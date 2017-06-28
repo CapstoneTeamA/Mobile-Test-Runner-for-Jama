@@ -1,0 +1,7 @@
+language: swift
+osx_image: xcode8.3
+xcode_sdk: iphonesimulatore10.3
+xcode_project: "Mobile Test Runner for Jama/Mobile Test Runner for Jama.xcodeproj"
+xcode_scheme: "Mobile Test Runner for Jama"
+
+ 
