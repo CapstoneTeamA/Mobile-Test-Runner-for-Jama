@@ -5,4 +5,4 @@ xcode_project: "Mobile Test Runner for Jama/Mobile Test Runner for Jama.xcodepro
 xcode_scheme: "Mobile Test Runner for Jama"
 
 script:
-- xcodebuild -project "Mobile Test Runner for Jama/Mobile Test Runner for Jama.xcodeproj" -scheme "Mobile Test Runner for Jama" -sdk iphonesimulator -destination 'platform=iOS Simulator, name=iPhone 7, OS=10.3.1'  ONLY_ACTIVE_ARCH=NO clean build test 
+- xcodebuild -project "Mobile Test Runner for Jama/Mobile Test Runner for Jama.xcodeproj" -scheme "Mobile Test Runner for Jama" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3.1'  ONLY_ACTIVE_ARCH=NO clean build test 
