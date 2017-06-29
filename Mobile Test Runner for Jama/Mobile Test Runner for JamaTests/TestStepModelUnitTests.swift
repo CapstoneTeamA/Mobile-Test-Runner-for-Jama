@@ -1,17 +1,14 @@
 //
-//  Mobile_Test_Runner_for_JamaTests.swift
-//  Mobile Test Runner for JamaTests
+//  TestStepModelUnitTests.swift
+//  Mobile Test Runner for Jama
 //
-//  Created by PSU2 on 6/27/17.
+//  Created by PSU2 on 6/28/17.
 //  Copyright © 2017 Jaca. All rights reserved.
 //
 
-//This class/file will likely be deleted
-
 import XCTest
-@testable import Mobile_Test_Runner_for_Jama
 
-class Mobile_Test_Runner_for_JamaTests: XCTestCase {
+class TestStepModelUnitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

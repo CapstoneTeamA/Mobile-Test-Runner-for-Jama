@@ -6,6 +6,7 @@
 //  Copyright © 2017 Jaca. All rights reserved.
 //
 
+//I think this class/file will be deleted
 import UIKit
 
 class ViewController: UIViewController {
