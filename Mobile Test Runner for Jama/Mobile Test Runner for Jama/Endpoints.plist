@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Delete</key>
+	<string></string>
+	<key>Patch</key>
+	<string></string>
+	<key>Put</key>
+	<dict/>
+	<key>Get</key>
+	<dict>
+		<key>CurrentUser</key>
+		<string>jamacloud.com/rest/latest/users/current</string>
+	</dict>
+</dict>
+</plist>
