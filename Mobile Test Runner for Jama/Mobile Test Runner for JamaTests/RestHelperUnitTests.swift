@@ -27,7 +27,7 @@ class RestHelperUnitTests: XCTestCase {
     }
     
     func testGetEndpointNotFound() {
-        let result = RestHelper.getEndpointString(method: "Get", endpoint: "JacasFakeEnpoint")
+        let result = RestHelper.getEndpointString(method: "Get", endpoint: "JacasFakeEndpoint")
         
         XCTAssertEqual(result, "")
     }
