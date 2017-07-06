@@ -205,7 +205,6 @@
 				13A343251F04C28F002EBC92 /* TestRunListViewController.swift */,
 				13A343271F04C2B4002EBC92 /* TestStepViewController.swift */,
 				13A343291F04C2DC002EBC92 /* ReviewTestRunViewController.swift */,
-				90D1E2381F0D787F00D66830 /* MaxTextLength.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -230,6 +229,7 @@
 		13A343201F04C216002EBC92 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				90D1E2381F0D787F00D66830 /* MaxTextLength.swift */,
 				13A3433F1F04C564002EBC92 /* RestHelper.swift */,
 			);
 			name = utils;
