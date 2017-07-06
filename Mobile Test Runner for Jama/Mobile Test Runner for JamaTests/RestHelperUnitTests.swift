@@ -37,4 +37,10 @@ class RestHelperUnitTests: XCTestCase {
         
         XCTAssertEqual(result, "")
     }
+    
+    func testGetEndpointBadEndpointAndMethodName() {
+        let result = RestHelper.getEndpointString(method: "BadMethodName", endpoint: "BadFakeEndpoint")
+        
+        XCTAssertEqual(result, "")
+    }
 }
