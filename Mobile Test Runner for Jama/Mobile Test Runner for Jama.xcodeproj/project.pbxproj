@@ -45,6 +45,7 @@
 		13A3435F1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3435E1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift */; };
 		13A343611F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */; };
 		13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */; };
+		13A343AD1F0C377C002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343AC1F0C377C002EBC92 /* Endpoints.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +93,7 @@
 		13A343391F04C454002EBC92 /* TestPlanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanModel.swift; sourceTree = "<group>"; };
 		13A3433B1F04C48E002EBC92 /* TestCycleListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCycleListModel.swift; sourceTree = "<group>"; };
 		13A3433D1F04C49F002EBC92 /* TestCycleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCycleModel.swift; sourceTree = "<group>"; };
-		13A3433F1F04C564002EBC92 /* RestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestHelper.swift; sourceTree = "<group>"; };
+		13A3433F1F04C564002EBC92 /* RestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestHelper.swift; path = "Mobile Test Runner for Jama/RestHelper.swift"; sourceTree = SOURCE_ROOT; };
 		13A343411F04C752002EBC92 /* UserModelUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModelUnitTest.swift; sourceTree = "<group>"; };
 		13A343431F04C77A002EBC92 /* ProjectListModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectListModelUnitTests.swift; sourceTree = "<group>"; };
 		13A343451F04C78F002EBC92 /* ProjectModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModelUnitTests.swift; sourceTree = "<group>"; };
@@ -109,6 +110,7 @@
 		13A3435E1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunListViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTestRunViewControllerUnitTests.swift; sourceTree = "<group>"; };
+		13A343AC1F0C377C002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				13A342F51F0367E9002EBC92 /* Assets.xcassets */,
 				13A342F71F0367E9002EBC92 /* LaunchScreen.storyboard */,
 				13A342FA1F0367E9002EBC92 /* Info.plist */,
+				13A343AC1F0C377C002EBC92 /* Endpoints.plist */,
 			);
 			path = "Mobile Test Runner for Jama";
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */,
+				13A343AD1F0C377C002EBC92 /* Endpoints.plist in Resources */,
 				13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */,
 				13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */,
 			);
