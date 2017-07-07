@@ -12,8 +12,7 @@ import XCTest
 class RestHelperUnitTests: XCTestCase {
     let username = "tester"
     let password = "password"
-    var restData : [[String: AnyObject]] = []
-    let encodedUserInfo = "dGVzdGVyOnBhc3N3b3Jk"
+    let encodedUserInfo = "dGVzdGVyOnBhc3N3b3Jk" //64bit encoding of "tester:password"
     
     override func setUp() {
         super.setUp()
@@ -23,18 +22,6 @@ class RestHelperUnitTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
     
     func testBasicAuthRequest() {
@@ -70,6 +57,24 @@ class RestHelperUnitTests: XCTestCase {
         XCTAssertNotEqual(request, returnedRequest)
     }
     
+    func testprepareHttpRequest() {
+        let endpoint = "endpoint.com"
+        let url = URL(string: endpoint)
+        let result = RestHelper.prepareHttpRequest(atEndpointString: endpoint, username: username, password: password, httpMethod: "Get")
+        var request = URLRequest(url: url!)
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Basic " + encodedUserInfo, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "Get"
+        
+        XCTAssertEqual(result, request)
+    }
+    
+    func testprepareHttpRequestFails() {
+        let endpoint = ""
+        let result = RestHelper.prepareHttpRequest(atEndpointString: endpoint, username: username, password: password, httpMethod: "Get")
+        XCTAssertNil(result)
+    }
     
 }
 
