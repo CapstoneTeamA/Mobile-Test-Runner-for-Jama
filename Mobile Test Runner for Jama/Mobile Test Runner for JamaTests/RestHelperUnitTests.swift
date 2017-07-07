@@ -16,11 +16,9 @@ class RestHelperUnitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
@@ -76,5 +74,16 @@ class RestHelperUnitTests: XCTestCase {
         XCTAssertNil(result)
     }
     
+    func testGetEndpointBadMethodName() {
+        let result = RestHelper.getEndpointString(method: "BadMethodName", endpoint: "jamacloud.com/rest/latest/users/current")
+        
+        XCTAssertEqual(result, "")
+    }
+    
+    func testGetEndpointBadEndpointAndMethodName() {
+        let result = RestHelper.getEndpointString(method: "BadMethodName", endpoint: "BadFakeEndpoint")
+        
+        XCTAssertEqual(result, "")
+    }
 }
 
