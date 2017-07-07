@@ -10,8 +10,7 @@ import XCTest
 @testable import Mobile_Test_Runner_for_Jama
 
 class RestHelperUnitTests: XCTestCase {
- 
-
+    
     override func setUp() {
         super.setUp()
     }
