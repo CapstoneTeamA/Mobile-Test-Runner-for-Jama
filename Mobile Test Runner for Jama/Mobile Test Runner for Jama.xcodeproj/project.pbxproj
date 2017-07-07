@@ -111,7 +111,7 @@
 		13A3435E1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunListViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTestRunViewControllerUnitTests.swift; sourceTree = "<group>"; };
-		13A343B01F0F5C6E002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Endpoints.plist; path = "Mobile Test Runner for Jama/Endpoints.plist"; sourceTree = "<group>"; };
+		13A343B01F0F5C6E002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,7 +143,6 @@
 		13A342E21F0367E9002EBC92 = {
 			isa = PBXGroup;
 			children = (
-				13A343B01F0F5C6E002EBC92 /* Endpoints.plist */,
 				13A342ED1F0367E9002EBC92 /* Mobile Test Runner for Jama */,
 				13A343021F0367E9002EBC92 /* Mobile Test Runner for JamaTests */,
 				13A3430D1F0367E9002EBC92 /* Mobile Test Runner for JamaUITests */,
@@ -173,6 +172,7 @@
 				13A342F51F0367E9002EBC92 /* Assets.xcassets */,
 				13A342F71F0367E9002EBC92 /* LaunchScreen.storyboard */,
 				13A342FA1F0367E9002EBC92 /* Info.plist */,
+				13A343B01F0F5C6E002EBC92 /* Endpoints.plist */,
 			);
 			path = "Mobile Test Runner for Jama";
 			sourceTree = "<group>";
