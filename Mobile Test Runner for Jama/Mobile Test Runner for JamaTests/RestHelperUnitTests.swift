@@ -79,7 +79,7 @@ class RestHelperUnitTests: XCTestCase {
         XCTAssertNotEqual(request, returnedRequest)
     }
     
-    func testprepareHttpRequest() {
+    func testPrepareHttpRequest() {
         let endpoint = "endpoint.com"
         let url = URL(string: endpoint)
         let result = RestHelper.prepareHttpRequest(atEndpointString: endpoint, username: username, password: password, httpMethod: "Get")
@@ -92,10 +92,33 @@ class RestHelperUnitTests: XCTestCase {
         XCTAssertEqual(result, request)
     }
     
-    func testprepareHttpRequestFails() {
+    func testPrepareHttpRequestFails() {
         let endpoint = ""
         let result = RestHelper.prepareHttpRequest(atEndpointString: endpoint, username: username, password: password, httpMethod: "Get")
         XCTAssertNil(result)
+    }
+    
+    func testProcessRestJson() {
+        var jsonData: [String: Any] = [:]
+        let parsedData: [String : AnyObject] = ["name" : username as AnyObject]
+
+        jsonData.updateValue(["status" : "status"], forKey: "meta")
+        jsonData.updateValue(parsedData, forKey: "data")
+        
+        let result = RestHelper.processRestJson(jsonData: jsonData)
+        let resultNameValue: String = result[0]["name"] as! String
+        XCTAssertEqual(resultNameValue, username)
+    }
+    
+    func testProcessRestJsonUnauthorized() {
+        var jsonData: [String: Any] = [:]
+
+        jsonData.updateValue(["status" : "Unauthorized"], forKey: "meta")
+        jsonData.updateValue("", forKey: "data")
+        
+        let result = RestHelper.processRestJson(jsonData: jsonData)
+        let resultNameValue: String = result[0]["Unauthorized"] as! String
+        XCTAssertEqual(resultNameValue, "Unauthorized")
     }
     
 }

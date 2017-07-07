@@ -61,6 +61,29 @@ class RestHelper {
         return request
     }
     
+    static func processRestJson(jsonData: [String: Any] ) -> [[String: AnyObject]] {
+        var endpointData : [[String: AnyObject]]  = []
+        var meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
+        let status = meta["status"] as! String
+        
+        //If user isn't authorized show an auth failed message.
+        if (status == "Unauthorized") {
+            endpointData = []
+            endpointData.append(["Unauthorized": status as AnyObject])
+            
+        } else {
+            //user authorized, parse data section of response and print greeting
+            if jsonData["data"] is Dictionary<String,AnyObject> {
+                //this is needed for endpoints that only return a single object e.g. currentUser
+                //as these are not returned wrapped in an array.
+                endpointData.append(jsonData["data"] as! Dictionary)
+            } else {
+                endpointData = jsonData["data"] as! Array
+            }
+        }
+        return endpointData
+    }
+    
     static func hitEndpoint(atEndpointString: String, withDelegate: EndpointDelegate, httpMethod : String = "Get", username: String, password: String) {
         guard let request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: httpMethod) else {
             return
@@ -89,24 +112,7 @@ class RestHelper {
                         return
                 }
                 //Get the meta section of the response to get the status.
-                var meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
-                let status = meta["status"] as! String
-                
-                //If user isn't authorized show an auth failed message.
-                if (status == "Unauthorized") {
-                    endpointData = []
-                    endpointData.append(["Unauthorized": status as AnyObject])
-                    
-                } else {
-                    //user authorized, parse data section of response and print greeting
-                    if jsonData["data"] is Dictionary<String,AnyObject> {
-                        //this is needed for endpoints that only return a single object e.g. currentUser
-                        //as these are not returned wrapped in an array.
-                        endpointData.append(jsonData["data"] as! Dictionary)
-                    } else {
-                        endpointData = jsonData["data"] as! Array
-                    }
-                }
+                endpointData = self.processRestJson(jsonData: jsonData)
                 //Call on the provided delegate
                 withDelegate.didLoadEndpoint(data: endpointData)
                 
