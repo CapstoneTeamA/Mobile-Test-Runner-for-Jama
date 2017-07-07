@@ -45,7 +45,8 @@
 		13A3435F1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3435E1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift */; };
 		13A343611F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */; };
 		13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */; };
-		13A343AD1F0C377C002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343AC1F0C377C002EBC92 /* Endpoints.plist */; };
+		13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343B01F0F5C6E002EBC92 /* Endpoints.plist */; };
+		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,7 +111,8 @@
 		13A3435E1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunListViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTestRunViewControllerUnitTests.swift; sourceTree = "<group>"; };
-		13A343AC1F0C377C002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
+		13A343B01F0F5C6E002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
+		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
