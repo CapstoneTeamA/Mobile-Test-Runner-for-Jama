@@ -12,7 +12,6 @@
 		13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F21F0367E9002EBC92 /* Main.storyboard */; };
 		13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F51F0367E9002EBC92 /* Assets.xcassets */; };
 		13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F71F0367E9002EBC92 /* LaunchScreen.storyboard */; };
-		13A343041F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343031F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaTests.swift */; };
 		13A3430F1F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3430E1F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaUITests.swift */; };
 		13A343221F04C247002EBC92 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343211F04C247002EBC92 /* LoginViewController.swift */; };
 		13A343241F04C271002EBC92 /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343231F04C271002EBC92 /* ProjectListViewController.swift */; };
@@ -75,7 +74,6 @@
 		13A342F81F0367E9002EBC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		13A342FA1F0367E9002EBC92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13A342FF1F0367E9002EBC92 /* Mobile Test Runner for JamaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mobile Test Runner for JamaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13A343031F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mobile_Test_Runner_for_JamaTests.swift; sourceTree = "<group>"; };
 		13A343051F0367E9002EBC92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13A3430A1F0367E9002EBC92 /* Mobile Test Runner for JamaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mobile Test Runner for JamaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A3430E1F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mobile_Test_Runner_for_JamaUITests.swift; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 				13A343591F04C94B002EBC92 /* ViewControllerUnitTests */,
 				13A343581F04C8C5002EBC92 /* utilsUnitTests */,
 				13A343571F04C896002EBC92 /* ModelUnitTests */,
-				13A343031F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaTests.swift */,
 				13A343051F0367E9002EBC92 /* Info.plist */,
 			);
 			path = "Mobile Test Runner for JamaTests";
@@ -442,7 +439,6 @@
 				13A3435B1F04C96B002EBC92 /* LoginViewControllerUnitTests.swift in Sources */,
 				13A343521F04C84B002EBC92 /* TestCycleListModelUnitTests.swift in Sources */,
 				13A343501F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift in Sources */,
-				13A343041F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaTests.swift in Sources */,
 				13A3435F1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift in Sources */,
 				13A343561F04C881002EBC92 /* RestHelperUnitTests.swift in Sources */,
 				13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */,
