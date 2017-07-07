@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFm-Ms-aCg">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFm-Ms-aCg" userLabel="TextBoxView">
                                 <rect key="frame" x="60" y="200" width="294" height="171"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IyA-MG-X2d">
@@ -67,46 +67,47 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="My-Instance.jamacloud.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FF6-ca-2PR">
+                                        <rect key="frame" x="0.33333333333334281" y="80" width="294" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="tlC-xa-Qj1"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                <integer key="value" value="50"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="b8q-H1-06O" firstAttribute="width" secondItem="zFm-Ms-aCg" secondAttribute="width" id="16d-Qm-Th1"/>
                                     <constraint firstItem="iMa-wn-bP5" firstAttribute="top" secondItem="IyA-MG-X2d" secondAttribute="bottom" constant="10" id="AZa-bM-ciy"/>
+                                    <constraint firstItem="FF6-ca-2PR" firstAttribute="centerX" secondItem="zFm-Ms-aCg" secondAttribute="centerX" id="EIT-oa-67H"/>
                                     <constraint firstItem="iMa-wn-bP5" firstAttribute="centerX" secondItem="zFm-Ms-aCg" secondAttribute="centerX" id="Goj-hA-v01"/>
+                                    <constraint firstItem="FF6-ca-2PR" firstAttribute="top" secondItem="iMa-wn-bP5" secondAttribute="bottom" constant="10" id="HgQ-ai-YZY"/>
                                     <constraint firstItem="iMa-wn-bP5" firstAttribute="width" secondItem="zFm-Ms-aCg" secondAttribute="width" id="KET-M1-s2n"/>
                                     <constraint firstItem="IyA-MG-X2d" firstAttribute="top" secondItem="zFm-Ms-aCg" secondAttribute="top" id="azI-pL-hat"/>
+                                    <constraint firstItem="FF6-ca-2PR" firstAttribute="width" secondItem="zFm-Ms-aCg" secondAttribute="width" id="bV4-fK-HWr"/>
                                     <constraint firstItem="IyA-MG-X2d" firstAttribute="width" secondItem="zFm-Ms-aCg" secondAttribute="width" id="dMi-Zt-OYV"/>
+                                    <constraint firstItem="b8q-H1-06O" firstAttribute="top" secondItem="FF6-ca-2PR" secondAttribute="bottom" constant="30" id="knu-DU-vbC"/>
                                     <constraint firstItem="IyA-MG-X2d" firstAttribute="leading" secondItem="zFm-Ms-aCg" secondAttribute="leading" id="ojG-YA-nRa"/>
                                     <constraint firstItem="b8q-H1-06O" firstAttribute="centerX" secondItem="zFm-Ms-aCg" secondAttribute="centerX" id="r6h-Ic-hks"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="My-Instance.jamacloud.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FF6-ca-2PR">
-                                <rect key="frame" x="60" y="280" width="294" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="tlC-xa-Qj1"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
-                                        <integer key="value" value="50"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zFm-Ms-aCg" secondAttribute="bottom" constant="365" id="1ji-Ma-FdZ"/>
+                            <constraint firstItem="FF6-ca-2PR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3RH-Mq-GWc"/>
                             <constraint firstItem="zFm-Ms-aCg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="AJT-4l-bwZ"/>
                             <constraint firstItem="zFm-Ms-aCg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="FGY-2H-sj8"/>
-                            <constraint firstItem="FF6-ca-2PR" firstAttribute="width" secondItem="zFm-Ms-aCg" secondAttribute="width" id="K8S-Pe-hXA"/>
                             <constraint firstItem="zFm-Ms-aCg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="136" id="RyA-Op-Epg"/>
-                            <constraint firstItem="FF6-ca-2PR" firstAttribute="top" secondItem="iMa-wn-bP5" secondAttribute="bottom" constant="10" id="bfu-Yu-Vby"/>
                             <constraint firstItem="zFm-Ms-aCg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fdH-Z7-EgZ"/>
-                            <constraint firstItem="FF6-ca-2PR" firstAttribute="centerX" secondItem="zFm-Ms-aCg" secondAttribute="centerX" id="iQL-ah-jtv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zFm-Ms-aCg" secondAttribute="trailing" constant="40" id="p3O-88-kO2"/>
-                            <constraint firstItem="b8q-H1-06O" firstAttribute="top" secondItem="FF6-ca-2PR" secondAttribute="bottom" constant="30" id="sXZ-bl-gQK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="zRk-ha-KMg"/>
