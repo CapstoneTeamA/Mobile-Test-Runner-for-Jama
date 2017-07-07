@@ -8,10 +8,14 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.userNameTextBox.delegate = self
+        self.instanceTextBox.delegate = self
+        self.passwordTextBox.delegate = self
+        
 
         // Do any additional setup after loading the view.
     }
@@ -21,7 +25,29 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    @IBOutlet weak var userNameTextBox: UITextField!
+    
+    @IBOutlet weak var passwordTextBox: UITextField!
+    
+    @IBOutlet weak var instanceTextBox: UITextField!
+    
+    @IBAction func logInSubmitButton(_ sender: Any) {
+        
+        // Code for what the log in button does goes here
+    }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return (true)
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
