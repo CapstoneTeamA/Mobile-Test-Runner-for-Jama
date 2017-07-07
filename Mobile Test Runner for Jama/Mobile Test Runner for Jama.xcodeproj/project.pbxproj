@@ -170,7 +170,7 @@
 				13A342F51F0367E9002EBC92 /* Assets.xcassets */,
 				13A342F71F0367E9002EBC92 /* LaunchScreen.storyboard */,
 				13A342FA1F0367E9002EBC92 /* Info.plist */,
-				13A343AC1F0C377C002EBC92 /* Endpoints.plist */,
+				13A343B01F0F5C6E002EBC92 /* Endpoints.plist */,
 			);
 			path = "Mobile Test Runner for Jama";
 			sourceTree = "<group>";
@@ -379,7 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */,
-				13A343AD1F0C377C002EBC92 /* Endpoints.plist in Resources */,
+				13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */,
 				13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */,
 				13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */,
 			);
