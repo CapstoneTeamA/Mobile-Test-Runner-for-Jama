@@ -22,6 +22,30 @@ class RestHelperUnitTests: XCTestCase {
         super.tearDown()
     }
     
+    func testGetCurrentUserEndpoint() {
+        let result = RestHelper.getEndpointString(method: "Get", endpoint: "CurrentUser")
+        
+        XCTAssertEqual(result, "jamacloud.com/rest/latest/users/current")
+    }
+    
+    func testGetEndpointNotFound() {
+        let result = RestHelper.getEndpointString(method: "Get", endpoint: "JacasFakeEndpoint")
+        
+        XCTAssertEqual(result, "")
+    }
+    
+    func testGetEndpointBadMethodName() {
+        let result = RestHelper.getEndpointString(method: "BadMethodName", endpoint: "jamacloud.com/rest/latest/users/current")
+        
+        XCTAssertEqual(result, "")
+    }
+    
+    func testGetEndpointBadEndpointAndMethodName() {
+        let result = RestHelper.getEndpointString(method: "BadMethodName", endpoint: "BadFakeEndpoint")
+        
+        XCTAssertEqual(result, "")
+    }
+    
     func testBasicAuthRequest() {
         guard let url = URL(string: "pathToResource.jaca.com/rest/test") else {
             print("URL was not constructed")
@@ -74,16 +98,5 @@ class RestHelperUnitTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func testGetEndpointBadMethodName() {
-        let result = RestHelper.getEndpointString(method: "BadMethodName", endpoint: "jamacloud.com/rest/latest/users/current")
-        
-        XCTAssertEqual(result, "")
-    }
-    
-    func testGetEndpointBadEndpointAndMethodName() {
-        let result = RestHelper.getEndpointString(method: "BadMethodName", endpoint: "BadFakeEndpoint")
-        
-        XCTAssertEqual(result, "")
-    }
 }
 
