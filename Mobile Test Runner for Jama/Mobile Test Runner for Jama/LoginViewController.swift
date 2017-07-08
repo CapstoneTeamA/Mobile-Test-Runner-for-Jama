@@ -84,21 +84,20 @@ extension LoginViewController: EndpointDelegate{
             return
         }
         if unwrappedData[0]["Unauthorized"] != nil {
-            //Notify user of unauthorized
-            unauthorizedLabel.isHidden = false
-            passwordTextBox.text = ""
             
-            //Reload the view on the main thread
+            //Notify user of unauthorized reload the view on the main thread
             DispatchQueue.main.async {
+                self.unauthorizedLabel.isHidden = false
+                self.passwordTextBox.text = ""
                 self.reloadViewWithUsernameAndInstanceSaved()
             }
             return
         }
-        //Extract the users name and will eventually call a segue to next screen.
-        self.parseCurrentUserInfo(currentUserData: unwrappedData[0]) //We know current user is a single item in the array so no need to loop
-        //these values will be set on a current user singleton in the future.
 
         DispatchQueue.main.async {
+            //Extract the users name and will eventually call a segue to next screen.
+            self.parseCurrentUserInfo(currentUserData: unwrappedData[0])
+            
             //This should be replaced in the future by using a singleton for the current user and using a segue.
             let viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
             viewController.currentUser = self.currentUser
