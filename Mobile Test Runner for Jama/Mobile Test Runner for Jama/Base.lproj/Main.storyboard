@@ -124,6 +124,7 @@
                         <outlet property="loginButton" destination="b8q-H1-06O" id="lAX-Q5-N94"/>
                         <outlet property="unauthorizedLabel" destination="lVH-1f-G54" id="S5o-oa-2Iv"/>
                         <outlet property="userNameTextBox" destination="IyA-MG-X2d" id="7bk-we-T3L"/>
+                        <segue destination="67N-f7-6S3" kind="show" identifier="LoginSegue" id="ACf-OQ-epR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -133,7 +134,7 @@
         <!--Project List-->
         <scene sceneID="TSg-94-4yu">
             <objects>
-                <viewController title="Project List" id="67N-f7-6S3" customClass="ProjectListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProjectListViewController" title="Project List" id="67N-f7-6S3" customClass="ProjectListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bwx-3Z-i5u"/>
                         <viewControllerLayoutGuide type="bottom" id="cSb-8O-36Q"/>

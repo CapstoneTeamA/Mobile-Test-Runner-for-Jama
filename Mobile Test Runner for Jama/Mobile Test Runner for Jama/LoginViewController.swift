@@ -83,5 +83,8 @@ extension LoginViewController: EndpointDelegate{
         //Extract the users name and will eventually call a segue to next screen.
         let user = unwrappedData[0] //We know current user is a single item in the array so no need to loop
         currentUserName = user["firstName"] as! String
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "LoginSegue", sender: self)
+        }
     }
 }
