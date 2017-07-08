@@ -91,6 +91,7 @@ extension LoginViewController: EndpointDelegate{
         currentUser.id = user["id"] as! Int
         currentUser.username = user["username"] as! String
         DispatchQueue.main.async {
+            //This should be replaced in the future by using a singleton for the current user and using a segue.
             let viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
             viewController.currentUser = self.currentUser
             self.navigationController!.pushViewController(viewController, animated: true)
