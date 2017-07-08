@@ -99,8 +99,12 @@
                                     <constraint firstItem="b8q-H1-06O" firstAttribute="centerX" secondItem="zFm-Ms-aCg" secondAttribute="centerX" id="r6h-Ic-hks"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unauthorized" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVH-1f-G54">
-                                <rect key="frame" x="155" y="248" width="104" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your login attempt was not successful. The user credentials you entered were not valid, please try again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVH-1f-G54">
+                                <rect key="frame" x="60" y="161" width="294" height="108"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="108" id="9mG-1U-twX"/>
+                                    <constraint firstAttribute="width" constant="294" id="Cra-1t-Ecc"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.63921568630000003" green="0.0" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>

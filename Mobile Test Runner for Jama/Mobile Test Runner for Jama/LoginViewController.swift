@@ -10,7 +10,6 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
-
     @IBOutlet weak var unauthorizedLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var userNameTextBox: UITextField!
@@ -27,6 +26,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //Make sure that the password is not saved when the login page reappears.
+        self.passwordTextBox.text = ""
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -34,6 +38,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func logInSubmitButton(_ sender: Any) {
+        if (userNameTextBox.text?.isEmpty)! || (passwordTextBox.text?.isEmpty)! || (instanceTextBox.text?.isEmpty)! {
+            unauthorizedLabel.isHidden = false
+            unauthorizedLabel.text = "One or more required fields were not entered."
+            return
+        }
         let endpointString = buildCurrentUserEndpointString()
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, httpMethod: "Get", username: userNameTextBox.text!, password: passwordTextBox.text!)
         
@@ -88,6 +97,7 @@ extension LoginViewController: EndpointDelegate{
             //Notify user of unauthorized reload the view on the main thread
             DispatchQueue.main.async {
                 self.unauthorizedLabel.isHidden = false
+                self.unauthorizedLabel.text = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
                 self.passwordTextBox.text = ""
                 self.reloadViewWithUsernameAndInstanceSaved()
             }
@@ -95,6 +105,8 @@ extension LoginViewController: EndpointDelegate{
         }
 
         DispatchQueue.main.async {
+            //Make sure that the authorization error message is hidden
+            self.unauthorizedLabel.isHidden = true
             //Extract the users name and will eventually call a segue to next screen.
             self.parseCurrentUserInfo(currentUserData: unwrappedData[0])
             
