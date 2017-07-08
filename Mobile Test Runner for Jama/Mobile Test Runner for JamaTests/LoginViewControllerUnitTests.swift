@@ -16,6 +16,7 @@ class LoginViewControllerUnitTests: XCTestCase {
     let username = "T_McT"
     let password = "dumb_password"
     let instance = "jaca_instance"
+    let missingFieldError = "One or more required fields were not entered."
     var viewController : LoginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
     var userData : [String : AnyObject] = [:]
     
@@ -54,5 +55,64 @@ class LoginViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(username, viewController.userNameTextBox.text)
         XCTAssertEqual(instance, viewController.instanceTextBox.text)
         XCTAssertEqual("", viewController.passwordTextBox.text)
+    }
+    
+    func testMissingAllFields() {
+        XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
+        XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+    }
+    
+    func testMissingUsername() {
+        viewController.passwordTextBox.text = password
+        viewController.instanceTextBox.text = instance
+        
+        XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
+        XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+    }
+    
+    func testMisssingPassword() {
+        viewController.userNameTextBox.text = username
+        viewController.instanceTextBox.text = instance
+        
+        XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
+        XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+    }
+    
+    func testMissingInstance() {
+        viewController.userNameTextBox.text = username
+        viewController.passwordTextBox.text = password
+        
+        XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
+        XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+    }
+    
+    func testMissingInstanceAndPassword() {
+        viewController.userNameTextBox.text = username
+        
+        XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
+        XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+    }
+    
+    func testMissingInstanceAndUserName() {
+        viewController.passwordTextBox.text = password
+        
+        XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
+        XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+    }
+    
+    func testMissingUsernameAndPassword() {
+        viewController.instanceTextBox.text = instance
+        
+        XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
+        XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+    }
+    
+    func testNoMissingFields() {
+        viewController.userNameTextBox.text = username
+        viewController.passwordTextBox.text = password
+        viewController.instanceTextBox.text = instance
+        
+        XCTAssertTrue(viewController.checkRequiredFieldsNotEmpty())
+        XCTAssertNotEqual(viewController.unauthorizedLabel.text, missingFieldError)
     }
 }

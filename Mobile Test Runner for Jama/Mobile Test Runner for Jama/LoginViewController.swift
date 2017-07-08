@@ -23,6 +23,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.instanceTextBox.delegate = self
         self.passwordTextBox.delegate = self
         unauthorizedLabel.isHidden = true
+        unauthorizedLabel.text = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
 
         // Do any additional setup after loading the view.
     }
@@ -38,16 +39,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func logInSubmitButton(_ sender: Any) {
-        if (userNameTextBox.text?.isEmpty)! || (passwordTextBox.text?.isEmpty)! || (instanceTextBox.text?.isEmpty)! {
-            unauthorizedLabel.isHidden = false
-            unauthorizedLabel.text = "One or more required fields were not entered."
+        if checkRequiredFieldsNotEmpty(){
             return
         }
         let endpointString = buildCurrentUserEndpointString()
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, httpMethod: "Get", username: userNameTextBox.text!, password: passwordTextBox.text!)
         
         loginButton.isEnabled = false
-        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -57,6 +55,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return (true)
+    }
+    
+    func checkRequiredFieldsNotEmpty() -> Bool {
+        if (userNameTextBox.text?.isEmpty)! || (passwordTextBox.text?.isEmpty)! || (instanceTextBox.text?.isEmpty)! {
+            unauthorizedLabel.isHidden = false
+            unauthorizedLabel.text = "One or more required fields were not entered."
+            return false
+        }
+        unauthorizedLabel.text = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
+        return true
     }
     
     func buildCurrentUserEndpointString() -> String {
@@ -97,7 +105,6 @@ extension LoginViewController: EndpointDelegate{
             //Notify user of unauthorized reload the view on the main thread
             DispatchQueue.main.async {
                 self.unauthorizedLabel.isHidden = false
-                self.unauthorizedLabel.text = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
                 self.passwordTextBox.text = ""
                 self.reloadViewWithUsernameAndInstanceSaved()
             }
