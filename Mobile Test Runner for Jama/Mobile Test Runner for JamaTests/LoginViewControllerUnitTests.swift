@@ -7,16 +7,52 @@
 //
 
 import XCTest
-
+@testable import Mobile_Test_Runner_for_Jama
 class LoginViewControllerUnitTests: XCTestCase {
+    let userFirstName = "tester"
+    let userLastName = "Mctester"
+    let userId = 23
+    let userEmail = "tester@jaca.com"
+    let username = "T_McT"
+    let password = "dumb_password"
+    let instance = "jaca_instance"
+    var viewController : LoginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+    var userData : [String : AnyObject] = [:]
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        _ = viewController.view //Needed to instantiate the properties in the class
+        userData.updateValue(userFirstName as AnyObject, forKey: "firstName")
+        userData.updateValue(userLastName as AnyObject, forKey: "lastName")
+        userData.updateValue(userId as AnyObject, forKey: "id")
+        userData.updateValue(username as AnyObject, forKey: "username")
+        userData.updateValue(userEmail as AnyObject, forKey: "email")
+        
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+    }
+    
+    func testParseCurrentUserData(){
+        viewController.parseCurrentUserInfo(currentUserData: userData)
+        XCTAssertEqual(userFirstName, viewController.currentUser.firstName)
+        XCTAssertEqual(userLastName, viewController.currentUser.lastName)
+        XCTAssertEqual(userId, viewController.currentUser.id)
+        XCTAssertEqual(userEmail, viewController.currentUser.email)
+        XCTAssertEqual(username, viewController.currentUser.username)
+    }
+    
+    func testReloadViewWithUsernameAndInstanceSaved() {
+        viewController.userNameTextBox.text = username
+        viewController.passwordTextBox.text = password
+        viewController.instanceTextBox.text = instance
+        
+        viewController.reloadViewWithUsernameAndInstanceSaved()
+        
+        XCTAssertEqual(username, viewController.userNameTextBox.text)
+        XCTAssertEqual(instance, viewController.instanceTextBox.text)
+        XCTAssertEqual("", viewController.passwordTextBox.text)
     }
 }

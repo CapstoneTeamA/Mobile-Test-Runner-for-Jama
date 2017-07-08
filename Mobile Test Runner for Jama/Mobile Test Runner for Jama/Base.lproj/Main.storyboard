@@ -13,7 +13,7 @@
         <!--Login-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Login" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="Login" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFm-Ms-aCg" userLabel="TextBoxView">
-                                <rect key="frame" x="60" y="200" width="294" height="171"/>
+                                <rect key="frame" x="60" y="281" width="294" height="175"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IyA-MG-X2d">
                                         <rect key="frame" x="0.0" y="0.0" width="294" height="30"/>
@@ -32,7 +32,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
                                                 <integer key="value" value="50"/>
@@ -60,21 +60,21 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
                                                 <integer key="value" value="50"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="My-Instance.jamacloud.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FF6-ca-2PR">
-                                        <rect key="frame" x="0.33333333333334281" y="80" width="294" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Jama-Instance" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FF6-ca-2PR">
+                                        <rect key="frame" x="0.0" y="80" width="294" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="tlC-xa-Qj1"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
                                                 <integer key="value" value="50"/>
@@ -86,6 +86,7 @@
                                 <constraints>
                                     <constraint firstItem="b8q-H1-06O" firstAttribute="width" secondItem="zFm-Ms-aCg" secondAttribute="width" id="16d-Qm-Th1"/>
                                     <constraint firstItem="iMa-wn-bP5" firstAttribute="top" secondItem="IyA-MG-X2d" secondAttribute="bottom" constant="10" id="AZa-bM-ciy"/>
+                                    <constraint firstAttribute="height" constant="175" id="Bl5-yH-s6q"/>
                                     <constraint firstItem="FF6-ca-2PR" firstAttribute="centerX" secondItem="zFm-Ms-aCg" secondAttribute="centerX" id="EIT-oa-67H"/>
                                     <constraint firstItem="iMa-wn-bP5" firstAttribute="centerX" secondItem="zFm-Ms-aCg" secondAttribute="centerX" id="Goj-hA-v01"/>
                                     <constraint firstItem="FF6-ca-2PR" firstAttribute="top" secondItem="iMa-wn-bP5" secondAttribute="bottom" constant="10" id="HgQ-ai-YZY"/>
@@ -98,23 +99,32 @@
                                     <constraint firstItem="b8q-H1-06O" firstAttribute="centerX" secondItem="zFm-Ms-aCg" secondAttribute="centerX" id="r6h-Ic-hks"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unauthorized" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVH-1f-G54">
+                                <rect key="frame" x="155" y="248" width="104" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.63921568630000003" green="0.0" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zFm-Ms-aCg" secondAttribute="bottom" constant="365" id="1ji-Ma-FdZ"/>
                             <constraint firstItem="FF6-ca-2PR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3RH-Mq-GWc"/>
                             <constraint firstItem="zFm-Ms-aCg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="AJT-4l-bwZ"/>
                             <constraint firstItem="zFm-Ms-aCg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="FGY-2H-sj8"/>
-                            <constraint firstItem="zFm-Ms-aCg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="136" id="RyA-Op-Epg"/>
+                            <constraint firstItem="zFm-Ms-aCg" firstAttribute="top" secondItem="lVH-1f-G54" secondAttribute="bottom" constant="12" id="PY9-9y-Ngm"/>
                             <constraint firstItem="zFm-Ms-aCg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fdH-Z7-EgZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zFm-Ms-aCg" secondAttribute="trailing" constant="40" id="p3O-88-kO2"/>
+                            <constraint firstItem="lVH-1f-G54" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="x4b-bE-err"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="zRk-ha-KMg"/>
                     <connections>
                         <outlet property="PasswordTextBox" destination="iMa-wn-bP5" id="g1x-Yn-caL"/>
                         <outlet property="instanceTextBox" destination="FF6-ca-2PR" id="8pf-jQ-lKE"/>
+                        <outlet property="loginButton" destination="b8q-H1-06O" id="lAX-Q5-N94"/>
+                        <outlet property="unauthorizedLabel" destination="lVH-1f-G54" id="S5o-oa-2Iv"/>
                         <outlet property="userNameTextBox" destination="IyA-MG-X2d" id="7bk-we-T3L"/>
+                        <segue destination="67N-f7-6S3" kind="show" identifier="LoginSegue" id="7vM-tb-K3r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -124,7 +134,7 @@
         <!--Project List-->
         <scene sceneID="TSg-94-4yu">
             <objects>
-                <viewController title="Project List" id="67N-f7-6S3" customClass="ProjectListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProjectListViewController" title="Project List" id="67N-f7-6S3" customClass="ProjectListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bwx-3Z-i5u"/>
                         <viewControllerLayoutGuide type="bottom" id="cSb-8O-36Q"/>
@@ -132,12 +142,31 @@
                     <view key="view" contentMode="scaleToFill" id="OsK-JF-zhz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahI-6p-Gws">
+                                <rect key="frame" x="120" y="318" width="174" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SwD-aj-o1A">
+                                <rect key="frame" x="186" y="269" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="tempLabel" destination="ahI-6p-Gws" id="RpU-av-c6j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zz-49-z1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2060" y="138.98050974512745"/>
+            <point key="canvasLocation" x="2059.4202898550725" y="138.58695652173915"/>
         </scene>
         <!--Test Run List-->
         <scene sceneID="1Jg-dI-eGb">

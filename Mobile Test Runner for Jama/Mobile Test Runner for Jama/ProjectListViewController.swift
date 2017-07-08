@@ -10,9 +10,13 @@ import UIKit
 
 class ProjectListViewController: UIViewController {
 
+    var currentUser: UserModel = UserModel()
+    
+    @IBOutlet weak var tempLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tempLabel.text = currentUser.firstName
+        
         // Do any additional setup after loading the view.
     }
 

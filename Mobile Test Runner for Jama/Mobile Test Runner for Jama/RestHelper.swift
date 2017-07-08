@@ -93,16 +93,18 @@ class RestHelper {
         //Asynchronous task to run in the background that hits the delegate when it finishes if successful.
         let task = session.dataTask(with: request) {
             (data,response,error) in
+            var endpointData : [[String: AnyObject]]  = []
             guard error == nil else {
                 print("error calling endpoint")
-                print(error as Any)
+                endpointData.append(["Unauthorized": "Unauthorized" as AnyObject])
+                withDelegate.didLoadEndpoint(data: endpointData)
                 return
             }
             guard let responseData = data else {
                 print("Error did not recieve data")
                 return
             }
-            var endpointData : [[String: AnyObject]]  = []
+            
             //Parsing json
             do {
                 //I believe the jsonData will always be a dictionary.
