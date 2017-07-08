@@ -9,3 +9,11 @@
 //This may be replaced by a singleton for the current user. TBD
 
 import Foundation
+
+class UserModel {
+    var firstName: String = ""
+    var lastName: String = ""
+    var email: String = ""
+    var id: String = ""
+    var username: String = ""
+}

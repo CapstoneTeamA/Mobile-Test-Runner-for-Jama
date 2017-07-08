@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userNameTextBox: UITextField!
     @IBOutlet weak var passwordTextBox: UITextField!
     @IBOutlet weak var instanceTextBox: UITextField!
-    var currentUserName = ""
+    var currentUser: UserModel = UserModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,10 +68,12 @@ extension LoginViewController: EndpointDelegate{
         }
         if unwrappedData[0]["Unauthorized"] != nil {
             //Notify user of unauthorized
-            print("Unauth")
             unauthorizedLabel.isHidden = false
             passwordTextBox.text = ""
+            
+            //Reload the view on the main thread
             DispatchQueue.main.async {
+                //save the username and instance strings and reload the view
                 let username = self.userNameTextBox.text
                 let instance = self.instanceTextBox.text
                 self.loadView()
@@ -82,7 +84,11 @@ extension LoginViewController: EndpointDelegate{
         }
         //Extract the users name and will eventually call a segue to next screen.
         let user = unwrappedData[0] //We know current user is a single item in the array so no need to loop
-        currentUserName = user["firstName"] as! String
+        currentUser.firstName = user["firstName"] as! String
+        currentUser.lastName = user["lastName"] as! String
+        currentUser.email = user["email"] as! String
+        currentUser.id = user["id"] as! String
+        currentUser.username = user["username"] as! String
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "LoginSegue", sender: self)
         }
