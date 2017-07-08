@@ -54,7 +54,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let endpoint = RestHelper.getEndpointString(method: "Get", endpoint: "CurrentUser")
         return "https://" + instanceTextBox.text! + "." + endpoint
     }
-
+    
+    func parseCurrentUserInfo(currentUserData: [String : AnyObject]) {
+        currentUser.firstName = currentUserData["firstName"] as! String
+        currentUser.lastName = currentUserData["lastName"] as! String
+        currentUser.email = currentUserData["email"] as! String
+        currentUser.id = currentUserData["id"] as! Int
+        currentUser.username = currentUserData["username"] as! String
+    }
+    
+    func reloadViewWithUsernameAndInstanceSaved() {
+        //Save the username and instance, reload the view then set the username and instance again.
+        let username = self.userNameTextBox.text
+        let instance = self.instanceTextBox.text
+        self.loadView()
+        self.userNameTextBox.text = username
+        self.instanceTextBox.text = instance
+    }
 }
 
 extension LoginViewController: EndpointDelegate{
@@ -74,22 +90,14 @@ extension LoginViewController: EndpointDelegate{
             
             //Reload the view on the main thread
             DispatchQueue.main.async {
-                //save the username and instance strings and reload the view
-                let username = self.userNameTextBox.text
-                let instance = self.instanceTextBox.text
-                self.loadView()
-                self.userNameTextBox.text = username
-                self.instanceTextBox.text = instance
+                self.reloadViewWithUsernameAndInstanceSaved()
             }
             return
         }
         //Extract the users name and will eventually call a segue to next screen.
-        let user = unwrappedData[0] //We know current user is a single item in the array so no need to loop
-        currentUser.firstName = user["firstName"] as! String
-        currentUser.lastName = user["lastName"] as! String
-        currentUser.email = user["email"] as! String
-        currentUser.id = user["id"] as! Int
-        currentUser.username = user["username"] as! String
+        self.parseCurrentUserInfo(currentUserData: unwrappedData[0]) //We know current user is a single item in the array so no need to loop
+        //these values will be set on a current user singleton in the future.
+
         DispatchQueue.main.async {
             //This should be replaced in the future by using a singleton for the current user and using a segue.
             let viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
