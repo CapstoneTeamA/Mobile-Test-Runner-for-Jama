@@ -67,7 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		13A342EB1F0367E9002EBC92 /* Test Runner for Jama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Runner for Jama.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13A342EB1F0367E9002EBC92 /* Mobile Test Runner for Jama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Test Runner for Jama.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A342EE1F0367E9002EBC92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13A342F01F0367E9002EBC92 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		13A342F31F0367E9002EBC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		13A342EC1F0367E9002EBC92 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13A342EB1F0367E9002EBC92 /* Test Runner for Jama.app */,
+				13A342EB1F0367E9002EBC92 /* Mobile Test Runner for Jama.app */,
 				13A342FF1F0367E9002EBC92 /* Mobile Test Runner for JamaTests.xctest */,
 				13A3430A1F0367E9002EBC92 /* Mobile Test Runner for JamaUITests.xctest */,
 			);
@@ -289,7 +289,7 @@
 			);
 			name = "Mobile Test Runner for Jama";
 			productName = "Mobile Test Runner for Jama";
-			productReference = 13A342EB1F0367E9002EBC92 /* Test Runner for Jama.app */;
+			productReference = 13A342EB1F0367E9002EBC92 /* Mobile Test Runner for Jama.app */;
 			productType = "com.apple.product-type.application";
 		};
 		13A342FE1F0367E9002EBC92 /* Mobile Test Runner for JamaTests */ = {
@@ -600,7 +600,7 @@
 				INFOPLIST_FILE = "Mobile Test Runner for Jama/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.capstone-team-A-Ben.Mobile-Test-Runner-for-Jama";
-				PRODUCT_NAME = "Test Runner for Jama";
+				PRODUCT_NAME = $PROJECT_NAME;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
@@ -615,7 +615,7 @@
 				INFOPLIST_FILE = "Mobile Test Runner for Jama/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.capstone-team-A-Ben.Mobile-Test-Runner-for-Jama";
-				PRODUCT_NAME = "Test Runner for Jama";
+				PRODUCT_NAME = $PROJECT_NAME;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
