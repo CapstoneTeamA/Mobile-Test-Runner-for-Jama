@@ -124,7 +124,7 @@
                         <outlet property="loginButton" destination="b8q-H1-06O" id="lAX-Q5-N94"/>
                         <outlet property="unauthorizedLabel" destination="lVH-1f-G54" id="S5o-oa-2Iv"/>
                         <outlet property="userNameTextBox" destination="IyA-MG-X2d" id="7bk-we-T3L"/>
-                        <segue destination="67N-f7-6S3" kind="show" identifier="LoginSegue" id="ACf-OQ-epR"/>
+                        <segue destination="67N-f7-6S3" kind="show" identifier="LoginSegue" id="7vM-tb-K3r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -142,12 +142,31 @@
                     <view key="view" contentMode="scaleToFill" id="OsK-JF-zhz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahI-6p-Gws">
+                                <rect key="frame" x="120" y="318" width="174" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SwD-aj-o1A">
+                                <rect key="frame" x="186" y="269" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="tempLabel" destination="ahI-6p-Gws" id="RpU-av-c6j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zz-49-z1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2060" y="138.98050974512745"/>
+            <point key="canvasLocation" x="2059.4202898550725" y="138.58695652173915"/>
         </scene>
         <!--Test Run List-->
         <scene sceneID="1Jg-dI-eGb">

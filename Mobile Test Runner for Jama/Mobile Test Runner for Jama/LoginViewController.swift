@@ -38,6 +38,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, httpMethod: "Get", username: userNameTextBox.text!, password: passwordTextBox.text!)
         
         loginButton.isEnabled = false
+        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -87,10 +88,12 @@ extension LoginViewController: EndpointDelegate{
         currentUser.firstName = user["firstName"] as! String
         currentUser.lastName = user["lastName"] as! String
         currentUser.email = user["email"] as! String
-        currentUser.id = user["id"] as! String
+        currentUser.id = user["id"] as! Int
         currentUser.username = user["username"] as! String
         DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "LoginSegue", sender: self)
+            let viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
+            viewController.currentUser = self.currentUser
+            self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
 }

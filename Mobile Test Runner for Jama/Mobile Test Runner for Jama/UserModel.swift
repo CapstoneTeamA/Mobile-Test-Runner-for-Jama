@@ -14,6 +14,6 @@ class UserModel {
     var firstName: String = ""
     var lastName: String = ""
     var email: String = ""
-    var id: String = ""
+    var id: Int = 0
     var username: String = ""
 }
