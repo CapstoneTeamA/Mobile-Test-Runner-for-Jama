@@ -27,7 +27,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         //Make sure that the password is not saved when the login page reappears.
-        self.passwordTextBox.text = ""
+        passwordTextBox.text = ""
+        userNameTextBox.text = ""
+        instanceTextBox.text = ""
         unauthorizedLabel.isHidden = true
         unauthorizedLabel.text = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
     }
@@ -81,6 +83,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func reloadViewWithUsernameAndInstanceSaved() {
+        //Show the unauth message and reset the password
+        self.unauthorizedLabel.isHidden = false
+        self.passwordTextBox.text = ""
+        
         //Save the username and instance, reload the view then set the username and instance again.
         let username = self.userNameTextBox.text
         let instance = self.instanceTextBox.text
@@ -104,8 +110,6 @@ extension LoginViewController: EndpointDelegate{
             
             //Notify user of unauthorized reload the view on the main thread
             DispatchQueue.main.async {
-                self.unauthorizedLabel.isHidden = false
-                self.passwordTextBox.text = ""
                 self.reloadViewWithUsernameAndInstanceSaved()
             }
             return

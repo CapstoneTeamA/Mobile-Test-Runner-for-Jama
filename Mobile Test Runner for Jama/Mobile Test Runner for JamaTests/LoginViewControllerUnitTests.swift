@@ -57,6 +57,14 @@ class LoginViewControllerUnitTests: XCTestCase {
         XCTAssertEqual("", viewController.passwordTextBox.text)
     }
     
+    func testReloadViewErrorAppears() {
+        viewController.unauthorizedLabel.isHidden = true
+        
+        viewController.reloadViewWithUsernameAndInstanceSaved()
+        
+        XCTAssertFalse(viewController.unauthorizedLabel.isHidden)
+    }
+    
     func testMissingAllFields() {
         XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
         XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
