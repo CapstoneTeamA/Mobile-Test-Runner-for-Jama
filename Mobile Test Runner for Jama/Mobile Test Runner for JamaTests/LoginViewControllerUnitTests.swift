@@ -60,6 +60,7 @@ class LoginViewControllerUnitTests: XCTestCase {
     func testMissingAllFields() {
         XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
         XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+        XCTAssertFalse(viewController.unauthorizedLabel.isHidden)
     }
     
     func testMissingUsername() {
@@ -68,6 +69,7 @@ class LoginViewControllerUnitTests: XCTestCase {
         
         XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
         XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+        XCTAssertFalse(viewController.unauthorizedLabel.isHidden)
     }
     
     func testMisssingPassword() {
@@ -76,6 +78,7 @@ class LoginViewControllerUnitTests: XCTestCase {
         
         XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
         XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+        XCTAssertFalse(viewController.unauthorizedLabel.isHidden)
     }
     
     func testMissingInstance() {
@@ -84,6 +87,7 @@ class LoginViewControllerUnitTests: XCTestCase {
         
         XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
         XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+        XCTAssertFalse(viewController.unauthorizedLabel.isHidden)
     }
     
     func testMissingInstanceAndPassword() {
@@ -91,6 +95,7 @@ class LoginViewControllerUnitTests: XCTestCase {
         
         XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
         XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+        XCTAssertFalse(viewController.unauthorizedLabel.isHidden)
     }
     
     func testMissingInstanceAndUserName() {
@@ -98,6 +103,7 @@ class LoginViewControllerUnitTests: XCTestCase {
         
         XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
         XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+        XCTAssertFalse(viewController.unauthorizedLabel.isHidden)
     }
     
     func testMissingUsernameAndPassword() {
@@ -105,6 +111,7 @@ class LoginViewControllerUnitTests: XCTestCase {
         
         XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
         XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+        XCTAssertFalse(viewController.unauthorizedLabel.isHidden)
     }
     
     func testNoMissingFields() {
@@ -114,5 +121,17 @@ class LoginViewControllerUnitTests: XCTestCase {
         
         XCTAssertTrue(viewController.checkRequiredFieldsNotEmpty())
         XCTAssertNotEqual(viewController.unauthorizedLabel.text, missingFieldError)
+        XCTAssertTrue(viewController.unauthorizedLabel.isHidden)
+    }
+    
+    func testAuthErrorMessageHidesAfterLoad(){
+        viewController.passwordTextBox.text = password
+        
+        XCTAssertFalse(viewController.checkRequiredFieldsNotEmpty())
+        XCTAssertEqual(viewController.unauthorizedLabel.text, missingFieldError)
+        XCTAssertFalse(viewController.unauthorizedLabel.isHidden)
+        
+        viewController.viewWillAppear(false)
+        XCTAssertTrue(viewController.unauthorizedLabel.isHidden)
     }
 }
