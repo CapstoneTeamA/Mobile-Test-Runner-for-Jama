@@ -10,22 +10,30 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
-
     @IBOutlet weak var unauthorizedLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var userNameTextBox: UITextField!
     @IBOutlet weak var passwordTextBox: UITextField!
     @IBOutlet weak var instanceTextBox: UITextField!
     var currentUser: UserModel = UserModel()
+    let badCredentialsMessage = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
+    let missingFieldMessage = "One or more required fields were not entered."
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.userNameTextBox.delegate = self
         self.instanceTextBox.delegate = self
         self.passwordTextBox.delegate = self
-        unauthorizedLabel.isHidden = true
-
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //Make sure that the password is not saved when the login page reappears.
+        passwordTextBox.text = ""
+        userNameTextBox.text = ""
+        instanceTextBox.text = ""
+        unauthorizedLabel.isHidden = true
+        unauthorizedLabel.text = badCredentialsMessage
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,11 +42,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func logInSubmitButton(_ sender: Any) {
+        if checkRequiredFieldsNotEmpty() == false{
+            return
+        }
         let endpointString = buildCurrentUserEndpointString()
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, httpMethod: "Get", username: userNameTextBox.text!, password: passwordTextBox.text!)
         
         loginButton.isEnabled = false
-        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -48,6 +58,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return (true)
+    }
+    
+    func checkRequiredFieldsNotEmpty() -> Bool {
+        if (userNameTextBox.text?.isEmpty)! || (passwordTextBox.text?.isEmpty)! || (instanceTextBox.text?.isEmpty)! {
+            unauthorizedLabel.isHidden = false
+            unauthorizedLabel.text = missingFieldMessage
+            return false
+        }
+        unauthorizedLabel.isHidden = true
+        return true
     }
     
     func buildCurrentUserEndpointString() -> String {
@@ -64,6 +84,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func reloadViewWithUsernameAndInstanceSaved() {
+        //Show the unauth message and reset the password
+        unauthorizedLabel.text = badCredentialsMessage
+        self.unauthorizedLabel.isHidden = false
+        self.passwordTextBox.text = ""
+        
         //Save the username and instance, reload the view then set the username and instance again.
         let username = self.userNameTextBox.text
         let instance = self.instanceTextBox.text
@@ -87,14 +112,14 @@ extension LoginViewController: EndpointDelegate{
             
             //Notify user of unauthorized reload the view on the main thread
             DispatchQueue.main.async {
-                self.unauthorizedLabel.isHidden = false
-                self.passwordTextBox.text = ""
                 self.reloadViewWithUsernameAndInstanceSaved()
             }
             return
         }
 
         DispatchQueue.main.async {
+            //Make sure that the authorization error message is hidden
+            self.unauthorizedLabel.isHidden = true
             //Extract the users name and will eventually call a segue to next screen.
             self.parseCurrentUserInfo(currentUserData: unwrappedData[0])
             
