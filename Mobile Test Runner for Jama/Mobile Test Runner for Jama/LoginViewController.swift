@@ -23,7 +23,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.instanceTextBox.delegate = self
         self.passwordTextBox.delegate = self
         unauthorizedLabel.isHidden = true
-        unauthorizedLabel.text = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
+
 
         // Do any additional setup after loading the view.
     }
@@ -31,6 +31,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         //Make sure that the password is not saved when the login page reappears.
         self.passwordTextBox.text = ""
+        unauthorizedLabel.text = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,7 +40,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func logInSubmitButton(_ sender: Any) {
-        if checkRequiredFieldsNotEmpty(){
+        if checkRequiredFieldsNotEmpty() == false{
             return
         }
         let endpointString = buildCurrentUserEndpointString()
