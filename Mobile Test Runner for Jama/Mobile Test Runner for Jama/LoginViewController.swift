@@ -16,6 +16,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextBox: UITextField!
     @IBOutlet weak var instanceTextBox: UITextField!
     var currentUser: UserModel = UserModel()
+    let badCredentialsMessage = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
+    let missingFieldMessage = "One or more required fields were not entered."
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         userNameTextBox.text = ""
         instanceTextBox.text = ""
         unauthorizedLabel.isHidden = true
-        unauthorizedLabel.text = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
+        unauthorizedLabel.text = badCredentialsMessage
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,11 +63,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func checkRequiredFieldsNotEmpty() -> Bool {
         if (userNameTextBox.text?.isEmpty)! || (passwordTextBox.text?.isEmpty)! || (instanceTextBox.text?.isEmpty)! {
             unauthorizedLabel.isHidden = false
-            unauthorizedLabel.text = "One or more required fields were not entered."
+            unauthorizedLabel.text = missingFieldMessage
             return false
         }
         unauthorizedLabel.isHidden = true
-        unauthorizedLabel.text = "Your login attempt was not successful. The user credentials you entered were not valid, please try again."
         return true
     }
     
@@ -84,6 +85,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func reloadViewWithUsernameAndInstanceSaved() {
         //Show the unauth message and reset the password
+        unauthorizedLabel.text = badCredentialsMessage
         self.unauthorizedLabel.isHidden = false
         self.passwordTextBox.text = ""
         
