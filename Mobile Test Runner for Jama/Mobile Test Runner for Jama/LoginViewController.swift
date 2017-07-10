@@ -115,9 +115,11 @@ extension LoginViewController: EndpointDelegate{
         DispatchQueue.main.async {
             self.loginButton.isEnabled = true
         }
+        
         guard let unwrappedData = data else {
             return
         }
+        
         if unwrappedData[0]["Unauthorized"] != nil {
             
             //Notify user of unauthorized reload the view on the main thread
