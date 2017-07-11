@@ -10,7 +10,7 @@
 import XCTest
 
 class ViewControllerUITests: XCTestCase {
-    
+    let app = XCUIApplication()
     override func setUp() {
         super.setUp()
         
@@ -29,22 +29,22 @@ class ViewControllerUITests: XCTestCase {
         super.tearDown()
     }
     
+    func testLoginExists() {
+        XCTAssert(app.staticTexts["Login"].exists)
+    }
     
     func testUsernamePlaceholder() {
-        let app = XCUIApplication()
         let usernameTextField = app.textFields["Username"]
         XCTAssertEqual(usernameTextField.placeholderValue, "Username")
         
     }
     
     func testPasswordPlaceholder() {
-        let app = XCUIApplication()
         let passwordSecureTextField = app.secureTextFields["Password"]
         XCTAssertEqual(passwordSecureTextField.placeholderValue, "Password")
     }
     
     func testInstancePlaceholder() {
-        let app = XCUIApplication()
         let jamaInstanceTextField = app.textFields["Jama-Instance"]
         XCTAssertEqual(jamaInstanceTextField.placeholderValue, "Jama-Instance")
     }
@@ -57,15 +57,14 @@ class ViewControllerUITests: XCTestCase {
      }
      */
     func testRequiredFields() {
-        let app = XCUIApplication()
         let logInButton = app.buttons["Log In"]
         logInButton.tap()
         _ = XCUIApplication().staticTexts["One or more required fields were not entered."]
         XCTAssert(app.staticTexts["One or more required fields were not entered."].exists)
     }
     
+    //This tests lags, gets stuck on "Attaching Test Runner on iPhone"
     func testInvalidLogin() {
-        let app = XCUIApplication()
         let usernameTextField = app.textFields["Username"]
         usernameTextField.tap()
         app.textFields["Username"].typeText("username")
@@ -80,4 +79,5 @@ class ViewControllerUITests: XCTestCase {
         _ = app.staticTexts["Your login attempt was not successful. The user credentials you entered were not valid, please try again."]
         XCTAssert(app.staticTexts["Your login attempt was not successful. The user credentials you entered were not valid, please try again."].exists)
     }
+
 }
