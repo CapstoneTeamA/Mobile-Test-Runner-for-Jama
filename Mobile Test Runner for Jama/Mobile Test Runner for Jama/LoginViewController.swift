@@ -24,7 +24,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.userNameTextBox.delegate = self
         self.instanceTextBox.delegate = self
         self.passwordTextBox.delegate = self
-        // Do any additional setup after loading the view.
+        
+        //Back button for the next screen is set in this screen.
+        let backItem = UIBarButtonItem()
+        backItem.title = "Log Out"
+        navigationItem.backBarButtonItem = backItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +36,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordTextBox.text = ""
         userNameTextBox.text = ""
         instanceTextBox.text = ""
+        
         unauthorizedLabel.isHidden = true
         unauthorizedLabel.text = badCredentialsMessage
     }
@@ -49,9 +54,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, httpMethod: "Get", username: userNameTextBox.text!, password: passwordTextBox.text!)
         
         loginButton.isEnabled = false
+        
+        //Make sure the cursor is not in one of the text boxes after the button is pressed
+        userNameTextBox.resignFirstResponder()
+        passwordTextBox.resignFirstResponder()
+        instanceTextBox.resignFirstResponder()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        loginButton.resignFirstResponder()
         self.view.endEditing(true)
     }
     
@@ -105,9 +116,11 @@ extension LoginViewController: EndpointDelegate{
         DispatchQueue.main.async {
             self.loginButton.isEnabled = true
         }
+        
         guard let unwrappedData = data else {
             return
         }
+        
         if unwrappedData[0]["Unauthorized"] != nil {
             
             //Notify user of unauthorized reload the view on the main thread
