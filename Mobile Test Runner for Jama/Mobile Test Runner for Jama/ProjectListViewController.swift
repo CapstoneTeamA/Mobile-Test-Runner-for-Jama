@@ -11,20 +11,23 @@ import UIKit
 class ProjectListViewController: UIViewController {
 
     var currentUser: UserModel = UserModel()
-    
+    var projectList: ProjectListModel = ProjectListModel()
+    var username = ""
+    var password = ""
+    var instance = ""
     @IBOutlet weak var tempLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         tempLabel.text = currentUser.firstName
-        
-        // Do any additional setup after loading the view.
+        var endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
+        endpointString = "https://" + instance + "." + endpointString
+        RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, username: username, password: password)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -36,4 +39,15 @@ class ProjectListViewController: UIViewController {
     }
     */
 
+}
+
+extension ProjectListViewController: EndpointDelegate {
+    func didLoadEndpoint(data: [[String : AnyObject]]?) {
+        guard let unwrappedData = data else {
+            return
+        }
+        DispatchQueue.main.async {
+            self.projectList.extractProjectList(fromData: unwrappedData)
+        }
+    }
 }

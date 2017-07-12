@@ -129,6 +129,9 @@ extension LoginViewController: EndpointDelegate{
             //This should be replaced in the future by using a singleton for the current user and using a segue.
             let viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
             viewController.currentUser = self.currentUser
+            viewController.password = self.passwordTextBox.text!
+            viewController.instance = self.instanceTextBox.text!
+            viewController.username = self.userNameTextBox.text!
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
