@@ -62,6 +62,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        loginButton.resignFirstResponder()
         self.view.endEditing(true)
     }
     
