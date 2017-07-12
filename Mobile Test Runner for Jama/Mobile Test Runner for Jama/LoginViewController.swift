@@ -126,6 +126,7 @@ extension LoginViewController: EndpointDelegate{
             //Notify user of unauthorized reload the view on the main thread
             DispatchQueue.main.async {
                 self.reloadViewWithUsernameAndInstanceSaved()
+                self.viewDidLoad()
             }
             return
         }
