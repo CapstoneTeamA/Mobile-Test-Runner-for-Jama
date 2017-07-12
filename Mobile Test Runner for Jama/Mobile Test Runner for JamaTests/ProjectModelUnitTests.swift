@@ -16,7 +16,6 @@ class ProjectModelUnitTests: XCTestCase {
     var projectKey = "ABC"
     var id = 23
     
-    
     override func setUp() {
         super.setUp()
         projectFields.updateValue(projectName as AnyObject, forKey: "name")
@@ -26,7 +25,6 @@ class ProjectModelUnitTests: XCTestCase {
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
