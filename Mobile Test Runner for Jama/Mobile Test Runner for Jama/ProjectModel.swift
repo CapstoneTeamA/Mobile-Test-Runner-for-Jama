@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+class ProjectModel {
+    var name = ""
+    var projectKey = ""
+    var id = -1
+    
+    func extractProject(fromData: [String : AnyObject]) {
+        var fields: [String : AnyObject] = [:]
+        guard fromData["fields"] != nil else {
+            return
+        }
+        fields = fromData["fields"] as! Dictionary
+        id = fromData["id"] as! Int
+        name = fields["name"] as! String
+        projectKey = fields["projectKey"] as! String
+    }
+}
