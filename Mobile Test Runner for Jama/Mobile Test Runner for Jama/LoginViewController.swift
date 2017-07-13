@@ -86,14 +86,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return "https://" + instanceTextBox.text! + "." + endpoint
     }
     
-    func parseCurrentUserInfo(currentUserData: [String : AnyObject]) {
-        currentUser.firstName = currentUserData["firstName"] as! String
-        currentUser.lastName = currentUserData["lastName"] as! String
-        currentUser.email = currentUserData["email"] as! String
-        currentUser.id = currentUserData["id"] as! Int
-        currentUser.username = currentUserData["username"] as! String
-    }
-    
     func reloadViewWithUsernameAndInstanceSaved() {
         //Show the unauth message and reset the password
         unauthorizedLabel.text = badCredentialsMessage
@@ -135,11 +127,13 @@ extension LoginViewController: EndpointDelegate{
             //Make sure that the authorization error message is hidden
             self.unauthorizedLabel.isHidden = true
             //Extract the users name and will eventually call a segue to next screen.
-            self.parseCurrentUserInfo(currentUserData: unwrappedData[0])
-            
+            self.currentUser.extractUser(fromData: unwrappedData[0])
             //This should be replaced in the future by using a singleton for the current user and using a segue.
             let viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
             viewController.currentUser = self.currentUser
+            viewController.password = self.passwordTextBox.text!
+            viewController.instance = self.instanceTextBox.text!
+            viewController.username = self.userNameTextBox.text!
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
