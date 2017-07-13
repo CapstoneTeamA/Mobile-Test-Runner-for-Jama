@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var unauthorizedLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var userNameTextBox: UITextField!
@@ -21,16 +21,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.userNameTextBox.delegate = self
-        self.instanceTextBox.delegate = self
-        self.passwordTextBox.delegate = self
+        setTextFieldDelegates()
         
         //Back button for the next screen is set in this screen.
         let backItem = UIBarButtonItem()
         backItem.title = "Log Out"
         navigationItem.backBarButtonItem = backItem
     }
-    
+    func setTextFieldDelegates() {
+        self.userNameTextBox.delegate = self
+        self.instanceTextBox.delegate = self
+        self.passwordTextBox.delegate = self
+    }
     override func viewWillAppear(_ animated: Bool) {
         //Make sure that the password is not saved when the login page reappears.
         passwordTextBox.text = ""
@@ -40,7 +42,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         unauthorizedLabel.isHidden = true
         unauthorizedLabel.text = badCredentialsMessage
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -60,7 +62,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordTextBox.resignFirstResponder()
         instanceTextBox.resignFirstResponder()
     }
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         loginButton.resignFirstResponder()
         self.view.endEditing(true)
@@ -86,6 +88,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return "https://" + instanceTextBox.text! + "." + endpoint
     }
     
+    func parseCurrentUserInfo(currentUserData: [String : AnyObject]) {
+        currentUser.firstName = currentUserData["firstName"] as! String
+        currentUser.lastName = currentUserData["lastName"] as! String
+        currentUser.email = currentUserData["email"] as! String
+        currentUser.id = currentUserData["id"] as! Int
+        currentUser.username = currentUserData["username"] as! String
+    }
+    
     func reloadViewWithUsernameAndInstanceSaved() {
         //Show the unauth message and reset the password
         unauthorizedLabel.text = badCredentialsMessage
@@ -98,6 +108,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.loadView()
         self.userNameTextBox.text = username
         self.instanceTextBox.text = instance
+        setTextFieldDelegates()
     }
 }
 
@@ -118,22 +129,19 @@ extension LoginViewController: EndpointDelegate{
             //Notify user of unauthorized reload the view on the main thread
             DispatchQueue.main.async {
                 self.reloadViewWithUsernameAndInstanceSaved()
-                self.viewDidLoad()
             }
             return
         }
-
+        
         DispatchQueue.main.async {
             //Make sure that the authorization error message is hidden
             self.unauthorizedLabel.isHidden = true
             //Extract the users name and will eventually call a segue to next screen.
-            self.currentUser.extractUser(fromData: unwrappedData[0])
+            self.parseCurrentUserInfo(currentUserData: unwrappedData[0])
+            
             //This should be replaced in the future by using a singleton for the current user and using a segue.
             let viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
             viewController.currentUser = self.currentUser
-            viewController.password = self.passwordTextBox.text!
-            viewController.instance = self.instanceTextBox.text!
-            viewController.username = self.userNameTextBox.text!
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

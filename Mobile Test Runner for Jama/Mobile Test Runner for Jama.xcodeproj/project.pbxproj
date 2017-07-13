@@ -340,7 +340,7 @@
 				TargetAttributes = {
 					13A342EA1F0367E9002EBC92 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = FEB24GUH44;
+						DevelopmentTeam = LA4QFXA5C5;
 						ProvisioningStyle = Automatic;
 					};
 					13A342FE1F0367E9002EBC92 = {
@@ -596,10 +596,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = FEB24GUH44;
+				DEVELOPMENT_TEAM = LA4QFXA5C5;
 				INFOPLIST_FILE = "Mobile Test Runner for Jama/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "meghankmcbee-gmail.com";
+				PRODUCT_BUNDLE_IDENTIFIER = Jama;
 				PRODUCT_NAME = $PROJECT_NAME;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -611,10 +611,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = FEB24GUH44;
+				DEVELOPMENT_TEAM = LA4QFXA5C5;
 				INFOPLIST_FILE = "Mobile Test Runner for Jama/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "meghankmcbee-gmail.com";
+				PRODUCT_BUNDLE_IDENTIFIER = Jama;
 				PRODUCT_NAME = $PROJECT_NAME;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
