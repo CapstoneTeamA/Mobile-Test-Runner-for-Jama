@@ -48,14 +48,12 @@ class ViewControllerUITests: XCTestCase {
         let jamaInstanceTextField = app.textFields["Jama-Instance"]
         XCTAssertEqual(jamaInstanceTextField.placeholderValue, "Jama-Instance")
     }
-    /* This test fails
-     func testLogInPlaceHolder() {
-     let app = XCUIApplication()
-     let logInButton = app.buttons["Log In"]
-     XCTAssertEqual(logInButton.placeholderValue, "Log In")
-     
-     }
-     */
+    
+    func testLogInPlaceHolder() {
+        let logInButton = app.buttons["Log In"]
+        XCTAssertEqual(logInButton.label, "Log In")
+        
+    }
     func testRequiredFields() {
         let logInButton = app.buttons["Log In"]
         logInButton.tap()
@@ -63,7 +61,6 @@ class ViewControllerUITests: XCTestCase {
         XCTAssert(app.staticTexts["One or more required fields were not entered."].exists)
     }
     
-    //This tests lags, gets stuck on "Attaching Test Runner on iPhone"
     func testInvalidLogin() {
         let usernameTextField = app.textFields["Username"]
         usernameTextField.tap()
