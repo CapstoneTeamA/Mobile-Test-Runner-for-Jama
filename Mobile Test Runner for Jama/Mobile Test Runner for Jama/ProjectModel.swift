@@ -7,3 +7,27 @@
 //
 
 import Foundation
+
+class ProjectModel {
+    var name = ""
+    var projectKey = ""
+    var id = -1
+    
+    func extractProject(fromData: [String : AnyObject]) {
+        var fields: [String : AnyObject] = [:]
+        guard fromData["fields"] != nil else {
+            return
+        }
+        
+       
+        fields = fromData["fields"] as! Dictionary
+        id = fromData["id"] as! Int
+        name = fields["name"] as! String
+        
+        //Appearently projectKey is not a required field on all projects.
+        guard fields["projectKey"] != nil  else{
+            return
+        }
+        projectKey = fields["projectKey"] as! String
+    }
+}
