@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFm-Ms-aCg" userLabel="TextBoxView">
-                                <rect key="frame" x="60" y="281" width="294" height="175"/>
+                                <rect key="frame" x="60" y="280.66666666666669" width="294" height="175"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IyA-MG-X2d">
                                         <rect key="frame" x="0.0" y="0.0" width="294" height="30"/>
@@ -100,7 +100,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your login attempt was not successful. The user credentials you entered were not valid, please try again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVH-1f-G54">
-                                <rect key="frame" x="60" y="161" width="294" height="108"/>
+                                <rect key="frame" x="60" y="160.66666666666669" width="294" height="108.00000000000006"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="108" id="9mG-1U-twX"/>
                                 </constraints>
@@ -148,22 +148,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahI-6p-Gws">
-                                <rect key="frame" x="120" y="318" width="174" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyW-IR-JdR">
+                                <rect key="frame" x="87" y="151" width="240" height="128"/>
+                                <connections>
+                                    <segue destination="clj-QG-8OW" kind="embed" id="TeR-g8-x0u"/>
+                                </connections>
+                            </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahI-6p-Gws">
+                                <rect key="frame" x="120" y="202.66666666666666" width="174" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="Cxj-r4-mwv"/>
+                                    <constraint firstAttribute="height" constant="25" id="GJn-fu-HGx"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SwD-aj-o1A">
-                                <rect key="frame" x="186" y="269" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SwD-aj-o1A">
+                                <rect key="frame" x="186" y="153.66666666666666" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="hIF-Fi-Hwq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ahI-6p-Gws" firstAttribute="top" secondItem="SwD-aj-o1A" secondAttribute="bottom" constant="28" id="3oe-0Z-jqT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JyW-IR-JdR" secondAttribute="trailing" constant="67" id="HT7-Jm-Za9"/>
+                            <constraint firstItem="JyW-IR-JdR" firstAttribute="leading" secondItem="OsK-JF-zhz" secondAttribute="leadingMargin" constant="67" id="Jcn-yM-jgA"/>
+                            <constraint firstItem="JyW-IR-JdR" firstAttribute="top" secondItem="bwx-3Z-i5u" secondAttribute="bottom" constant="87" id="YFo-8g-FtF"/>
+                            <constraint firstItem="SwD-aj-o1A" firstAttribute="centerX" secondItem="ahI-6p-Gws" secondAttribute="centerX" id="h7b-dg-feT"/>
+                            <constraint firstItem="ahI-6p-Gws" firstAttribute="centerY" secondItem="JyW-IR-JdR" secondAttribute="centerY" id="juJ-Y9-T9o"/>
+                            <constraint firstItem="ahI-6p-Gws" firstAttribute="centerX" secondItem="JyW-IR-JdR" secondAttribute="centerX" id="nZz-Wa-pYf"/>
+                            <constraint firstItem="cSb-8O-36Q" firstAttribute="top" secondItem="JyW-IR-JdR" secondAttribute="bottom" constant="457" id="x8g-bd-mOn"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tempLabel" destination="ahI-6p-Gws" id="RpU-av-c6j"/>
@@ -244,6 +265,19 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CBR-KJ-hJF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-63.200000000000003" y="138.98050974512745"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="I7s-1y-I1O">
+            <objects>
+                <viewController id="clj-QG-8OW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LFO-os-ONY">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HXa-ky-8Zo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
 </document>
