@@ -1,1 +1,7 @@
-TEST README PLACEHOLDER
+# Unit Tests
+
+Mobile Test Runner for Jama was built using Test Driven Development. In the folders: ViewControllerUnitTests, utilsUnitTests, and ModelUnitTests you will find all of the unit test code used throughout development.
+
+
+## Running tests
+These tests can be run by hitting within Xcode, or by selecting Product/Test from the dropdown menu.
