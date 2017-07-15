@@ -23,3 +23,7 @@ The view controller handels all user interaction.
 
 # Screen Flow Diagram 
 ![Screen Flow](http://i.imgur.com/SZER521.jpg)
+
+# Notes
+
+App has been forced to only run in vertical or portrait mode to conform to stylistic and design requirements. 
