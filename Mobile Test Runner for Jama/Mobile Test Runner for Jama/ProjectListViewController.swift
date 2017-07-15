@@ -15,10 +15,10 @@ class ProjectListViewController: UIViewController {
     var username = ""
     var password = ""
     var instance = ""
-    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tempLabel.text = currentUser.firstName
         var endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
         endpointString = "https://" + instance + "." + endpointString
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, username: username, password: password)
@@ -48,6 +48,26 @@ extension ProjectListViewController: EndpointDelegate {
         }
         DispatchQueue.main.async {
             self.projectList.extractProjectList(fromData: unwrappedData)
+            self.collectionView.reloadData()
         }
     }
+}
+
+
+extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return projectList.projectList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProjectCollectionViewCell
+        
+        cell.projectCellLabel.text = projectList.projectList[indexPath.row].name
+        
+        return cell
+    }
+
 }
