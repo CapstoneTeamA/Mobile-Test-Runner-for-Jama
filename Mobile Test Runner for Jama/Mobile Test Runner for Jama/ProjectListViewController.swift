@@ -63,12 +63,12 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProjectCollectionViewCell
-        
-        prepCell(forCell: cell, withLabelText: projectList.projectList[indexPath.row].name)
+        cell.projectCellLabel.text = projectList.projectList[indexPath.row].name
+        prepCell(forCell: cell)
         return cell
     }
     
-    func prepCell(forCell: UICollectionViewCell, withLabelText: String) {
+    func prepCell(forCell: ProjectCollectionViewCell) {
         forCell.layer.cornerRadius = 5.0
         forCell.layer.shadowColor = UIColor.lightGray.cgColor
         forCell.layer.shadowOffset = CGSize(width: 0, height: 2.0)

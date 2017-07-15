@@ -149,7 +149,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OOj-1o-RZK">
-                                <rect key="frame" x="0.0" y="69" width="414" height="662"/>
+                                <rect key="frame" x="0.0" y="164" width="414" height="452"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="1000" id="BdS-cu-LOg">
                                     <size key="itemSize" width="350" height="60"/>
@@ -191,14 +191,52 @@
                                     <outlet property="delegate" destination="67N-f7-6S3" id="tQP-G9-jSP"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a project to view available tests:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcD-9G-aW0">
+                                <rect key="frame" x="20" y="72" width="374" height="67"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h28-EN-tPd">
+                                <rect key="frame" x="0.0" y="154" width="414" height="10"/>
+                                <color key="backgroundColor" red="0.94509803921568625" green="0.38039215686274508" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="e9D-xB-OfC"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELL-qg-OTg">
+                                <rect key="frame" x="0.0" y="616" width="414" height="10"/>
+                                <color key="backgroundColor" red="0.94509803921568625" green="0.38039215686274508" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="BJK-1V-eId"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Jama-logo-smallwtext.png" translatesAutoresizingMaskIntoConstraints="NO" id="dzY-H8-Icy">
+                                <rect key="frame" x="87" y="626" width="240" height="110"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="OOj-1o-RZK" firstAttribute="centerY" secondItem="OsK-JF-zhz" secondAttribute="centerY" id="Bg3-Bz-LBi"/>
+                            <constraint firstItem="h28-EN-tPd" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="2Ng-X7-qki"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="qcD-9G-aW0" secondAttribute="leading" id="2gU-z7-HW2"/>
+                            <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="qcD-9G-aW0" secondAttribute="bottom" constant="25" id="3ds-W6-dRJ"/>
+                            <constraint firstItem="ELL-qg-OTg" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="BOW-jV-bRW"/>
+                            <constraint firstItem="dzY-H8-Icy" firstAttribute="top" secondItem="ELL-qg-OTg" secondAttribute="bottom" id="Bid-Tf-LaG"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="GSH-5D-c04"/>
+                            <constraint firstItem="qcD-9G-aW0" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="L9f-GI-9De"/>
+                            <constraint firstItem="ELL-qg-OTg" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="NJQ-uH-2mS"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="OJv-ib-oQe"/>
-                            <constraint firstItem="cSb-8O-36Q" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" constant="5" id="WsT-Bx-K3N"/>
-                            <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="bwx-3Z-i5u" secondAttribute="bottom" constant="5" id="m5E-62-pFx"/>
+                            <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="h28-EN-tPd" secondAttribute="bottom" id="UqO-6T-J5C"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qcD-9G-aW0" secondAttribute="trailing" id="Wn0-uh-ZY8"/>
+                            <constraint firstItem="cSb-8O-36Q" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" constant="120" id="WsT-Bx-K3N"/>
+                            <constraint firstItem="ELL-qg-OTg" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" id="YCl-BK-Ejz"/>
+                            <constraint firstItem="h28-EN-tPd" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="evr-8w-D6t"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dzY-H8-Icy" secondAttribute="trailing" constant="67" id="fcK-ae-snf"/>
+                            <constraint firstItem="dzY-H8-Icy" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="iqY-SL-PaT"/>
+                            <constraint firstItem="qcD-9G-aW0" firstAttribute="top" secondItem="bwx-3Z-i5u" secondAttribute="bottom" constant="8" id="j0K-f1-Xpa"/>
+                            <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="bwx-3Z-i5u" secondAttribute="bottom" constant="100" id="m5E-62-pFx"/>
+                            <constraint firstItem="dzY-H8-Icy" firstAttribute="leading" secondItem="OsK-JF-zhz" secondAttribute="leadingMargin" constant="67" id="sJt-7k-BWd"/>
+                            <constraint firstItem="cSb-8O-36Q" firstAttribute="top" secondItem="dzY-H8-Icy" secondAttribute="bottom" id="xyU-49-Taq"/>
                         </constraints>
                     </view>
                     <connections>
@@ -282,4 +320,7 @@
             <point key="canvasLocation" x="-63.200000000000003" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Jama-logo-smallwtext.png" width="1157" height="514"/>
+    </resources>
 </document>

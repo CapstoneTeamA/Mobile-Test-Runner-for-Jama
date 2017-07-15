@@ -33,7 +33,7 @@ class ProjectListViewControllerUnitTests: XCTestCase {
     func testPrepCell() {
         let cell = ProjectCollectionViewCell()
         
-        viewController.prepCell(forCell: cell, withLabelText: "test")
+        viewController.prepCell(forCell: cell)
         
         XCTAssertEqual(5.0, cell.layer.cornerRadius)
         XCTAssertEqual(UIColor.lightGray.cgColor, cell.layer.shadowColor)
