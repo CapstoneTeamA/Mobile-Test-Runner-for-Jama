@@ -36,15 +36,6 @@ class LoginViewControllerUnitTests: XCTestCase {
         super.tearDown()
     }
     
-    func testParseCurrentUserData(){
-        viewController.parseCurrentUserInfo(currentUserData: userData)
-        XCTAssertEqual(userFirstName, viewController.currentUser.firstName)
-        XCTAssertEqual(userLastName, viewController.currentUser.lastName)
-        XCTAssertEqual(userId, viewController.currentUser.id)
-        XCTAssertEqual(userEmail, viewController.currentUser.email)
-        XCTAssertEqual(username, viewController.currentUser.username)
-    }
-    
     func testReloadViewWithUsernameAndInstanceSaved() {
         viewController.userNameTextBox.text = username
         viewController.passwordTextBox.text = password

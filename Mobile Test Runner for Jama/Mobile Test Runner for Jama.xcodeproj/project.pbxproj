@@ -599,7 +599,7 @@
 				DEVELOPMENT_TEAM = LA4QFXA5C5;
 				INFOPLIST_FILE = "Mobile Test Runner for Jama/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.capstone-team-A-Ben.Mobile-Test-Runner-for-Jama";
+				PRODUCT_BUNDLE_IDENTIFIER = Jama;
 				PRODUCT_NAME = $PROJECT_NAME;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -614,7 +614,7 @@
 				DEVELOPMENT_TEAM = LA4QFXA5C5;
 				INFOPLIST_FILE = "Mobile Test Runner for Jama/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.capstone-team-A-Ben.Mobile-Test-Runner-for-Jama";
+				PRODUCT_BUNDLE_IDENTIFIER = Jama;
 				PRODUCT_NAME = $PROJECT_NAME;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
