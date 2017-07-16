@@ -15,31 +15,30 @@ class ProjectListViewController: UIViewController {
     var username = ""
     var password = ""
     var instance = ""
-    @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var tempLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        tempLabel.text = currentUser.firstName
         var endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
         endpointString = "https://" + instance + "." + endpointString
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, username: username, password: password)
-        
-        let layout = buildCollectionLayout()
-        collectionView.setCollectionViewLayout(layout, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    //Create the layout for the collection view to set the size of objects and sets the cells spacing.
-    func buildCollectionLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 20, height: 60)
-        layout.minimumInteritemSpacing = 1000
-        layout.minimumLineSpacing = 6
-        return layout
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
+    */
+
 }
 
 extension ProjectListViewController: EndpointDelegate {
@@ -49,35 +48,6 @@ extension ProjectListViewController: EndpointDelegate {
         }
         DispatchQueue.main.async {
             self.projectList.extractProjectList(fromData: unwrappedData)
-            self.collectionView.reloadData() //After async call, reload the collection data
         }
     }
-}
-
-
-extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    //How many cells will the collection view have
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return projectList.projectList.count
-    }
-    
-    //Makes a cell for the collection. This is called for each of the projects in the list.
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProjectCollectionViewCell
-        cell.projectCellLabel.text = projectList.projectList[indexPath.row].name
-        prepCell(forCell: cell)
-        return cell
-    }
-    
-    //Make the cell all pretty
-    func prepCell(forCell: ProjectCollectionViewCell) {
-        forCell.layer.cornerRadius = 5.0
-        forCell.layer.shadowColor = UIColor.lightGray.cgColor
-        forCell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        forCell.layer.shadowRadius = 2.0
-        forCell.layer.shadowOpacity = 1.0
-        forCell.layer.masksToBounds = false
-        forCell.layer.shadowPath = UIBezierPath(roundedRect: forCell.bounds, cornerRadius: forCell.contentView.layer.cornerRadius).cgPath
-    }
-
 }
