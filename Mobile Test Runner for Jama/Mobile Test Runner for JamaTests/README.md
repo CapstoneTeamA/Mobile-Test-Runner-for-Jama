@@ -4,4 +4,4 @@ Mobile Test Runner for Jama was built using Test Driven Development. In the fold
 
 
 ## Running tests
-These tests can be run by hitting command+U within Xcode, or by selecting Product/Test from the dropdown menu.
+These tests can be run by hitting within Xcode, or by selecting Product/Test from the dropdown menu.
