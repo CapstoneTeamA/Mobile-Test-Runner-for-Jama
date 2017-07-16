@@ -85,12 +85,8 @@ class ProjectListViewControllerUnitTests: XCTestCase {
         viewController.projectList.projectList.append(project)
         viewController.collectionView.reloadData()
         
-        let result = viewController.buildCell(indexPath: indexPath) 
-        
+        let result = viewController.buildCell(indexPath: indexPath)
         XCTAssertEqual("testProject", result.projectCellLabel.text)
-        
-        
-
     }
     
     func testCollectionViewCells() {
@@ -108,15 +104,12 @@ class ProjectListViewControllerUnitTests: XCTestCase {
         project.name = "testProject"
         viewController.projectList.projectList.append(project)
         viewController.collectionView.reloadData()
-        
         XCTAssertEqual(1, viewController.collectionView.numberOfItems(inSection: 0))
         
         let proj2 = ProjectModel()
         proj2.name = "proj2"
         viewController.projectList.projectList.append(proj2)
         viewController.collectionView.reloadData()
-        
         XCTAssertEqual(2, viewController.collectionView(viewController.collectionView, numberOfItemsInSection: 0))
-
     }
 }
