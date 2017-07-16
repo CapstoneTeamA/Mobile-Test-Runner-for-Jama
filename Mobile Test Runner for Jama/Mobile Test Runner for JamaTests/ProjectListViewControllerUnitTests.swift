@@ -13,6 +13,7 @@ class ProjectListViewControllerUnitTests: XCTestCase {
     override func setUp() {
         super.setUp()
         viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
+        _ = viewController.view
     }
     
     override func tearDown() {
@@ -75,5 +76,19 @@ class ProjectListViewControllerUnitTests: XCTestCase {
         XCTAssertTrue(viewController.compareProjectNames(lhs: proj2, rhs: proj1))
         XCTAssertFalse(viewController.compareProjectNames(lhs: proj1, rhs: proj2))
         XCTAssertFalse(viewController.compareProjectNames(lhs: proj2, rhs: proj2))
+    }
+    
+    func testBuildCellt() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let project = ProjectModel()
+        project.name = "testProject"
+        viewController.projectList.projectList.append(project)
+
+        let result = viewController.buildCell(indexPath: indexPath) 
+        
+        XCTAssertEqual("testProject", result.projectCellLabel.text)
+        
+        viewController.collectionView.reloadData()
+        XCTAssertEqual(1, viewController.collectionView.numberOfItems(inSection: 0))
     }
 }

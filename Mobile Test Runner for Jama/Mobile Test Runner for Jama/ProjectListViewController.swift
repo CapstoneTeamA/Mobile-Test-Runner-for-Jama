@@ -81,6 +81,10 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     
     //Makes a cell for the collection. This is called for each of the projects in the list.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return buildCell(indexPath: indexPath)
+    }
+    
+    func buildCell(indexPath: IndexPath) -> ProjectCollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProjectCollectionViewCell
         cell.projectCellLabel.text = projectList.projectList[indexPath.row].name
         prepCell(forCell: cell)
