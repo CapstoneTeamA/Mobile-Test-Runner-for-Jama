@@ -139,7 +139,7 @@
         <!--Project List-->
         <scene sceneID="TSg-94-4yu">
             <objects>
-                <viewController storyboardIdentifier="ProjectListViewController" title="Project List" id="67N-f7-6S3" customClass="ProjectListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProjectListViewController" title="Project List" automaticallyAdjustsScrollViewInsets="NO" id="67N-f7-6S3" customClass="ProjectListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bwx-3Z-i5u"/>
                         <viewControllerLayoutGuide type="bottom" id="cSb-8O-36Q"/>
@@ -198,21 +198,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h28-EN-tPd">
-                                <rect key="frame" x="0.0" y="154" width="414" height="10"/>
+                                <rect key="frame" x="0.0" y="148" width="414" height="10"/>
                                 <color key="backgroundColor" red="0.94509803921568625" green="0.38039215686274508" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="e9D-xB-OfC"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELL-qg-OTg">
-                                <rect key="frame" x="0.0" y="616" width="414" height="10"/>
+                                <rect key="frame" x="0.0" y="622" width="414" height="10"/>
                                 <color key="backgroundColor" red="0.94509803921568625" green="0.38039215686274508" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="BJK-1V-eId"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Jama-logo-smallwtext.png" translatesAutoresizingMaskIntoConstraints="NO" id="dzY-H8-Icy">
-                                <rect key="frame" x="83" y="626" width="248" height="110"/>
+                                <rect key="frame" x="83" y="632" width="248" height="104"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="248" id="XL4-9s-V6A"/>
                                 </constraints>
@@ -229,10 +229,10 @@
                             <constraint firstItem="qcD-9G-aW0" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="L9f-GI-9De"/>
                             <constraint firstItem="ELL-qg-OTg" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="NJQ-uH-2mS"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="OJv-ib-oQe"/>
-                            <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="h28-EN-tPd" secondAttribute="bottom" id="UqO-6T-J5C"/>
+                            <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="h28-EN-tPd" secondAttribute="bottom" constant="6" id="UqO-6T-J5C"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qcD-9G-aW0" secondAttribute="trailing" id="Wn0-uh-ZY8"/>
                             <constraint firstItem="cSb-8O-36Q" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" constant="120" id="WsT-Bx-K3N"/>
-                            <constraint firstItem="ELL-qg-OTg" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" id="YCl-BK-Ejz"/>
+                            <constraint firstItem="ELL-qg-OTg" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" constant="6" id="YCl-BK-Ejz"/>
                             <constraint firstItem="h28-EN-tPd" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="evr-8w-D6t"/>
                             <constraint firstItem="dzY-H8-Icy" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="iqY-SL-PaT"/>
                             <constraint firstItem="qcD-9G-aW0" firstAttribute="top" secondItem="bwx-3Z-i5u" secondAttribute="bottom" constant="8" id="j0K-f1-Xpa"/>
