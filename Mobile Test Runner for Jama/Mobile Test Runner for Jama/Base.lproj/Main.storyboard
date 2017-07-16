@@ -182,7 +182,7 @@
                                             <constraint firstItem="IJa-8k-3bZ" firstAttribute="centerY" secondItem="jaN-fO-anp" secondAttribute="centerY" id="nhP-GD-u5f"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="projectCellLabel" destination="IJa-8k-3bZ" id="Ezg-Si-3Ub"/>
+                                            <outlet property="projectCellLabel" destination="IJa-8k-3bZ" id="Oi7-14-amb"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
