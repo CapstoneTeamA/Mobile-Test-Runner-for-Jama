@@ -40,6 +40,11 @@ class ProjectListViewController: UIViewController {
         layout.minimumLineSpacing = 6
         return layout
     }
+    
+    //Comparator function to be used by the sort method on arrays
+    func compareProjectNames(lhs: ProjectModel, rhs: ProjectModel) -> Bool {
+        return lhs.name.uppercased() < rhs.name.uppercased()
+    }
 }
 
 extension ProjectListViewController: EndpointDelegate {
@@ -49,6 +54,9 @@ extension ProjectListViewController: EndpointDelegate {
         }
         DispatchQueue.main.async {
             self.projectList.extractProjectList(fromData: unwrappedData)
+            
+            //It looks like the API returns the list sorted but it seems like we should make sure
+            self.projectList.projectList.sort(by: self.compareProjectNames(lhs:rhs:))
             self.collectionView.reloadData() //After async call, reload the collection data
         }
     }

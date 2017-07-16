@@ -46,4 +46,34 @@ class ProjectListViewControllerUnitTests: XCTestCase {
         let shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.layer.cornerRadius).cgPath
         XCTAssertEqual(shadowPath, cell.layer.shadowPath)
     }
+    
+    func testCompareProjectNames() {
+        let proj1 = ProjectModel()
+        let proj2 = ProjectModel()
+        proj1.name = "zzz"
+        proj2.name = "aaa"
+        
+        //Ensure the compare function returns the expected values for alphabetical order
+        XCTAssertTrue(viewController.compareProjectNames(lhs: proj2, rhs: proj1))
+        XCTAssertFalse(viewController.compareProjectNames(lhs: proj1, rhs: proj2))
+        XCTAssertFalse(viewController.compareProjectNames(lhs: proj1, rhs: proj1))
+        
+        //Ensure case insensitivity
+        proj2.name = "AAA"
+        XCTAssertTrue(viewController.compareProjectNames(lhs: proj2, rhs: proj1))
+        XCTAssertFalse(viewController.compareProjectNames(lhs: proj1, rhs: proj2))
+        XCTAssertFalse(viewController.compareProjectNames(lhs: proj2, rhs: proj2))
+        
+        //Make sure numbers come before letters in alpha sort comparator
+        proj2.name = "111"
+        XCTAssertTrue(viewController.compareProjectNames(lhs: proj2, rhs: proj1))
+        XCTAssertFalse(viewController.compareProjectNames(lhs: proj1, rhs: proj2))
+        XCTAssertFalse(viewController.compareProjectNames(lhs: proj2, rhs: proj2))
+        
+        //Make sure that number are sorted as expected in alpha sort comparator
+        proj1.name = "222"
+        XCTAssertTrue(viewController.compareProjectNames(lhs: proj2, rhs: proj1))
+        XCTAssertFalse(viewController.compareProjectNames(lhs: proj1, rhs: proj2))
+        XCTAssertFalse(viewController.compareProjectNames(lhs: proj2, rhs: proj2))
+    }
 }
