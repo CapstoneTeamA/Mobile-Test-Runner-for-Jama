@@ -46,7 +46,7 @@ class ProjectListViewController: UIViewController {
         return lhs.name.uppercased() < rhs.name.uppercased()
     }
     
-//  Useful to make sure that giant project lists are handled okay.
+//    //Useful to make sure that giant project lists are handled okay.
 //    func debugHugeProjectList(){
 //        for ndx in 0...1000 {
 //            let tmpProject = ProjectModel()
