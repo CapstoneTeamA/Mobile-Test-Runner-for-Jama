@@ -50,4 +50,8 @@ extension ProjectListViewController: EndpointDelegate {
             self.projectList.extractProjectList(fromData: unwrappedData)
         }
     }
+    
+    func endpointErrorOccurred() {
+        <#code#>
+    }
 }
