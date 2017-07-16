@@ -45,6 +45,15 @@ class ProjectListViewController: UIViewController {
     func compareProjectNames(lhs: ProjectModel, rhs: ProjectModel) -> Bool {
         return lhs.name.uppercased() < rhs.name.uppercased()
     }
+    
+//  Useful to make sure that giant project lists are handled okay.
+//    func debugHugeProjectList(){
+//        for ndx in 0...1000 {
+//            let tmpProject = ProjectModel()
+//            tmpProject.name = "project \(ndx)"
+//            self.projectList.projectList.append(tmpProject)
+//        }
+//    }
 }
 
 extension ProjectListViewController: EndpointDelegate {
@@ -57,6 +66,7 @@ extension ProjectListViewController: EndpointDelegate {
             
             //It looks like the API returns the list sorted but it seems like we should make sure
             self.projectList.projectList.sort(by: self.compareProjectNames(lhs:rhs:))
+//            self.debugHugeProjectList()
             self.collectionView.reloadData() //After async call, reload the collection data
         }
     }
