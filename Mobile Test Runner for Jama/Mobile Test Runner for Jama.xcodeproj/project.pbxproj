@@ -213,6 +213,7 @@
 		13A3431E1F04C1E8002EBC92 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */,
 				13A343211F04C247002EBC92 /* LoginViewController.swift */,
 				13A343231F04C271002EBC92 /* ProjectListViewController.swift */,
 				133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */,
