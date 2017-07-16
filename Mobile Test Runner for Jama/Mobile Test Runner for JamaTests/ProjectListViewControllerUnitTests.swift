@@ -83,12 +83,40 @@ class ProjectListViewControllerUnitTests: XCTestCase {
         let project = ProjectModel()
         project.name = "testProject"
         viewController.projectList.projectList.append(project)
-
+        viewController.collectionView.reloadData()
+        
         let result = viewController.buildCell(indexPath: indexPath) 
         
         XCTAssertEqual("testProject", result.projectCellLabel.text)
         
+        
+
+    }
+    
+    func testCollectionViewCells() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let project = ProjectModel()
+        project.name = "testProject"
+        viewController.projectList.projectList.append(project)
         viewController.collectionView.reloadData()
+        let cell = viewController.collectionView(viewController.collectionView, cellForItemAt: indexPath) as! ProjectCollectionViewCell
+        XCTAssertEqual("testProject", cell.projectCellLabel.text)
+    }
+    
+    func testCollectionViewCellCount() {
+        let project = ProjectModel()
+        project.name = "testProject"
+        viewController.projectList.projectList.append(project)
+        viewController.collectionView.reloadData()
+        
         XCTAssertEqual(1, viewController.collectionView.numberOfItems(inSection: 0))
+        
+        let proj2 = ProjectModel()
+        proj2.name = "proj2"
+        viewController.projectList.projectList.append(proj2)
+        viewController.collectionView.reloadData()
+        
+        XCTAssertEqual(2, viewController.collectionView(viewController.collectionView, numberOfItemsInSection: 0))
+
     }
 }
