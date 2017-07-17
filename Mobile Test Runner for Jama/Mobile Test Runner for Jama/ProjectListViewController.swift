@@ -44,14 +44,18 @@ class ProjectListViewController: UIViewController {
 extension ProjectListViewController: EndpointDelegate {
     func didLoadEndpoint(data: [[String : AnyObject]]?) {
         guard let unwrappedData = data else {
+            endpointErrorOccurred()
             return
         }
         DispatchQueue.main.async {
             self.projectList.extractProjectList(fromData: unwrappedData)
+            if (self.projectList.projectList[0].name == "") {
+                // TODO: add no projects image.
+            }
         }
     }
     
     func endpointErrorOccurred() {
-        <#code#>
+        
     }
 }
