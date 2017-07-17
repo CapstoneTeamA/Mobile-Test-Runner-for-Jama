@@ -15,11 +15,12 @@ class ProjectListViewController: UIViewController {
     var username = ""
     var password = ""
     var instance = ""
+    var endpointString = ""
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
+        endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
         endpointString = "https://" + instance + "." + endpointString
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, username: username, password: password)
         
@@ -57,17 +58,29 @@ class ProjectListViewController: UIViewController {
 }
 
 extension ProjectListViewController: EndpointDelegate {
-    func didLoadEndpoint(data: [[String : AnyObject]]?) {
+    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
         guard let unwrappedData = data else {
             return
         }
         DispatchQueue.main.async {
-            self.projectList.extractProjectList(fromData: unwrappedData)
+//            let isInitialAPICall = self.projectList.projectList.count == 0
+            let tmpList = ProjectListModel()
+            tmpList.extractProjectList(fromData: unwrappedData)
+            self.projectList.projectList.append(contentsOf: tmpList.projectList)
             
             //It looks like the API returns the list sorted but it seems like we should make sure
             self.projectList.projectList.sort(by: self.compareProjectNames(lhs:rhs:))
 //            self.debugHugeProjectList()
+            
+            //Since we are lazy loading the list only load the data into the view if it is the initial data
+//            if isInitialAPICall {
             self.collectionView.reloadData() //After async call, reload the collection data
+//            }
+            
+            //As long as there are more Projects that we need to get from the API keep calling for them.
+            if self.collectionView.numberOfItems(inSection: 0) < totalItems {
+                RestHelper.hitEndpoint(atEndpointString: self.endpointString + "?startAt=\(self.projectList.projectList.count)", withDelegate: self, username: self.username, password: self.password)
+            }
         }
     }
 }
@@ -83,6 +96,18 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return buildCell(indexPath: indexPath)
     }
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let scrollHeight = scrollView.frame.size.height
+//        let scrollViewContentHeight = scrollView.contentSize.height
+//        let scrollOffset = scrollView.contentOffset.y
+//        
+//        if scrollHeight + scrollOffset == scrollViewContentHeight {
+//            if collectionView.numberOfItems(inSection: 0) < projectList.projectList.count {
+//                collectionView.reloadData()
+//            }
+//        }
+//    }
     
     func buildCell(indexPath: IndexPath) -> ProjectCollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProjectCollectionViewCell

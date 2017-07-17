@@ -9,7 +9,7 @@
 import Foundation
 
 protocol EndpointDelegate {
-    func didLoadEndpoint(data: [[String: AnyObject]]?)
+    func didLoadEndpoint(data: [[String: AnyObject]]?, totalItems: Int)
 }
 
 class RestHelper {
@@ -61,10 +61,16 @@ class RestHelper {
         return request
     }
     
-    static func processRestJson(jsonData: [String: Any] ) -> [[String: AnyObject]] {
+    static func processRestJson(jsonData: [String: Any] ) -> ([[String: AnyObject]], Int) {
+        var totalItems: Int = 0
         var endpointData : [[String: AnyObject]]  = []
         var meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
         let status = meta["status"] as! String
+        if let pageInfo: [String : AnyObject] = meta["pageInfo"] as? Dictionary {
+            totalItems = pageInfo["totalResults"] as! Int
+        } else {
+            totalItems = 1
+        }
         
         //If user isn't authorized show an auth failed message.
         if (status == "Unauthorized") {
@@ -81,7 +87,7 @@ class RestHelper {
                 endpointData = jsonData["data"] as! Array
             }
         }
-        return endpointData
+        return (endpointData, totalItems)
     }
     
     static func hitEndpoint(atEndpointString: String, withDelegate: EndpointDelegate, httpMethod : String = "Get", username: String, password: String) {
@@ -97,7 +103,7 @@ class RestHelper {
             guard error == nil else {
                 print("error calling endpoint")
                 endpointData.append(["Unauthorized": "Unauthorized" as AnyObject])
-                withDelegate.didLoadEndpoint(data: endpointData)
+                withDelegate.didLoadEndpoint(data: endpointData, totalItems: 0)
                 return
             }
             guard let responseData = data else {
@@ -114,9 +120,11 @@ class RestHelper {
                         return
                 }
                 //Get the meta section of the response to get the status.
-                endpointData = self.processRestJson(jsonData: jsonData)
+                var totalItems = 0
+                (endpointData, totalItems) = self.processRestJson(jsonData: jsonData)
+                
                 //Call on the provided delegate
-                withDelegate.didLoadEndpoint(data: endpointData)
+                withDelegate.didLoadEndpoint(data: endpointData, totalItems: totalItems)
                 
             } catch {
                 print("error trying to convert to json")
