@@ -48,7 +48,7 @@ Information on these tests can be found in the Jama test [README.md](Mobile-Test
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](Mobile-Test-Runner-for-Jama/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/CapstoneTeamA/Mobile-Test-Runner-for-Jama/blob/master/LICENSE) file for details.
 
 
 ## Acknowledgements
