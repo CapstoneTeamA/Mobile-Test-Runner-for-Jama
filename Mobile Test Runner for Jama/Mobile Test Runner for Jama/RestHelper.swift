@@ -17,7 +17,7 @@ class RestHelper {
     static func getEndpointString(method: String, endpoint: String) -> String{
         //Get the Endpoints plist, using the http method string select the correct dictionary of endpoints, then grab and return the endpoint
         if let plist = Bundle.main.path(forResource: "Endpoints", ofType: "plist"), let dict = NSDictionary(contentsOfFile: plist) as? [String : AnyObject] {
-            guard let httpDict : [String : AnyObject] = dict[method] as? Dictionary else {
+            guard let httpDict: [String : AnyObject] = dict[method] as? Dictionary else {
                 print("HTTP method does not exist. Ensure method is all caps")
                 return ""
             }
@@ -61,9 +61,9 @@ class RestHelper {
         return request
     }
     
-    static func processRestJson(jsonData: [String: Any] ) -> ([[String: AnyObject]], Int) {
+    static func processRestJson(jsonData: [String : Any] ) -> ([[String : AnyObject]], Int) {
         var totalItems: Int = 0
-        var endpointData : [[String: AnyObject]]  = []
+        var endpointData: [[String : AnyObject]]  = []
         var meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
         let status = meta["status"] as! String
         if let pageInfo: [String : AnyObject] = meta["pageInfo"] as? Dictionary {
@@ -99,7 +99,7 @@ class RestHelper {
         //Asynchronous task to run in the background that hits the delegate when it finishes if successful.
         let task = session.dataTask(with: request) {
             (data,response,error) in
-            var endpointData : [[String: AnyObject]]  = []
+            var endpointData: [[String : AnyObject]]  = []
             guard error == nil else {
                 print("error calling endpoint")
                 endpointData.append(["Unauthorized": "Unauthorized" as AnyObject])
