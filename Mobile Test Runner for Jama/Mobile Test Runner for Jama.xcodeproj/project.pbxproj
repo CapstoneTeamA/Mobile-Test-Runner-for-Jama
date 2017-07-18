@@ -186,7 +186,6 @@
 				13A342F71F0367E9002EBC92 /* LaunchScreen.storyboard */,
 				13A342FA1F0367E9002EBC92 /* Info.plist */,
 				13A343B01F0F5C6E002EBC92 /* Endpoints.plist */,
-				133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */,
 			);
 			path = "Mobile Test Runner for Jama";
 			sourceTree = "<group>";
@@ -216,6 +215,7 @@
 			children = (
 				13A343211F04C247002EBC92 /* LoginViewController.swift */,
 				13A343231F04C271002EBC92 /* ProjectListViewController.swift */,
+				133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */,
 				13A343251F04C28F002EBC92 /* TestRunListViewController.swift */,
 				13A343271F04C2B4002EBC92 /* TestStepViewController.swift */,
 				13A343291F04C2DC002EBC92 /* ReviewTestRunViewController.swift */,
