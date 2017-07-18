@@ -63,7 +63,10 @@ extension ProjectListViewController: EndpointDelegate {
             return
         }
         DispatchQueue.main.async {
+            //Boolean that will determine if we should load the data into the view automatically if 
+            //"scroll to bottom" lazy loading is enabled.
 //            let isInitialAPICall = self.projectList.projectList.count == 0
+            
             let tmpList = ProjectListModel()
             tmpList.extractProjectList(fromData: unwrappedData)
             self.projectList.projectList.append(contentsOf: tmpList.projectList)
@@ -73,6 +76,7 @@ extension ProjectListViewController: EndpointDelegate {
 //            self.debugHugeProjectList()
             
             //Since we are lazy loading the list only load the data into the view if it is the initial data
+            //This if statement is commented out so the collection will continuously reloaded as the API returns a page
 //            if isInitialAPICall {
             self.collectionView.reloadData() //After async call, reload the collection data
 //            }
@@ -97,6 +101,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         return buildCell(indexPath: indexPath)
     }
     
+    //This is to be used if we want to detect the user has scrolled to the bottom of the list and reload the data then.
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        let scrollHeight = scrollView.frame.size.height
 //        let scrollViewContentHeight = scrollView.contentSize.height
