@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */ = {isa = PBXBuildFile; fileRef = 133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */; };
+		133971BB1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */; };
 		13A342EF1F0367E9002EBC92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A342EE1F0367E9002EBC92 /* AppDelegate.swift */; };
 		13A342F11F0367E9002EBC92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A342F01F0367E9002EBC92 /* ViewController.swift */; };
 		13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F21F0367E9002EBC92 /* Main.storyboard */; };
@@ -67,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Jama-logo-smallwtext.png"; sourceTree = "<group>"; };
+		133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		13A342EB1F0367E9002EBC92 /* Mobile Test Runner for Jama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Test Runner for Jama.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A342EE1F0367E9002EBC92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13A342F01F0367E9002EBC92 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +144,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		133971B71F1B437600AB9D30 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		13A342E21F0367E9002EBC92 = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +175,7 @@
 		13A342ED1F0367E9002EBC92 /* Mobile Test Runner for Jama */ = {
 			isa = PBXGroup;
 			children = (
+				133971B71F1B437600AB9D30 /* Resources */,
 				13A343201F04C216002EBC92 /* utils */,
 				13A3431F1F04C1FC002EBC92 /* Models */,
 				13A3431E1F04C1E8002EBC92 /* ViewControllers */,
@@ -173,6 +186,7 @@
 				13A342F71F0367E9002EBC92 /* LaunchScreen.storyboard */,
 				13A342FA1F0367E9002EBC92 /* Info.plist */,
 				13A343B01F0F5C6E002EBC92 /* Endpoints.plist */,
+				133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */,
 			);
 			path = "Mobile Test Runner for Jama";
 			sourceTree = "<group>";
@@ -340,7 +354,7 @@
 				TargetAttributes = {
 					13A342EA1F0367E9002EBC92 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = FEB24GUH44;
+						DevelopmentTeam = LA4QFXA5C5;
 						ProvisioningStyle = Automatic;
 					};
 					13A342FE1F0367E9002EBC92 = {
@@ -384,6 +398,7 @@
 				13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */,
 				13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */,
 				13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */,
+				133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				133971BB1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift in Sources */,
 				13A3433C1F04C48E002EBC92 /* TestCycleListModel.swift in Sources */,
 				13A343281F04C2B4002EBC92 /* TestStepViewController.swift in Sources */,
 				13A343241F04C271002EBC92 /* ProjectListViewController.swift in Sources */,
@@ -596,10 +612,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = FEB24GUH44;
+				DEVELOPMENT_TEAM = LA4QFXA5C5;
 				INFOPLIST_FILE = "Mobile Test Runner for Jama/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "meghankmcbee-gmail.com";
+				PRODUCT_BUNDLE_IDENTIFIER = Jama;
 				PRODUCT_NAME = $PROJECT_NAME;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -611,10 +627,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = FEB24GUH44;
+				DEVELOPMENT_TEAM = LA4QFXA5C5;
 				INFOPLIST_FILE = "Mobile Test Runner for Jama/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "meghankmcbee-gmail.com";
+				PRODUCT_BUNDLE_IDENTIFIER = Jama;
 				PRODUCT_NAME = $PROJECT_NAME;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;

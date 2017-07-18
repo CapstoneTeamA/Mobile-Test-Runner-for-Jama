@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+class ProjectListModel {
+    var projectList : [ProjectModel] = []
+    
+    func extractProjectList(fromData: [[String : AnyObject]]) {
+        for projectsData in fromData {
+            let tmpProj = ProjectModel()
+            tmpProj.extractProject(fromData: projectsData)
+            projectList.append(tmpProj)
+            
+        }
+    }
+}
