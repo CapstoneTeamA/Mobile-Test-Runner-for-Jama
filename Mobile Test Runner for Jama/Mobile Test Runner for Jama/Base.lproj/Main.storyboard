@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,7 +35,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
-                                                <integer key="value" value="50"/>
+                                                <integer key="value" value="200"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
@@ -63,7 +63,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
-                                                <integer key="value" value="50"/>
+                                                <integer key="value" value="200"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
@@ -77,7 +77,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
-                                                <integer key="value" value="50"/>
+                                                <integer key="value" value="200"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
@@ -242,6 +242,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="OOj-1o-RZK" id="a3r-SZ-EpG"/>
+                        <segue destination="b7n-lk-QU3" kind="show" identifier="ProjectListSegue" id="ZVZ-Vv-N56"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zz-49-z1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -251,7 +252,7 @@
         <!--Test Run List-->
         <scene sceneID="1Jg-dI-eGb">
             <objects>
-                <viewController title="Test Run List" id="b7n-lk-QU3" customClass="TestRunListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TestRunList" title="Test Run List" id="b7n-lk-QU3" customClass="TestRunListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hkT-vr-wmT"/>
                         <viewControllerLayoutGuide type="bottom" id="jOc-nP-z75"/>
@@ -259,12 +260,32 @@
                     <view key="view" contentMode="scaleToFill" id="Rez-5u-Hfc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kyx-07-h7L">
+                                <rect key="frame" x="40" y="106" width="334" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="fSh-Mg-lJj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Kyx-07-h7L" secondAttribute="trailing" constant="20" id="Jgg-Rg-ezA"/>
+                            <constraint firstItem="Kyx-07-h7L" firstAttribute="centerX" secondItem="Rez-5u-Hfc" secondAttribute="centerX" id="NV1-U2-jDd"/>
+                            <constraint firstItem="Kyx-07-h7L" firstAttribute="leading" secondItem="Rez-5u-Hfc" secondAttribute="leadingMargin" constant="20" id="Plk-IV-7xE"/>
+                            <constraint firstItem="Kyx-07-h7L" firstAttribute="top" secondItem="hkT-vr-wmT" secondAttribute="bottom" constant="42" id="qPB-Ga-TiF"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tmpProjectLabel" destination="Kyx-07-h7L" id="D6K-ck-Xi6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dL-pN-r0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2956" y="138.98050974512745"/>
+            <point key="canvasLocation" x="2953.6231884057975" y="138.58695652173915"/>
         </scene>
         <!--Test Step-->
         <scene sceneID="SDY-2C-hHe">

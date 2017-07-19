@@ -15,11 +15,12 @@ class ProjectListViewController: UIViewController {
     var username = ""
     var password = ""
     var instance = ""
+    var endpointString = ""
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
+        endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
         endpointString = "https://" + instance + "." + endpointString
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, username: username, password: password)
         
@@ -57,7 +58,7 @@ class ProjectListViewController: UIViewController {
 }
 
 extension ProjectListViewController: EndpointDelegate {
-    func didLoadEndpoint(data: [[String : AnyObject]]?) {
+    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
         guard let unwrappedData = data else {
             endpointErrorOccurred()
             return
@@ -86,6 +87,27 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return buildCell(indexPath: indexPath)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let testRunViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunList") as! TestRunListViewController
+
+        testRunViewController.projectName = projectList.projectList[indexPath.row].name
+        testRunViewController.projectKey = projectList.projectList[indexPath.row].projectKey
+        self.navigationController?.pushViewController(testRunViewController, animated: true)
+    }
+    
+    //This is to be used if we want to detect the user has scrolled to the bottom of the list and reload the data then.
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let scrollHeight = scrollView.frame.size.height
+//        let scrollViewContentHeight = scrollView.contentSize.height
+//        let scrollOffset = scrollView.contentOffset.y
+//        
+//        if scrollHeight + scrollOffset == scrollViewContentHeight {
+//            if collectionView.numberOfItems(inSection: 0) < projectList.projectList.count {
+//                collectionView.reloadData()
+//            }
+//        }
+//    }
     
     func buildCell(indexPath: IndexPath) -> ProjectCollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProjectCollectionViewCell

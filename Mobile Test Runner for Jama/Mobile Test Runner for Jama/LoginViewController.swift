@@ -106,7 +106,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 }
 
 extension LoginViewController: EndpointDelegate{
-    func didLoadEndpoint(data: [[String : AnyObject]]?) {
+    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
         //Enable login button once async function returns.
         //This can take a while if you provide a bad instance name.
         DispatchQueue.main.async {
