@@ -9,7 +9,7 @@
 import Foundation
 
 class TestPlanListModel {
-    var testPlanList : [testPlanModel] = []
+    var testPlanList : [TestPlanModel] = []
     
     func extractTestPlanList(fromData: [[String : AnyObject]]) {
         for testPlanData in fromData {
