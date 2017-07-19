@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+class TestPlanListModel {
+    var testPlanList : [testPlanModel] = []
+    
+    func extractTestPlanList(fromData: [[String : AnyObject]]) {
+        for testPlanData in fromData {
+            let tmpPlan = TestPlanModel()
+            tmpPlan.extractTestPlan(fromData: testPlanData)
+            testPlanList.append(tmpPlan)
+            
+        }
+    }
+}
