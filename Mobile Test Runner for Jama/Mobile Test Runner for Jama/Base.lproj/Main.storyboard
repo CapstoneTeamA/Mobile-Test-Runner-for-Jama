@@ -252,7 +252,7 @@
         <!--Test Run List-->
         <scene sceneID="1Jg-dI-eGb">
             <objects>
-                <viewController storyboardIdentifier="TestRunList" title="Test Run List" id="b7n-lk-QU3" customClass="TestRunListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TestList" title="Test Run List" id="b7n-lk-QU3" customClass="TestListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hkT-vr-wmT"/>
                         <viewControllerLayoutGuide type="bottom" id="jOc-nP-z75"/>
