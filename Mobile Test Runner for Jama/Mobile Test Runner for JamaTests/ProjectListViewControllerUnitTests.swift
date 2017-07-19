@@ -15,7 +15,8 @@ class ProjectListViewControllerUnitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
+        _ = viewController.view
     }
     
     override func tearDown() {
