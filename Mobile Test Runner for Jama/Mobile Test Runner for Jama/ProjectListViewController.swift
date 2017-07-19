@@ -16,8 +16,12 @@ class ProjectListViewController: UIViewController {
     var password = ""
     var instance = ""
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var serverErrorMessage: UILabel!
+    let serverErrorMessageText = "Server Error"
     
     override func viewDidLoad() {
+        serverErrorMessage.isHidden = true
+        serverErrorMessage.text = serverErrorMessageText
         super.viewDidLoad()
         var endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
         endpointString = "https://" + instance + "." + endpointString
@@ -71,7 +75,7 @@ extension ProjectListViewController: EndpointDelegate {
     }
     
     func endpointErrorOccurred() {
-        
+        serverErrorMessage.isHidden = false
     }
 }
 
