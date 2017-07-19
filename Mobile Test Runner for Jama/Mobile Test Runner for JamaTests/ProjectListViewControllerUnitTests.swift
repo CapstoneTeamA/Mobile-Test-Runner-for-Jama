@@ -36,6 +36,11 @@ class ProjectListViewControllerUnitTests: XCTestCase {
             XCTAssertEqual(self.viewController.projectList.projectList[0].name, "Achiever UAV Sample Set")
             
         })
+    }
+    
+    func testProjectListIsNil(){
+        viewController.didLoadEndpoint(data: nil)
+        XCTAssertEqual(viewController.serverErrorMessage.isHidden, false)
         
     }
     
