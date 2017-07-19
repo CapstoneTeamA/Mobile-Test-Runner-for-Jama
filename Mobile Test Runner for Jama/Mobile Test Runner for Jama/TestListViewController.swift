@@ -8,14 +8,14 @@
 
 import UIKit
 
-class TestRunListViewController: UIViewController {
+class TestListViewController: UIViewController {
     var projectName = ""
-    var projectKey = ""
+    var projectId = -1
     @IBOutlet weak var tmpProjectLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tmpProjectLabel.text = projectName + "\nProject Key: " + projectKey
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -85,11 +85,11 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let testRunViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunList") as! TestRunListViewController
+        let testViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestList") as! TestListViewController
 
-        testRunViewController.projectName = projectList.projectList[indexPath.row].name
-        testRunViewController.projectKey = projectList.projectList[indexPath.row].projectKey
-        self.navigationController?.pushViewController(testRunViewController, animated: true)
+        testViewController.projectName = projectList.projectList[indexPath.row].name
+        testViewController.projectKey = projectList.projectList[indexPath.row].projectKey
+        self.navigationController?.pushViewController(testViewController, animated: true)
     }
     
     func buildCell(indexPath: IndexPath) -> ProjectCollectionViewCell {

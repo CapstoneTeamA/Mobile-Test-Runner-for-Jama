@@ -8,7 +8,7 @@
 
 import XCTest
 
-class TestRunListViewControllerUnitTests: XCTestCase {
+class TestListViewControllerUnitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
