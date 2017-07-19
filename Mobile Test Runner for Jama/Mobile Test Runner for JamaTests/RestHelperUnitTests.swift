@@ -106,7 +106,7 @@ class RestHelperUnitTests: XCTestCase {
         jsonData.updateValue(parsedData, forKey: "data")
         
         let result = RestHelper.processRestJson(jsonData: jsonData)
-        let resultNameValue: String = result[0]["name"] as! String
+        let resultNameValue: String = result.0[0]["name"] as! String
         XCTAssertEqual(resultNameValue, username)
     }
     
@@ -117,7 +117,7 @@ class RestHelperUnitTests: XCTestCase {
         jsonData.updateValue("", forKey: "data")
         
         let result = RestHelper.processRestJson(jsonData: jsonData)
-        let resultNameValue: String = result[0]["Unauthorized"] as! String
+        let resultNameValue: String = result.0[0]["Unauthorized"] as! String
         XCTAssertEqual(resultNameValue, "Unauthorized")
     }
     
