@@ -7,16 +7,54 @@
 //
 
 import XCTest
-
+@testable import Mobile_Test_Runner_for_Jama
 class TestListViewControllerUnitTests: XCTestCase {
+    let projectId = 23314
+    var viewController : TestListViewController!
+    let instance = "test-instance"
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestList") as! TestListViewController
+        viewController.projectId = projectId
+        viewController.instance = instance
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+    }
+    
+    func testBuildEndpointString() {
+        let endpointString = viewController.buildEndpointString()
+        
+        XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testplans?project=23314", endpointString)
+    }
+    
+    func testComparePlan() {
+        let plan1 = TestPlanModel()
+        let plan2 = TestPlanModel()
+        
+        plan1.name = "aaa"
+        plan2.name = "bbb"
+        XCTAssertTrue(viewController.comparePlans(lhs: plan1, rhs: plan2))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan2, rhs: plan1))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan1))
+        
+        plan1.name = "AAA"
+        XCTAssertTrue(viewController.comparePlans(lhs: plan1, rhs: plan2))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan2, rhs: plan1))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan1))
+        
+        plan1.name = "111"
+        XCTAssertTrue(viewController.comparePlans(lhs: plan1, rhs: plan2))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan2, rhs: plan1))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan1))
+        
+        plan2.name = "000"
+        XCTAssertTrue(viewController.comparePlans(lhs: plan2, rhs: plan1))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan2))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan1))
+        
     }
 }

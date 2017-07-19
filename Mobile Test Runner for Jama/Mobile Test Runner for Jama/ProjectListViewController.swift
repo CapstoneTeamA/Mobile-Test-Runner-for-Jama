@@ -88,7 +88,10 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         let testViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestList") as! TestListViewController
 
         testViewController.projectName = projectList.projectList[indexPath.row].name
-        testViewController.projectKey = projectList.projectList[indexPath.row].projectKey
+        testViewController.projectId = projectList.projectList[indexPath.row].id
+        testViewController.username = username
+        testViewController.password = password
+        testViewController.instance = instance
         self.navigationController?.pushViewController(testViewController, animated: true)
     }
     

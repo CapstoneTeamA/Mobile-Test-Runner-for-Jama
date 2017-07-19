@@ -38,7 +38,7 @@
 		13A3434A1F04C7BE002EBC92 /* TestRunModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343491F04C7BE002EBC92 /* TestRunModelUnitTests.swift */; };
 		13A3434C1F04C7DE002EBC92 /* TestStepModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3434B1F04C7DE002EBC92 /* TestStepModelUnitTests.swift */; };
 		13A3434E1F04C814002EBC92 /* TestPlanListModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3434D1F04C814002EBC92 /* TestPlanListModelUnitTests.swift */; };
-		13A343501F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3434F1F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift */; };
+		13A343501F04C82C002EBC92 /* TestPlanModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3434F1F04C82C002EBC92 /* TestPlanModelUnitTests.swift */; };
 		13A343521F04C84B002EBC92 /* TestCycleListModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343511F04C84B002EBC92 /* TestCycleListModelUnitTests.swift */; };
 		13A343541F04C867002EBC92 /* TestCycleModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343531F04C867002EBC92 /* TestCycleModelUnitTests.swift */; };
 		13A343561F04C881002EBC92 /* RestHelperUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343551F04C881002EBC92 /* RestHelperUnitTests.swift */; };
@@ -106,7 +106,7 @@
 		13A343491F04C7BE002EBC92 /* TestRunModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunModelUnitTests.swift; sourceTree = "<group>"; };
 		13A3434B1F04C7DE002EBC92 /* TestStepModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepModelUnitTests.swift; sourceTree = "<group>"; };
 		13A3434D1F04C814002EBC92 /* TestPlanListModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanListModelUnitTests.swift; sourceTree = "<group>"; };
-		13A3434F1F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectPlanModelUnitTests.swift; sourceTree = "<group>"; };
+		13A3434F1F04C82C002EBC92 /* TestPlanModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanModelUnitTests.swift; sourceTree = "<group>"; };
 		13A343511F04C84B002EBC92 /* TestCycleListModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCycleListModelUnitTests.swift; sourceTree = "<group>"; };
 		13A343531F04C867002EBC92 /* TestCycleModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCycleModelUnitTests.swift; sourceTree = "<group>"; };
 		13A343551F04C881002EBC92 /* RestHelperUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestHelperUnitTests.swift; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 				13A343491F04C7BE002EBC92 /* TestRunModelUnitTests.swift */,
 				13A3434B1F04C7DE002EBC92 /* TestStepModelUnitTests.swift */,
 				13A3434D1F04C814002EBC92 /* TestPlanListModelUnitTests.swift */,
-				13A3434F1F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift */,
+				13A3434F1F04C82C002EBC92 /* TestPlanModelUnitTests.swift */,
 				13A343511F04C84B002EBC92 /* TestCycleListModelUnitTests.swift */,
 				13A343531F04C867002EBC92 /* TestCycleModelUnitTests.swift */,
 			);
@@ -458,7 +458,7 @@
 				13A343421F04C752002EBC92 /* UserModelUnitTest.swift in Sources */,
 				13A3435B1F04C96B002EBC92 /* LoginViewControllerUnitTests.swift in Sources */,
 				13A343521F04C84B002EBC92 /* TestCycleListModelUnitTests.swift in Sources */,
-				13A343501F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift in Sources */,
+				13A343501F04C82C002EBC92 /* TestPlanModelUnitTests.swift in Sources */,
 				13A3435F1F04CA38002EBC92 /* TestListViewControllerUnitTests.swift in Sources */,
 				13A343561F04C881002EBC92 /* RestHelperUnitTests.swift in Sources */,
 				13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */,
