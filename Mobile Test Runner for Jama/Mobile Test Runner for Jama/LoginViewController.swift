@@ -144,6 +144,6 @@ extension LoginViewController: EndpointDelegate{
     }
     
     func endpointErrorOccurred() {
-        <#code#>
+        //
     }
 }

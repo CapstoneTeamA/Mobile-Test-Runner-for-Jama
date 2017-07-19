@@ -11,11 +11,12 @@ import XCTest
 
 class ProjectListViewControllerUnitTests: XCTestCase {
     
-    let projects: ProjectListViewController = ProjectListViewController ()
+    
+    let viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
     
     override func setUp() {
         super.setUp()
-        viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
+        
         _ = viewController.view
     }
     
@@ -24,17 +25,19 @@ class ProjectListViewControllerUnitTests: XCTestCase {
         super.tearDown()
     }
     
-    func test(){
-        projects.currentUser.username = "demo"
-        projects.username = "demo"
-        projects.password = "password"
-        projects.instance = "capstone-sandbox"
+    func testSucellfulGetProjects(){
+        viewController.currentUser.username = "demo"
+        viewController.username = "demo"
+        viewController.password = "password"
+        viewController.instance = "capstone-sandbox"
         
-        //For personal testing Okay to delete (jason)
+        //For fixing the timing issue testing has
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-            XCTAssertEqual(self.projects.projectList.projectList[0].name, "Achiever UAV Sample Set")
+            XCTAssertEqual(self.viewController.projectList.projectList[0].name, "Achiever UAV Sample Set")
             
         })
         
     }
+    
+    
 }
