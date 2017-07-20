@@ -221,8 +221,8 @@
                                     <constraint firstAttribute="width" constant="251" id="XL4-9s-V6A"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="No Projects Found" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vqP-G6-Uxm">
-                                <rect key="frame" x="81" y="523" width="270" height="68"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="left" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="No Projects Found" textAlignment="center" minimumFontSize="23" translatesAutoresizingMaskIntoConstraints="NO" id="vqP-G6-Uxm">
+                                <rect key="frame" x="72" y="519" width="270" height="68"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -233,12 +233,12 @@
                             <constraint firstItem="h28-EN-tPd" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="2Ng-X7-qki"/>
                             <constraint firstAttribute="leadingMargin" secondItem="qcD-9G-aW0" secondAttribute="leading" id="2gU-z7-HW2"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="qcD-9G-aW0" secondAttribute="bottom" constant="25" id="3ds-W6-dRJ"/>
+                            <constraint firstItem="vqP-G6-Uxm" firstAttribute="top" secondItem="hD8-m1-bId" secondAttribute="bottom" constant="-100" id="4PQ-Iy-60C"/>
                             <constraint firstItem="dzY-H8-Icy" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="93x-vm-S9d"/>
                             <constraint firstItem="ELL-qg-OTg" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="BOW-jV-bRW"/>
                             <constraint firstItem="dzY-H8-Icy" firstAttribute="top" secondItem="ELL-qg-OTg" secondAttribute="bottom" id="Bid-Tf-LaG"/>
                             <constraint firstItem="vqP-G6-Uxm" firstAttribute="centerX" secondItem="hD8-m1-bId" secondAttribute="centerX" id="ENG-BY-75Z"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="GSH-5D-c04"/>
-                            <constraint firstItem="vqP-G6-Uxm" firstAttribute="baseline" secondItem="hD8-m1-bId" secondAttribute="baseline" id="ISG-Nv-stJ"/>
                             <constraint firstItem="qcD-9G-aW0" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="L9f-GI-9De"/>
                             <constraint firstItem="ELL-qg-OTg" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="NJQ-uH-2mS"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="OJv-ib-oQe"/>
