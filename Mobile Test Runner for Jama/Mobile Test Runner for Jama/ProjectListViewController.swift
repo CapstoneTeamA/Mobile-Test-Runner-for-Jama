@@ -21,10 +21,12 @@ class ProjectListViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        
         serverErrorMessage.isHidden = true
         serverErrorMessage.text = serverErrorMessageText
         
         super.viewDidLoad()
+        
         
         endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
         endpointString = "https://" + instance + "." + endpointString
@@ -61,6 +63,10 @@ class ProjectListViewController: UIViewController {
     //            self.projectList.projectList.append(tmpProject)
     //        }
     //    }
+    
+    func endpointErrorOccurred() {
+        serverErrorMessage.isHidden = false
+    }
 }
 
 extension ProjectListViewController: EndpointDelegate {
@@ -97,11 +103,11 @@ extension ProjectListViewController: EndpointDelegate {
                 RestHelper.hitEndpoint(atEndpointString: self.endpointString + "?startAt=\(self.projectList.projectList.count)", withDelegate: self, username: self.username, password: self.password)
             }
         }
+        
+        
     }
 }
-    func endpointErrorOccurred() {
-        serverErrorMessage.isHidden = false
-    }
+
 
 extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //How many cells will the collection view have

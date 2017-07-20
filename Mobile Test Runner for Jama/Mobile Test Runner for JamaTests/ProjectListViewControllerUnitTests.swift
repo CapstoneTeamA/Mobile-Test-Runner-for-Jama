@@ -125,10 +125,13 @@ class ProjectListViewControllerUnitTests: XCTestCase {
         })
     }
     
-    //func testProjectListIsNil(){
-    //    viewController.didLoadEndpoint(data: nil, totalItems: <#Int#>)
-    //    XCTAssertEqual(viewController.serverErrorMessage.isHidden, false)
+    func testProjectListIsNil(){
+        viewController.didLoadEndpoint(data: nil, totalItems: 0)
         
-    //}
+        //For fixing the timing issue testing has
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+            XCTAssertEqual(self.viewController.serverErrorMessage.isHidden, false)
+        })
+    }
 
 }

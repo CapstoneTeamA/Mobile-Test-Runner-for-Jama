@@ -217,11 +217,10 @@
                                     <constraint firstAttribute="width" constant="248" id="XL4-9s-V6A"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHY-vu-dKZ" userLabel="serverErrorMessage">
-                                <rect key="frame" x="119" y="338" width="177" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EoY-hG-v0K" userLabel="serverErrorLabel">
+                                <rect key="frame" x="0.0" y="357" width="414" height="78"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -233,10 +232,12 @@
                             <constraint firstItem="ELL-qg-OTg" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="BOW-jV-bRW"/>
                             <constraint firstItem="dzY-H8-Icy" firstAttribute="top" secondItem="ELL-qg-OTg" secondAttribute="bottom" id="Bid-Tf-LaG"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="GSH-5D-c04"/>
+                            <constraint firstItem="dzY-H8-Icy" firstAttribute="top" secondItem="EoY-hG-v0K" secondAttribute="bottom" constant="197" id="KAy-91-tfh"/>
                             <constraint firstItem="qcD-9G-aW0" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="L9f-GI-9De"/>
                             <constraint firstItem="ELL-qg-OTg" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="NJQ-uH-2mS"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="OJv-ib-oQe"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="h28-EN-tPd" secondAttribute="bottom" constant="6" id="UqO-6T-J5C"/>
+                            <constraint firstItem="EoY-hG-v0K" firstAttribute="top" secondItem="bwx-3Z-i5u" secondAttribute="bottom" constant="293" id="Vbr-D0-eem"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qcD-9G-aW0" secondAttribute="trailing" id="Wn0-uh-ZY8"/>
                             <constraint firstItem="cSb-8O-36Q" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" constant="120" id="WsT-Bx-K3N"/>
                             <constraint firstItem="ELL-qg-OTg" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" constant="6" id="YCl-BK-Ejz"/>
@@ -249,7 +250,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="OOj-1o-RZK" id="a3r-SZ-EpG"/>
-                        <outlet property="serverErrorMessage" destination="xHY-vu-dKZ" id="q0B-rL-zKc"/>
+                        <outlet property="serverErrorMessage" destination="EoY-hG-v0K" id="Mi4-Ti-3iC"/>
                         <segue destination="b7n-lk-QU3" kind="show" identifier="ProjectListSegue" id="ZVZ-Vv-N56"/>
                     </connections>
                 </viewController>
