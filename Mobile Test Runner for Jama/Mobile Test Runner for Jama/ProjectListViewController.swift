@@ -17,8 +17,12 @@ class ProjectListViewController: UIViewController {
     var instance = ""
     var endpointString = ""
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var serverErrorMessage: UILabel!
+    let serverErrorMessageText = "Server Error"
     
     override func viewDidLoad() {
+        serverErrorMessage.isHidden = true
+        serverErrorMessage.text = serverErrorMessageText
         super.viewDidLoad()
         endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
         endpointString = "https://" + instance + "." + endpointString
@@ -60,32 +64,19 @@ class ProjectListViewController: UIViewController {
 extension ProjectListViewController: EndpointDelegate {
     func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
         guard let unwrappedData = data else {
+            endpointErrorOccurred()
             return
         }
         DispatchQueue.main.async {
-            //Boolean that will determine if we should load the data into the view automatically if 
-            //"scroll to bottom" lazy loading is enabled.
-//            let isInitialAPICall = self.projectList.projectList.count == 0
-            
-            let tmpList = ProjectListModel()
-            tmpList.extractProjectList(fromData: unwrappedData)
-            self.projectList.projectList.append(contentsOf: tmpList.projectList)
-            
-            //It looks like the API returns the list sorted but it seems like we should make sure
-            self.projectList.projectList.sort(by: self.compareProjectNames(lhs:rhs:))
-//            self.debugHugeProjectList()
-            
-            //Since we are lazy loading the list only load the data into the view if it is the initial data
-            //This if statement is commented out so the collection will continuously reloaded as the API returns a page
-//            if isInitialAPICall {
-            self.collectionView.reloadData() //After async call, reload the collection data
-//            }
-            
-            //As long as there are more Projects that we need to get from the API keep calling for them.
-            if self.collectionView.numberOfItems(inSection: 0) < totalItems {
-                RestHelper.hitEndpoint(atEndpointString: self.endpointString + "?startAt=\(self.projectList.projectList.count)", withDelegate: self, username: self.username, password: self.password)
+            self.projectList.extractProjectList(fromData: unwrappedData)
+            if (self.projectList.projectList[0].name == "") {
+                // TODO: add no projects image.
             }
         }
+    }
+    
+    func endpointErrorOccurred() {
+        serverErrorMessage.isHidden = false
     }
 }
 
@@ -102,11 +93,14 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let testRunViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunList") as! TestRunListViewController
+        let testViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestList") as! TestListViewController
 
-        testRunViewController.projectName = projectList.projectList[indexPath.row].name
-        testRunViewController.projectKey = projectList.projectList[indexPath.row].projectKey
-        self.navigationController?.pushViewController(testRunViewController, animated: true)
+        testViewController.projectName = projectList.projectList[indexPath.row].name
+        testViewController.projectId = projectList.projectList[indexPath.row].id
+        testViewController.username = username
+        testViewController.password = password
+        testViewController.instance = instance
+        self.navigationController?.pushViewController(testViewController, animated: true)
     }
     
     //This is to be used if we want to detect the user has scrolled to the bottom of the list and reload the data then.

@@ -10,6 +10,7 @@ import Foundation
 
 protocol EndpointDelegate {
     func didLoadEndpoint(data: [[String: AnyObject]]?, totalItems: Int)
+    
 }
 
 class RestHelper {

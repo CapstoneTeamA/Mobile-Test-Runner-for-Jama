@@ -157,6 +157,13 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8iE-8v-9On" userLabel="Server Error">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="452"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.65064060688018799" green="0.041189827024936676" blue="0.07761625200510025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="jaN-fO-anp" customClass="ProjectCollectionViewCell" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target">
                                         <rect key="frame" x="32" y="0.0" width="350" height="60"/>
@@ -242,7 +249,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="OOj-1o-RZK" id="a3r-SZ-EpG"/>
-                        <segue destination="b7n-lk-QU3" kind="show" identifier="ProjectListSegue" id="ZVZ-Vv-N56"/>
+                        <outlet property="serverErrorMessage" destination="8iE-8v-9On" id="gDA-kR-X3u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zz-49-z1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -252,7 +259,7 @@
         <!--Test Run List-->
         <scene sceneID="1Jg-dI-eGb">
             <objects>
-                <viewController storyboardIdentifier="TestRunList" title="Test Run List" id="b7n-lk-QU3" customClass="TestRunListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TestList" title="Test Run List" id="b7n-lk-QU3" customClass="TestListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hkT-vr-wmT"/>
                         <viewControllerLayoutGuide type="bottom" id="jOc-nP-z75"/>

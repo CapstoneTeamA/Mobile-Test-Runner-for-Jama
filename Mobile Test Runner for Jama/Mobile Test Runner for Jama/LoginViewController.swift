@@ -142,4 +142,8 @@ extension LoginViewController: EndpointDelegate{
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
+    
+    func endpointErrorOccurred() {
+        //
+    }
 }
