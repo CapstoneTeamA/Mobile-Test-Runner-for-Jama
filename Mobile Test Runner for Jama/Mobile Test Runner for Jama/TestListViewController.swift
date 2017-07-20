@@ -9,7 +9,7 @@
 import UIKit
 
 class TestListViewController: UIViewController {
-    var projectName = ""
+    var projectName = "" //I don't know if we need this but we might want to display it or something so I left it.
     var projectId = -1
     var instance = ""
     var username = ""
@@ -21,7 +21,7 @@ class TestListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let endpoint = buildEndpointString()
+        let endpoint = buildTestPlanEndpointString()
         RestHelper.hitEndpoint(atEndpointString: endpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
     }
 
@@ -30,7 +30,7 @@ class TestListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func buildEndpointString() -> String {
+    func buildTestPlanEndpointString() -> String {
         var endpoint = RestHelper.getEndpointString(method: "Get", endpoint: "TestPlans")
         endpoint = "https://" + instance + "." + endpoint
         endpoint = endpoint.replacingOccurrences(of: "{projectId}", with: "\(projectId)")
@@ -40,7 +40,7 @@ class TestListViewController: UIViewController {
 }
 
 extension TestListViewController: EndpointDelegate {
-    func didLoadEndpoint(data: [[String : AnyObject]]?) {
+    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
         guard let unwrappedData = data else {
             //Do and Error work for a nil data returned from the endpoint
             return
@@ -52,8 +52,12 @@ extension TestListViewController: EndpointDelegate {
             
             self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
             
+            //reload Data in view
             
-            //reload Data
+            //keep calling api while there is still more plans to get
+            if self.testPlanList.testPlanList.count < totalItems {
+                RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
+            }
             
         }
     }

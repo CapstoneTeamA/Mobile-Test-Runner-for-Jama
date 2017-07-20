@@ -26,7 +26,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     }
     
     func testBuildEndpointString() {
-        let endpointString = viewController.buildEndpointString()
+        let endpointString = viewController.buildTestPlanEndpointString()
         
         XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testplans?project=23314", endpointString)
     }
