@@ -17,7 +17,7 @@ class ProjectListViewController: UIViewController {
     var instance = ""
     var endpointString = ""
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var noProjectsLabel: UITextField!
+    @IBOutlet weak var noProjectsLabel: UILabel!
     @IBOutlet weak var noProjectsImage: UIImageView!
 
     let noProjectsMessage = "No Projects Found."
