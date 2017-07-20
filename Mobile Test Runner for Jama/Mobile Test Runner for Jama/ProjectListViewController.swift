@@ -16,11 +16,11 @@ class ProjectListViewController: UIViewController {
     var password = ""
     var instance = ""
     var endpointString = ""
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noProjectsLabel: UILabel!
     @IBOutlet weak var noProjectsImage: UIImageView!
-
-    let noProjectsMessage = "No Projects Found."
+    let noProjectsMessage = "No Projects Found"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +47,7 @@ class ProjectListViewController: UIViewController {
         layout.minimumLineSpacing = 6
         return layout
     }
+    
     func checkProjectListEmpty() {
         //if there's nothing in the list
         if (self.projectList.projectList.isEmpty) {
@@ -54,13 +55,21 @@ class ProjectListViewController: UIViewController {
             noProjectsLabel.isHidden = false
             noProjectsImage.isHidden = false
             noProjectsLabel.text = noProjectsMessage
+            formatEmptyProjectMessage()
         }
         else {
-        //set both image and label to invisible
-        noProjectsLabel.isHidden = true
-        noProjectsImage.isHidden = true
+            //set both image and label to invisible
+            noProjectsLabel.isHidden = true
+            noProjectsImage.isHidden = true
         }
     }
+    
+    func formatEmptyProjectMessage() {
+        view.bringSubview(toFront: noProjectsLabel)
+        view.bringSubview(toFront: noProjectsImage)
+        collectionView.backgroundColor = UIColor.white
+    }
+    
     //Comparator function to be used by the sort method on arrays
     func compareProjectNames(lhs: ProjectModel, rhs: ProjectModel) -> Bool {
         return lhs.name.uppercased() < rhs.name.uppercased()
