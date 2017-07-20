@@ -9,21 +9,21 @@ import UIKit
 
 class ProjectListViewController: UIViewController {
     
+    @IBOutlet weak var serverErrorLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
     var currentUser: UserModel = UserModel()
     var projectList: ProjectListModel = ProjectListModel()
     var username = ""
     var password = ""
     var instance = ""
     var endpointString = ""
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var serverErrorMessage: UILabel!
-    let serverErrorMessageText = "Server Error"
+    let serverErrorMessage = "Server Error"
     
     
     override func viewDidLoad() {
         
-        serverErrorMessage.isHidden = true
-        serverErrorMessage.text = serverErrorMessageText
+        serverErrorLabel.isHidden = true
+        serverErrorLabel.text = serverErrorMessage
         
         super.viewDidLoad()
         
@@ -65,7 +65,7 @@ class ProjectListViewController: UIViewController {
     //    }
     
     func endpointErrorOccurred() {
-        serverErrorMessage.isHidden = false
+        serverErrorLabel.isHidden = false
     }
 }
 

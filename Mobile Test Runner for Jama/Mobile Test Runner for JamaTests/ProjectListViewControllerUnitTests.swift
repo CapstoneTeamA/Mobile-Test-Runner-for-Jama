@@ -112,7 +112,7 @@ class ProjectListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(2, viewController.collectionView(viewController.collectionView, numberOfItemsInSection: 0))
     }
     
-    func testSucellfulGetProjects(){
+    func testSuccessfulGetProjects(){
         viewController.currentUser.username = "demo"
         viewController.username = "demo"
         viewController.password = "password"
@@ -125,13 +125,6 @@ class ProjectListViewControllerUnitTests: XCTestCase {
         })
     }
     
-    func testProjectListIsNil(){
-        viewController.didLoadEndpoint(data: nil, totalItems: 0)
-        
-        //For fixing the timing issue testing has
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-            XCTAssertEqual(self.viewController.serverErrorMessage.isHidden, false)
-        })
-    }
+    
 
 }
