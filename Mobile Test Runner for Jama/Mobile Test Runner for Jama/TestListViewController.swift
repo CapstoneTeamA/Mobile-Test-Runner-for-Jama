@@ -40,7 +40,7 @@ class TestListViewController: UIViewController {
 }
 
 extension TestListViewController: EndpointDelegate {
-    func didLoadEndpoint(data: [[String : AnyObject]]?) {
+    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
         guard let unwrappedData = data else {
             //Do and Error work for a nil data returned from the endpoint
             return
