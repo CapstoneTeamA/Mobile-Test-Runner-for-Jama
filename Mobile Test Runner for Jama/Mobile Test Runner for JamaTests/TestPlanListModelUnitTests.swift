@@ -51,6 +51,12 @@ class TestPlanListModelUnitTests: XCTestCase {
         super.tearDown()
     }
     
+    func testExtractTestPlanFromEmptyData() {
+        planList.extractPlanList(fromData: [])
+        
+        XCTAssertTrue(planList.testPlanList.isEmpty)
+    }
+    
     func testExtractPlanList() {
         planList.extractPlanList(fromData: data)
         
