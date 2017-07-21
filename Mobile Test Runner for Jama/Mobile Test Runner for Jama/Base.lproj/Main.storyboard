@@ -251,7 +251,6 @@
                     <connections>
                         <outlet property="collectionView" destination="OOj-1o-RZK" id="a3r-SZ-EpG"/>
                         <outlet property="serverErrorLabel" destination="EoY-hG-v0K" id="iTw-9F-wpS"/>
-                        <outlet property="serverErrorMessage" destination="EoY-hG-v0K" id="Mi4-Ti-3iC"/>
                         <segue destination="b7n-lk-QU3" kind="show" identifier="ProjectListSegue" id="ZVZ-Vv-N56"/>
                     </connections>
                 </viewController>
