@@ -151,14 +151,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder-lightbl-redx.png" translatesAutoresizingMaskIntoConstraints="NO" id="hD8-m1-bId" userLabel="noProjectsImage">
-                                <rect key="frame" x="69" y="252" width="276" height="276"/>
+                                <rect key="frame" x="62" y="220" width="290" height="290"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hD8-m1-bId" secondAttribute="height" multiplier="1:1" id="8cz-eH-1cn"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Projects Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atM-JS-d50">
-                                <rect key="frame" x="108" y="534" width="196.66666666666669" height="28.666666666666629"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No projects found. Please contact your administrator." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atM-JS-d50">
+                                <rect key="frame" x="25.333333333333343" y="516" width="361.66666666666663" height="89.333333333333371"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="atM-JS-d50" secondAttribute="height" multiplier="303:75" id="bVH-yU-4JV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.34874260425567627" green="0.34956219792366028" blue="0.3565392792224884" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -219,7 +222,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELL-qg-OTg" userLabel="BottomDivider">
-                                <rect key="frame" x="0.33333333333334281" y="652" width="414" height="10"/>
+                                <rect key="frame" x="0.0" y="652" width="414" height="10"/>
                                 <color key="backgroundColor" red="0.94509803921568625" green="0.38039215686274508" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="BJK-1V-eId"/>
@@ -251,8 +254,9 @@
                             <constraint firstItem="cSb-8O-36Q" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" constant="90" id="WsT-Bx-K3N"/>
                             <constraint firstItem="ELL-qg-OTg" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" constant="6" id="YCl-BK-Ejz"/>
                             <constraint firstItem="atM-JS-d50" firstAttribute="centerX" secondItem="hD8-m1-bId" secondAttribute="centerX" id="dS7-PT-T3v"/>
-                            <constraint firstItem="hD8-m1-bId" firstAttribute="width" secondItem="OOj-1o-RZK" secondAttribute="width" multiplier="2:3" id="dfI-aD-bWk"/>
-                            <constraint firstItem="hD8-m1-bId" firstAttribute="centerY" secondItem="OOj-1o-RZK" secondAttribute="centerY" constant="-15" id="djs-zh-Ce3"/>
+                            <constraint firstItem="hD8-m1-bId" firstAttribute="width" secondItem="OOj-1o-RZK" secondAttribute="width" multiplier="7:10" id="dfI-aD-bWk"/>
+                            <constraint firstItem="hD8-m1-bId" firstAttribute="centerY" secondItem="OOj-1o-RZK" secondAttribute="centerY" constant="-40" id="djs-zh-Ce3"/>
+                            <constraint firstItem="atM-JS-d50" firstAttribute="width" secondItem="hD8-m1-bId" secondAttribute="width" multiplier="1.25" id="eC6-El-SU4"/>
                             <constraint firstItem="h28-EN-tPd" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="evr-8w-D6t"/>
                             <constraint firstItem="dzY-H8-Icy" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="iqY-SL-PaT"/>
                             <constraint firstItem="qcD-9G-aW0" firstAttribute="top" secondItem="bwx-3Z-i5u" secondAttribute="bottom" constant="8" id="j0K-f1-Xpa"/>

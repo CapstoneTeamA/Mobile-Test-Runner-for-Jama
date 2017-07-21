@@ -20,7 +20,7 @@ class ProjectListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noProjectsLabel: UILabel!
     @IBOutlet weak var noProjectsImage: UIImageView!
-    let noProjectsMessage = "No Projects Found"
+    let noProjectsMessage = "No projects found. Please contact your administrator."
     
     override func viewDidLoad() {
         super.viewDidLoad()
