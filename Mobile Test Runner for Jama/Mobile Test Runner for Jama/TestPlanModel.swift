@@ -7,17 +7,3 @@
 //
 
 import Foundation
-
-
-class TestPlanModel {
-    var projectId = -1
-    var id = -1
-    var name = ""
-    
-    func extractPlan(fromData: [String: AnyObject]) {
-        id = fromData["id"] as! Int
-        projectId = fromData["project"] as! Int
-        let fields: [String :  AnyObject] = fromData["fields"] as! Dictionary
-        name = fields["name"] as! String
-    }
-}

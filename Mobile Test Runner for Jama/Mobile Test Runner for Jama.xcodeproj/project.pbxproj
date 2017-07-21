@@ -17,7 +17,7 @@
 		13A3430F1F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3430E1F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaUITests.swift */; };
 		13A343221F04C247002EBC92 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343211F04C247002EBC92 /* LoginViewController.swift */; };
 		13A343241F04C271002EBC92 /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343231F04C271002EBC92 /* ProjectListViewController.swift */; };
-		13A343261F04C28F002EBC92 /* TestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343251F04C28F002EBC92 /* TestListViewController.swift */; };
+		13A343261F04C28F002EBC92 /* TestRunListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343251F04C28F002EBC92 /* TestRunListViewController.swift */; };
 		13A343281F04C2B4002EBC92 /* TestStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343271F04C2B4002EBC92 /* TestStepViewController.swift */; };
 		13A3432A1F04C2DC002EBC92 /* ReviewTestRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343291F04C2DC002EBC92 /* ReviewTestRunViewController.swift */; };
 		13A3432C1F04C33F002EBC92 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3432B1F04C33F002EBC92 /* UserModel.swift */; };
@@ -38,19 +38,17 @@
 		13A3434A1F04C7BE002EBC92 /* TestRunModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343491F04C7BE002EBC92 /* TestRunModelUnitTests.swift */; };
 		13A3434C1F04C7DE002EBC92 /* TestStepModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3434B1F04C7DE002EBC92 /* TestStepModelUnitTests.swift */; };
 		13A3434E1F04C814002EBC92 /* TestPlanListModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3434D1F04C814002EBC92 /* TestPlanListModelUnitTests.swift */; };
-		13A343501F04C82C002EBC92 /* TestPlanModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3434F1F04C82C002EBC92 /* TestPlanModelUnitTests.swift */; };
+		13A343501F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3434F1F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift */; };
 		13A343521F04C84B002EBC92 /* TestCycleListModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343511F04C84B002EBC92 /* TestCycleListModelUnitTests.swift */; };
 		13A343541F04C867002EBC92 /* TestCycleModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343531F04C867002EBC92 /* TestCycleModelUnitTests.swift */; };
 		13A343561F04C881002EBC92 /* RestHelperUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343551F04C881002EBC92 /* RestHelperUnitTests.swift */; };
 		13A3435B1F04C96B002EBC92 /* LoginViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3435A1F04C96B002EBC92 /* LoginViewControllerUnitTests.swift */; };
 		13A3435D1F04CA1E002EBC92 /* ProjectListViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3435C1F04CA1E002EBC92 /* ProjectListViewControllerUnitTests.swift */; };
-		13A3435F1F04CA38002EBC92 /* TestListViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3435E1F04CA38002EBC92 /* TestListViewControllerUnitTests.swift */; };
+		13A3435F1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3435E1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift */; };
 		13A343611F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */; };
 		13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */; };
 		13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343B01F0F5C6E002EBC92 /* Endpoints.plist */; };
 		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
-		E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */; };
-		E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +85,7 @@
 		13A343101F0367E9002EBC92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13A343211F04C247002EBC92 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		13A343231F04C271002EBC92 /* ProjectListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
-		13A343251F04C28F002EBC92 /* TestListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListViewController.swift; sourceTree = "<group>"; };
+		13A343251F04C28F002EBC92 /* TestRunListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunListViewController.swift; sourceTree = "<group>"; };
 		13A343271F04C2B4002EBC92 /* TestStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepViewController.swift; sourceTree = "<group>"; };
 		13A343291F04C2DC002EBC92 /* ReviewTestRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTestRunViewController.swift; sourceTree = "<group>"; };
 		13A3432B1F04C33F002EBC92 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -108,19 +106,17 @@
 		13A343491F04C7BE002EBC92 /* TestRunModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunModelUnitTests.swift; sourceTree = "<group>"; };
 		13A3434B1F04C7DE002EBC92 /* TestStepModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepModelUnitTests.swift; sourceTree = "<group>"; };
 		13A3434D1F04C814002EBC92 /* TestPlanListModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanListModelUnitTests.swift; sourceTree = "<group>"; };
-		13A3434F1F04C82C002EBC92 /* TestPlanModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanModelUnitTests.swift; sourceTree = "<group>"; };
+		13A3434F1F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectPlanModelUnitTests.swift; sourceTree = "<group>"; };
 		13A343511F04C84B002EBC92 /* TestCycleListModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCycleListModelUnitTests.swift; sourceTree = "<group>"; };
 		13A343531F04C867002EBC92 /* TestCycleModelUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCycleModelUnitTests.swift; sourceTree = "<group>"; };
 		13A343551F04C881002EBC92 /* RestHelperUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestHelperUnitTests.swift; sourceTree = "<group>"; };
 		13A3435A1F04C96B002EBC92 /* LoginViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A3435C1F04CA1E002EBC92 /* ProjectListViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectListViewControllerUnitTests.swift; sourceTree = "<group>"; };
-		13A3435E1F04CA38002EBC92 /* TestListViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListViewControllerUnitTests.swift; sourceTree = "<group>"; };
+		13A3435E1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunListViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTestRunViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343B01F0F5C6E002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
-		E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtr-logo-v2.png"; sourceTree = "<group>"; };
-		E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-lightbl-redx.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,8 +147,6 @@
 		133971B71F1B437600AB9D30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */,
-				E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */,
 				133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */,
 			);
 			name = Resources;
@@ -222,7 +216,7 @@
 				13A343211F04C247002EBC92 /* LoginViewController.swift */,
 				13A343231F04C271002EBC92 /* ProjectListViewController.swift */,
 				133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */,
-				13A343251F04C28F002EBC92 /* TestListViewController.swift */,
+				13A343251F04C28F002EBC92 /* TestRunListViewController.swift */,
 				13A343271F04C2B4002EBC92 /* TestStepViewController.swift */,
 				13A343291F04C2DC002EBC92 /* ReviewTestRunViewController.swift */,
 			);
@@ -265,7 +259,7 @@
 				13A343491F04C7BE002EBC92 /* TestRunModelUnitTests.swift */,
 				13A3434B1F04C7DE002EBC92 /* TestStepModelUnitTests.swift */,
 				13A3434D1F04C814002EBC92 /* TestPlanListModelUnitTests.swift */,
-				13A3434F1F04C82C002EBC92 /* TestPlanModelUnitTests.swift */,
+				13A3434F1F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift */,
 				13A343511F04C84B002EBC92 /* TestCycleListModelUnitTests.swift */,
 				13A343531F04C867002EBC92 /* TestCycleModelUnitTests.swift */,
 			);
@@ -285,7 +279,7 @@
 			children = (
 				13A3435A1F04C96B002EBC92 /* LoginViewControllerUnitTests.swift */,
 				13A3435C1F04CA1E002EBC92 /* ProjectListViewControllerUnitTests.swift */,
-				13A3435E1F04CA38002EBC92 /* TestListViewControllerUnitTests.swift */,
+				13A3435E1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift */,
 				13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */,
 				13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */,
 			);
@@ -402,11 +396,9 @@
 			files = (
 				13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */,
 				13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */,
-				E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */,
 				13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */,
 				13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */,
 				133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */,
-				E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +434,7 @@
 				13A343321F04C396002EBC92 /* TestRunListModel.swift in Sources */,
 				90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */,
 				13A343221F04C247002EBC92 /* LoginViewController.swift in Sources */,
-				13A343261F04C28F002EBC92 /* TestListViewController.swift in Sources */,
+				13A343261F04C28F002EBC92 /* TestRunListViewController.swift in Sources */,
 				13A343301F04C379002EBC92 /* ProjectModel.swift in Sources */,
 				13A343401F04C564002EBC92 /* RestHelper.swift in Sources */,
 				13A3432E1F04C369002EBC92 /* ProjectListModel.swift in Sources */,
@@ -466,8 +458,8 @@
 				13A343421F04C752002EBC92 /* UserModelUnitTest.swift in Sources */,
 				13A3435B1F04C96B002EBC92 /* LoginViewControllerUnitTests.swift in Sources */,
 				13A343521F04C84B002EBC92 /* TestCycleListModelUnitTests.swift in Sources */,
-				13A343501F04C82C002EBC92 /* TestPlanModelUnitTests.swift in Sources */,
-				13A3435F1F04CA38002EBC92 /* TestListViewControllerUnitTests.swift in Sources */,
+				13A343501F04C82C002EBC92 /* ProjectPlanModelUnitTests.swift in Sources */,
+				13A3435F1F04CA38002EBC92 /* TestRunListViewControllerUnitTests.swift in Sources */,
 				13A343561F04C881002EBC92 /* RestHelperUnitTests.swift in Sources */,
 				13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */,
 				13A343541F04C867002EBC92 /* TestCycleModelUnitTests.swift in Sources */,

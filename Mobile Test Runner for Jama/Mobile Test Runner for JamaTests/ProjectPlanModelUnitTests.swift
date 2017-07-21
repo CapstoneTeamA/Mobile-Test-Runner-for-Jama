@@ -1,5 +1,5 @@
 //
-//  TestPlanListModelUnitTests.swift
+//  ProjectPlanModelUnitTests.swift
 //  Mobile Test Runner for Jama
 //
 //  Created by PSU2 on 6/28/17.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class TestPlanListModelUnitTests: XCTestCase {
+class ProjectPlanModelUnitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
