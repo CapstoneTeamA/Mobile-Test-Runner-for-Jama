@@ -136,11 +136,14 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let testRunViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunList") as! TestRunListViewController
+        let testViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestList") as! TestListViewController
 
-        testRunViewController.projectName = projectList.projectList[indexPath.row].name
-        testRunViewController.projectKey = projectList.projectList[indexPath.row].projectKey
-        self.navigationController?.pushViewController(testRunViewController, animated: true)
+        testViewController.projectName = projectList.projectList[indexPath.row].name
+        testViewController.projectId = projectList.projectList[indexPath.row].id
+        testViewController.username = username
+        testViewController.password = password
+        testViewController.instance = instance
+        self.navigationController?.pushViewController(testViewController, animated: true)
     }
     
     //This is to be used if we want to detect the user has scrolled to the bottom of the list and reload the data then.
