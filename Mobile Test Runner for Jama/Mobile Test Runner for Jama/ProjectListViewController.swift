@@ -16,7 +16,11 @@ class ProjectListViewController: UIViewController {
     var password = ""
     var instance = ""
     var endpointString = ""
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var noProjectsLabel: UILabel!
+    @IBOutlet weak var noProjectsImage: UIImageView!
+    let noProjectsMessage = "No projects found. Please contact your administrator."
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +30,8 @@ class ProjectListViewController: UIViewController {
         
         let layout = buildCollectionLayout()
         collectionView.setCollectionViewLayout(layout, animated: false)
+        noProjectsLabel.isHidden = true
+        noProjectsImage.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +46,28 @@ class ProjectListViewController: UIViewController {
         layout.minimumInteritemSpacing = 1000
         layout.minimumLineSpacing = 6
         return layout
+    }
+    
+    func checkProjectListEmpty() {
+        //if there's nothing in the list
+        if (self.projectList.projectList.isEmpty) {
+            //show the image and the words
+            noProjectsLabel.isHidden = false
+            noProjectsImage.isHidden = false
+            noProjectsLabel.text = noProjectsMessage
+            formatEmptyProjectMessage()
+        }
+        else {
+            //set both image and label to invisible
+            noProjectsLabel.isHidden = true
+            noProjectsImage.isHidden = true
+        }
+    }
+    
+    func formatEmptyProjectMessage() {
+        view.bringSubview(toFront: noProjectsLabel)
+        view.bringSubview(toFront: noProjectsImage)
+        collectionView.backgroundColor = UIColor.white
     }
     
     //Comparator function to be used by the sort method on arrays
@@ -59,10 +87,14 @@ class ProjectListViewController: UIViewController {
 
 extension ProjectListViewController: EndpointDelegate {
     func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
+        //set image to invisible ASAP
+        
         guard let unwrappedData = data else {
             return
         }
         DispatchQueue.main.async {
+            self.noProjectsImage.isHidden = true
+            self.noProjectsLabel.isHidden = true
             //Boolean that will determine if we should load the data into the view automatically if 
             //"scroll to bottom" lazy loading is enabled.
 //            let isInitialAPICall = self.projectList.projectList.count == 0
@@ -85,6 +117,8 @@ extension ProjectListViewController: EndpointDelegate {
             if self.collectionView.numberOfItems(inSection: 0) < totalItems {
                 RestHelper.hitEndpoint(atEndpointString: self.endpointString + "?startAt=\(self.projectList.projectList.count)", withDelegate: self, username: self.username, password: self.password)
             }
+            //if no projects were returned, display image and text
+            self.checkProjectListEmpty()
         }
     }
 }

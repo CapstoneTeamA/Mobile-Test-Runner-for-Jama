@@ -49,6 +49,8 @@
 		13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */; };
 		13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343B01F0F5C6E002EBC92 /* Endpoints.plist */; };
 		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
+		E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */; };
+		E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,8 @@
 		13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTestRunViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343B01F0F5C6E002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
+		E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtr-logo-v2.png"; sourceTree = "<group>"; };
+		E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-lightbl-redx.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 		133971B71F1B437600AB9D30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */,
+				E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */,
 				133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */,
 			);
 			name = Resources;
@@ -396,9 +402,11 @@
 			files = (
 				13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */,
 				13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */,
+				E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */,
 				13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */,
 				13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */,
 				133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */,
+				E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
