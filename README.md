@@ -55,4 +55,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 
 * Our Sponsors: Iman Bilal & Eric Rickson at [Jama](https://www.jamasoftware.com/)
 * Warren Harrison at PSU’s [Capstone Program](http://wiki.cs.pdx.edu/capstone/) 
-* Janaka Jayawardena, IT Director at PSU
+* Janaka Jayawardena, Director of Information Technologies, Maseeh College of Engineering and Computer Science at PSU
