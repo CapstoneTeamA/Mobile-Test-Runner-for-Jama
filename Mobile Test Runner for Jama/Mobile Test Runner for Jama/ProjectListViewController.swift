@@ -10,6 +10,10 @@ import UIKit
 
 class ProjectListViewController: UIViewController {
 
+    @IBOutlet weak var serverErrorLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var noProjectsLabel: UILabel!
+    @IBOutlet weak var noProjectsImage: UIImageView!
     var currentUser: UserModel = UserModel()
     var projectList: ProjectListModel = ProjectListModel()
     var username = ""
@@ -17,13 +21,15 @@ class ProjectListViewController: UIViewController {
     var instance = ""
     var endpointString = ""
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var noProjectsLabel: UILabel!
-    @IBOutlet weak var noProjectsImage: UIImageView!
+    
     let noProjectsMessage = "No projects found. Please contact your administrator."
+    let serverErrorMessage = "Server Error"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        serverErrorLabel.isHidden = true
+        serverErrorLabel.text = serverErrorMessage
         endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
         endpointString = "https://" + instance + "." + endpointString
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, username: username, password: password)
@@ -83,13 +89,19 @@ class ProjectListViewController: UIViewController {
 //            self.projectList.projectList.append(tmpProject)
 //        }
 //    }
+    func endpointErrorOccured(){
+        serverErrorLabel.isHidden = false
+    }
 }
+
+
 
 extension ProjectListViewController: EndpointDelegate {
     func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
         //set image to invisible ASAP
         
         guard let unwrappedData = data else {
+            endpointErrorOccured()
             return
         }
         DispatchQueue.main.async {
