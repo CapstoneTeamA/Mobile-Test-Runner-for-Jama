@@ -107,7 +107,7 @@ class RestHelper {
                 return
             }
             guard let responseData = data else {
-                print("Error did not recieve data")
+                withDelegate.didLoadEndpoint(data: nil, totalItems: 0)
                 return
             }
             
