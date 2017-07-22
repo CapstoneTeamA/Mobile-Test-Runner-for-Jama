@@ -28,11 +28,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         backItem.title = "Log Out"
         navigationItem.backBarButtonItem = backItem
     }
+    
     func setTextFieldDelegates() {
         self.userNameTextBox.delegate = self
         self.instanceTextBox.delegate = self
         self.passwordTextBox.delegate = self
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         //Make sure that the password is not saved when the login page reappears.
         passwordTextBox.text = ""

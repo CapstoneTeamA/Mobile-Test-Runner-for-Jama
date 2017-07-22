@@ -69,4 +69,32 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(NSTextAlignment.center, cell.textLabel?.textAlignment)
         XCTAssertEqual(font, cell.textLabel?.font)
     }
+    
+    
+    func testCompareCycle() {
+        let plan1 = TestPlanModel()
+        let plan2 = TestPlanModel()
+        
+        plan1.name = "aaa"
+        plan2.name = "bbb"
+        XCTAssertTrue(viewController.comparePlans(lhs: plan1, rhs: plan2))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan2, rhs: plan1))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan1))
+        
+        plan1.name = "AAA"
+        XCTAssertTrue(viewController.comparePlans(lhs: plan1, rhs: plan2))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan2, rhs: plan1))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan1))
+        
+        plan1.name = "111"
+        XCTAssertTrue(viewController.comparePlans(lhs: plan1, rhs: plan2))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan2, rhs: plan1))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan1))
+        
+        plan2.name = "000"
+        XCTAssertTrue(viewController.comparePlans(lhs: plan2, rhs: plan1))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan2))
+        XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan1))
+        
+    }
 }

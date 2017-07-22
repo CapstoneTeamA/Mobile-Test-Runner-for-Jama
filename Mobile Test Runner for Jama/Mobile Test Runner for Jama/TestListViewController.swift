@@ -14,16 +14,25 @@ class TestListViewController: UIViewController {
     var instance = ""
     var username = ""
     var password = ""
+    enum TestLevel {
+        case plan, cycle, run
+    }
+    var currentTestLevel = TestLevel.plan
+    var planId = -1
     
     @IBOutlet weak var testList: UITableView!
-    let testPlanList: TestPlanListModel = TestPlanListModel()
     @IBOutlet weak var tmpProjectLabel: UILabel!
+    let testPlanList: TestPlanListModel = TestPlanListModel()
+    let testCycleList: TestCycleListModel = TestCycleListModel()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        self.currentTestLevel = .plan
         let endpoint = buildTestPlanEndpointString()
         RestHelper.hitEndpoint(atEndpointString: endpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +46,25 @@ class TestListViewController: UIViewController {
         endpoint = endpoint.replacingOccurrences(of: "{projectId}", with: "\(projectId)")
         return endpoint
     }
+    
+    // TO DO: attach this action to the selected plan button
+    func getCyclesForPlanOnClick() {
+        // get plan id for chosen testplanmodel somehow
+        planId = 3334
+        
+        self.currentTestLevel = .cycle
+        let cycleEndpoint = buildTestCycleEndpointString()
+        RestHelper.hitEndpoint(atEndpointString: cycleEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+        print(cycleEndpoint)
+    }
+    
+    func buildTestCycleEndpointString() -> String {
+        var cycleEndpoint = RestHelper.getEndpointString(method: "Get", endpoint: "TestCycles")
+        cycleEndpoint = "https://" + instance + "." + cycleEndpoint
+        cycleEndpoint = cycleEndpoint.replacingOccurrences(of: "{planId}", with: "\(planId)")
+        return cycleEndpoint
+    }
+
     @IBAction func touchedLogoutButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
     }
@@ -50,25 +78,47 @@ extension TestListViewController: EndpointDelegate {
             return
         }
         DispatchQueue.main.async {
-            let tmpList = TestPlanListModel()
-            tmpList.extractPlanList(fromData: unwrappedData)
-            self.testPlanList.testPlanList.append(contentsOf: tmpList.testPlanList)
             
-   //         self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
+            switch self.currentTestLevel {
+                
+                case .plan:
+                    let tmpList = TestPlanListModel()
+                    tmpList.extractPlanList(fromData: unwrappedData)
+                    self.testPlanList.testPlanList.append(contentsOf: tmpList.testPlanList)
+                    print("switched to plan")
+                    //self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
             
-            //reload Data in view
-            self.testList.reloadData()
-            //keep calling api while there is still more plans to get
-            if self.testPlanList.testPlanList.count < totalItems {
-                RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
+                    //reload Data in view
+                    self.testList.reloadData()
+                    //keep calling api while there is still more plans to get
+                    if self.testPlanList.testPlanList.count < totalItems {
+                        RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
+                    }
+                
+                case .cycle:
+                    let tmpList = TestCycleListModel()
+                    tmpList.extractCycleList(fromData: unwrappedData)
+                    self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
+                    print("switched to cycle")
+                    //reload Data in view? self.testCycle.reloadData()
+                
+                    //keep calling api while there are still more cycles
+                    if self.testCycleList.testCycleList.count < totalItems {
+                        RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
+                    }
+                        
+                case .run:
+                    let _ = TestCycleListModel()
+                    //Add call for test runs here
+
             }
-            
         }
     }
     
     func comparePlans(lhs: TestPlanModel, rhs: TestPlanModel) -> Bool {
         return lhs.name < rhs.name
     }
+    
 }
 
 extension TestListViewController: UITableViewDelegate, UITableViewDataSource {

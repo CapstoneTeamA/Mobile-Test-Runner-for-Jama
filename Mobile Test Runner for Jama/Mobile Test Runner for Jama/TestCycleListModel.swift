@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+class TestCycleListModel {
+    var testCycleList: [TestCycleModel] = []
+    
+    func extractCycleList(fromData: [[String : AnyObject]]) {
+        for cycle in fromData {
+            let tmpCycle = TestCycleModel()
+            tmpCycle.extractCycle(fromData: cycle)
+            testCycleList.append(tmpCycle)
+        }
+    }
+}
