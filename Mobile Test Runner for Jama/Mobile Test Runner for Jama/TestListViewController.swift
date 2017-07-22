@@ -15,6 +15,7 @@ class TestListViewController: UIViewController {
     var username = ""
     var password = ""
     
+    @IBOutlet weak var testList: UITableView!
     let testPlanList: TestPlanListModel = TestPlanListModel()
     @IBOutlet weak var tmpProjectLabel: UILabel!
     
@@ -50,10 +51,10 @@ extension TestListViewController: EndpointDelegate {
             tmpList.extractPlanList(fromData: unwrappedData)
             self.testPlanList.testPlanList.append(contentsOf: tmpList.testPlanList)
             
-            self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
+   //         self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
             
             //reload Data in view
-            
+            self.testList.reloadData()
             //keep calling api while there is still more plans to get
             if self.testPlanList.testPlanList.count < totalItems {
                 RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
@@ -65,4 +66,25 @@ extension TestListViewController: EndpointDelegate {
     func comparePlans(lhs: TestPlanModel, rhs: TestPlanModel) -> Bool {
         return lhs.name < rhs.name
     }
+}
+
+extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return testPlanList.testPlanList.count
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
+        return buildCell(indexPath: indexPath)
+    }
+    
+    func buildCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestPlanCell")
+        
+        cell.textLabel?.text = testPlanList.testPlanList[indexPath.row].name
+        cell.textLabel?.textAlignment = .center
+        cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
+        return cell
+    }
+
 }
