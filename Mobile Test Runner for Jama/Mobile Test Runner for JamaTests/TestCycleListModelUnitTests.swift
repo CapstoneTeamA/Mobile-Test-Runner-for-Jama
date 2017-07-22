@@ -21,6 +21,8 @@ class TestCycleListModelUnitTests: XCTestCase {
     var projectId = 123
     var cycle1Name = "cycle1"
     var cycle2Name = "cycle2"
+    var testCycleItemType = 36
+    var notTestCycleItemType = 37
     var data: [[String : AnyObject]] = []
     
     override func setUp() {
@@ -33,10 +35,12 @@ class TestCycleListModelUnitTests: XCTestCase {
         fields1.updateValue(cycle1Name as AnyObject, forKey: "name")
         cycle1Data.updateValue(id1 as AnyObject, forKey: "id")
         cycle1Data.updateValue(fields1 as AnyObject, forKey: "fields")
+        cycle1Data.updateValue(testCycleItemType as AnyObject, forKey: "itemType")
         
         fields2.updateValue(cycle2Name as AnyObject, forKey: "name")
         cycle2Data.updateValue(id2 as AnyObject, forKey: "id")
         cycle2Data.updateValue(fields2 as AnyObject, forKey: "fields")
+        cycle2Data.updateValue(testCycleItemType as AnyObject, forKey: "itemType")
         
         data.append(cycle1Data)
         data.append(cycle2Data)
@@ -60,5 +64,18 @@ class TestCycleListModelUnitTests: XCTestCase {
         XCTAssertEqual(cycle1.name, cycleList.testCycleList[0].name)
         XCTAssertEqual(cycle2.id, cycleList.testCycleList[1].id)
         XCTAssertEqual(cycle2.name, cycleList.testCycleList[1].name)
+    }
+    
+    func testExtractCycleListFromWrongItemTypeData() {
+        cycle1Data.updateValue(notTestCycleItemType as AnyObject, forKey: "itemType")
+        cycle2Data.updateValue(notTestCycleItemType as AnyObject, forKey: "itemType")
+        
+        data = []
+        data.append(cycle1Data)
+        data.append(cycle2Data)
+        
+        cycleList.extractCycleList(fromData: data)
+        
+        XCTAssertTrue(cycleList.testCycleList.isEmpty)
     }
 }
