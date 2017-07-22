@@ -49,13 +49,12 @@ class TestListViewController: UIViewController {
     
     // TO DO: attach this action to the selected plan button
     func getCyclesForPlanOnClick() {
-        // get plan id for chosen testplanmodel somehow
+        // TO DO: get plan id for chosen testplanmodel somehow
         planId = 3334
         
         self.currentTestLevel = .cycle
         let cycleEndpoint = buildTestCycleEndpointString()
         RestHelper.hitEndpoint(atEndpointString: cycleEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
-        print(cycleEndpoint)
     }
     
     func buildTestCycleEndpointString() -> String {
@@ -78,14 +77,12 @@ extension TestListViewController: EndpointDelegate {
             return
         }
         DispatchQueue.main.async {
-            
             switch self.currentTestLevel {
                 
                 case .plan:
                     let tmpList = TestPlanListModel()
                     tmpList.extractPlanList(fromData: unwrappedData)
                     self.testPlanList.testPlanList.append(contentsOf: tmpList.testPlanList)
-                    print("switched to plan")
                     //self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
             
                     //reload Data in view
@@ -99,7 +96,7 @@ extension TestListViewController: EndpointDelegate {
                     let tmpList = TestCycleListModel()
                     tmpList.extractCycleList(fromData: unwrappedData)
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
-                    print("switched to cycle")
+
                     //reload Data in view? self.testCycle.reloadData()
                 
                     //keep calling api while there are still more cycles
@@ -108,8 +105,7 @@ extension TestListViewController: EndpointDelegate {
                     }
                         
                 case .run:
-                    let _ = TestCycleListModel()
-                    //Add call for test runs here
+                    let _ = 0  //TO DO: Add call for test runs here and remove this line
 
             }
         }
