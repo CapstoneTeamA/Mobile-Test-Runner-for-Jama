@@ -37,6 +37,9 @@ class TestListViewController: UIViewController {
         endpoint = endpoint.replacingOccurrences(of: "{projectId}", with: "\(projectId)")
         return endpoint
     }
+    @IBAction func touchedLogoutButton(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
 
 }
 

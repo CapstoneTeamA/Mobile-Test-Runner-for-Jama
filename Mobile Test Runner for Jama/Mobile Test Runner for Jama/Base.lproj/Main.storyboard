@@ -355,6 +355,13 @@
                             <constraint firstItem="Jw9-Nh-Msb" firstAttribute="top" secondItem="LwG-d3-PFR" secondAttribute="bottom" id="ySQ-hB-rl3"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Test Run List" id="ihb-y8-tGc">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="u6s-Bu-rkP">
+                            <connections>
+                                <action selector="touchedLogoutButton:" destination="b7n-lk-QU3" id="VIG-wG-Ssa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="testList" destination="Jw9-Nh-Msb" id="sf6-HP-fdd"/>
                     </connections>
