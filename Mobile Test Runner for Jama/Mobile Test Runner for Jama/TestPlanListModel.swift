@@ -13,6 +13,9 @@ class TestPlanListModel {
     
     func extractPlanList(fromData: [[String : AnyObject]]) {
         for plan in fromData {
+            if plan["itemType"] as! Int != 35 {
+                break
+            }
             let tmpPlan = TestPlanModel()
             tmpPlan.extractPlan(fromData: plan)
             testPlanList.append(tmpPlan)

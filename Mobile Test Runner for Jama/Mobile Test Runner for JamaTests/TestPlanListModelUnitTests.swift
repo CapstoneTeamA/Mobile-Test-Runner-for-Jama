@@ -21,6 +21,8 @@ class TestPlanListModelUnitTests: XCTestCase {
     var projectId = 123
     var plan1Name = "plan1"
     var plan2Name = "plan2"
+    var testPlanType = 35
+    var notTestPlanType = 36
     var data: [[String : AnyObject]] = []
     
     override func setUp() {
@@ -36,11 +38,13 @@ class TestPlanListModelUnitTests: XCTestCase {
         plan1Data.updateValue(id1 as AnyObject, forKey: "id")
         plan1Data.updateValue(projectId as AnyObject, forKey: "project")
         plan1Data.updateValue(fields1 as AnyObject, forKey: "fields")
+        plan1Data.updateValue(testPlanType as AnyObject, forKey: "itemType")
         
         fields2.updateValue(plan2Name as AnyObject, forKey: "name")
         plan2Data.updateValue(id2 as AnyObject, forKey: "id")
         plan2Data.updateValue(projectId as AnyObject, forKey: "project")
         plan2Data.updateValue(fields2 as AnyObject, forKey: "fields")
+        plan2Data.updateValue(testPlanType as AnyObject, forKey: "itemType")
         
         data.append(plan1Data)
         data.append(plan2Data)
@@ -66,5 +70,16 @@ class TestPlanListModelUnitTests: XCTestCase {
         XCTAssertEqual(plan2.id, planList.testPlanList[1].id)
         XCTAssertEqual(plan2.projectId, planList.testPlanList[1].projectId)
         XCTAssertEqual(plan2.name, planList.testPlanList[1].name)
+    }
+    
+    func testExtractTestPlanFromWrongItemTypeData() {
+        plan1Data.updateValue(notTestPlanType as AnyObject, forKey: "itemType")
+        plan2Data.updateValue(notTestPlanType as AnyObject, forKey: "itemType")
+        
+        data = []
+        data.append(plan1Data)
+        data.append(plan2Data)
+        
+        XCTAssertTrue(planList.testPlanList.isEmpty)
     }
 }

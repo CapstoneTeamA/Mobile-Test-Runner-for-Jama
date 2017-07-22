@@ -69,4 +69,4 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(NSTextAlignment.center, cell.textLabel?.textAlignment)
         XCTAssertEqual(font, cell.textLabel?.font)
     }
-}
+ }

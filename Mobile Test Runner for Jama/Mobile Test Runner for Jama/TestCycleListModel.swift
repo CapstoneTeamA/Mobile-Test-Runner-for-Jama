@@ -7,3 +7,18 @@
 //
 
 import Foundation
+
+class TestCycleListModel {
+    var testCycleList: [TestCycleModel] = []
+    
+    func extractCycleList(fromData: [[String : AnyObject]]) {
+        for cycle in fromData {
+            if cycle["itemType"] as! Int != 36 {
+                break
+            }
+            let tmpCycle = TestCycleModel()
+            tmpCycle.extractCycle(fromData: cycle)
+            testCycleList.append(tmpCycle)
+        }
+    }
+}

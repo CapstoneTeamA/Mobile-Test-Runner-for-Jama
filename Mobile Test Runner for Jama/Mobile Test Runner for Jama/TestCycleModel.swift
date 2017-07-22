@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+class TestCycleModel {
+    var id = -1
+    var name = ""
+    
+    func extractCycle(fromData: [String: AnyObject]) {
+        id = fromData["id"] as! Int
+        let fields: [String :  AnyObject] = fromData["fields"] as! Dictionary
+        name = fields["name"] as! String
+    }
+}
