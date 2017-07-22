@@ -57,4 +57,16 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertFalse(viewController.comparePlans(lhs: plan1, rhs: plan1))
         
     }
+    
+    func testBuildCell() {
+        let testPlan = TestPlanModel()
+        testPlan.name = "testPlanName"
+        let font = UIFont(name: "Helvetica Neue", size: 20.0)
+        viewController.testPlanList.testPlanList.append(testPlan)
+        let cell = viewController.buildCell(indexPath: IndexPath(row: 0, section: 0))
+        
+        XCTAssertEqual(testPlan.name, cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.center, cell.textLabel?.textAlignment)
+        XCTAssertEqual(font, cell.textLabel?.font)
+    }
 }

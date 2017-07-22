@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -242,7 +242,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.90187478065490723" green="0.9020228385925293" blue="0.90184324979782104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="QHA-VP-gmH" firstAttribute="centerX" secondItem="OOj-1o-RZK" secondAttribute="centerX" id="04j-Cc-qrV"/>
                             <constraint firstItem="h28-EN-tPd" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="2Ng-X7-qki"/>
@@ -288,7 +288,7 @@
         <!--Test Run List-->
         <scene sceneID="1Jg-dI-eGb">
             <objects>
-                <viewController storyboardIdentifier="TestList" title="Test Run List" id="b7n-lk-QU3" customClass="TestListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TestList" title="Test Run List" automaticallyAdjustsScrollViewInsets="NO" id="b7n-lk-QU3" customClass="TestListViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hkT-vr-wmT"/>
                         <viewControllerLayoutGuide type="bottom" id="jOc-nP-z75"/>
@@ -297,26 +297,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kyx-07-h7L">
-                                <rect key="frame" x="40" y="106" width="334" height="80"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-d3-PFR" userLabel="TopDivider">
+                                <rect key="frame" x="0.0" y="148" width="414" height="10"/>
+                                <color key="backgroundColor" red="0.94509803920000002" green="0.3803921569" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="fSh-Mg-lJj"/>
+                                    <constraint firstAttribute="height" constant="10" id="JsS-jL-14v"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jw9-Nh-Msb">
+                                <rect key="frame" x="0.0" y="158" width="414" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TestPlanCell" id="rFr-a9-8Js">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rFr-a9-8Js" id="mSU-nv-LVR">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="b7n-lk-QU3" id="lTa-kl-3Iy"/>
+                                    <outlet property="delegate" destination="b7n-lk-QU3" id="MxS-b2-09A"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INj-Pt-cDa" userLabel="BottomDivider">
+                                <rect key="frame" x="0.0" y="726" width="414" height="10"/>
+                                <color key="backgroundColor" red="0.94509803920000002" green="0.3803921569" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="u5H-qV-bza"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a test to run:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZK8-jV-Ohl">
+                                <rect key="frame" x="20" y="72" width="374" height="61"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Kyx-07-h7L" secondAttribute="trailing" constant="20" id="Jgg-Rg-ezA"/>
-                            <constraint firstItem="Kyx-07-h7L" firstAttribute="centerX" secondItem="Rez-5u-Hfc" secondAttribute="centerX" id="NV1-U2-jDd"/>
-                            <constraint firstItem="Kyx-07-h7L" firstAttribute="leading" secondItem="Rez-5u-Hfc" secondAttribute="leadingMargin" constant="20" id="Plk-IV-7xE"/>
-                            <constraint firstItem="Kyx-07-h7L" firstAttribute="top" secondItem="hkT-vr-wmT" secondAttribute="bottom" constant="42" id="qPB-Ga-TiF"/>
+                            <constraint firstItem="ZK8-jV-Ohl" firstAttribute="leading" secondItem="Rez-5u-Hfc" secondAttribute="leadingMargin" id="CMg-3b-aoi"/>
+                            <constraint firstItem="INj-Pt-cDa" firstAttribute="top" secondItem="Jw9-Nh-Msb" secondAttribute="bottom" id="Dlb-Ld-Ei2"/>
+                            <constraint firstItem="INj-Pt-cDa" firstAttribute="centerX" secondItem="Rez-5u-Hfc" secondAttribute="centerX" id="JSY-IV-hIf"/>
+                            <constraint firstItem="LwG-d3-PFR" firstAttribute="width" secondItem="Rez-5u-Hfc" secondAttribute="width" id="RdH-OB-6AC"/>
+                            <constraint firstItem="Jw9-Nh-Msb" firstAttribute="top" secondItem="hkT-vr-wmT" secondAttribute="bottom" constant="94" id="VVI-9c-qew"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZK8-jV-Ohl" secondAttribute="trailing" id="WJT-RY-UCH"/>
+                            <constraint firstItem="jOc-nP-z75" firstAttribute="top" secondItem="Jw9-Nh-Msb" secondAttribute="bottom" constant="10" id="az4-ne-OHe"/>
+                            <constraint firstItem="ZK8-jV-Ohl" firstAttribute="top" secondItem="hkT-vr-wmT" secondAttribute="bottom" constant="8" id="dYF-Fe-v7V"/>
+                            <constraint firstItem="Jw9-Nh-Msb" firstAttribute="width" secondItem="Rez-5u-Hfc" secondAttribute="width" id="dkt-3F-b43"/>
+                            <constraint firstItem="jOc-nP-z75" firstAttribute="top" secondItem="INj-Pt-cDa" secondAttribute="bottom" id="fc7-6Q-DoV"/>
+                            <constraint firstItem="Jw9-Nh-Msb" firstAttribute="centerX" secondItem="Rez-5u-Hfc" secondAttribute="centerX" id="fuQ-ym-uzr"/>
+                            <constraint firstItem="LwG-d3-PFR" firstAttribute="centerX" secondItem="Rez-5u-Hfc" secondAttribute="centerX" id="nBJ-r5-WUa"/>
+                            <constraint firstItem="INj-Pt-cDa" firstAttribute="width" secondItem="Rez-5u-Hfc" secondAttribute="width" id="r0g-G4-bjH"/>
+                            <constraint firstItem="Jw9-Nh-Msb" firstAttribute="top" secondItem="ZK8-jV-Ohl" secondAttribute="bottom" constant="25" id="s6O-eV-KmI"/>
+                            <constraint firstItem="Jw9-Nh-Msb" firstAttribute="top" secondItem="LwG-d3-PFR" secondAttribute="bottom" id="ySQ-hB-rl3"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Test Run List" id="ihb-y8-tGc">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="u6s-Bu-rkP">
+                            <connections>
+                                <action selector="touchedLogoutButton:" destination="b7n-lk-QU3" id="VIG-wG-Ssa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="tmpProjectLabel" destination="Kyx-07-h7L" id="D6K-ck-Xi6"/>
+                        <outlet property="testList" destination="Jw9-Nh-Msb" id="sf6-HP-fdd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dL-pN-r0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
