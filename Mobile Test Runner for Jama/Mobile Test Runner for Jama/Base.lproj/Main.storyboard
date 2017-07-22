@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -235,9 +235,16 @@
                                     <constraint firstAttribute="height" constant="74" id="jki-FZ-Ewe"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHA-VP-gmH" userLabel="ServerErrorLabel">
+                                <rect key="frame" x="0.0" y="355" width="414" height="58"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.63921568627450975" green="0.0" blue="0.023529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90187478065490723" green="0.9020228385925293" blue="0.90184324979782104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="QHA-VP-gmH" firstAttribute="centerX" secondItem="OOj-1o-RZK" secondAttribute="centerX" id="04j-Cc-qrV"/>
                             <constraint firstItem="h28-EN-tPd" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="2Ng-X7-qki"/>
                             <constraint firstAttribute="leadingMargin" secondItem="qcD-9G-aW0" secondAttribute="leading" id="2gU-z7-HW2"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="qcD-9G-aW0" secondAttribute="bottom" constant="25" id="3ds-W6-dRJ"/>
@@ -248,6 +255,7 @@
                             <constraint firstItem="qcD-9G-aW0" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="L9f-GI-9De"/>
                             <constraint firstItem="ELL-qg-OTg" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="NJQ-uH-2mS"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="OJv-ib-oQe"/>
+                            <constraint firstItem="QHA-VP-gmH" firstAttribute="centerY" secondItem="OOj-1o-RZK" secondAttribute="centerY" id="TlY-fi-1mx"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="h28-EN-tPd" secondAttribute="bottom" constant="6" id="UqO-6T-J5C"/>
                             <constraint firstItem="hD8-m1-bId" firstAttribute="centerX" secondItem="OOj-1o-RZK" secondAttribute="centerX" id="Uql-11-GWz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qcD-9G-aW0" secondAttribute="trailing" id="Wn0-uh-ZY8"/>
@@ -269,6 +277,7 @@
                         <outlet property="collectionView" destination="OOj-1o-RZK" id="a3r-SZ-EpG"/>
                         <outlet property="noProjectsImage" destination="hD8-m1-bId" id="tma-OV-wFa"/>
                         <outlet property="noProjectsLabel" destination="atM-JS-d50" id="35O-Ny-oec"/>
+                        <outlet property="serverErrorLabel" destination="QHA-VP-gmH" id="wF5-Jj-3B2"/>
                         <segue destination="b7n-lk-QU3" kind="show" identifier="ProjectListSegue" id="ZVZ-Vv-N56"/>
                     </connections>
                 </viewController>

@@ -112,4 +112,17 @@ class ProjectListViewControllerUnitTests: XCTestCase {
         viewController.collectionView.reloadData()
         XCTAssertEqual(2, viewController.collectionView(viewController.collectionView, numberOfItemsInSection: 0))
     }
+    
+    func testSuccessfulGetProjects(){
+        viewController.currentUser.username = "demo"
+        viewController.username = "demo"
+        viewController.password = "password"
+        viewController.instance = "capstone-sandbox"
+        
+        //For fixing the timing issue testing has
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+            XCTAssertEqual(self.viewController.projectList.projectList[0].name, "Achiever UAV Sample Set")
+            
+        })
+    }
 }
