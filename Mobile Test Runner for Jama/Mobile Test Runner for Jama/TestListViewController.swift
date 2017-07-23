@@ -102,7 +102,7 @@ extension TestListViewController: EndpointDelegate {
                 
                 case .cycle:
                     let tmpList = TestCycleListModel()
-                    tmpList.extractCycleList(fromData: unwrappedData)
+                    tmpList.extractCycleList(fromData: unwrappedData, parentId: self.planId)
                     if tmpList.testCycleList.isEmpty {
                         return
                     }

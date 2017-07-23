@@ -10,6 +10,7 @@ import XCTest
 @testable import Mobile_Test_Runner_for_Jama
 class TestListViewControllerUnitTests: XCTestCase {
     let projectId = 23314
+    let planId = 31132
     var viewController : TestListViewController!
     let instance = "test-instance"
     
@@ -19,6 +20,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         _ = viewController.view
         viewController.projectId = projectId
         viewController.instance = instance
+        viewController.planId = planId
         
         let testPlan1 = TestPlanModel()
         let testPlan2 = TestPlanModel()
@@ -195,6 +197,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         cycleData.updateValue(1 as AnyObject, forKey: "project")
         cycleData.updateValue(36 as AnyObject, forKey: "itemType")
         fields.updateValue("testCycle" as AnyObject, forKey: "name")
+        fields.updateValue(planId as AnyObject, forKey: "testPlan")
         cycleData.updateValue(fields as AnyObject, forKey: "fields")
         
         dataList.append(cycleData)

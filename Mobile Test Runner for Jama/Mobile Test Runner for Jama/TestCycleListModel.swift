@@ -11,9 +11,10 @@ import Foundation
 class TestCycleListModel {
     var testCycleList: [TestCycleModel] = []
     
-    func extractCycleList(fromData: [[String : AnyObject]]) {
+    func extractCycleList(fromData: [[String : AnyObject]], parentId: Int) {
         for cycle in fromData {
-            if cycle["itemType"] as! Int != 36 {
+            let fields: [String : AnyObject] = cycle["fields"] as! Dictionary
+            if cycle["itemType"] as! Int != 36 || fields["testPlan"] as! Int != parentId{
                 break
             }
             let tmpCycle = TestCycleModel()
