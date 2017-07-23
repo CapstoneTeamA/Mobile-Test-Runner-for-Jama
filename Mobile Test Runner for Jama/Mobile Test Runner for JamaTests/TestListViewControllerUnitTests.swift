@@ -53,6 +53,13 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testplans?project=23314", endpointString)
     }
     
+    func testBuildTestCycleEndpointString() {
+        viewController.planId = 45
+        let endpointString = viewController.buildTestCycleEndpointString()
+
+        XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testplans/45/testcycles", endpointString)
+    }
+    
     func testComparePlan() {
         let plan1 = TestPlanModel()
         let plan2 = TestPlanModel()
