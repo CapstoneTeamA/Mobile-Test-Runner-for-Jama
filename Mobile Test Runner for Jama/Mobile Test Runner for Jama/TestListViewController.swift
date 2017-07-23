@@ -24,6 +24,7 @@ class TestListViewController: UIViewController {
     @IBOutlet weak var tmpProjectLabel: UILabel!
     let testPlanList: TestPlanListModel = TestPlanListModel()
     let testCycleList: TestCycleListModel = TestCycleListModel()
+    let testRunList:  TestRunListModel = TestRunListModel()
 
     
     override func viewDidLoad() {

@@ -7,3 +7,18 @@
 //
 
 import Foundation
+
+class TestRunListModel {
+    var testRunList: [TestRunModel] = []
+    
+    func extractRunList(fromData: [[String : AnyObject]]) {
+        for run in fromData {
+            if run["itemType"] as! Int != 37 {
+                break
+            }
+            let tmpRun = TestRunModel()
+            tmpRun.extractPlan(fromData: run)
+            testRunList.append(tmpRun)
+        }
+    }
+}
