@@ -11,9 +11,11 @@ import UIKit
 class TestListViewController: UIViewController {
     var projectName = "" //I don't know if we need this but we might want to display it or something so I left it.
     var projectId = -1
+    var testCycleId = -1
     var instance = ""
     var username = ""
     var password = ""
+    var testRunDescription = ""
     enum TestLevel {
         case plan, cycle, run
     }
@@ -64,6 +66,24 @@ class TestListViewController: UIViewController {
         cycleEndpoint = cycleEndpoint.replacingOccurrences(of: "{planId}", with: "\(planId)")
         return cycleEndpoint
     }
+    
+    func getRunsForCycleOnClick(){
+        // TODO: get test cycle id for chosen testplan
+        testCycleId = 6838
+        self.currentTestLevel = .run
+        let runEndpoint = buildTestRunEndpointString()
+        RestHelper.hitEndpoint(atEndpointString: runEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+    }
+    
+    func buildTestRunEndpointString() -> String {
+        var runEndpoint = RestHelper.getEndpointString(method: "Get", endpoint: "TestRuns")
+        runEndpoint = "https://" + instance + "." + runEndpoint
+        runEndpoint = runEndpoint.replacingOccurrences(of: "{testCycleId}", with: "\(testCycleId)")
+        return runEndpoint
+    }
+
+
+
 
     @IBAction func touchedLogoutButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
