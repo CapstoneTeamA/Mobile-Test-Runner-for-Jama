@@ -132,7 +132,21 @@ extension TestListViewController: EndpointDelegate {
                     }
                         
                 case .run:
-                    let _ = 0  //TO DO: Add call for test runs here and remove this line
+                    let tmpList = TestRunListModel()
+                    tmpList.extractRunList(fromData: unwrappedData)
+                    if tmpList.testRunList.isEmpty {
+                        //TODO: display message for no test runs
+                        return
+                    }
+                    self.testRunList.testRunList.append(contentsOf: tmpList.testRunList)
+                    
+                    //TODO: once the testRuns view is made we need to reload the data in the view
+                    //reload Data in view?
+                    
+                    //keep calling api while there are still more cycles
+                    if self.testRunList.testRunList.count < totalItems {
+                        RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
+                    }
 
             }
         }
