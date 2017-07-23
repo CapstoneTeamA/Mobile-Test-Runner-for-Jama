@@ -10,6 +10,7 @@ import XCTest
 @testable import Mobile_Test_Runner_for_Jama
 class TestListViewControllerUnitTests: XCTestCase {
     let projectId = 23314
+    let testCycleId = 6835
     var viewController : TestListViewController!
     let instance = "test-instance"
     
@@ -18,6 +19,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestList") as! TestListViewController
         viewController.projectId = projectId
         viewController.instance = instance
+        viewController.testCycleId = testCycleId
     }
     
     override func tearDown() {
@@ -30,6 +32,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         
         XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testplans?project=23314", endpointString)
     }
+    
     
     func testComparePlan() {
         let plan1 = TestPlanModel()
@@ -68,5 +71,11 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(testPlan.name, cell.textLabel?.text)
         XCTAssertEqual(NSTextAlignment.center, cell.textLabel?.textAlignment)
         XCTAssertEqual(font, cell.textLabel?.font)
+    }
+    
+    func testBuildTestRunEndpointString() {
+        let endpointString = viewController.buildTestRunEndpointString()
+        
+        XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testruns?testCycle=6835", endpointString)
     }
  }
