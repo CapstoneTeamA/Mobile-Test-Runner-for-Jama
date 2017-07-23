@@ -82,6 +82,9 @@ extension TestListViewController: EndpointDelegate {
                 case .plan:
                     let tmpList = TestPlanListModel()
                     tmpList.extractPlanList(fromData: unwrappedData)
+                    if tmpList.testPlanList.isEmpty {
+                        return
+                    }
                     self.testPlanList.testPlanList.append(contentsOf: tmpList.testPlanList)
                     //self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
             
@@ -95,6 +98,9 @@ extension TestListViewController: EndpointDelegate {
                 case .cycle:
                     let tmpList = TestCycleListModel()
                     tmpList.extractCycleList(fromData: unwrappedData)
+                    if tmpList.testCycleList.isEmpty {
+                        return
+                    }
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
 
                     //reload Data in view? self.testCycle.reloadData()
