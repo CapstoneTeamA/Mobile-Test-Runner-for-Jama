@@ -14,6 +14,9 @@ class TestListViewController: UIViewController {
     var instance = ""
     var username = ""
     var password = ""
+    var totalCyclesVisable = 0;
+    var selectedPlanIndex = Int.max
+    var selectedCycleIndex = Int.max
     enum TestLevel {
         case plan, cycle, run
     }
@@ -30,9 +33,14 @@ class TestListViewController: UIViewController {
         super.viewDidLoad()
 
         self.currentTestLevel = .plan
+
+
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         let endpoint = buildTestPlanEndpointString()
         RestHelper.hitEndpoint(atEndpointString: endpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,9 +57,6 @@ class TestListViewController: UIViewController {
     
     // TO DO: attach this action to the selected plan button
     func getCyclesForPlanOnClick() {
-        // TO DO: get plan id for chosen testplanmodel somehow
-        planId = 3334
-        
         self.currentTestLevel = .cycle
         let cycleEndpoint = buildTestCycleEndpointString()
         RestHelper.hitEndpoint(atEndpointString: cycleEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
@@ -102,9 +107,10 @@ extension TestListViewController: EndpointDelegate {
                         return
                     }
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
-
+                    self.totalCyclesVisable = self.testCycleList.testCycleList.count
+                    self.testPlanList.testPlanList[self.selectedPlanIndex].numOfCycles = self.totalCyclesVisable
                     //reload Data in view? self.testCycle.reloadData()
-                
+                    self.testList.reloadData()
                     //keep calling api while there are still more cycles
                     if self.testCycleList.testCycleList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
@@ -126,18 +132,52 @@ extension TestListViewController: EndpointDelegate {
 extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testPlanList.testPlanList.count
+        return testPlanList.testPlanList.count + testCycleList.testCycleList.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         return buildCell(indexPath: indexPath)
     }
     
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //unselect item
+        if indexPath.row == selectedPlanIndex {
+            selectedPlanIndex = Int.max
+            testCycleList.testCycleList = []
+            testList.reloadData()
+            return
+        }
+        //tapped on a cycle do something
+        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisable {
+            return
+        }
+        //TODO will need to subtract totalRunsVisable also
+        selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - totalCyclesVisable
+        testCycleList.testCycleList = []
+        planId = testPlanList.testPlanList[selectedPlanIndex].id
+        getCyclesForPlanOnClick()
+    }
+    
     func buildCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestPlanCell")
+        //TODO Need to check if the cell needs to be a test run
         
-        cell.textLabel?.text = testPlanList.testPlanList[indexPath.row].name
-        cell.textLabel?.textAlignment = .center
+        //This needs to be a testCycle cell
+        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisable {
+            let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestCycleCell")
+            cell.textLabel?.text = self.testCycleList.testCycleList[indexPath.row - self.selectedPlanIndex - 1].name
+            cell.textLabel?.textAlignment = .left
+            cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
+            cell.backgroundColor = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            cell.indentationLevel = 1
+            cell.indentationWidth = 15.0
+            return cell
+        }
+        //Otherwise just the cell needs to be a test plan cell
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestPlanCell")
+        let testPlanIndex = indexPath.row > selectedPlanIndex ? indexPath.row - testPlanList.testPlanList[selectedPlanIndex].numOfCycles : indexPath.row
+        cell.textLabel?.text = testPlanList.testPlanList[testPlanIndex].name
+        cell.textLabel?.textAlignment = .left
+        cell.backgroundColor = UIColor.white
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         return cell
     }
