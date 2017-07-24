@@ -19,6 +19,9 @@ class TestListViewController: UIViewController {
     var instance = ""
     var username = ""
     var password = ""
+    var totalCyclesVisable = 0;
+    var selectedPlanIndex = Int.max
+    var selectedCycleIndex = Int.max
     var testRunDescription = ""
     enum TestLevel {
         case plan, cycle, run

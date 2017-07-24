@@ -10,6 +10,7 @@ import XCTest
 @testable import Mobile_Test_Runner_for_Jama
 class TestListViewControllerUnitTests: XCTestCase {
     let projectId = 23314
+    let planId = 31132
     let testCycleId = 6835
     var viewController : TestListViewController!
     let instance = "test-instance"
@@ -21,6 +22,28 @@ class TestListViewControllerUnitTests: XCTestCase {
         viewController.projectId = projectId
         viewController.instance = instance
         viewController.testCycleId = testCycleId
+        viewController.planId = planId
+        
+        let testPlan1 = TestPlanModel()
+        let testPlan2 = TestPlanModel()
+        let testCycle = TestCycleModel()
+        
+        testPlan1.id = 23
+        testPlan1.name = "testPlan1"
+        testPlan1.projectId = 2
+        testPlan1.numOfCycles = 0
+        testPlan2.id = 31
+        testPlan2.name = "testPlan2"
+        testPlan2.projectId = 2
+        testPlan2.numOfCycles = 1
+        
+        testCycle.id = 123
+        testCycle.name = "testCycle"
+        viewController.totalCyclesVisable = 1
+        viewController.selectedPlanIndex = 1
+        viewController.testPlanList.testPlanList.append(testPlan1)
+        viewController.testPlanList.testPlanList.append(testPlan2)
+        viewController.testCycleList.testCycleList.append(testCycle)
     }
     
     override func tearDown() {
@@ -34,6 +57,12 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testplans?project=23314", endpointString)
     }
     
+    func testBuildTestCycleEndpointString() {
+        viewController.planId = 45
+        let endpointString = viewController.buildTestCycleEndpointString()
+
+        XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testplans/45/testcycles", endpointString)
+    }
     
     func testComparePlan() {
         let plan1 = TestPlanModel()
@@ -182,6 +211,4 @@ class TestListViewControllerUnitTests: XCTestCase {
             XCTAssertEqual(1, self.viewController.testPlanList.testPlanList[0].projectId)
         })
     }
-    
-    
  }
