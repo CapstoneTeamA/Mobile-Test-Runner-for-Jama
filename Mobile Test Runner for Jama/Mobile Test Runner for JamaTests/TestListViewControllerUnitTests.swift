@@ -17,6 +17,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     override func setUp() {
         super.setUp()
         viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestList") as! TestListViewController
+        _ = viewController.view
         viewController.projectId = projectId
         viewController.instance = instance
         viewController.testCycleId = testCycleId
@@ -62,15 +63,124 @@ class TestListViewControllerUnitTests: XCTestCase {
     }
     
     func testBuildCell() {
-        let testPlan = TestPlanModel()
-        testPlan.name = "testPlanName"
+
         let font = UIFont(name: "Helvetica Neue", size: 20.0)
-        viewController.testPlanList.testPlanList.append(testPlan)
-        let cell = viewController.buildCell(indexPath: IndexPath(row: 0, section: 0))
+        let white = UIColor.white
+        let gray = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+        var cell = viewController.buildCell(indexPath: IndexPath(row: 0, section: 0))
         
-        XCTAssertEqual(testPlan.name, cell.textLabel?.text)
-        XCTAssertEqual(NSTextAlignment.center, cell.textLabel?.textAlignment)
+        XCTAssertEqual("testPlan1", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(0, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
+        XCTAssertEqual(white, cell.backgroundColor)
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 1, section: 0))
+        
+        XCTAssertEqual("testPlan2", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(0, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
+        XCTAssertEqual(white, cell.backgroundColor)
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 2, section: 0))
+        
+        XCTAssertEqual("testCycle", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
+        XCTAssertEqual(gray, cell.backgroundColor)
+        
+        viewController.testPlanList.testPlanList = viewController.testPlanList.testPlanList.reversed()
+        viewController.selectedPlanIndex = 0
+        cell = viewController.buildCell(indexPath: IndexPath(row: 1, section: 0))
+        
+        XCTAssertEqual("testCycle", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
+        XCTAssertEqual(gray, cell.backgroundColor)
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 2, section: 0))
+        XCTAssertEqual("testPlan1", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(0, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
+        XCTAssertEqual(white, cell.backgroundColor)
+    }
+    
+    func testDidLoadEndpointEmptyPlanList() {
+        viewController.currentTestLevel = .plan
+        viewController.testPlanList.testPlanList = []
+        viewController.didLoadEndpoint(data: [], totalItems: 0)
+        XCTAssertTrue(viewController.testPlanList.testPlanList.isEmpty)
+    }
+    
+    func testDidLoadEndpointEmptyCycleList() {
+        viewController.currentTestLevel = .cycle
+        viewController.testCycleList.testCycleList = []
+        viewController.didLoadEndpoint(data: [], totalItems: 0)
+        XCTAssertTrue(viewController.testCycleList.testCycleList.isEmpty)
+    }
+    
+    func testDidLoadEndpointNilList() {
+        viewController.currentTestLevel = .plan
+        viewController.testPlanList.testPlanList = []
+        viewController.didLoadEndpoint(data: nil, totalItems: 0)
+        XCTAssertTrue(viewController.testPlanList.testPlanList.isEmpty)
+    }
+    
+    func testDidEndpointLoadWithPlanData() {
+        viewController.currentTestLevel = .plan
+        viewController.testPlanList.testPlanList = []
+        
+        var dataList: [[String : AnyObject]] = []
+        var planData: [String : AnyObject] = [:]
+        var fields: [String : AnyObject] = [:]
+        planData.updateValue(23 as AnyObject, forKey: "id")
+        planData.updateValue(1 as AnyObject, forKey: "project")
+        planData.updateValue(35 as AnyObject, forKey: "itemType")
+        fields.updateValue("testPlan" as AnyObject, forKey: "name")
+        planData.updateValue(fields as AnyObject, forKey: "fields")
+        
+        dataList.append(planData)
+        
+        viewController.didLoadEndpoint(data: dataList, totalItems: 1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+            XCTAssertEqual("testPlan", self.viewController.testPlanList.testPlanList[0].name)
+            XCTAssertEqual(23, self.viewController.testPlanList.testPlanList[0].id)
+            XCTAssertEqual(1, self.viewController.testPlanList.testPlanList[0].projectId)
+        })
+    }
+    
+    func testDidEndpointLoadWithCycleData() {
+        viewController.currentTestLevel = .cycle
+        viewController.testPlanList.testPlanList = []
+        viewController.selectedPlanIndex = 0
+        viewController.testPlanList.testPlanList.append(TestPlanModel())
+        var dataList: [[String : AnyObject]] = []
+        var cycleData: [String : AnyObject] = [:]
+        var fields: [String : AnyObject] = [:]
+        cycleData.updateValue(23 as AnyObject, forKey: "id")
+        cycleData.updateValue(1 as AnyObject, forKey: "project")
+        cycleData.updateValue(36 as AnyObject, forKey: "itemType")
+        fields.updateValue("testCycle" as AnyObject, forKey: "name")
+        fields.updateValue(planId as AnyObject, forKey: "testPlan")
+        cycleData.updateValue(fields as AnyObject, forKey: "fields")
+        
+        dataList.append(cycleData)
+        
+        viewController.didLoadEndpoint(data: dataList, totalItems: 1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+            XCTAssertEqual("testCycle", self.viewController.testPlanList.testPlanList[0].name)
+            XCTAssertEqual(23, self.viewController.testPlanList.testPlanList[0].id)
+            XCTAssertEqual(1, self.viewController.testPlanList.testPlanList[0].projectId)
+        })
     }
     
     
