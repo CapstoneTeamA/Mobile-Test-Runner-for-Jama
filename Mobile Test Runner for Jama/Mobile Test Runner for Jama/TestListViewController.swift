@@ -102,8 +102,8 @@ extension TestListViewController: EndpointDelegate {
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
                     self.totalCyclesVisable = self.testCycleList.testCycleList.count
                     self.testPlanList.testPlanList[self.selectedPlanIndex].numOfCycles = self.totalCyclesVisable
-                    //reload Data in view? self.testCycle.reloadData()
                     self.testList.reloadData()
+                    
                     //keep calling api while there are still more cycles
                     if self.testCycleList.testCycleList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
