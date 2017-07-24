@@ -10,7 +10,7 @@ import Foundation
 
 class TestCycleListModel {
     var testCycleList: [TestCycleModel] = []
-    let testCycleItemTypeId = 36//ID in the jama system for items of the type TestCycle
+    let testCycleItemTypeId = 36 //ID in the jama system for items of the type TestCycle
     
     func extractCycleList(fromData: [[String : AnyObject]], parentId: Int) {
         for cycle in fromData {
