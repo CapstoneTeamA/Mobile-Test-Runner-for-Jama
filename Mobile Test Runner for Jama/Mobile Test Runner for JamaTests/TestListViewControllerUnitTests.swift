@@ -73,9 +73,5 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(font, cell.textLabel?.font)
     }
     
-    func testBuildTestRunEndpointString() {
-        let endpointString = viewController.buildTestRunEndpointString()
-        
-        XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testruns?testCycle=6835", endpointString)
-    }
+    
  }
