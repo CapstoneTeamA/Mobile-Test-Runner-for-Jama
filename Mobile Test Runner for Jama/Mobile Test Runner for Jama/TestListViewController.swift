@@ -13,6 +13,7 @@ class TestListViewController: UIViewController {
     @IBOutlet weak var tmpProjectLabel: UILabel!
     let testPlanList: TestPlanListModel = TestPlanListModel()
     let testCycleList: TestCycleListModel = TestCycleListModel()
+    let testRunList:  TestRunListModel = TestRunListModel()
     var projectName = "" //I don't know if we need this but we might want to display it or something so I left it.
     var projectId = -1
     var testCycleId = -1
@@ -29,11 +30,7 @@ class TestListViewController: UIViewController {
     var currentTestLevel = TestLevel.plan
     var planId = -1
     
-    @IBOutlet weak var testList: UITableView!
-    @IBOutlet weak var tmpProjectLabel: UILabel!
-    let testPlanList: TestPlanListModel = TestPlanListModel()
-    let testCycleList: TestCycleListModel = TestCycleListModel()
-    let testRunList:  TestRunListModel = TestRunListModel()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
