@@ -50,7 +50,6 @@ class TestListViewController: UIViewController {
         return endpoint
     }
     
-    // TO DO: attach this action to the selected plan button
     func getCyclesForPlanOnClick() {
         self.currentTestLevel = .cycle
         let cycleEndpoint = buildTestCycleEndpointString()
@@ -67,7 +66,6 @@ class TestListViewController: UIViewController {
     @IBAction func touchedLogoutButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
     }
-
 }
 
 extension TestListViewController: EndpointDelegate {
