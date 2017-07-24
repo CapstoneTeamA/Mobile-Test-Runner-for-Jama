@@ -21,6 +21,7 @@ class TestCycleListModelUnitTests: XCTestCase {
     var projectId = 123
     var cycle1Name = "cycle1"
     var cycle2Name = "cycle2"
+    var testPlanId = 12
     var testCycleItemType = 36
     var notTestCycleItemType = 37
     var data: [[String : AnyObject]] = []
@@ -32,11 +33,13 @@ class TestCycleListModelUnitTests: XCTestCase {
         cycle1.name = cycle1Name
         cycle2.name = cycle2Name
         
+        fields1.updateValue(testPlanId as AnyObject, forKey: "testPlan")
         fields1.updateValue(cycle1Name as AnyObject, forKey: "name")
         cycle1Data.updateValue(id1 as AnyObject, forKey: "id")
         cycle1Data.updateValue(fields1 as AnyObject, forKey: "fields")
         cycle1Data.updateValue(testCycleItemType as AnyObject, forKey: "itemType")
         
+        fields2.updateValue(testPlanId as AnyObject, forKey: "testPlan")
         fields2.updateValue(cycle2Name as AnyObject, forKey: "name")
         cycle2Data.updateValue(id2 as AnyObject, forKey: "id")
         cycle2Data.updateValue(fields2 as AnyObject, forKey: "fields")
@@ -52,13 +55,19 @@ class TestCycleListModelUnitTests: XCTestCase {
     }
     
     func testExtractTestCycleFromEmptyData() {
-        cycleList.extractCycleList(fromData: [])
+        cycleList.extractCycleList(fromData: [], parentId: testPlanId)
+        
+        XCTAssertTrue(cycleList.testCycleList.isEmpty)
+    }
+    
+    func testExtractCycleListFromWrongParentData() {
+        cycleList.extractCycleList(fromData: data, parentId: testPlanId + 1)
         
         XCTAssertTrue(cycleList.testCycleList.isEmpty)
     }
     
     func testExtractCycleList() {
-        cycleList.extractCycleList(fromData: data)
+        cycleList.extractCycleList(fromData: data, parentId: testPlanId)
         
         XCTAssertEqual(cycle1.id, cycleList.testCycleList[0].id)
         XCTAssertEqual(cycle1.name, cycleList.testCycleList[0].name)
@@ -74,7 +83,7 @@ class TestCycleListModelUnitTests: XCTestCase {
         data.append(cycle1Data)
         data.append(cycle2Data)
         
-        cycleList.extractCycleList(fromData: data)
+        cycleList.extractCycleList(fromData: data, parentId: testPlanId)
         
         XCTAssertTrue(cycleList.testCycleList.isEmpty)
     }

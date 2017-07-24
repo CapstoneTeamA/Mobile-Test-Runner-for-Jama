@@ -10,10 +10,11 @@ import Foundation
 
 class TestPlanListModel {
     var testPlanList: [TestPlanModel] = []
+    let testPlanItemTypeId = 35 //Id in the jama system for items of type TestPlan
     
     func extractPlanList(fromData: [[String : AnyObject]]) {
         for plan in fromData {
-            if plan["itemType"] as! Int != 35 {
+            if plan["itemType"] as! Int != testPlanItemTypeId {
                 break
             }
             let tmpPlan = TestPlanModel()
