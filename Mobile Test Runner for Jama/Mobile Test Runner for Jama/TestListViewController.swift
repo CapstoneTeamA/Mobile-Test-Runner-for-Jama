@@ -9,6 +9,10 @@
 import UIKit
 
 class TestListViewController: UIViewController {
+    @IBOutlet weak var testList: UITableView!
+    @IBOutlet weak var tmpProjectLabel: UILabel!
+    let testPlanList: TestPlanListModel = TestPlanListModel()
+    let testCycleList: TestCycleListModel = TestCycleListModel()
     var projectName = "" //I don't know if we need this but we might want to display it or something so I left it.
     var projectId = -1
     var instance = ""
@@ -22,20 +26,11 @@ class TestListViewController: UIViewController {
     }
     var currentTestLevel = TestLevel.plan
     var planId = -1
-    
-    @IBOutlet weak var testList: UITableView!
-    @IBOutlet weak var tmpProjectLabel: UILabel!
-    let testPlanList: TestPlanListModel = TestPlanListModel()
-    let testCycleList: TestCycleListModel = TestCycleListModel()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.currentTestLevel = .plan
-
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
