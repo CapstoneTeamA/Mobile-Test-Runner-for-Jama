@@ -20,7 +20,8 @@ class TestListViewController: UIViewController {
     var instance = ""
     var username = ""
     var password = ""
-    var totalCyclesVisable = 0;
+    var totalCyclesVisible = 0
+    var totalRunsVisible = 0
     var selectedPlanIndex = Int.max
     var selectedCycleIndex = Int.max
     var testRunDescription = ""
@@ -69,8 +70,6 @@ class TestListViewController: UIViewController {
     }
     
     func getRunsForCycleOnClick(){
-        // TODO: get test cycle id for chosen testplan
-        testCycleId = 6838
         self.currentTestLevel = .run
         let runEndpoint = buildTestRunEndpointString()
         RestHelper.hitEndpoint(atEndpointString: runEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
@@ -123,8 +122,8 @@ extension TestListViewController: EndpointDelegate {
                         return
                     }
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
-                    self.totalCyclesVisable = self.testCycleList.testCycleList.count
-                    self.testPlanList.testPlanList[self.selectedPlanIndex].numOfCycles = self.totalCyclesVisable
+                    self.totalCyclesVisible = self.testCycleList.testCycleList.count
+                    self.testPlanList.testPlanList[self.selectedPlanIndex].numOfCycles = self.totalCyclesVisible
                     self.testList.reloadData()
                     
                     //keep calling api while there are still more cycles
@@ -134,17 +133,14 @@ extension TestListViewController: EndpointDelegate {
                         
                 case .run:
                     let tmpList = TestRunListModel()
-                    tmpList.extractRunList(fromData: unwrappedData)
+                    tmpList.extractRunList(fromData: unwrappedData, parentId: self.testCycleId)
                     if tmpList.testRunList.isEmpty {
-                        //TODO: display message for no test runs
                         return
                     }
                     self.testRunList.testRunList.append(contentsOf: tmpList.testRunList)
-                    
-                    //TODO: once the testRuns view is made we need to reload the data in the view
-                    //reload Data in view?
-                    
-                    //keep calling api while there are still more cycles
+                    self.totalRunsVisible = self.testRunList.testRunList.count
+                    self.testList.reloadData()
+                                       //keep calling api while there are still more cycles
                     if self.testRunList.testRunList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
@@ -177,12 +173,25 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             testList.reloadData()
             return
         }
+        //TODO
+        //Unselect Cycle
+        if indexPath.row - selectedPlanIndex - 1 == selectedCycleIndex {
+            testRunList.testRunList = []
+            selectedCycleIndex = Int.max
+            testList.reloadData()
+        }
         //tapped on a cycle do something
-        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisable {
+        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisible {
+            selectedCycleIndex = indexPath.row <= selectedCycleIndex ? indexPath.row - selectedPlanIndex - 1 : indexPath.row - selectedPlanIndex - 1 // TODO: should be - totalRunsVisable add that in after we view the runs. we are not currently loading in the runs
+            testRunList.testRunList = []
+            testCycleId = testCycleList.testCycleList[selectedCycleIndex].id
+            getRunsForCycleOnClick()
+            
+            
             return
         }
         //TODO will need to subtract totalRunsVisable also
-        selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - totalCyclesVisable
+        selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - totalCyclesVisible
         testCycleList.testCycleList = []
         planId = testPlanList.testPlanList[selectedPlanIndex].id
         getCyclesForPlanOnClick()
@@ -192,7 +201,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         //TODO Need to check if the cell needs to be a test run
         
         //This needs to be a testCycle cell
-        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisable {
+        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisible {
             let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestCycleCell")
             cell.textLabel?.text = self.testCycleList.testCycleList[indexPath.row - self.selectedPlanIndex - 1].name
             cell.textLabel?.textAlignment = .left
