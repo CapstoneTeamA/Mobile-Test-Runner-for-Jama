@@ -182,7 +182,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         //tapped on a cycle do something
         if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisible {
-            selectedCycleIndex = indexPath.row <= selectedCycleIndex ? indexPath.row - selectedPlanIndex - 1 : indexPath.row - selectedPlanIndex - 1 // TODO: should be - totalRunsVisable add that in after we view the runs. we are not currently loading in the runs
+            selectedCycleIndex = indexPath.row <= selectedCycleIndex ? indexPath.row - selectedPlanIndex - 1 : indexPath.row - selectedPlanIndex - 1 // TODO: should be - totalRunsVisible add that in after we view the runs. we are not currently loading in the runs
             testRunList.testRunList = []
             testCycleId = testCycleList.testCycleList[selectedCycleIndex].id
             getRunsForCycleOnClick()
@@ -190,7 +190,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             
             return
         }
-        //TODO will need to subtract totalRunsVisable also
+        //TODO will need to subtract totalRunsVisible also
         selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - totalCyclesVisible
         testCycleList.testCycleList = []
         planId = testPlanList.testPlanList[selectedPlanIndex].id

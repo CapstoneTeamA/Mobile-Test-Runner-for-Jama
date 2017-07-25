@@ -39,7 +39,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         
         testCycle.id = 123
         testCycle.name = "testCycle"
-        viewController.totalCyclesVisable = 1
+        viewController.totalCyclesVisible = 1
         viewController.selectedPlanIndex = 1
         viewController.testPlanList.testPlanList.append(testPlan1)
         viewController.testPlanList.testPlanList.append(testPlan2)
