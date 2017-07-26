@@ -208,8 +208,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
             cell.backgroundColor = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
             cell.indentationLevel = 1
-            cell.indentationWidth = 30.0
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            cell.indentationWidth = 15.0
             return cell
         }
         //Otherwise just the cell needs to be a test plan cell
@@ -219,7 +218,6 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.textAlignment = .left
         cell.backgroundColor = UIColor.white
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
-        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return cell
     }
 
