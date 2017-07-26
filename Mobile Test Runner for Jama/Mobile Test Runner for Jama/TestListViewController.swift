@@ -140,7 +140,7 @@ extension TestListViewController: EndpointDelegate {
                     self.testRunList.testRunList.append(contentsOf: tmpList.testRunList)
                     self.totalRunsVisible = self.testRunList.testRunList.count
                     self.testList.reloadData()
-                                       //keep calling api while there are still more cycles
+                                       //keep calling api while there are still more runs
                     if self.testRunList.testRunList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
