@@ -21,8 +21,8 @@ class TestListViewControllerUnitTests: XCTestCase {
         _ = viewController.view
         viewController.projectId = projectId
         viewController.instance = instance
-        viewController.testCycleId = testCycleId
-        viewController.planId = planId
+        viewController.selectedTestCycleId = testCycleId
+        viewController.selectedPlanId = planId
         
         let testPlan1 = TestPlanModel()
         let testPlan2 = TestPlanModel()
@@ -56,7 +56,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     }
     
     func testBuildTestCycleEndpointString() {
-        viewController.planId = 45
+        viewController.selectedPlanId = 45
         let endpointString = viewController.buildTestCycleEndpointString()
 
         XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testplans/45/testcycles", endpointString)

@@ -15,7 +15,8 @@ class TestListViewController: UIViewController {
     let testCycleList: TestCycleListModel = TestCycleListModel()
     let testRunList:  TestRunListModel = TestRunListModel()
     var projectId = -1
-    var testCycleId = -1
+    var selectedPlanId = -1
+    var selectedTestCycleId = -1
     let largeNumber = 1000000
     var instance = ""
     var username = ""
@@ -23,12 +24,12 @@ class TestListViewController: UIViewController {
     var selectedPlanIndex = 1000000
     var selectedCycleIndex = 1000000
     var selectedCycleUIIndex = -1
-    var testRunDescription = ""
+    var currentTestLevel = TestLevel.plan
+
     enum TestLevel {
         case plan, cycle, run
     }
-    var currentTestLevel = TestLevel.plan
-    var planId = -1
+
     
     
 
@@ -64,7 +65,7 @@ class TestListViewController: UIViewController {
     func buildTestCycleEndpointString() -> String {
         var cycleEndpoint = RestHelper.getEndpointString(method: "Get", endpoint: "TestCycles")
         cycleEndpoint = "https://" + instance + "." + cycleEndpoint
-        cycleEndpoint = cycleEndpoint.replacingOccurrences(of: "{planId}", with: "\(planId)")
+        cycleEndpoint = cycleEndpoint.replacingOccurrences(of: "{planId}", with: "\(selectedPlanId)")
         return cycleEndpoint
     }
     
@@ -77,7 +78,7 @@ class TestListViewController: UIViewController {
     func buildTestRunEndpointString() -> String {
         var runEndpoint = RestHelper.getEndpointString(method: "Get", endpoint: "TestRuns")
         runEndpoint = "https://" + instance + "." + runEndpoint
-        runEndpoint = runEndpoint.replacingOccurrences(of: "{testCycleId}", with: "\(testCycleId)")
+        runEndpoint = runEndpoint.replacingOccurrences(of: "{testCycleId}", with: "\(selectedTestCycleId)")
         return runEndpoint
     }
 
@@ -116,7 +117,7 @@ extension TestListViewController: EndpointDelegate {
                 
                 case .cycle:
                     let tmpList = TestCycleListModel()
-                    tmpList.extractCycleList(fromData: unwrappedData, parentId: self.planId)
+                    tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
                     if tmpList.testCycleList.isEmpty {
                         return
                     }
@@ -130,7 +131,7 @@ extension TestListViewController: EndpointDelegate {
                         
                 case .run:
                     let tmpList = TestRunListModel()
-                    tmpList.extractRunList(fromData: unwrappedData, parentId: self.testCycleId)
+                    tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
                     if tmpList.testRunList.isEmpty {
                         return
                     }
@@ -236,7 +237,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         
         //Empty out the previously selected test cycle's run list
         testRunList.testRunList = []
-        testCycleId = testCycleList.testCycleList[selectedCycleIndex].id
+        selectedTestCycleId = testCycleList.testCycleList[selectedCycleIndex].id
         getRunsForCycleOnClick()
     }
     
@@ -249,7 +250,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         //Empty out the previous test plan's cycle list and run list
         testCycleList.testCycleList = []
         testRunList.testRunList = []
-        planId = testPlanList.testPlanList[selectedPlanIndex].id
+        selectedPlanId = testPlanList.testPlanList[selectedPlanIndex].id
         getCyclesForPlanOnClick()
     }
     
