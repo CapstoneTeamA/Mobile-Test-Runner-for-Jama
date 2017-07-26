@@ -13,19 +13,25 @@ class TestListViewController: UIViewController {
     @IBOutlet weak var tmpProjectLabel: UILabel!
     let testPlanList: TestPlanListModel = TestPlanListModel()
     let testCycleList: TestCycleListModel = TestCycleListModel()
+    let testRunList:  TestRunListModel = TestRunListModel()
     var projectName = "" //I don't know if we need this but we might want to display it or something so I left it.
     var projectId = -1
+    var testCycleId = -1
     var instance = ""
     var username = ""
     var password = ""
-    var totalCyclesVisable = 0;
+    var totalCyclesVisible = 0
+    var totalRunsVisible = 0
     var selectedPlanIndex = Int.max
     var selectedCycleIndex = Int.max
+    var testRunDescription = ""
     enum TestLevel {
         case plan, cycle, run
     }
     var currentTestLevel = TestLevel.plan
     var planId = -1
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +68,22 @@ class TestListViewController: UIViewController {
         cycleEndpoint = cycleEndpoint.replacingOccurrences(of: "{planId}", with: "\(planId)")
         return cycleEndpoint
     }
+    
+    func getRunsForCycleOnClick(){
+        self.currentTestLevel = .run
+        let runEndpoint = buildTestRunEndpointString()
+        RestHelper.hitEndpoint(atEndpointString: runEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+    }
+    
+    func buildTestRunEndpointString() -> String {
+        var runEndpoint = RestHelper.getEndpointString(method: "Get", endpoint: "TestRuns")
+        runEndpoint = "https://" + instance + "." + runEndpoint
+        runEndpoint = runEndpoint.replacingOccurrences(of: "{testCycleId}", with: "\(testCycleId)")
+        return runEndpoint
+    }
+
+
+
 
     @IBAction func touchedLogoutButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
@@ -100,8 +122,8 @@ extension TestListViewController: EndpointDelegate {
                         return
                     }
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
-                    self.totalCyclesVisable = self.testCycleList.testCycleList.count
-                    self.testPlanList.testPlanList[self.selectedPlanIndex].numOfCycles = self.totalCyclesVisable
+                    self.totalCyclesVisible = self.testCycleList.testCycleList.count
+                    self.testPlanList.testPlanList[self.selectedPlanIndex].numOfCycles = self.totalCyclesVisible
                     self.testList.reloadData()
                     
                     //keep calling api while there are still more cycles
@@ -110,7 +132,18 @@ extension TestListViewController: EndpointDelegate {
                     }
                         
                 case .run:
-                    let _ = 0  //TO DO: Add call for test runs here and remove this line
+                    let tmpList = TestRunListModel()
+                    tmpList.extractRunList(fromData: unwrappedData, parentId: self.testCycleId)
+                    if tmpList.testRunList.isEmpty {
+                        return
+                    }
+                    self.testRunList.testRunList.append(contentsOf: tmpList.testRunList)
+                    self.totalRunsVisible = self.testRunList.testRunList.count
+                    self.testList.reloadData()
+                                       //keep calling api while there are still more runs
+                    if self.testRunList.testRunList.count < totalItems {
+                        RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
+                    }
 
             }
         }
@@ -140,12 +173,25 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             testList.reloadData()
             return
         }
+        //TODO
+        //Unselect Cycle
+        if indexPath.row - selectedPlanIndex - 1 == selectedCycleIndex {
+            testRunList.testRunList = []
+            selectedCycleIndex = Int.max
+            testList.reloadData()
+        }
         //tapped on a cycle do something
-        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisable {
+        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisible {
+            selectedCycleIndex = indexPath.row <= selectedCycleIndex ? indexPath.row - selectedPlanIndex - 1 : indexPath.row - selectedPlanIndex - 1 // TODO: should be - totalRunsVisible add that in after we view the runs. we are not currently loading in the runs
+            testRunList.testRunList = []
+            testCycleId = testCycleList.testCycleList[selectedCycleIndex].id
+            getRunsForCycleOnClick()
+            
+            
             return
         }
-        //TODO will need to subtract totalRunsVisable also
-        selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - totalCyclesVisable
+        //TODO will need to subtract totalRunsVisible also
+        selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - totalCyclesVisible
         testCycleList.testCycleList = []
         planId = testPlanList.testPlanList[selectedPlanIndex].id
         getCyclesForPlanOnClick()
@@ -155,7 +201,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         //TODO Need to check if the cell needs to be a test run
         
         //This needs to be a testCycle cell
-        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisable {
+        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisible {
             let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestCycleCell")
             cell.textLabel?.text = self.testCycleList.testCycleList[indexPath.row - self.selectedPlanIndex - 1].name
             cell.textLabel?.textAlignment = .left

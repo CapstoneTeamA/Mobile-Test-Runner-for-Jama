@@ -11,6 +11,7 @@ import XCTest
 class TestListViewControllerUnitTests: XCTestCase {
     let projectId = 23314
     let planId = 31132
+    let testCycleId = 6835
     var viewController : TestListViewController!
     let instance = "test-instance"
     
@@ -20,6 +21,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         _ = viewController.view
         viewController.projectId = projectId
         viewController.instance = instance
+        viewController.testCycleId = testCycleId
         viewController.planId = planId
         
         let testPlan1 = TestPlanModel()
@@ -37,7 +39,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         
         testCycle.id = 123
         testCycle.name = "testCycle"
-        viewController.totalCyclesVisable = 1
+        viewController.totalCyclesVisible = 1
         viewController.selectedPlanIndex = 1
         viewController.testPlanList.testPlanList.append(testPlan1)
         viewController.testPlanList.testPlanList.append(testPlan2)

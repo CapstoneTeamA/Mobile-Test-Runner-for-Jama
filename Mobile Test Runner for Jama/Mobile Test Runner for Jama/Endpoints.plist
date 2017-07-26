@@ -10,6 +10,8 @@
 	<dict/>
 	<key>Get</key>
 	<dict>
+		<key>TestRuns</key>
+		<string>jamacloud.com/rest/latest/testruns?testCycle={testCycleId}</string>
 		<key>TestCycles</key>
 		<string>jamacloud.com/rest/latest/testplans/{planId}/testcycles</string>
 		<key>TestPlans</key>
