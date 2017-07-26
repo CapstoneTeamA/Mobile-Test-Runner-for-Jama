@@ -14,16 +14,15 @@ class TestListViewController: UIViewController {
     let testPlanList: TestPlanListModel = TestPlanListModel()
     let testCycleList: TestCycleListModel = TestCycleListModel()
     let testRunList:  TestRunListModel = TestRunListModel()
-    var projectName = "" //I don't know if we need this but we might want to display it or something so I left it.
     var projectId = -1
     var testCycleId = -1
+    let largeNumber = 1000000
     var instance = ""
     var username = ""
     var password = ""
-    var totalCyclesVisible = 0
-    var totalRunsVisible = 0
-    var selectedPlanIndex = Int.max
-    var selectedCycleIndex = Int.max
+    var selectedPlanIndex = 1000000
+    var selectedCycleIndex = 1000000
+    var selectedCycleUIIndex = -1
     var testRunDescription = ""
     enum TestLevel {
         case plan, cycle, run
@@ -122,8 +121,6 @@ extension TestListViewController: EndpointDelegate {
                         return
                     }
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
-                    self.totalCyclesVisible = self.testCycleList.testCycleList.count
-                    self.testPlanList.testPlanList[self.selectedPlanIndex].numOfCycles = self.totalCyclesVisible
                     self.testList.reloadData()
                     
                     //keep calling api while there are still more cycles
@@ -138,7 +135,6 @@ extension TestListViewController: EndpointDelegate {
                         return
                     }
                     self.testRunList.testRunList.append(contentsOf: tmpList.testRunList)
-                    self.totalRunsVisible = self.testRunList.testRunList.count
                     self.testList.reloadData()
                                        //keep calling api while there are still more runs
                     if self.testRunList.testRunList.count < totalItems {
@@ -158,7 +154,7 @@ extension TestListViewController: EndpointDelegate {
 extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testPlanList.testPlanList.count + testCycleList.testCycleList.count
+        return testPlanList.testPlanList.count + testCycleList.testCycleList.count + testRunList.testRunList.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
@@ -166,55 +162,140 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //unselect item
-        if indexPath.row == selectedPlanIndex {
-            selectedPlanIndex = Int.max
+        //If we unselect a test plan or cycle return
+        if unselectTestPlan(indexPath: indexPath) || unselectTestCycle(indexPath: indexPath) {
+            return
+        }
+        //TODO implement what happens when the user taps a test run
+        if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TestRunCell" {
+            return
+        }
+        //If the user taps a test cycle in the table
+        if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TestCycleCell" {
+            didTapTestCycleCell(indexPath: indexPath)
+            return
+        }
+        didTapTestPlanCell(indexPath: indexPath)
+    }
+    
+    func buildCell(indexPath: IndexPath) -> UITableViewCell {
+        //If the cell needs to be a testRun cell
+        if indexPath.row > selectedCycleUIIndex && indexPath.row <= selectedCycleUIIndex + testRunList.testRunList.count {
+            return buildTestRunCell(indexPath: indexPath)
+        }
+        
+        //If the cell needs to be a testCycle cell
+        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + testCycleList.testCycleList.count + testRunList.testRunList.count {
+            return buildTestCycleCell(indexPath: indexPath)
+        }
+
+        //If the cell needs to be a testPlan cell
+        return buildTestPlanCell(indexPath: indexPath)
+    }
+    
+    func unselectTestPlan(indexPath: IndexPath) -> Bool {
+        //If the user taps the plan that was already selected, empty out the test run and test cycle lists deselect the selectedCycleIndex, selectedCycleUIIndex, and selectedPlanIndex and reload the table
+        if selectedPlanIndex == indexPath.row {
+            selectedPlanIndex = largeNumber
+            selectedCycleIndex = largeNumber
+            selectedCycleUIIndex = largeNumber
             testCycleList.testCycleList = []
-            testList.reloadData()
-            return
-        }
-        //TODO
-        //Unselect Cycle
-        if indexPath.row - selectedPlanIndex - 1 == selectedCycleIndex {
             testRunList.testRunList = []
-            selectedCycleIndex = Int.max
             testList.reloadData()
+            return true
         }
-        //tapped on a cycle do something
-        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisible {
-            selectedCycleIndex = indexPath.row <= selectedCycleIndex ? indexPath.row - selectedPlanIndex - 1 : indexPath.row - selectedPlanIndex - 1 // TODO: should be - totalRunsVisible add that in after we view the runs. we are not currently loading in the runs
+        return false
+    }
+    
+    func unselectTestCycle(indexPath: IndexPath) -> Bool {
+        //If the user taps the cycle that was already selected, empty out the test run list and deselect the selectedCycleIndex and selectedCycleUIIndex and reload the table
+        if selectedCycleUIIndex == indexPath.row {
+            selectedCycleUIIndex = largeNumber
+            selectedCycleIndex = largeNumber
             testRunList.testRunList = []
-            testCycleId = testCycleList.testCycleList[selectedCycleIndex].id
-            getRunsForCycleOnClick()
-            
-            
-            return
+            testList.reloadData()
+            return true
         }
-        //TODO will need to subtract totalRunsVisible also
-        selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - totalCyclesVisible
+        return false
+    }
+    
+    func didTapTestCycleCell(indexPath: IndexPath) {
+        //Set the selectedCycleIndex based on if the cycle is before or after the currently showing test runs
+        if indexPath.row < selectedCycleUIIndex {
+            selectedCycleIndex = indexPath.row - selectedPlanIndex - 1
+        } else {
+            selectedCycleIndex = indexPath.row - selectedPlanIndex - testRunList.testRunList.count - 1
+        }
+        
+        //Set the selectedCycleUIIndex based on if the selected cycle is before or after the showing test runs
+        if indexPath.row <= selectedCycleUIIndex {
+            selectedCycleUIIndex = indexPath.row
+        } else {
+            selectedCycleUIIndex = indexPath.row - testRunList.testRunList.count
+        }
+        
+        //Empty out the previously selected test cycle's run list
+        testRunList.testRunList = []
+        testCycleId = testCycleList.testCycleList[selectedCycleIndex].id
+        getRunsForCycleOnClick()
+    }
+    
+    func didTapTestPlanCell(indexPath: IndexPath) {
+        //The user tapped a test plan, deselect the selectedCycleIndex and selectedCycleUIIndex, then set the new selectedPlanIndex
+        selectedCycleUIIndex = largeNumber
+        selectedCycleIndex = largeNumber
+        selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - testCycleList.testCycleList.count - testRunList.testRunList.count
+        
+        //Empty out the previous test plan's cycle list and run list
         testCycleList.testCycleList = []
+        testRunList.testRunList = []
         planId = testPlanList.testPlanList[selectedPlanIndex].id
         getCyclesForPlanOnClick()
     }
     
-    func buildCell(indexPath: IndexPath) -> UITableViewCell {
-        //TODO Need to check if the cell needs to be a test run
-        
-        //This needs to be a testCycle cell
-        if indexPath.row > selectedPlanIndex && indexPath.row <= selectedPlanIndex + totalCyclesVisible {
-            let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestCycleCell")
-            cell.textLabel?.text = self.testCycleList.testCycleList[indexPath.row - self.selectedPlanIndex - 1].name
-            cell.textLabel?.textAlignment = .left
-            cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
-            cell.backgroundColor = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
-            cell.indentationLevel = 1
-            cell.indentationWidth = 15.0
-            return cell
+    func buildTestRunCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestRunCell")
+        let currentRunIndex = indexPath.row - selectedCycleUIIndex - 1
+        cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
+        cell.textLabel?.textAlignment = .left
+        cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
+        cell.backgroundColor = UIColor.white
+        cell.indentationLevel = 1
+        cell.accessoryType = .disclosureIndicator
+        cell.indentationWidth = 15.0
+        return cell
+    }
+    
+    func buildTestCycleCell(indexPath: IndexPath) -> UITableViewCell {
+        //Find the index into the testCycleList to get the cycle name for the current cell
+        var currentCycleIndex = largeNumber
+        if indexPath.row <= selectedCycleUIIndex {
+            currentCycleIndex = indexPath.row - selectedPlanIndex - 1
+        } else {
+            currentCycleIndex = indexPath.row - selectedPlanIndex - testRunList.testRunList.count - 1
         }
-        //Otherwise just the cell needs to be a test plan cell
+        
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestCycleCell")
+        cell.textLabel?.text = self.testCycleList.testCycleList[currentCycleIndex].name
+        cell.textLabel?.textAlignment = .left
+        cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
+        cell.backgroundColor = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+        cell.indentationLevel = 1
+        cell.indentationWidth = 15.0
+        return cell
+    }
+    
+    func buildTestPlanCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestPlanCell")
-        let testPlanIndex = indexPath.row > selectedPlanIndex ? indexPath.row - testPlanList.testPlanList[selectedPlanIndex].numOfCycles : indexPath.row
-        cell.textLabel?.text = testPlanList.testPlanList[testPlanIndex].name
+        
+        //Find the index into the testPlanList to get the plan name
+        var currentPlanIndex = largeNumber
+        if indexPath.row <= selectedPlanIndex {
+            currentPlanIndex = indexPath.row
+        } else {
+            currentPlanIndex = indexPath.row - testCycleList.testCycleList.count - testRunList.testRunList.count
+        }
+        cell.textLabel?.text = testPlanList.testPlanList[currentPlanIndex].name
         cell.textLabel?.textAlignment = .left
         cell.backgroundColor = UIColor.white
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)

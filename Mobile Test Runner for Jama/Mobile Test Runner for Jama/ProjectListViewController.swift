@@ -150,7 +150,6 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let testViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestList") as! TestListViewController
 
-        testViewController.projectName = projectList.projectList[indexPath.row].name
         testViewController.projectId = projectList.projectList[indexPath.row].id
         testViewController.username = username
         testViewController.password = password
