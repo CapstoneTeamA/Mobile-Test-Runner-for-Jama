@@ -103,6 +103,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
         XCTAssertEqual(white, cell.backgroundColor)
         
+        viewController.selectedPlanIndex = 1
         cell = viewController.buildCell(indexPath: IndexPath(row: 1, section: 0))
         
         XCTAssertEqual("testPlan2", cell.textLabel?.text)
@@ -110,7 +111,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(0, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
-        XCTAssertEqual(white, cell.backgroundColor)
+        XCTAssertEqual(UIColor(colorLiteralRed: 0x99/0xFF, green: 0xCC/0xFF, blue: 0x00/0xFF, alpha: 1), cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 2, section: 0))
         
@@ -139,6 +140,18 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
         XCTAssertEqual(white, cell.backgroundColor)
+        
+        
+        viewController.selectedPlanIndex = 0
+        viewController.selectedCycleUIIndex = 1
+        cell = viewController.buildCell(indexPath: IndexPath(row: 1, section: 0))
+        
+        XCTAssertEqual("testCycle", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
+        XCTAssertEqual(UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1), cell.backgroundColor)
     }
     
     func testDidLoadEndpointEmptyPlanList() {
