@@ -14,6 +14,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     let testCycleId = 6835
     var viewController : TestListViewController!
     let instance = "test-instance"
+    let font = UIFont(name: "Helvetica Neue", size: 20.0)
     
     override func setUp() {
         super.setUp()
@@ -21,29 +22,43 @@ class TestListViewControllerUnitTests: XCTestCase {
         _ = viewController.view
         viewController.projectId = projectId
         viewController.instance = instance
-        viewController.testCycleId = testCycleId
-        viewController.planId = planId
+        viewController.selectedTestCycleId = testCycleId
+        viewController.selectedPlanId = planId
         
         let testPlan1 = TestPlanModel()
         let testPlan2 = TestPlanModel()
-        let testCycle = TestCycleModel()
+        let testCycle1 = TestCycleModel()
+        let testCycle2 = TestCycleModel()
+        let testRun1 = TestRunModel()
+        let testRun2 = TestRunModel()
         
         testPlan1.id = 23
         testPlan1.name = "testPlan1"
         testPlan1.projectId = 2
-        testPlan1.numOfCycles = 0
+
         testPlan2.id = 31
         testPlan2.name = "testPlan2"
         testPlan2.projectId = 2
-        testPlan2.numOfCycles = 1
+        testCycle1.id = 123
+        testCycle1.name = "testCycle1"
         
-        testCycle.id = 123
-        testCycle.name = "testCycle"
-        viewController.totalCyclesVisible = 1
+        testCycle2.id = 124
+        testCycle2.name = "testCycle2"
+        
+        testRun1.id = 2323
+        testRun1.name = "testRun1"
+        
+        testRun2.id = 2324
+        testRun2.name = "testRun2"
+        
         viewController.selectedPlanIndex = 1
         viewController.testPlanList.testPlanList.append(testPlan1)
         viewController.testPlanList.testPlanList.append(testPlan2)
-        viewController.testCycleList.testCycleList.append(testCycle)
+        viewController.testCycleList.testCycleList.append(testCycle1)
+        viewController.testCycleList.testCycleList.append(testCycle2)
+        viewController.testRunList.testRunList.append(testRun1)
+        viewController.testRunList.testRunList.append(testRun2)
+        
     }
     
     override func tearDown() {
@@ -58,10 +73,16 @@ class TestListViewControllerUnitTests: XCTestCase {
     }
     
     func testBuildTestCycleEndpointString() {
-        viewController.planId = 45
+        viewController.selectedPlanId = 45
         let endpointString = viewController.buildTestCycleEndpointString()
 
         XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testplans/45/testcycles", endpointString)
+    }
+    
+    func testBuildTestRunEndpointString() {
+        viewController.selectedTestCycleId = 23
+        let endpointString = viewController.buildTestRunEndpointString()
+        XCTAssertEqual("https://test-instance.jamacloud.com/rest/latest/testruns?testCycle=23", endpointString)
     }
     
     func testComparePlan() {
@@ -92,10 +113,15 @@ class TestListViewControllerUnitTests: XCTestCase {
     }
     
     func testBuildCell() {
-
-        let font = UIFont(name: "Helvetica Neue", size: 20.0)
         let white = UIColor.white
         let gray = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+        let selectedPlanColor = UIColor(colorLiteralRed: 0x99/0xFF, green: 0xCC/0xFF, blue: 0x00, alpha: 1)
+        let selectedCycleColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+        
+      
+        viewController.selectedPlanIndex = 1
+        viewController.selectedCycleIndex = 1
+        viewController.selectedCycleTableViewIndex = 3
         var cell = viewController.buildCell(indexPath: IndexPath(row: 0, section: 0))
         
         XCTAssertEqual("testPlan1", cell.textLabel?.text)
@@ -112,35 +138,112 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(0, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
+        XCTAssertEqual(selectedPlanColor, cell.backgroundColor)
+        
+
+        cell = viewController.buildCell(indexPath: IndexPath(row: 2, section: 0))
+        
+        XCTAssertEqual("testCycle1", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
+        XCTAssertEqual(gray, cell.backgroundColor)
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 3, section: 0))
+        
+        XCTAssertEqual("testCycle2", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
+        XCTAssertEqual(selectedCycleColor, cell.backgroundColor)
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 4, section: 0))
+        XCTAssertEqual("1. testRun1", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
         XCTAssertEqual(white, cell.backgroundColor)
         
-        cell = viewController.buildCell(indexPath: IndexPath(row: 2, section: 0))
-        
-        XCTAssertEqual("testCycle", cell.textLabel?.text)
+        cell = viewController.buildCell(indexPath: IndexPath(row: 5, section: 0))
+        XCTAssertEqual("2. testRun2", cell.textLabel?.text)
         XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
-        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
-        XCTAssertEqual(gray, cell.backgroundColor)
+        XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
+        XCTAssertEqual(white, cell.backgroundColor)
         
-        viewController.testPlanList.testPlanList = viewController.testPlanList.testPlanList.reversed()
+        
         viewController.selectedPlanIndex = 0
-        cell = viewController.buildCell(indexPath: IndexPath(row: 1, section: 0))
+        viewController.selectedCycleIndex = 1
+        viewController.selectedCycleTableViewIndex = 2
         
-        XCTAssertEqual("testCycle", cell.textLabel?.text)
-        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
-        XCTAssertEqual(1, cell.indentationLevel)
-        XCTAssertEqual(font, cell.textLabel?.font)
-        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
-        XCTAssertEqual(gray, cell.backgroundColor)
+        cell = viewController.buildCell(indexPath: IndexPath(row: 0, section: 0))
         
-        cell = viewController.buildCell(indexPath: IndexPath(row: 2, section: 0))
         XCTAssertEqual("testPlan1", cell.textLabel?.text)
         XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
         XCTAssertEqual(0, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
+        XCTAssertEqual(selectedPlanColor, cell.backgroundColor)
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 1, section: 0))
+        
+        XCTAssertEqual("testCycle1", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
+        XCTAssertEqual(gray, cell.backgroundColor)
+        
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 2, section: 0))
+        
+        XCTAssertEqual("testCycle2", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
+        XCTAssertEqual(selectedCycleColor, cell.backgroundColor)
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 3, section: 0))
+        
+        XCTAssertEqual("1. testRun1", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
         XCTAssertEqual(white, cell.backgroundColor)
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 4, section: 0))
+        XCTAssertEqual("2. testRun2", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
+        XCTAssertEqual(white, cell.backgroundColor)
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 5, section: 0))
+        XCTAssertEqual("testPlan2", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(0, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
+        XCTAssertEqual(white, cell.backgroundColor)
+        
+        viewController.selectedCycleIndex = 0
+        viewController.selectedCycleTableViewIndex = 1
+        viewController.selectedPlanIndex = 0
+        cell = viewController.buildCell(indexPath: IndexPath(row: 4, section: 0))
+        
+        XCTAssertEqual("testCycle2", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
+        XCTAssertEqual(gray, cell.backgroundColor)
     }
     
     func testDidLoadEndpointEmptyPlanList() {
@@ -157,11 +260,28 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertTrue(viewController.testCycleList.testCycleList.isEmpty)
     }
     
+    func testDidLoadEndpointEmptyRunList() {
+        viewController.currentTestLevel = .run
+        viewController.testRunList.testRunList = []
+        viewController.didLoadEndpoint(data: [], totalItems: 0)
+        XCTAssertTrue(viewController.testRunList.testRunList.isEmpty)
+    }
+    
     func testDidLoadEndpointNilList() {
         viewController.currentTestLevel = .plan
         viewController.testPlanList.testPlanList = []
         viewController.didLoadEndpoint(data: nil, totalItems: 0)
         XCTAssertTrue(viewController.testPlanList.testPlanList.isEmpty)
+        
+        viewController.currentTestLevel = .cycle
+        viewController.testCycleList.testCycleList = []
+        viewController.didLoadEndpoint(data: nil, totalItems: 0)
+        XCTAssertTrue(viewController.testCycleList.testCycleList.isEmpty)
+        
+        viewController.currentTestLevel = .run
+        viewController.testRunList.testRunList = []
+        viewController.didLoadEndpoint(data: nil, totalItems: 0)
+        XCTAssertTrue(viewController.testRunList.testRunList.isEmpty)
     }
     
     func testDidEndpointLoadWithPlanData() {
@@ -187,7 +307,10 @@ class TestListViewControllerUnitTests: XCTestCase {
         })
     }
     
-    func testDidEndpointLoadWithCycleData() {
+    func testDidLoadEndpointWithCycleData() {
+        let cycleId = 23
+        let projId = 1
+        let jamaItemTypeId = 36
         viewController.currentTestLevel = .cycle
         viewController.testPlanList.testPlanList = []
         viewController.selectedPlanIndex = 0
@@ -195,20 +318,166 @@ class TestListViewControllerUnitTests: XCTestCase {
         var dataList: [[String : AnyObject]] = []
         var cycleData: [String : AnyObject] = [:]
         var fields: [String : AnyObject] = [:]
-        cycleData.updateValue(23 as AnyObject, forKey: "id")
-        cycleData.updateValue(1 as AnyObject, forKey: "project")
-        cycleData.updateValue(36 as AnyObject, forKey: "itemType")
-        fields.updateValue("testCycle" as AnyObject, forKey: "name")
+        cycleData.updateValue(cycleId as AnyObject, forKey: "id")
+        cycleData.updateValue(projId as AnyObject, forKey: "project")
+        cycleData.updateValue(jamaItemTypeId as AnyObject, forKey: "itemType")
+        fields.updateValue("testCycle1" as AnyObject, forKey: "name")
         fields.updateValue(planId as AnyObject, forKey: "testPlan")
         cycleData.updateValue(fields as AnyObject, forKey: "fields")
         
         dataList.append(cycleData)
         
         viewController.didLoadEndpoint(data: dataList, totalItems: 1)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-            XCTAssertEqual("testCycle", self.viewController.testPlanList.testPlanList[0].name)
-            XCTAssertEqual(23, self.viewController.testPlanList.testPlanList[0].id)
-            XCTAssertEqual(1, self.viewController.testPlanList.testPlanList[0].projectId)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: {
+            XCTAssertEqual("testCycle1", self.viewController.testCycleList.testCycleList[0].name)
+            XCTAssertEqual(cycleId, self.viewController.testCycleList.testCycleList[0].id)
         })
     }
+    
+    func testDidLoadEndpointWithRunData() {
+        let runId = 23
+        let parentCycleId = 22
+        let projId = 1
+        let jamaItemTypeId = 37
+        viewController.currentTestLevel = .run
+        viewController.selectedTestCycleId = parentCycleId
+        
+        var dataList: [[String : AnyObject]] = []
+        var runData: [String : AnyObject] = [:]
+        var fields: [String : AnyObject] = [:]
+        
+        runData.updateValue(runId as AnyObject, forKey: "id")
+        runData.updateValue(projId as AnyObject, forKey: "project")
+        runData.updateValue(jamaItemTypeId as AnyObject, forKey: "itemType")
+        fields.updateValue("testRun1" as AnyObject, forKey: "name")
+        fields.updateValue("desc" as AnyObject, forKey: "description")
+        fields.updateValue(parentCycleId as AnyObject, forKey: "testCycle")
+        runData.updateValue(fields as AnyObject, forKey: "fields")
+        
+        dataList.append(runData)
+        
+        viewController.didLoadEndpoint(data: dataList, totalItems: 1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: {
+            XCTAssertEqual("testRun1", self.viewController.testRunList.testRunList[0].name)
+            XCTAssertEqual(runId, self.viewController.testRunList.testRunList[0].id)
+            XCTAssertEqual("desc", self.viewController.testRunList.testRunList[0].description)
+        })
+    }
+    
+    func testDidTapTestPlanCellBeforeSelectedCycle() {
+        viewController.selectedPlanIndex = 1
+        let tableIndexToTap = 0
+        let planIndexForTappedCell = 0
+        viewController.didTapTestPlanCell(indexPath: IndexPath(row: tableIndexToTap, section: 0))
+        
+        XCTAssertEqual(viewController.largeNumber, viewController.selectedCycleTableViewIndex)
+        XCTAssertEqual(viewController.largeNumber, viewController.selectedCycleIndex)
+        XCTAssertEqual(planIndexForTappedCell, viewController.selectedPlanIndex)
+        XCTAssertTrue(viewController.testCycleList.testCycleList.isEmpty)
+        XCTAssertTrue(viewController.testRunList.testRunList.isEmpty)
+        XCTAssertEqual(viewController.testPlanList.testPlanList[planIndexForTappedCell].id, viewController.selectedPlanId)
+    }
+    
+    func testDidTapTestPlanCellAfterSelectedPlan() {
+        let tableIndexToTap = 5
+        let planIndexForTappedCell = 1
+        
+        viewController.selectedPlanIndex = 0
+        viewController.selectedCycleIndex = 0
+        viewController.selectedCycleTableViewIndex = 1
+        viewController.didTapTestPlanCell(indexPath: IndexPath(row: tableIndexToTap, section: 0))
+        
+        XCTAssertEqual(viewController.largeNumber, viewController.selectedCycleTableViewIndex)
+        XCTAssertEqual(viewController.largeNumber, viewController.selectedCycleIndex)
+        XCTAssertEqual(planIndexForTappedCell, viewController.selectedPlanIndex)
+        XCTAssertTrue(viewController.testCycleList.testCycleList.isEmpty)
+        XCTAssertTrue(viewController.testRunList.testRunList.isEmpty)
+        XCTAssertEqual(viewController.testPlanList.testPlanList[planIndexForTappedCell].id, viewController.selectedPlanId)
+        
+    }
+    
+    func testDidTapTestCycleCellBeforeSelectedCycle() {
+        let tableIndexToTap = 2
+        viewController.selectedPlanIndex = 1
+        viewController.selectedCycleIndex = 1
+        viewController.selectedCycleTableViewIndex = 3
+        let expectedSelectedCycleIndex = 0
+        viewController.didTapTestCycleCell(indexPath: IndexPath(row: tableIndexToTap, section: 0))
+        
+        XCTAssertEqual(expectedSelectedCycleIndex, viewController.selectedCycleIndex)
+        XCTAssertEqual(tableIndexToTap, viewController.selectedCycleTableViewIndex)
+        XCTAssertTrue(viewController.testRunList.testRunList.isEmpty)
+        XCTAssertEqual(viewController.testCycleList.testCycleList[expectedSelectedCycleIndex].id, viewController.selectedTestCycleId)
+    }
+    
+    func testDidTapTestCycleCellAfterSelectedCycle() {
+        let tableIndexToTap = 5
+        viewController.selectedPlanIndex = 1
+        viewController.selectedCycleIndex = 0
+        viewController.selectedCycleTableViewIndex = 2
+        let expectedSelectedCycleIndex = 1
+        let expectedSelectedCycleTableViewIndex = tableIndexToTap - viewController.testRunList.testRunList.count
+        viewController.didTapTestCycleCell(indexPath: IndexPath(row: tableIndexToTap, section: 0))
+        
+        XCTAssertEqual(expectedSelectedCycleIndex, viewController.selectedCycleIndex)
+        XCTAssertEqual(expectedSelectedCycleTableViewIndex, viewController.selectedCycleTableViewIndex)
+        XCTAssertTrue(viewController.testRunList.testRunList.isEmpty)
+        XCTAssertEqual(viewController.testCycleList.testCycleList[expectedSelectedCycleIndex].id, viewController.selectedTestCycleId)
+    }
+    
+    func testUnselectTestPlanForAlreadySelectedPlan() {
+        viewController.selectedPlanIndex = 0
+        viewController.selectedCycleIndex = 0
+        viewController.selectedCycleTableViewIndex = 1
+        
+        XCTAssertFalse(viewController.testCycleList.testCycleList.isEmpty)
+        XCTAssertFalse(viewController.testRunList.testRunList.isEmpty)
+        
+        let result = viewController.unselectTestPlan(indexPath: IndexPath(row: 0, section: 0))
+        
+        XCTAssertTrue(result)
+        XCTAssertEqual(viewController.largeNumber, viewController.selectedPlanIndex)
+        XCTAssertEqual(viewController.largeNumber, viewController.selectedCycleIndex)
+        XCTAssertEqual(viewController.largeNumber, viewController.selectedCycleTableViewIndex)
+        XCTAssertTrue(viewController.testCycleList.testCycleList.isEmpty)
+        XCTAssertTrue(viewController.testRunList.testRunList.isEmpty)
+    }
+    
+    func testUnselectTestPlanForPlanNotalreadySelected() {
+        viewController.selectedPlanIndex = 1
+        viewController.selectedCycleIndex = 0
+        viewController.selectedCycleTableViewIndex = 2
+        
+        let result = viewController.unselectTestPlan(indexPath: IndexPath(row: 0, section: 0))
+        
+        XCTAssertFalse(result)
+    }
+    
+    func testUnselectTestCycleForAlreadySelectedPlan() {
+        viewController.selectedPlanIndex = 0
+        viewController.selectedCycleIndex = 0
+        viewController.selectedCycleTableViewIndex = 1
+        
+        XCTAssertFalse(viewController.testRunList.testRunList.isEmpty)
+        
+        let result = viewController.unselectTestCycle(indexPath: IndexPath(row: 1, section: 0))
+        
+        XCTAssertTrue(result)
+        XCTAssertEqual(viewController.largeNumber, viewController.selectedCycleTableViewIndex)
+        XCTAssertEqual(viewController.largeNumber, viewController.selectedCycleIndex)
+        XCTAssertTrue(viewController.testRunList.testRunList.isEmpty)
+    }
+    
+    func testUnselectTestCycleForPlanNotalreadySelected() {
+        viewController.selectedPlanIndex = 0
+        viewController.selectedCycleIndex = 0
+        viewController.selectedCycleTableViewIndex = 1
+        
+        XCTAssertFalse(viewController.testRunList.testRunList.isEmpty)
+        
+        let result = viewController.unselectTestCycle(indexPath: IndexPath(row: 2, section: 0))
+        
+        XCTAssertFalse(result)
+    }
+    
  }

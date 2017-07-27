@@ -11,7 +11,6 @@ import Foundation
 class TestPlanModel {
     var projectId = -1
     var id = -1
-    var numOfCycles = 0
     var name = ""
     
     func extractPlan(fromData: [String: AnyObject]) {
