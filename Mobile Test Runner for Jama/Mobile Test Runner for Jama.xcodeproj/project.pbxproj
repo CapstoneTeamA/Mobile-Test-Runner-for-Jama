@@ -13,7 +13,6 @@
 		13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F21F0367E9002EBC92 /* Main.storyboard */; };
 		13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F51F0367E9002EBC92 /* Assets.xcassets */; };
 		13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F71F0367E9002EBC92 /* LaunchScreen.storyboard */; };
-		13A3430F1F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3430E1F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaUITests.swift */; };
 		13A343221F04C247002EBC92 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343211F04C247002EBC92 /* LoginViewController.swift */; };
 		13A343241F04C271002EBC92 /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343231F04C271002EBC92 /* ProjectListViewController.swift */; };
 		13A343261F04C28F002EBC92 /* TestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343251F04C28F002EBC92 /* TestListViewController.swift */; };
@@ -46,6 +45,7 @@
 		13A343611F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */; };
 		13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */; };
 		13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343B01F0F5C6E002EBC92 /* Endpoints.plist */; };
+		303AD4651F2994F5000E3988 /* LoginViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */; };
 		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
 		E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */; };
 		E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */; };
@@ -80,7 +80,6 @@
 		13A342FF1F0367E9002EBC92 /* Mobile Test Runner for JamaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mobile Test Runner for JamaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A343051F0367E9002EBC92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13A3430A1F0367E9002EBC92 /* Mobile Test Runner for JamaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mobile Test Runner for JamaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13A3430E1F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mobile_Test_Runner_for_JamaUITests.swift; sourceTree = "<group>"; };
 		13A343101F0367E9002EBC92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13A343211F04C247002EBC92 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		13A343231F04C271002EBC92 /* ProjectListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +113,7 @@
 		13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTestRunViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343B01F0F5C6E002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
+		303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerUITests.swift; sourceTree = "<group>"; };
 		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
 		E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtr-logo-v2.png"; sourceTree = "<group>"; };
 		E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-lightbl-redx.png"; sourceTree = "<group>"; };
@@ -205,8 +205,8 @@
 		13A3430D1F0367E9002EBC92 /* Mobile Test Runner for JamaUITests */ = {
 			isa = PBXGroup;
 			children = (
-				13A3430E1F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaUITests.swift */,
 				13A343101F0367E9002EBC92 /* Info.plist */,
+				303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */,
 			);
 			path = "Mobile Test Runner for JamaUITests";
 			sourceTree = "<group>";
@@ -473,7 +473,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13A3430F1F0367E9002EBC92 /* Mobile_Test_Runner_for_JamaUITests.swift in Sources */,
+				303AD4651F2994F5000E3988 /* LoginViewControllerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
