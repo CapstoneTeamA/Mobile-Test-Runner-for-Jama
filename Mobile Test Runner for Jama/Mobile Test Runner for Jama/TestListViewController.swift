@@ -17,7 +17,6 @@ class TestListViewController: UIViewController {
     var projectId = -1
     var selectedPlanId = -1
     var selectedTestCycleId = -1
-    var selectedRunId = -1
     let largeNumber = 1000000
     var instance = ""
     var username = ""
@@ -168,7 +167,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         if unselectTestPlan(indexPath: indexPath) || unselectTestCycle(indexPath: indexPath) {
             return
         }
-        //TODO implement what happens when the user taps a test run
+        //If the user taps a test run, go to the index screen for that test run
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TestRunCell" {
             let runViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunIndex") as! TestRunIndexViewController
             
