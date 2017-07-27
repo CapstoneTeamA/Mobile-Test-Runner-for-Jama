@@ -17,6 +17,7 @@ class TestListViewController: UIViewController {
     var projectId = -1
     var selectedPlanId = -1
     var selectedTestCycleId = -1
+    var selectedRunId = -1
     let largeNumber = 1000000
     var instance = ""
     var username = ""
@@ -169,6 +170,15 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         //TODO implement what happens when the user taps a test run
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TestRunCell" {
+            let runViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunIndex") as! TestRunIndexViewController
+            
+            let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
+            runViewController.runId = self.testRunList.testRunList[currentRunIndex].id
+            runViewController.runName = self.testRunList.testRunList[currentRunIndex].name
+            runViewController.username = username
+            runViewController.password = password
+            runViewController.instance = instance
+            self.navigationController?.pushViewController(runViewController, animated: true)
             return
         }
         //If the user taps a test cycle in the table

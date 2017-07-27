@@ -235,8 +235,8 @@
                                     <constraint firstAttribute="height" constant="74" id="jki-FZ-Ewe"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHA-VP-gmH" userLabel="ServerErrorLabel">
-                                <rect key="frame" x="0.0" y="355" width="414" height="58"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHA-VP-gmH" userLabel="ServerErrorLabel">
+                                <rect key="frame" x="186.33333333333337" y="395" width="41.666666666666657" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.63921568627450975" green="0.0" blue="0.023529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -328,7 +328,7 @@
                                         <rect key="frame" x="0.0" y="116" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B1E-R0-Lnn" id="acE-da-uOf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -372,6 +372,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Test Run List" id="ihb-y8-tGc">
+                        <barButtonItem key="backBarButtonItem" title="Cancel Run" id="9jQ-sc-iNA"/>
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="u6s-Bu-rkP">
                             <connections>
                                 <action selector="touchedLogoutButton:" destination="b7n-lk-QU3" id="VIG-wG-Ssa"/>
@@ -380,6 +381,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="testList" destination="Jw9-Nh-Msb" id="sf6-HP-fdd"/>
+                        <segue destination="NKr-0k-Apa" kind="show" identifier="TestRunListSeque" id="b6e-uI-ife"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dL-pN-r0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -404,23 +406,46 @@
             </objects>
             <point key="canvasLocation" x="3888.8000000000002" y="138.98050974512745"/>
         </scene>
-        <!--Review Test Run-->
+        <!--Test Run Index-->
         <scene sceneID="zfG-eL-1OD">
             <objects>
-                <viewController title="Review Test Run" id="NKr-0k-Apa" customClass="ReviewTestRunViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TestRunIndex" title="Test Run Index" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NKr-0k-Apa" customClass="TestRunIndexViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Arf-ao-gXm"/>
                         <viewControllerLayoutGuide type="bottom" id="gXa-Dc-LxK"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="29g-Lj-zF6">
+                    <view key="view" contentMode="scaleToFill" id="29g-Lj-zF6" userLabel="MainView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Run Name Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRZ-zm-DjT">
+                                <rect key="frame" x="50" y="206" width="321" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Run ID Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgm-zC-l3r">
+                                <rect key="frame" x="47" y="255" width="321" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Test Run Index" id="Bjc-ta-NLl">
+                        <barButtonItem key="backBarButtonItem" title="Back to Index" id="kXn-nt-KIv"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="runIdLabel" destination="xgm-zC-l3r" id="gSx-U6-gQE"/>
+                        <outlet property="runNameLabel" destination="dRZ-zm-DjT" id="Q1A-tQ-bET"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97h-qu-cpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4903.1999999999998" y="138.98050974512745"/>
+            <point key="canvasLocation" x="4902.898550724638" y="138.58695652173915"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9DH-Iu-r92">
