@@ -80,9 +80,6 @@ class TestListViewController: UIViewController {
         return runEndpoint
     }
 
-
-
-
     @IBAction func touchedLogoutButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
     }
@@ -96,7 +93,6 @@ extension TestListViewController: EndpointDelegate {
         }
         DispatchQueue.main.async {
             switch self.currentTestLevel {
-                
                 case .plan:
                     let tmpList = TestPlanListModel()
                     tmpList.extractPlanList(fromData: unwrappedData)
@@ -112,7 +108,6 @@ extension TestListViewController: EndpointDelegate {
                     if self.testPlanList.testPlanList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
-                
                 case .cycle:
                     let tmpList = TestCycleListModel()
                     tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
@@ -126,7 +121,6 @@ extension TestListViewController: EndpointDelegate {
                     if self.testCycleList.testCycleList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
-                        
                 case .run:
                     let tmpList = TestRunListModel()
                     tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
@@ -134,17 +128,17 @@ extension TestListViewController: EndpointDelegate {
                         return
                     }
                     self.totalRunsReturnedFromServer += tmpList.testRunList.count
+                    //Filter the runs returned from the API to select the assignedTo value is the current user's id
                     for run in tmpList.testRunList {
                         if run.assignedTo == self.currentUser.id {
                             self.testRunList.testRunList.append(run)
                         }
                     }
                     self.testList.reloadData()
-                                       //keep calling api while there are still more runs
+                    //keep calling api while there are still more runs
                     if self.totalRunsReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
-
             }
         }
     }
@@ -152,7 +146,6 @@ extension TestListViewController: EndpointDelegate {
     func comparePlans(lhs: TestPlanModel, rhs: TestPlanModel) -> Bool {
         return lhs.name < rhs.name
     }
-    
 }
 
 extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
