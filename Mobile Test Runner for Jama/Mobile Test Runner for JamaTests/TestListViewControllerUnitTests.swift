@@ -15,7 +15,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     var viewController : TestListViewController!
     let instance = "test-instance"
     let font = UIFont(name: "Helvetica Neue", size: 20.0)
-    
+    let currentUser = UserModel()
     override func setUp() {
         super.setUp()
         viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestList") as! TestListViewController
@@ -24,6 +24,8 @@ class TestListViewControllerUnitTests: XCTestCase {
         viewController.instance = instance
         viewController.selectedTestCycleId = testCycleId
         viewController.selectedPlanId = planId
+        viewController.currentUser = currentUser
+        viewController.currentUser.id = 54459
         
         let testPlan1 = TestPlanModel()
         let testPlan2 = TestPlanModel()

@@ -14,6 +14,7 @@ class TestListViewController: UIViewController {
     let testPlanList: TestPlanListModel = TestPlanListModel()
     let testCycleList: TestCycleListModel = TestCycleListModel()
     let testRunList:  TestRunListModel = TestRunListModel()
+    var currentUser: UserModel!
     var projectId = -1
     var selectedPlanId = -1
     var selectedTestCycleId = -1
@@ -24,14 +25,11 @@ class TestListViewController: UIViewController {
     var selectedPlanIndex = 1000000
     var selectedCycleIndex = 1000000
     var selectedCycleTableViewIndex = -1
+    var totalRunsReturnedFromServer = 0
     var currentTestLevel = TestLevel.plan
-
     enum TestLevel {
         case plan, cycle, run
     }
-
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,10 +133,15 @@ extension TestListViewController: EndpointDelegate {
                     if tmpList.testRunList.isEmpty {
                         return
                     }
-                    self.testRunList.testRunList.append(contentsOf: tmpList.testRunList)
+                    self.totalRunsReturnedFromServer += tmpList.testRunList.count
+                    for run in tmpList.testRunList {
+                        if run.assignedTo == self.currentUser.id {
+                            self.testRunList.testRunList.append(run)
+                        }
+                    }
                     self.testList.reloadData()
                                        //keep calling api while there are still more runs
-                    if self.testRunList.testRunList.count < totalItems {
+                    if self.totalRunsReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
 
@@ -234,6 +237,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
                 
         //Empty out the previously selected test cycle's run list
         testRunList.testRunList = []
+        totalRunsReturnedFromServer = 0
         selectedTestCycleId = testCycleList.testCycleList[selectedCycleIndex].id
     }
     
