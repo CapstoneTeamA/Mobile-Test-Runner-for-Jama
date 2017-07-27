@@ -308,7 +308,11 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         if selectedPlanIndex != indexPath.row {
             cell.backgroundColor = UIColor.white
         } else {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0x99/0xFF, green: 0xCC/0xFF, blue: 0x00, alpha: 1)
+            if selectedCycleIndex == largeNumber {
+                cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            } else {
+                cell.backgroundColor = UIColor.lightGray
+            }
         }
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         return cell
