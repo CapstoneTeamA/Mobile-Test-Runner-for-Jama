@@ -10,7 +10,6 @@
 		133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */ = {isa = PBXBuildFile; fileRef = 133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */; };
 		133971BB1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */; };
 		13A342EF1F0367E9002EBC92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A342EE1F0367E9002EBC92 /* AppDelegate.swift */; };
-		13A342F11F0367E9002EBC92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A342F01F0367E9002EBC92 /* ViewController.swift */; };
 		13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F21F0367E9002EBC92 /* Main.storyboard */; };
 		13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F51F0367E9002EBC92 /* Assets.xcassets */; };
 		13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F71F0367E9002EBC92 /* LaunchScreen.storyboard */; };
@@ -74,7 +73,6 @@
 		133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		13A342EB1F0367E9002EBC92 /* Mobile Test Runner for Jama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Test Runner for Jama.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A342EE1F0367E9002EBC92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		13A342F01F0367E9002EBC92 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		13A342F31F0367E9002EBC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		13A342F51F0367E9002EBC92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13A342F81F0367E9002EBC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 				13A3431F1F04C1FC002EBC92 /* Models */,
 				13A3431E1F04C1E8002EBC92 /* ViewControllers */,
 				13A342EE1F0367E9002EBC92 /* AppDelegate.swift */,
-				13A342F01F0367E9002EBC92 /* ViewController.swift */,
 				13A342F21F0367E9002EBC92 /* Main.storyboard */,
 				13A342F51F0367E9002EBC92 /* Assets.xcassets */,
 				13A342F71F0367E9002EBC92 /* LaunchScreen.storyboard */,
@@ -445,7 +442,6 @@
 				13A3432E1F04C369002EBC92 /* ProjectListModel.swift in Sources */,
 				13A343361F04C3EF002EBC92 /* TestStepModel.swift in Sources */,
 				13A3433E1F04C49F002EBC92 /* TestCycleModel.swift in Sources */,
-				13A342F11F0367E9002EBC92 /* ViewController.swift in Sources */,
 				13A342EF1F0367E9002EBC92 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

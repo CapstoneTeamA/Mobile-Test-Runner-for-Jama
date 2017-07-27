@@ -23,7 +23,7 @@ class TestListViewController: UIViewController {
     var password = ""
     var selectedPlanIndex = 1000000
     var selectedCycleIndex = 1000000
-    var selectedCycleUIIndex = -1
+    var selectedCycleTableViewIndex = -1
     var currentTestLevel = TestLevel.plan
 
     enum TestLevel {
@@ -183,7 +183,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func buildCell(indexPath: IndexPath) -> UITableViewCell {
         //If the cell needs to be a testRun cell
-        if indexPath.row > selectedCycleUIIndex && indexPath.row <= selectedCycleUIIndex + testRunList.testRunList.count {
+        if indexPath.row > selectedCycleTableViewIndex && indexPath.row <= selectedCycleTableViewIndex + testRunList.testRunList.count {
             return buildTestRunCell(indexPath: indexPath)
         }
         
@@ -197,11 +197,11 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func unselectTestPlan(indexPath: IndexPath) -> Bool {
-        //If the user taps the plan that was already selected, empty out the test run and test cycle lists deselect the selectedCycleIndex, selectedCycleUIIndex, and selectedPlanIndex and reload the table
+        //If the user taps the plan that was already selected, empty out the test run and test cycle lists deselect the selectedCycleIndex, selectedCycleTableViewIndex, and selectedPlanIndex and reload the table
         if selectedPlanIndex == indexPath.row {
             selectedPlanIndex = largeNumber
             selectedCycleIndex = largeNumber
-            selectedCycleUIIndex = largeNumber
+            selectedCycleTableViewIndex = largeNumber
             testCycleList.testCycleList = []
             testRunList.testRunList = []
             testList.reloadData()
@@ -211,9 +211,9 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func unselectTestCycle(indexPath: IndexPath) -> Bool {
-        //If the user taps the cycle that was already selected, empty out the test run list and deselect the selectedCycleIndex and selectedCycleUIIndex and reload the table
-        if selectedCycleUIIndex == indexPath.row {
-            selectedCycleUIIndex = largeNumber
+        //If the user taps the cycle that was already selected, empty out the test run list and deselect the selectedCycleIndex and selectedCycleTableViewIndex and reload the table
+        if selectedCycleTableViewIndex == indexPath.row {
+            selectedCycleTableViewIndex = largeNumber
             selectedCycleIndex = largeNumber
             testRunList.testRunList = []
             testList.reloadData()
@@ -224,27 +224,22 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func didTapTestCycleCell(indexPath: IndexPath) {
         //Set the selectedCycleIndex based on if the cycle is before or after the currently showing test runs
-        if indexPath.row < selectedCycleUIIndex {
+        if indexPath.row <= selectedCycleTableViewIndex {
             selectedCycleIndex = indexPath.row - selectedPlanIndex - 1
+            selectedCycleTableViewIndex = indexPath.row
         } else {
             selectedCycleIndex = indexPath.row - selectedPlanIndex - testRunList.testRunList.count - 1
+            selectedCycleTableViewIndex = indexPath.row - testRunList.testRunList.count
         }
-        
-        //Set the selectedCycleUIIndex based on if the selected cycle is before or after the showing test runs
-        if indexPath.row <= selectedCycleUIIndex {
-            selectedCycleUIIndex = indexPath.row
-        } else {
-            selectedCycleUIIndex = indexPath.row - testRunList.testRunList.count
-        }
-        
+                
         //Empty out the previously selected test cycle's run list
         testRunList.testRunList = []
         selectedTestCycleId = testCycleList.testCycleList[selectedCycleIndex].id
     }
     
     func didTapTestPlanCell(indexPath: IndexPath) {
-        //The user tapped a test plan, deselect the selectedCycleIndex and selectedCycleUIIndex, then set the new selectedPlanIndex
-        selectedCycleUIIndex = largeNumber
+        //The user tapped a test plan, deselect the selectedCycleIndex and selectedCycleTableViewIndex, then set the new selectedPlanIndex
+        selectedCycleTableViewIndex = largeNumber
         selectedCycleIndex = largeNumber
         selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - testCycleList.testCycleList.count - testRunList.testRunList.count
         
@@ -256,7 +251,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func buildTestRunCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestRunCell")
-        let currentRunIndex = indexPath.row - selectedCycleUIIndex - 1
+        let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
         cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
         cell.textLabel?.textAlignment = .left
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
@@ -270,7 +265,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     func buildTestCycleCell(indexPath: IndexPath) -> UITableViewCell {
         //Find the index into the testCycleList to get the cycle name for the current cell
         var currentCycleIndex = largeNumber
-        if indexPath.row <= selectedCycleUIIndex {
+        if indexPath.row <= selectedCycleTableViewIndex {
             currentCycleIndex = indexPath.row - selectedPlanIndex - 1
         } else {
             currentCycleIndex = indexPath.row - selectedPlanIndex - testRunList.testRunList.count - 1
@@ -282,7 +277,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         
         //If cycle's cell is selected change the background color
-        if selectedCycleUIIndex != indexPath.row {
+        if selectedCycleTableViewIndex != indexPath.row {
             cell.backgroundColor = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
         } else {
             cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
