@@ -1,5 +1,5 @@
 //
-//  ViewControllerUITests.swift
+//  LoginViewControllerUITests.swift
 //  Mobile Test Runner for Jama
 //
 //  Created by PSU2 on 6/27/17.
@@ -9,7 +9,7 @@
 
 import XCTest
 
-class ViewControllerUITests: XCTestCase {
+class LoginViewControllerUITests: XCTestCase {
     let app = XCUIApplication()
     override func setUp() {
         super.setUp()
@@ -67,7 +67,7 @@ class ViewControllerUITests: XCTestCase {
         app.textFields["Username"].typeText("username")
         let passwordSecureTextField = app.secureTextFields["Password"]
         passwordSecureTextField.tap()
-        passwordSecureTextField.typeText("password")
+        passwordSecureTextField.typeText("bad_password")
         let jamaInstanceTextField = app.textFields["Jama-Instance"]
         jamaInstanceTextField.tap()
         app.textFields["Jama-Instance"].typeText("capstone-sandbox")
@@ -76,7 +76,7 @@ class ViewControllerUITests: XCTestCase {
         let invalidLoginLabel = app.staticTexts["Your login attempt was not successful. The user credentials you entered were not valid, please try again."]
         let exists = NSPredicate(format: "exists == true")
         expectation(for: exists, evaluatedWith: invalidLoginLabel, handler: nil)
-        waitForExpectations(timeout: 5, handler: nil) 
+        waitForExpectations(timeout: 5, handler: nil)
     }
     
 }
