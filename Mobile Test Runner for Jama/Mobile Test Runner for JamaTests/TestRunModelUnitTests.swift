@@ -7,16 +7,45 @@
 //
 
 import XCTest
-
+@testable import Mobile_Test_Runner_for_Jama
 class TestRunUnitTests: XCTestCase {
-    
+    var dataWithAssignment: [String : AnyObject] = [:]
+    var dataWithoutAssignment: [String : AnyObject] = [:]
+    var fields: [String : AnyObject] = [:]
+    let run = TestRunModel()
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        dataWithAssignment.updateValue(23 as AnyObject, forKey: "id")
+        dataWithoutAssignment.updateValue(23 as AnyObject, forKey: "id")
+        fields.updateValue("testRun" as AnyObject, forKey: "name")
+        fields.updateValue("desc" as AnyObject, forKey: "description")
+        
+        dataWithoutAssignment.updateValue(fields as AnyObject, forKey: "fields")
+        
+        fields.updateValue(19 as AnyObject, forKey: "assignedTo")
+        dataWithAssignment.updateValue(fields as AnyObject, forKey: "fields")
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+    }
+    
+    func testExtractRunFromDataWithoutAssignment() {
+        run.extractPlan(fromData: dataWithoutAssignment)
+        
+        XCTAssertEqual("testRun", run.name)
+        XCTAssertEqual(23, run.id)
+        XCTAssertEqual("desc", run.description)
+        XCTAssertEqual(-1, run.assignedTo)
+    }
+    
+    func testExtractRunFromDataWithAssignment() {
+        run.extractPlan(fromData: dataWithAssignment)
+        
+        XCTAssertEqual("testRun", run.name)
+        XCTAssertEqual(23, run.id)
+        XCTAssertEqual("desc", run.description)
+        XCTAssertEqual(19, run.assignedTo)
     }
 }

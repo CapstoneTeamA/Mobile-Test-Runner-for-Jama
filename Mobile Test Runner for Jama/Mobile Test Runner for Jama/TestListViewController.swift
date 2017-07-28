@@ -14,6 +14,7 @@ class TestListViewController: UIViewController {
     let testPlanList: TestPlanListModel = TestPlanListModel()
     let testCycleList: TestCycleListModel = TestCycleListModel()
     let testRunList:  TestRunListModel = TestRunListModel()
+    var currentUser: UserModel!
     var projectId = -1
     var selectedPlanId = -1
     var selectedTestCycleId = -1
@@ -24,14 +25,11 @@ class TestListViewController: UIViewController {
     var selectedPlanIndex = 1000000
     var selectedCycleIndex = 1000000
     var selectedCycleTableViewIndex = -1
+    var totalRunsReturnedFromServer = 0
     var currentTestLevel = TestLevel.plan
-
     enum TestLevel {
         case plan, cycle, run
     }
-
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,9 +80,6 @@ class TestListViewController: UIViewController {
         return runEndpoint
     }
 
-
-
-
     @IBAction func touchedLogoutButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
     }
@@ -98,7 +93,6 @@ extension TestListViewController: EndpointDelegate {
         }
         DispatchQueue.main.async {
             switch self.currentTestLevel {
-                
                 case .plan:
                     let tmpList = TestPlanListModel()
                     tmpList.extractPlanList(fromData: unwrappedData)
@@ -114,7 +108,6 @@ extension TestListViewController: EndpointDelegate {
                     if self.testPlanList.testPlanList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
-                
                 case .cycle:
                     let tmpList = TestCycleListModel()
                     tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
@@ -128,20 +121,24 @@ extension TestListViewController: EndpointDelegate {
                     if self.testCycleList.testCycleList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
-                        
                 case .run:
                     let tmpList = TestRunListModel()
                     tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
                     if tmpList.testRunList.isEmpty {
                         return
                     }
-                    self.testRunList.testRunList.append(contentsOf: tmpList.testRunList)
+                    self.totalRunsReturnedFromServer += tmpList.testRunList.count
+                    //Filter the runs returned from the API to select the assignedTo value is the current user's id
+                    for run in tmpList.testRunList {
+                        if run.assignedTo == self.currentUser.id {
+                            self.testRunList.testRunList.append(run)
+                        }
+                    }
                     self.testList.reloadData()
-                                       //keep calling api while there are still more runs
-                    if self.testRunList.testRunList.count < totalItems {
+                    //keep calling api while there are still more runs
+                    if self.totalRunsReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
-
             }
         }
     }
@@ -149,7 +146,6 @@ extension TestListViewController: EndpointDelegate {
     func comparePlans(lhs: TestPlanModel, rhs: TestPlanModel) -> Bool {
         return lhs.name < rhs.name
     }
-    
 }
 
 extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -243,6 +239,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
                 
         //Empty out the previously selected test cycle's run list
         testRunList.testRunList = []
+        totalRunsReturnedFromServer = 0
         selectedTestCycleId = testCycleList.testCycleList[selectedCycleIndex].id
     }
     
@@ -313,7 +310,11 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         if selectedPlanIndex != indexPath.row {
             cell.backgroundColor = UIColor.white
         } else {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0x99/0xFF, green: 0xCC/0xFF, blue: 0x00, alpha: 1)
+            if selectedCycleIndex == largeNumber {
+                cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            } else {
+                cell.backgroundColor = UIColor.lightGray
+            }
         }
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         return cell

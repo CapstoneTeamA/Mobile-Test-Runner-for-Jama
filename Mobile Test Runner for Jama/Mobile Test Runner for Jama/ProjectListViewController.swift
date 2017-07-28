@@ -154,6 +154,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         testViewController.username = username
         testViewController.password = password
         testViewController.instance = instance
+        testViewController.currentUser = currentUser
         self.navigationController?.pushViewController(testViewController, animated: true)
     }
     
