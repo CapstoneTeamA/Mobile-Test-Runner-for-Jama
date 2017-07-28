@@ -167,8 +167,17 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         if unselectTestPlan(indexPath: indexPath) || unselectTestCycle(indexPath: indexPath) {
             return
         }
-        //TODO implement what happens when the user taps a test run
+        //If the user taps a test run, go to the index screen for that test run
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TestRunCell" {
+            let runViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunIndex") as! TestRunIndexViewController
+            
+            let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
+            runViewController.runId = self.testRunList.testRunList[currentRunIndex].id
+            runViewController.runName = self.testRunList.testRunList[currentRunIndex].name
+            runViewController.username = username
+            runViewController.password = password
+            runViewController.instance = instance
+            self.navigationController?.pushViewController(runViewController, animated: true)
             return
         }
         //If the user taps a test cycle in the table
