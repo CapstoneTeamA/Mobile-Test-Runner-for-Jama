@@ -46,6 +46,7 @@
 		13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */; };
 		13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343B01F0F5C6E002EBC92 /* Endpoints.plist */; };
 		303AD4651F2994F5000E3988 /* LoginViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */; };
+		4D15D7D81F2A802F009A26B8 /* TestRunIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */; };
 		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
 		E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */; };
 		E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */; };
@@ -114,6 +115,7 @@
 		13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTestRunViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343B01F0F5C6E002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 		303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerUITests.swift; sourceTree = "<group>"; };
+		4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunIndexViewController.swift; sourceTree = "<group>"; };
 		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
 		E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtr-logo-v2.png"; sourceTree = "<group>"; };
 		E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-lightbl-redx.png"; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */,
 				13A343251F04C28F002EBC92 /* TestListViewController.swift */,
 				13A343271F04C2B4002EBC92 /* TestStepViewController.swift */,
+				4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 			files = (
 				133971BB1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift in Sources */,
 				13A3433C1F04C48E002EBC92 /* TestCycleListModel.swift in Sources */,
+				4D15D7D81F2A802F009A26B8 /* TestRunIndexViewController.swift in Sources */,
 				13A343281F04C2B4002EBC92 /* TestStepViewController.swift in Sources */,
 				13A343241F04C271002EBC92 /* ProjectListViewController.swift in Sources */,
 				13A3432C1F04C33F002EBC92 /* UserModel.swift in Sources */,
