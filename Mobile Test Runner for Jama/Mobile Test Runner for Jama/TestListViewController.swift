@@ -11,6 +11,9 @@ import UIKit
 class TestListViewController: UIViewController {
     @IBOutlet weak var testList: UITableView!
     @IBOutlet weak var tmpProjectLabel: UILabel!
+    
+    @IBOutlet weak var noPlansImage: UIImageView!
+    @IBOutlet weak var noPlansLabel: UILabel!
     let testPlanList: TestPlanListModel = TestPlanListModel()
     let testCycleList: TestCycleListModel = TestCycleListModel()
     let testRunList:  TestRunListModel = TestRunListModel()
@@ -33,7 +36,8 @@ class TestListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.noPlansImage.isHidden = true
+        self.noPlansLabel.isHidden = true
         self.currentTestLevel = .plan
     }
     
@@ -97,6 +101,8 @@ extension TestListViewController: EndpointDelegate {
                     let tmpList = TestPlanListModel()
                     tmpList.extractPlanList(fromData: unwrappedData)
                     if tmpList.testPlanList.isEmpty {
+                        self.noPlansImage.isHidden = false
+                        self.noPlansLabel.isHidden = false
                         return
                     }
                     self.testPlanList.testPlanList.append(contentsOf: tmpList.testPlanList)
