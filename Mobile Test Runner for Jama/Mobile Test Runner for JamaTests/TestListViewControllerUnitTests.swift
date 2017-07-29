@@ -497,5 +497,12 @@ class TestListViewControllerUnitTests: XCTestCase {
         
         XCTAssertFalse(result)
     }
-    
+    func testDefaultCycleVals() {
+        let testCycle = TestCycleModel()
+        XCTAssertEqual(testCycle.name, "No Cycles Found")
+    }
+    func testDefaultRunVals() {
+        let testRun = TestRunModel()
+        XCTAssertEqual(testRun.name, "No Runs Found")
+    }
  }
