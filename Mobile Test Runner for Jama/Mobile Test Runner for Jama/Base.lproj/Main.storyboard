@@ -418,34 +418,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Run Name Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRZ-zm-DjT">
-                                <rect key="frame" x="50" y="206" width="321" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Run ID Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgm-zC-l3r">
-                                <rect key="frame" x="47" y="255" width="321" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7gT-7g-SHk">
+                                <rect key="frame" x="0.0" y="64" width="414" height="552"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TestStepCell" id="k0v-dr-JEK">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k0v-dr-JEK" id="2iW-Ca-kqn" customClass="TestStepTableViewCell" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="381" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="NKr-0k-Apa" id="fLx-84-pXE"/>
+                                    <outlet property="delegate" destination="NKr-0k-Apa" id="nUN-Ze-2YS"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7gT-7g-SHk" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="Eac-aO-Y1s"/>
+                            <constraint firstItem="7gT-7g-SHk" firstAttribute="centerX" secondItem="29g-Lj-zF6" secondAttribute="centerX" id="IFg-Ys-KUv"/>
+                            <constraint firstItem="7gT-7g-SHk" firstAttribute="top" secondItem="Arf-ao-gXm" secondAttribute="bottom" id="OTY-99-hJj"/>
+                            <constraint firstItem="gXa-Dc-LxK" firstAttribute="top" secondItem="7gT-7g-SHk" secondAttribute="bottom" constant="120" id="WqF-nC-td4"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Test Run Index" id="Bjc-ta-NLl">
                         <barButtonItem key="backBarButtonItem" title="Back to Index" id="kXn-nt-KIv"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="runIdLabel" destination="xgm-zC-l3r" id="gSx-U6-gQE"/>
-                        <outlet property="runNameLabel" destination="dRZ-zm-DjT" id="Q1A-tQ-bET"/>
+                        <outlet property="testStepTable" destination="7gT-7g-SHk" id="1Sm-Yg-8pg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97h-qu-cpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3904" y="139"/>
+            <point key="canvasLocation" x="3902.898550724638" y="138.58695652173915"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9DH-Iu-r92">
