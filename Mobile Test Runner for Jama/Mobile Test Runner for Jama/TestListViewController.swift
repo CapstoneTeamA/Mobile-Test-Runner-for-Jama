@@ -118,29 +118,40 @@ extension TestListViewController: EndpointDelegate {
                 case .cycle:
                     let tmpList = TestCycleListModel()
                     tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
+                    //if there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
                     if tmpList.testCycleList.isEmpty {
-                        return
+                        let emptyCycle = TestCycleModel();
+                        tmpList.testCycleList.insert(emptyCycle, at: 0)
+                        
+                      
                     }
+                    
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
                     self.testList.reloadData()
                     
                     //keep calling api while there are still more cycles
                     if self.testCycleList.testCycleList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
-                    }
+                    
+                }
                 case .run:
                     let tmpList = TestRunListModel()
                     tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
-                    if tmpList.testRunList.isEmpty {
-                        return
-                    }
-                    self.totalRunsReturnedFromServer += tmpList.testRunList.count
                     //Filter the runs returned from the API to select the assignedTo value is the current user's id
                     for run in tmpList.testRunList {
                         if run.assignedTo == self.currentUser.id {
                             self.testRunList.testRunList.append(run)
                         }
                     }
+                    ////if there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
+                    if self.testRunList.testRunList.isEmpty {
+                        let emptyRun = TestRunModel()
+                        self.testRunList.testRunList.insert(emptyRun, at: 0)
+                    }
+                    
+                    self.totalRunsReturnedFromServer += tmpList.testRunList.count
+                    
+                   
                     self.testList.reloadData()
                     //keep calling api while there are still more runs
                     if self.totalRunsReturnedFromServer < totalItems {
@@ -265,13 +276,22 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     func buildTestRunCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestRunCell")
         let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
-        cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
+        
         cell.textLabel?.textAlignment = .left
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         cell.backgroundColor = UIColor.white
-        cell.indentationLevel = 1
-        cell.accessoryType = .disclosureIndicator
-        cell.indentationWidth = 15.0
+        
+        if self.testRunList.testRunList[0].name == "No Runs Found" {
+            cell.isUserInteractionEnabled = false
+            cell.textLabel?.text = self.testRunList.testRunList[currentRunIndex].name
+        }
+        else {
+            cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
+            cell.indentationLevel = 1
+            cell.accessoryType = .disclosureIndicator
+            cell.indentationWidth = 15.0
+        
+        }
         return cell
     }
     
@@ -297,6 +317,10 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.indentationLevel = 1
         cell.indentationWidth = 15.0
+        if(self.testCycleList.testCycleList[0].name == "No Cycles Found")
+        {
+            cell.isUserInteractionEnabled = false
+        }
         return cell
     }
     
