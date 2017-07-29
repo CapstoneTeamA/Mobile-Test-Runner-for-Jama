@@ -12,6 +12,7 @@ class TestListViewController: UIViewController {
     @IBOutlet weak var testList: UITableView!
     @IBOutlet weak var tmpProjectLabel: UILabel!
     
+    
     @IBOutlet weak var noPlansImage: UIImageView!
     @IBOutlet weak var noPlansLabel: UILabel!
     let testPlanList: TestPlanListModel = TestPlanListModel()

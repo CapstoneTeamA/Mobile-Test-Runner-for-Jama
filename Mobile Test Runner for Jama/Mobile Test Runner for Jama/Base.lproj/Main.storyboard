@@ -312,7 +312,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rFr-a9-8Js" id="mSU-nv-LVR">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -320,7 +320,7 @@
                                         <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1mn-LC-0ox" id="q9h-Zr-M4H">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -328,7 +328,7 @@
                                         <rect key="frame" x="0.0" y="116" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B1E-R0-Lnn" id="acE-da-uOf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -351,43 +351,46 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder-lightbl-redx.png" translatesAutoresizingMaskIntoConstraints="NO" id="B5x-UF-49V" userLabel="noProjectsImage">
-                                <rect key="frame" x="62" y="223" width="290" height="290"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="290" id="A3C-w2-Smf"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No plans found. Please contact your administrator." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeV-l0-ABz">
-                                <rect key="frame" x="25" y="516" width="362" height="89"/>
+                                <rect key="frame" x="25" y="563" width="362" height="89"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="89" id="6EM-C4-F7i"/>
+                                    <constraint firstAttribute="height" constant="89" id="WBe-Nu-B4J"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.3445105664" green="0.34528696850000001" blue="0.3571347594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder-lightbl-redx.png" translatesAutoresizingMaskIntoConstraints="NO" id="XBs-RX-qYO">
+                                <rect key="frame" x="20" y="213" width="374" height="342"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XBs-RX-qYO" secondAttribute="height" multiplier="1:1" constant="32" id="Nrp-qn-KEi"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="LwG-d3-PFR" firstAttribute="centerX" secondItem="B5x-UF-49V" secondAttribute="centerX" id="3Nf-5Y-NCg"/>
+                            <constraint firstAttribute="bottom" secondItem="VeV-l0-ABz" secondAttribute="bottom" constant="84" id="3pn-RX-TiF"/>
+                            <constraint firstItem="VeV-l0-ABz" firstAttribute="top" secondItem="XBs-RX-qYO" secondAttribute="bottom" constant="8" id="B1V-SO-gRm"/>
                             <constraint firstItem="INj-Pt-cDa" firstAttribute="bottom" secondItem="jOc-nP-z75" secondAttribute="top" id="DBi-SV-4PF"/>
                             <constraint firstItem="Jw9-Nh-Msb" firstAttribute="trailing" secondItem="INj-Pt-cDa" secondAttribute="trailing" id="DZh-tO-cKF"/>
-                            <constraint firstItem="B5x-UF-49V" firstAttribute="top" secondItem="LwG-d3-PFR" secondAttribute="bottom" constant="65" id="FAl-2Q-4Os"/>
                             <constraint firstItem="ZK8-jV-Ohl" firstAttribute="leading" secondItem="Rez-5u-Hfc" secondAttribute="leadingMargin" id="Hf7-GK-NVd"/>
+                            <constraint firstItem="VeV-l0-ABz" firstAttribute="top" secondItem="XBs-RX-qYO" secondAttribute="bottom" constant="8" id="Muw-uR-1j5"/>
                             <constraint firstItem="LwG-d3-PFR" firstAttribute="top" secondItem="ZK8-jV-Ohl" secondAttribute="bottom" constant="15" id="PYa-VK-VmT"/>
+                            <constraint firstItem="XBs-RX-qYO" firstAttribute="centerX" secondItem="Rez-5u-Hfc" secondAttribute="centerX" id="TjC-jd-Ox4"/>
                             <constraint firstItem="ZK8-jV-Ohl" firstAttribute="centerX" secondItem="LwG-d3-PFR" secondAttribute="centerX" id="Tk7-nw-Hf7"/>
+                            <constraint firstItem="VeV-l0-ABz" firstAttribute="leading" secondItem="Rez-5u-Hfc" secondAttribute="leadingMargin" constant="5" id="XIx-WO-3bA"/>
                             <constraint firstItem="LwG-d3-PFR" firstAttribute="leading" secondItem="Jw9-Nh-Msb" secondAttribute="leading" id="XhW-By-hzr"/>
                             <constraint firstAttribute="trailing" secondItem="LwG-d3-PFR" secondAttribute="trailing" id="YOh-Pr-RVd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VeV-l0-ABz" secondAttribute="trailing" constant="7" id="al2-LK-Fyj"/>
                             <constraint firstItem="LwG-d3-PFR" firstAttribute="leading" secondItem="Rez-5u-Hfc" secondAttribute="leading" id="cLt-u3-LUV"/>
                             <constraint firstItem="Jw9-Nh-Msb" firstAttribute="leading" secondItem="INj-Pt-cDa" secondAttribute="leading" id="ctj-ij-y0N"/>
-                            <constraint firstItem="B5x-UF-49V" firstAttribute="centerY" secondItem="Rez-5u-Hfc" secondAttribute="centerY" id="dWW-mA-dtw"/>
-                            <constraint firstItem="VeV-l0-ABz" firstAttribute="leading" secondItem="Rez-5u-Hfc" secondAttribute="leadingMargin" constant="5" id="gpv-Ft-dmo"/>
+                            <constraint firstItem="XBs-RX-qYO" firstAttribute="leading" secondItem="Rez-5u-Hfc" secondAttribute="leadingMargin" id="dHA-Ag-8XF"/>
                             <constraint firstItem="Jw9-Nh-Msb" firstAttribute="top" secondItem="LwG-d3-PFR" secondAttribute="bottom" id="iD7-nE-nO6"/>
-                            <constraint firstItem="B5x-UF-49V" firstAttribute="leading" secondItem="Rez-5u-Hfc" secondAttribute="leadingMargin" constant="42" id="l6D-tF-1xI"/>
+                            <constraint firstItem="INj-Pt-cDa" firstAttribute="top" secondItem="VeV-l0-ABz" secondAttribute="bottom" constant="74" id="j5V-V9-vR9"/>
                             <constraint firstItem="LwG-d3-PFR" firstAttribute="trailing" secondItem="Jw9-Nh-Msb" secondAttribute="trailing" id="mgC-Jt-ba8"/>
-                            <constraint firstItem="VeV-l0-ABz" firstAttribute="top" secondItem="B5x-UF-49V" secondAttribute="bottom" constant="3" id="nYo-fN-Egi"/>
+                            <constraint firstItem="XBs-RX-qYO" firstAttribute="top" secondItem="LwG-d3-PFR" secondAttribute="bottom" constant="55" id="sIt-pc-tK4"/>
                             <constraint firstItem="ZK8-jV-Ohl" firstAttribute="top" secondItem="hkT-vr-wmT" secondAttribute="bottom" constant="8" symbolic="YES" id="sdv-Wj-Jsd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="VeV-l0-ABz" secondAttribute="trailing" constant="7" id="xPf-11-itF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XBs-RX-qYO" secondAttribute="trailing" id="x2n-Yd-w6S"/>
                             <constraint firstItem="INj-Pt-cDa" firstAttribute="top" secondItem="Jw9-Nh-Msb" secondAttribute="bottom" id="zkX-T1-Egl"/>
                         </constraints>
                     </view>
@@ -400,8 +403,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="noPlansImage" destination="XBs-RX-qYO" id="0pu-gF-bQ0"/>
                         <outlet property="noPlansLabel" destination="VeV-l0-ABz" id="WAt-jw-73z"/>
-                        <outlet property="noProjectsImage" destination="B5x-UF-49V" id="GsI-op-ymy"/>
                         <outlet property="testList" destination="Jw9-Nh-Msb" id="sf6-HP-fdd"/>
                         <segue destination="NKr-0k-Apa" kind="show" identifier="TestRunListSeque" id="b6e-uI-ife"/>
                     </connections>
