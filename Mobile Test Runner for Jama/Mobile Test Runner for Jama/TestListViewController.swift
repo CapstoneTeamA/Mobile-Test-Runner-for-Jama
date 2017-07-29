@@ -137,26 +137,35 @@ extension TestListViewController: EndpointDelegate {
                 case .run:
                     let tmpList = TestRunListModel()
                     tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
+                    
+                    
+                    
                     //Filter the runs returned from the API to select the assignedTo value is the current user's id
+                    self.totalRunsReturnedFromServer += tmpList.testRunList.count
+                    
+                    
                     for run in tmpList.testRunList {
                         if run.assignedTo == self.currentUser.id {
                             self.testRunList.testRunList.append(run)
                         }
                     }
                     ////if there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
-                    if self.testRunList.testRunList.isEmpty {
-                        let emptyRun = TestRunModel()
-                        self.testRunList.testRunList.insert(emptyRun, at: 0)
-                    }
                     
-                    self.totalRunsReturnedFromServer += tmpList.testRunList.count
+                    
                     
                    
                     self.testList.reloadData()
                     //keep calling api while there are still more runs
                     if self.totalRunsReturnedFromServer < totalItems {
-                        RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
+                        RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password)
+                        return
                     }
+                    if self.testRunList.testRunList.isEmpty {
+                        let emptyRun = TestRunModel()
+                        self.testRunList.testRunList.insert(emptyRun, at: 0)
+                    }
+                    
+                    self.testList.reloadData()
             }
         }
     }
