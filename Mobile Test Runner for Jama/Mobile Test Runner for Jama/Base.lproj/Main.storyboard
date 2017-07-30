@@ -516,12 +516,22 @@
                             <constraint firstItem="miI-Kx-Bj4" firstAttribute="top" secondItem="7gT-7g-SHk" secondAttribute="bottom" constant="2" id="yFy-vu-gkB"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Test Run Index" id="Bjc-ta-NLl">
-                        <barButtonItem key="backBarButtonItem" title="Back to Index" id="kXn-nt-KIv"/>
+                        <barButtonItem key="rightBarButtonItem" title="Cancel Run" id="lHq-Lx-YPg">
+                            <connections>
+                                <action selector="cancelRun:" destination="NKr-0k-Apa" id="GZk-SH-0KU"/>
+                            </connections>
+                        </barButtonItem>
+                        <connections>
+                            <outlet property="rightBarButtonItem" destination="lHq-Lx-YPg" id="4AR-3K-bmb"/>
+                        </connections>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="testRunNameLabel" destination="ukt-q7-rqc" id="PeF-El-ACB"/>
-                        <outlet property="testStepTable" destination="7gT-7g-SHk" id="1Sm-Yg-8pg"/>
+                        <outlet property="cancelRun" destination="lHq-Lx-YPg" id="rMz-b9-Nhz"/>
+                        <outlet property="runIdLabel" destination="xgm-zC-l3r" id="gSx-U6-gQE"/>
+                        <outlet property="runNameLabel" destination="dRZ-zm-DjT" id="Q1A-tQ-bET"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97h-qu-cpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
