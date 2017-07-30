@@ -10,6 +10,10 @@ import UIKit
 
 class TestStepTableViewCell: UITableViewCell {
     var statusIconImageView: UIImageView!
+    let iconOffset: CGFloat = 22
+    let nameLabelOffset: CGFloat = 50
+    let iconCenterX: CGFloat = 24
+    let iconCenterY: CGFloat = 22
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -26,15 +30,15 @@ class TestStepTableViewCell: UITableViewCell {
         //create an image view from the image and set its position
         let image = UIImage(named: "check_icon.png")
         statusIconImageView = UIImageView(image: image)
-        statusIconImageView.center = CGPoint(x: 24, y: 22)
+        statusIconImageView.center = CGPoint(x: iconCenterX, y: iconCenterY)
         
         //Build the labels for the step number and step name
         let numberLabel = UILabel(frame: CGRect(x: self.contentView.bounds.minX, y: self.contentView.bounds.minY, width: 40, height: self.contentView.bounds.height))
-        let nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - statusIconImageView.bounds.width - numberLabel.bounds.width - 50 , height: self.contentView.bounds.height))
+        let nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - statusIconImageView.bounds.width - numberLabel.bounds.width - nameLabelOffset , height: self.contentView.bounds.height))
         
         //set the position of the labels
-        numberLabel.center = CGPoint(x: statusIconImageView.center.x + 22 + numberLabel.bounds.width/2 , y: self.contentView.center.y)
-        nameLabel.center = CGPoint(x: numberLabel.center.x + 22 + nameLabel.bounds.width/2, y: self.contentView.center.y)
+        numberLabel.center = CGPoint(x: statusIconImageView.center.x + iconOffset + numberLabel.bounds.width/2 , y: self.contentView.center.y)
+        nameLabel.center = CGPoint(x: numberLabel.center.x + iconOffset + nameLabel.bounds.width/2, y: self.contentView.center.y)
         
         numberLabel.text = "\(stepNumber)"
         //added a long string at the end to show proof of concept that the name truncates correctly

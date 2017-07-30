@@ -58,6 +58,7 @@ class TestRunIndexViewController: UIViewController {
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //TODO this is hard coded until we implement loading real steps into the screen.
         return 20
     }
     
