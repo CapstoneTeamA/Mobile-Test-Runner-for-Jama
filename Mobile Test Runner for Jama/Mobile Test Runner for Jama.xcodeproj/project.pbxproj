@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */ = {isa = PBXBuildFile; fileRef = 133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */; };
 		133971BB1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */; };
+		133971C31F2C326700AB9D30 /* TestStepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */; };
+		133971C51F2C893800AB9D30 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 133971C41F2C893800AB9D30 /* check_icon.png */; };
 		13A342EF1F0367E9002EBC92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A342EE1F0367E9002EBC92 /* AppDelegate.swift */; };
 		13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F21F0367E9002EBC92 /* Main.storyboard */; };
 		13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F51F0367E9002EBC92 /* Assets.xcassets */; };
@@ -72,6 +74,8 @@
 /* Begin PBXFileReference section */
 		133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Jama-logo-smallwtext.png"; sourceTree = "<group>"; };
 		133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
+		133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepTableViewCell.swift; sourceTree = "<group>"; };
+		133971C41F2C893800AB9D30 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
 		13A342EB1F0367E9002EBC92 /* Mobile Test Runner for Jama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Test Runner for Jama.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A342EE1F0367E9002EBC92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13A342F31F0367E9002EBC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 		133971B71F1B437600AB9D30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				133971C41F2C893800AB9D30 /* check_icon.png */,
 				E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */,
 				E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */,
 				133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */,
@@ -222,6 +227,7 @@
 				13A343251F04C28F002EBC92 /* TestListViewController.swift */,
 				13A343271F04C2B4002EBC92 /* TestStepViewController.swift */,
 				4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */,
+				133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -404,6 +410,7 @@
 				13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */,
 				133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */,
 				E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */,
+				133971C51F2C893800AB9D30 /* check_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +452,7 @@
 				13A343401F04C564002EBC92 /* RestHelper.swift in Sources */,
 				13A3432E1F04C369002EBC92 /* ProjectListModel.swift in Sources */,
 				13A343361F04C3EF002EBC92 /* TestStepModel.swift in Sources */,
+				133971C31F2C326700AB9D30 /* TestStepTableViewCell.swift in Sources */,
 				13A3433E1F04C49F002EBC92 /* TestCycleModel.swift in Sources */,
 				13A342EF1F0367E9002EBC92 /* AppDelegate.swift in Sources */,
 			);

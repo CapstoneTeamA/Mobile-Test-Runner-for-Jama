@@ -9,7 +9,10 @@
 import UIKit
 
 class TestRunIndexViewController: UIViewController {
+   
     @IBOutlet weak var cancelRun: UIBarButtonItem!
+    @IBOutlet weak var testRunNameLabel: UILabel!
+    @IBOutlet weak var testStepTable: UITableView!
     
     var instance = ""
     var username = ""
@@ -17,15 +20,13 @@ class TestRunIndexViewController: UIViewController {
     var runId = -1
     var runName = ""
     
-    @IBOutlet weak var runNameLabel: UILabel!
-    @IBOutlet weak var runIdLabel: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //hide the default back button and instead show cancel run
         self.navigationItem.hidesBackButton = true
-        runNameLabel.text = "Name: " + runName
-        runIdLabel.text = "Run ID: " + String(runId)
+        testRunNameLabel.text = runName
+        testStepTable.reloadData()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,4 +54,18 @@ class TestRunIndexViewController: UIViewController {
         
     }
     
+}
+
+extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //TODO this is hard coded until we implement loading real steps into the screen.
+        return 20
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
+        let cell = TestStepTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestStepCell")
+        cell.customInit(tableWidth: tableView.bounds.width, stepNumber: indexPath.row + 1, stepName: runName)
+
+        return cell
+    }
 }
