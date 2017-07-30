@@ -9,10 +9,11 @@
 import UIKit
 
 class TestRunIndexViewController: UIViewController {
+   
     @IBOutlet weak var cancelRun: UIBarButtonItem!
-    
     @IBOutlet weak var testRunNameLabel: UILabel!
     @IBOutlet weak var testStepTable: UITableView!
+    
     var instance = ""
     var username = ""
     var password = ""
