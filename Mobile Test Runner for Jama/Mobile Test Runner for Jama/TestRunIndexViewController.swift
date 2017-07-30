@@ -23,8 +23,6 @@ class TestRunIndexViewController: UIViewController {
         super.viewDidLoad()
         //hide the default back button and instead show cancel run
         self.navigationItem.hidesBackButton = true
-        runNameLabel.text = "Name: " + runName
-        runIdLabel.text = "Run ID: " + String(runId)
         testRunNameLabel.text = runName
         testStepTable.reloadData()
         
