@@ -14,10 +14,12 @@ class TestListViewController: UIViewController {
     let testPlanList: TestPlanListModel = TestPlanListModel()
     let testCycleList: TestCycleListModel = TestCycleListModel()
     let testRunList:  TestRunListModel = TestRunListModel()
+    var testRun: TestRunModel = TestRunModel()
     var currentUser: UserModel!
     var projectId = -1
     var selectedPlanId = -1
     var selectedTestCycleId = -1
+    var selectedRunId = -1
     let largeNumber = 1000000
     var instance = ""
     var username = ""
@@ -28,7 +30,7 @@ class TestListViewController: UIViewController {
     var totalRunsReturnedFromServer = 0
     var currentTestLevel = TestLevel.plan
     enum TestLevel {
-        case plan, cycle, run
+        case plan, cycle, run, step
     }
 
     override func viewDidLoad() {
@@ -78,6 +80,19 @@ class TestListViewController: UIViewController {
         runEndpoint = "https://" + instance + "." + runEndpoint
         runEndpoint = runEndpoint.replacingOccurrences(of: "{testCycleId}", with: "\(selectedTestCycleId)")
         return runEndpoint
+    }
+    
+    func getStepsForRunOnClick() {
+        self.currentTestLevel = .step
+        let stepEndpoint = buildRunStepsEndpointString()
+        RestHelper.hitEndpoint(atEndpointString: stepEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+    }
+    
+    func buildRunStepsEndpointString() -> String {
+        var stepEndpoint = RestHelper.getEndpointString(method: "Get", endpoint: "RunSteps")
+        stepEndpoint = "https://" + instance + "." + stepEndpoint
+        stepEndpoint = stepEndpoint.replacingOccurrences(of: "{testRunId}", with: "\(selectedRunId)")
+        return stepEndpoint
     }
 
     @IBAction func touchedLogoutButton(_ sender: Any) {
@@ -139,6 +154,17 @@ extension TestListViewController: EndpointDelegate {
                     if self.totalRunsReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
+                case .step:
+                    let tmpRun = TestRunModel()
+                    tmpRun.extractRun(fromData: unwrappedData[0])
+                    if tmpRun.testStepList.isEmpty {
+                        return
+                    }
+                    self.testRun.testStepList.append(contentsOf: tmpRun.testStepList)
+                    //keep calling api while there are still more steps
+                    if self.testRun.testStepList.count < totalItems {
+                        RestHelper.hitEndpoint(atEndpointString: self.buildRunStepsEndpointString() + "&startAt=\(self.testRun.testStepList.count)", withDelegate: self, username: self.username, password: self.password)
+                    }
             }
         }
     }
@@ -163,13 +189,14 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         if unselectTestPlan(indexPath: indexPath) || unselectTestCycle(indexPath: indexPath) {
             return
         }
-        //If the user taps a test run, go to the index screen for that test run
+        //If the user taps a test run, load all data (incl steps) for that run from the API and pass to run index screen
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TestRunCell" {
             let runViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunIndex") as! TestRunIndexViewController
             
             let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
-            runViewController.runId = self.testRunList.testRunList[currentRunIndex].id
-            runViewController.runName = self.testRunList.testRunList[currentRunIndex].name
+            selectedRunId = self.testRunList.testRunList[currentRunIndex].id
+            getStepsForRunOnClick()
+            runViewController.testRun = self.testRun
             runViewController.username = username
             runViewController.password = password
             runViewController.instance = instance

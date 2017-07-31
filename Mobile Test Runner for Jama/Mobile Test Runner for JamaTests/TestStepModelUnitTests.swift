@@ -9,7 +9,6 @@
 import XCTest
 @testable import Mobile_Test_Runner_for_Jama
 class TestStepModelUnitTests: XCTestCase {
-    
     var fields: [String: AnyObject] = [:]
     var testModel = TestStepModel()
     
@@ -20,7 +19,6 @@ class TestStepModelUnitTests: XCTestCase {
         fields.updateValue("note" as AnyObject, forKey: "notes")
         fields.updateValue("result" as AnyObject, forKey: "result")
         fields.updateValue("pass" as AnyObject, forKey: "status")
-        
     }
     
     override func tearDown() {

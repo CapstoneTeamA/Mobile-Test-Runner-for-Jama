@@ -20,7 +20,7 @@ class TestRunListModel {
                 break
             }
             let tmpRun = TestRunModel()
-            tmpRun.extractPlan(fromData: run)
+            tmpRun.extractRun(fromData: run)
             testRunList.append(tmpRun)
         }
     }
