@@ -13,6 +13,7 @@ class TestRunModel {
     var id = -1
     var name = ""
     var assignedTo = -1
+    var result = ""
     
     func extractPlan(fromData: [String: AnyObject]) {
         id = fromData["id"] as! Int

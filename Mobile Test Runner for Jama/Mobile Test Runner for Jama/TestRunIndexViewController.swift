@@ -56,36 +56,20 @@ class TestRunIndexViewController: UIViewController {
     }
     
     @IBAction func enterText(_ sender: UIButton) {
-        let inputTextAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        let inputTextAlert = UIAlertController(title: nil, message: "Enter Results", preferredStyle: UIAlertControllerStyle.alert)
         
-        inputTextAlert.addAction(UIAlertAction(title: "Done", style: .default, handler: {
-            (action: UIAlertAction!) in
-            self.navigationController?.popViewController(animated: true)
-        }))
+        inputTextAlert.addTextField { (textField) in
+        }
         
+        let confirmAction = UIAlertAction(title: "Done", style: .default) { (_) in
+            self.testRun.result = (inputTextAlert.textFields?[0].text)!
+            print(self.testRun.result)
+        }
+        
+        inputTextAlert.addAction(confirmAction)
         present(inputTextAlert, animated: true, completion: nil)
-        
-        
     }
-/*
-    @IBAction func enterText(_ sender: UIButton){
-        let alertController = UIAlertController(title: "Add Results", message: "Enter results", preferredStyle: UIAlertControllerStyle.alert)
-        
-        let confirm = UIAlertAction(title: "Done", style: .default) { (_) in
-            if let field = alertController.textFields?[0] {
-                // store your data
-            } else {
-                // user did not fill field
-            }
-        }
-        alertController.addTextField { (textField) in
-            textField.placeholder = "Result"
-        }
-        
-        alertController.addAction(confirm)
-        present(alertController, animated: true, completion: nil)
-    }
-    */
+
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
