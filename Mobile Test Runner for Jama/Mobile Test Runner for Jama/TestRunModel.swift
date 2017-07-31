@@ -24,8 +24,10 @@ class TestRunModel {
             assignedTo = assignedToWrappedValue as! Int
         }
         description = fields["description"] as! String
-        
-        //extract the list of steps
+    }
+    
+    func extractSteps(fromData: [String: AnyObject]) {
+        let fields: [String :  AnyObject] = fromData["fields"] as! Dictionary
         let testStepFields: [[String : AnyObject]] = fields["testRunSteps"] as! [[String : AnyObject]]
         
         for step in testStepFields {
@@ -33,18 +35,6 @@ class TestRunModel {
             tmpStep.extractStep(fromData: step)
             testStepList.append(tmpStep)
         }
-    }
-/*
-    func extractStepList(fromData: [String : AnyObject]) {
-        //TODO assign run id
-        let fields: [String : AnyObject] = fromData["fields"] as! Dictionary
-        let testStepFields: [[String : AnyObject]] = fields["testRunSteps"] as! [[String : AnyObject]]
         
-        for step in testStepFields {
-            let tmpStep = TestStepModel()
-            tmpStep.extractStep(fromData: step)
-            testStepList.append(tmpStep)
-        }
     }
- */
 }

@@ -156,7 +156,7 @@ extension TestListViewController: EndpointDelegate {
                     }
                 case .step:
                     let tmpRun = TestRunModel()
-                    tmpRun.extractRun(fromData: unwrappedData[0])
+                    tmpRun.extractSteps(fromData: unwrappedData[0])
                     if tmpRun.testStepList.isEmpty {
                         return
                     }
