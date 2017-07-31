@@ -13,12 +13,14 @@ class TestRunIndexViewController: UIViewController {
     @IBOutlet weak var cancelRun: UIBarButtonItem!
     @IBOutlet weak var testRunNameLabel: UILabel!
     @IBOutlet weak var testStepTable: UITableView!
-    
+    @IBOutlet weak var inputResultsButton: UIButton!
+
     var instance = ""
     var username = ""
     var password = ""
     var runId = -1
     var runName = ""
+    var testRun: TestRunModel = TestRunModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,6 @@ class TestRunIndexViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         testRunNameLabel.text = runName
         testStepTable.reloadData()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,6 +55,37 @@ class TestRunIndexViewController: UIViewController {
         
     }
     
+    @IBAction func enterText(_ sender: UIButton) {
+        let inputTextAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        
+        inputTextAlert.addAction(UIAlertAction(title: "Done", style: .default, handler: {
+            (action: UIAlertAction!) in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        present(inputTextAlert, animated: true, completion: nil)
+        
+        
+    }
+/*
+    @IBAction func enterText(_ sender: UIButton){
+        let alertController = UIAlertController(title: "Add Results", message: "Enter results", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let confirm = UIAlertAction(title: "Done", style: .default) { (_) in
+            if let field = alertController.textFields?[0] {
+                // store your data
+            } else {
+                // user did not fill field
+            }
+        }
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Result"
+        }
+        
+        alertController.addAction(confirm)
+        present(alertController, animated: true, completion: nil)
+    }
+    */
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {

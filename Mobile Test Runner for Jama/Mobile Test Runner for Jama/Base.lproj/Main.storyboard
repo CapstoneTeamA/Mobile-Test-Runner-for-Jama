@@ -441,6 +441,9 @@
                                         <state key="normal" title="Input Results">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="enterText:" destination="NKr-0k-Apa" eventType="touchUpInside" id="Yk8-yL-2R4"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -530,6 +533,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cancelRun" destination="lHq-Lx-YPg" id="rMz-b9-Nhz"/>
+                        <outlet property="inputResultsButton" destination="rM3-gm-dNb" id="R52-Wl-RVn"/>
                         <outlet property="testRunNameLabel" destination="ukt-q7-rqc" id="9TX-3G-Tpf"/>
                         <outlet property="testStepTable" destination="7gT-7g-SHk" id="16F-k8-pks"/>
                     </connections>
