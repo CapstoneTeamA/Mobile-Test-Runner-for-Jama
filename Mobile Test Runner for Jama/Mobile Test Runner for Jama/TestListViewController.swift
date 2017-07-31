@@ -102,7 +102,8 @@ extension TestListViewController: EndpointDelegate {
                     let tmpList = TestPlanListModel()
                     tmpList.extractPlanList(fromData: unwrappedData)
                     if tmpList.testPlanList.isEmpty {
-                        self.testList.isHidden = true
+                        self.testList.isUserInteractionEnabled = false
+                        self.testList.separatorColor = UIColor.white
                         self.noPlansImage.isHidden = false
                         self.noPlansLabel.isHidden = false
                         return
