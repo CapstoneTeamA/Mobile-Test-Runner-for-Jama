@@ -9,9 +9,9 @@
 import Foundation
 
 class TestRunModel {
-    var description = ""
+    var description = "No Runs Found"
     var id = -1
-    var name = ""
+    var name = "No Runs Found"
     var assignedTo = -1
     var testStepList: [TestStepModel] = []
     

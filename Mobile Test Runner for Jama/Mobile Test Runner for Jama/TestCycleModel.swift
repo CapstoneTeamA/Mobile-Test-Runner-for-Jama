@@ -10,7 +10,7 @@ import Foundation
 
 class TestCycleModel {
     var id = -1
-    var name = ""
+    var name = "No Cycles Found"
     
     func extractCycle(fromData: [String: AnyObject]) {
         id = fromData["id"] as! Int
