@@ -341,7 +341,6 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         //If the plan's cell is selected change the background color
         if selectedPlanIndex != indexPath.row {
             //default plan color
-            //cell.backgroundColor = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFF/0xFF, blue: 0xFF/0xFF, alpha: 1)
             cell.backgroundColor = UIColor.lightGray
             
         } else {
