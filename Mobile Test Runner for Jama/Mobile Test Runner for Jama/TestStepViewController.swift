@@ -10,6 +10,13 @@ import UIKit
 
 class TestStepViewController: UIViewController {
 
+    @IBOutlet weak var passButton: UIButton!
+    @IBOutlet weak var failButton: UIButton!
+    @IBOutlet weak var addResultsButton: UIButton!
+    @IBOutlet weak var actionTextField: UITextView!
+    @IBOutlet weak var expResultTextField: UITextView!
+    @IBOutlet weak var notesTextField: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
