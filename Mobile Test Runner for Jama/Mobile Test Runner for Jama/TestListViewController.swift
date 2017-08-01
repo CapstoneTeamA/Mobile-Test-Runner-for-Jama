@@ -282,15 +282,15 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.textAlignment = .left
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         cell.backgroundColor = UIColor.white
-        
+        cell.indentationLevel = 1
         if self.testRunList.testRunList[0].name == "No Runs Found" {
             cell.isUserInteractionEnabled = false
             cell.textLabel?.text = self.testRunList.testRunList[currentRunIndex].name
         } else {
             cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
-            cell.indentationLevel = 1
+            
             cell.accessoryType = .disclosureIndicator
-            cell.indentationWidth = 15.0
+            
         
         }
         return cell
@@ -313,7 +313,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         
         //If cycle's cell is selected change the background color
         if selectedCycleTableViewIndex != indexPath.row {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            cell.backgroundColor = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
         } else {
             cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
         }
@@ -338,14 +338,18 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.textLabel?.text = testPlanList.testPlanList[currentPlanIndex].name
         cell.textLabel?.textAlignment = .left
-        
         //If the plan's cell is selected change the background color
         if selectedPlanIndex != indexPath.row {
-            cell.backgroundColor = UIColor.white
+            //default plan color
+            //cell.backgroundColor = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFF/0xFF, blue: 0xFF/0xFF, alpha: 1)
+            cell.backgroundColor = UIColor.lightGray
+            
         } else {
             if selectedCycleIndex == largeNumber {
-                cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+                //clicked plan color
+                cell.backgroundColor = UIColor(colorLiteralRed: 0xF1/0xFF, green: 0x61/0xFF, blue: 0x2A/0xFF, alpha: 1)
             } else {
+                //unselected plan color
                 cell.backgroundColor = UIColor.lightGray
             }
         }
