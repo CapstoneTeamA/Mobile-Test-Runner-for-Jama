@@ -11,7 +11,6 @@ import Foundation
 class TestRunListModel {
     var testRunList: [TestRunModel] = []
     let testRunItemTypeId = 37 //Id in the jama system for items of type TestPlan
-
     
     func extractRunList(fromData: [[String : AnyObject]], parentId: Int) {
         for run in fromData {

@@ -19,18 +19,21 @@ class TestRunModel {
         id = fromData["id"] as! Int
         let fields: [String :  AnyObject] = fromData["fields"] as! Dictionary
         name = fields["name"] as! String
+        description = fields["description"] as! String
+        
         let assignedToWrappedValue = fields["assignedTo"]
         if assignedToWrappedValue != nil {
             assignedTo = assignedToWrappedValue as! Int
         }
-        description = fields["description"] as! String
         
-        let testStepFields: [[String : AnyObject]] = fields["testRunSteps"] as! [[String : AnyObject]]
+        if fields["testRunSteps"] != nil {
+            let testStepFields: [[String : AnyObject]] = fields["testRunSteps"] as! Array
         
-        for step in testStepFields {
-            let tmpStep = TestStepModel()
-            tmpStep.extractStep(fromData: step)
-            testStepList.append(tmpStep)
+            for step in testStepFields {
+                let tmpStep = TestStepModel()
+                tmpStep.extractStep(fromData: step)
+                testStepList.append(tmpStep)
+            }
         }
     }
 }

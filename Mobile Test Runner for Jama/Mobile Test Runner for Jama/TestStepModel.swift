@@ -19,7 +19,9 @@ class TestStepModel {
         action = fromData["action"] as! String
         expectedResult = fromData["expectedResult"] as! String
         notes = fromData["notes"] as! String
-        result = fromData["result"] as! String
+        if fromData["result"] != nil {
+            result = fromData["result"] as! String
+        }
         status = fromData["status"] as! String
     }
 }
