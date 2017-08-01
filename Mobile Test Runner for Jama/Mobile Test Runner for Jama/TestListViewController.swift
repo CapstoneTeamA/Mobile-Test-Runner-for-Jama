@@ -11,8 +11,6 @@ import UIKit
 class TestListViewController: UIViewController {
     @IBOutlet weak var testList: UITableView!
     @IBOutlet weak var tmpProjectLabel: UILabel!
-    
-    
     @IBOutlet weak var noPlansImage: UIImageView!
     @IBOutlet weak var noPlansLabel: UILabel!
     let testPlanList: TestPlanListModel = TestPlanListModel()
@@ -132,7 +130,6 @@ extension TestListViewController: EndpointDelegate {
                     //keep calling api while there are still more cycles
                     if self.testCycleList.testCycleList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
-                    
                 }
                 case .run:
                     let tmpList = TestRunListModel()
@@ -140,7 +137,6 @@ extension TestListViewController: EndpointDelegate {
                     
                     //Filter the runs returned from the API to select the assignedTo value is the current user's id
                     self.totalRunsReturnedFromServer += tmpList.testRunList.count
-                    
                     
                     for run in tmpList.testRunList {
                         if run.assignedTo == self.currentUser.id {
@@ -153,7 +149,6 @@ extension TestListViewController: EndpointDelegate {
                     //keep calling api while there are still more runs
                     if self.totalRunsReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password)
-                        
                         return
                     }
                     
@@ -161,7 +156,6 @@ extension TestListViewController: EndpointDelegate {
                             let emptyRun = TestRunModel()
                             self.testRunList.testRunList.insert(emptyRun, at: 0)
                     }
-                    
                     self.testList.reloadData()
             }
         }
@@ -292,8 +286,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         if self.testRunList.testRunList[0].name == "No Runs Found" {
             cell.isUserInteractionEnabled = false
             cell.textLabel?.text = self.testRunList.testRunList[currentRunIndex].name
-        }
-        else {
+        } else {
             cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
             cell.indentationLevel = 1
             cell.accessoryType = .disclosureIndicator
