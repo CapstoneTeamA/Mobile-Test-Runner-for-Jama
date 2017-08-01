@@ -26,7 +26,7 @@ class TestStepModelUnitTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExtractPlanFromData() {
+    func testExtractStepFromData() {
         testModel.extractStep(fromData: fields)
         
         XCTAssertEqual("action", testModel.action)
@@ -36,7 +36,3 @@ class TestStepModelUnitTests: XCTestCase {
         XCTAssertEqual("pass", testModel.status)
     }
 }
-
-
-
-

@@ -12,9 +12,6 @@ class TestRunUnitTests: XCTestCase {
     var dataWithAssignment: [String : AnyObject] = [:]
     var dataWithoutAssignment: [String : AnyObject] = [:]
     var fields: [String : AnyObject] = [:]
-    var runSteps: [TestStepModel] = []
-    var step1: TestStepModel = TestStepModel()
-    var step2: TestStepModel = TestStepModel()
     let run = TestRunModel()
     
     override func setUp() {

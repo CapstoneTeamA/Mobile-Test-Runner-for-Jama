@@ -185,7 +185,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         if unselectTestPlan(indexPath: indexPath) || unselectTestCycle(indexPath: indexPath) {
             return
         }
-        //If the user taps a test run, load all data (incl steps) for that run from the API and pass to run index screen
+        //If the user taps a test run, go to the index screen for that test run
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TestRunCell" {
             let runViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunIndex") as! TestRunIndexViewController
             
