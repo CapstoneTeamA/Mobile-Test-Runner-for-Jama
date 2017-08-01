@@ -339,11 +339,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = testPlanList.testPlanList[currentPlanIndex].name
         cell.textLabel?.textAlignment = .left
         //If the plan's cell is selected change the background color
-        if selectedPlanIndex != indexPath.row {
-            //default plan color
-            cell.backgroundColor = UIColor.lightGray
-            
-        } else {
+    
             if selectedCycleIndex == largeNumber {
                 //clicked plan color
                 cell.backgroundColor = UIColor(colorLiteralRed: 0xF1/0xFF, green: 0x61/0xFF, blue: 0x2A/0xFF, alpha: 1)
@@ -351,7 +347,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
                 //unselected plan color
                 cell.backgroundColor = UIColor.lightGray
             }
-        }
+        
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         return cell
     }

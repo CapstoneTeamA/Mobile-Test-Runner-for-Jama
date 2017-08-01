@@ -111,9 +111,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mtrlogo_v8-1.png" translatesAutoresizingMaskIntoConstraints="NO" id="9wk-Au-Oog">
-                                <rect key="frame" x="60" y="554" width="294" height="98"/>
+                                <rect key="frame" x="60" y="554" width="294" height="109"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="9wk-Au-Oog" secondAttribute="height" multiplier="3:1" id="aqR-B1-FWO"/>
+                                    <constraint firstAttribute="width" secondItem="9wk-Au-Oog" secondAttribute="height" multiplier="2.7:1" id="aqR-B1-FWO"/>
                                 </constraints>
                             </imageView>
                         </subviews>
