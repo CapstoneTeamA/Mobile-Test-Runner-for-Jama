@@ -25,6 +25,7 @@ class TestRunIndexViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         testRunNameLabel.text = testRun.name
         testStepTable.reloadData()
+ 
         
     }
     
@@ -62,7 +63,7 @@ extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         let cell = TestStepTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestStepCell")
-        cell.customInit(tableWidth: tableView.bounds.width, stepNumber: indexPath.row + 1, stepName: testRun.name)
+        cell.customInit(tableWidth: tableView.bounds.width, stepNumber: indexPath.row + 1, stepName: testRun.testStepList[indexPath.row].action)
 
         return cell
     }
