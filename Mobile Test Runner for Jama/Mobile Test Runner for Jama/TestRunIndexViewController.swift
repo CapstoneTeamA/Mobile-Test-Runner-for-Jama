@@ -14,7 +14,8 @@ class TestRunIndexViewController: UIViewController {
     @IBOutlet weak var testRunNameLabel: UILabel!
     @IBOutlet weak var testStepTable: UITableView!
     @IBOutlet weak var inputResultsButton: UIButton!
-
+    @IBOutlet weak var inputResultBox: UIView!
+    
     var instance = ""
     var username = ""
     var password = ""
@@ -28,6 +29,7 @@ class TestRunIndexViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         testRunNameLabel.text = runName
         testStepTable.reloadData()
+        inputResultBox.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,9 +58,15 @@ class TestRunIndexViewController: UIViewController {
     }
     
     @IBAction func enterText(_ sender: UIButton) {
+        inputResultBox.isHidden = false
+        /*
         let inputTextAlert = UIAlertController(title: nil, message: "Enter Results", preferredStyle: UIAlertControllerStyle.alert)
         
         inputTextAlert.addTextField { (textField) in
+            textField.clearsOnBeginEditing = false
+            var frameRect = textField.frame
+            frameRect.size.height = 125
+            textField.frame = frameRect
         }
         
         let confirmAction = UIAlertAction(title: "Done", style: .default) { (_) in
@@ -68,6 +76,7 @@ class TestRunIndexViewController: UIViewController {
         
         inputTextAlert.addAction(confirmAction)
         present(inputTextAlert, animated: true, completion: nil)
+ */
     }
 
 }

@@ -492,9 +492,50 @@
                                 <rect key="frame" x="0.0" y="570" width="414" height="2"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJc-4V-jEK" userLabel="popUpView">
+                                <rect key="frame" x="0.0" y="63.999999999999972" width="414" height="441.33333333333326"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enter Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JxG-OY-Tih">
+                                        <rect key="frame" x="186" y="0.0" width="42" height="73.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="Enter results here" translatesAutoresizingMaskIntoConstraints="NO" id="Gvz-Ft-XC7" userLabel="inputTextBox">
+                                        <rect key="frame" x="0.0" y="73.666666666666657" width="414" height="294.33333333333337"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="NKr-0k-Apa" id="llG-n2-zQF"/>
+                                        </connections>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgE-cu-Qsn">
+                                        <rect key="frame" x="0.0" y="368" width="414" height="73.666666666666686"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="JxG-OY-Tih" firstAttribute="top" secondItem="eJc-4V-jEK" secondAttribute="top" id="BEn-gC-fBx"/>
+                                    <constraint firstItem="Gvz-Ft-XC7" firstAttribute="width" secondItem="eJc-4V-jEK" secondAttribute="width" id="CoF-OE-J8X"/>
+                                    <constraint firstItem="JxG-OY-Tih" firstAttribute="width" secondItem="eJc-4V-jEK" secondAttribute="width" id="Li4-vt-Sak"/>
+                                    <constraint firstItem="Gvz-Ft-XC7" firstAttribute="top" secondItem="JxG-OY-Tih" secondAttribute="bottom" id="NMk-4Z-hch"/>
+                                    <constraint firstItem="JxG-OY-Tih" firstAttribute="height" secondItem="eJc-4V-jEK" secondAttribute="height" multiplier="1:6" id="OE5-t7-qXQ"/>
+                                    <constraint firstItem="Gvz-Ft-XC7" firstAttribute="height" secondItem="eJc-4V-jEK" secondAttribute="height" multiplier="2:3" id="W2X-yH-U3S"/>
+                                    <constraint firstItem="qgE-cu-Qsn" firstAttribute="height" secondItem="eJc-4V-jEK" secondAttribute="height" multiplier="1:6" id="YRt-rC-U6j"/>
+                                    <constraint firstItem="qgE-cu-Qsn" firstAttribute="width" secondItem="eJc-4V-jEK" secondAttribute="width" id="adk-qB-yCB"/>
+                                    <constraint firstItem="Gvz-Ft-XC7" firstAttribute="centerX" secondItem="eJc-4V-jEK" secondAttribute="centerX" id="tnh-MM-3Xl"/>
+                                    <constraint firstItem="qgE-cu-Qsn" firstAttribute="top" secondItem="Gvz-Ft-XC7" secondAttribute="bottom" id="ule-LG-ZnQ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="eJc-4V-jEK" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="1pj-7i-Awg"/>
                             <constraint firstItem="1ZF-DZ-CxQ" firstAttribute="top" secondItem="7gT-7g-SHk" secondAttribute="bottom" id="42x-6y-Cp8"/>
                             <constraint firstItem="TzA-TL-KAC" firstAttribute="top" secondItem="ukt-q7-rqc" secondAttribute="bottom" id="5Ig-E1-isQ"/>
                             <constraint firstItem="1ZF-DZ-CxQ" firstAttribute="centerX" secondItem="29g-Lj-zF6" secondAttribute="centerX" id="6Nr-Po-j4i"/>
@@ -508,8 +549,11 @@
                             <constraint firstItem="TzA-TL-KAC" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="V5H-ok-5ac"/>
                             <constraint firstItem="ukt-q7-rqc" firstAttribute="top" secondItem="Arf-ao-gXm" secondAttribute="bottom" id="VCr-dZ-OmC"/>
                             <constraint firstItem="gXa-Dc-LxK" firstAttribute="top" secondItem="7gT-7g-SHk" secondAttribute="bottom" constant="122" id="WqF-nC-td4"/>
+                            <constraint firstItem="eJc-4V-jEK" firstAttribute="centerY" secondItem="29g-Lj-zF6" secondAttribute="centerY" id="Xxl-fW-Pz8"/>
                             <constraint firstItem="ukt-q7-rqc" firstAttribute="centerX" secondItem="29g-Lj-zF6" secondAttribute="centerX" id="ZPd-Ck-wqQ"/>
                             <constraint firstItem="TzA-TL-KAC" firstAttribute="centerX" secondItem="29g-Lj-zF6" secondAttribute="centerX" id="bCR-Mz-qb8"/>
+                            <constraint firstItem="eJc-4V-jEK" firstAttribute="top" secondItem="Arf-ao-gXm" secondAttribute="bottom" id="d8c-8k-fCk"/>
+                            <constraint firstItem="eJc-4V-jEK" firstAttribute="height" secondItem="29g-Lj-zF6" secondAttribute="height" multiplier="3:5" id="eMj-ft-8cc"/>
                             <constraint firstItem="ukt-q7-rqc" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="gY6-yz-Q8B"/>
                             <constraint firstItem="miI-Kx-Bj4" firstAttribute="top" secondItem="1ZF-DZ-CxQ" secondAttribute="bottom" id="mwq-76-Ca4"/>
                             <constraint firstItem="7gT-7g-SHk" firstAttribute="top" secondItem="ukt-q7-rqc" secondAttribute="bottom" constant="2" id="pmk-ea-Ihp"/>
@@ -533,7 +577,9 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cancelRun" destination="lHq-Lx-YPg" id="rMz-b9-Nhz"/>
+                        <outlet property="inputResultBox" destination="eJc-4V-jEK" id="YYj-Sv-Og2"/>
                         <outlet property="inputResultsButton" destination="rM3-gm-dNb" id="R52-Wl-RVn"/>
+                        <outlet property="inputTextBox" destination="Gvz-Ft-XC7" id="rcH-Wb-FuJ"/>
                         <outlet property="testRunNameLabel" destination="ukt-q7-rqc" id="9TX-3G-Tpf"/>
                         <outlet property="testStepTable" destination="7gT-7g-SHk" id="16F-k8-pks"/>
                     </connections>
