@@ -391,7 +391,7 @@
         <!--Test Step-->
         <scene sceneID="SDY-2C-hHe">
             <objects>
-                <viewController title="Test Step" id="RUt-e2-15a" customClass="TestStepViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Test Step" title="Test Step" id="RUt-e2-15a" customClass="TestStepViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kzJ-PQ-I07"/>
                         <viewControllerLayoutGuide type="bottom" id="bCd-i8-7Uu"/>
@@ -583,9 +583,6 @@
                                         <state key="normal" title="Mark as Blocked">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="RUt-e2-15a" kind="show" id="pvH-oG-fkH"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rM3-gm-dNb">
                                         <rect key="frame" x="207" y="4" width="207" height="61"/>

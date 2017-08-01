@@ -19,6 +19,8 @@ class TestRunIndexViewController: UIViewController {
     var password = ""
     var runId = -1
     var runName = ""
+
+   // var testStepList : [TestSteps]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,14 +60,27 @@ class TestRunIndexViewController: UIViewController {
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return testStepList.count
         //TODO this is hard coded until we implement loading real steps into the screen.
         return 20
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
+       // expectedResults  = testStepList[indexPath.row].expectedResults
         let cell = TestStepTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestStepCell")
         cell.customInit(tableWidth: tableView.bounds.width, stepNumber: indexPath.row + 1, stepName: runName)
 
         return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let stepDetailController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Test Step") as! TestStepViewController
+        stepDetailController.action = "action"
+        stepDetailController.expResult = "The purpose of this ticket is to enable the user to click on any of the test steps that are listed on the run view and navigate to a placeholder screen for that test step. For testing purposes, it is OK to implement a temporary back button on the destination screen so that you can navigate back to the test run list screen."
+        
+        stepDetailController.notes = "notes"
+        
+        self.navigationController?.pushViewController(stepDetailController, animated: true)
+
     }
 }
