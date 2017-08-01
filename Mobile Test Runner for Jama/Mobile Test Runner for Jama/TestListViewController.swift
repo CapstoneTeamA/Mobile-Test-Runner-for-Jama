@@ -124,8 +124,6 @@ extension TestListViewController: EndpointDelegate {
                     if tmpList.testCycleList.isEmpty {
                         let emptyCycle = TestCycleModel();
                         tmpList.testCycleList.insert(emptyCycle, at: 0)
-                        
-                      
                     }
                     
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
@@ -140,8 +138,6 @@ extension TestListViewController: EndpointDelegate {
                     let tmpList = TestRunListModel()
                     tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
                     
-                    
-                    
                     //Filter the runs returned from the API to select the assignedTo value is the current user's id
                     self.totalRunsReturnedFromServer += tmpList.testRunList.count
                     
@@ -152,19 +148,18 @@ extension TestListViewController: EndpointDelegate {
                         }
                     }
                     ////if there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
-                    
-                    
-                    
                    
                     self.testList.reloadData()
                     //keep calling api while there are still more runs
                     if self.totalRunsReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password)
+                        
                         return
                     }
+                    
                     if self.testRunList.testRunList.isEmpty {
-                        let emptyRun = TestRunModel()
-                        self.testRunList.testRunList.insert(emptyRun, at: 0)
+                            let emptyRun = TestRunModel()
+                            self.testRunList.testRunList.insert(emptyRun, at: 0)
                     }
                     
                     self.testList.reloadData()
@@ -180,7 +175,9 @@ extension TestListViewController: EndpointDelegate {
 extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testPlanList.testPlanList.count + testCycleList.testCycleList.count + testRunList.testRunList.count
+        let numOfRun = selectedCycleIndex == largeNumber ? 0 : testRunList.testRunList.count
+        let numOfCycle = selectedPlanIndex == largeNumber ? 0 : testCycleList.testCycleList.count
+        return testPlanList.testPlanList.count + numOfCycle + numOfRun
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
@@ -316,6 +313,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestCycleCell")
+        
         cell.textLabel?.text = self.testCycleList.testCycleList[currentCycleIndex].name
         cell.textLabel?.textAlignment = .left
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
