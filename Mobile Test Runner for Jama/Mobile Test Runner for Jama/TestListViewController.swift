@@ -30,7 +30,7 @@ class TestListViewController: UIViewController {
     var totalRunsReturnedFromServer = 0
     var currentTestLevel = TestLevel.plan
     enum TestLevel {
-        case plan, cycle, run, step
+        case plan, cycle, run
     }
 
     override func viewDidLoad() {
@@ -80,19 +80,6 @@ class TestListViewController: UIViewController {
         runEndpoint = "https://" + instance + "." + runEndpoint
         runEndpoint = runEndpoint.replacingOccurrences(of: "{testCycleId}", with: "\(selectedTestCycleId)")
         return runEndpoint
-    }
-    
-    func getStepsForRunOnClick() {
-        self.currentTestLevel = .step
-        let stepEndpoint = buildRunStepsEndpointString()
-        RestHelper.hitEndpoint(atEndpointString: stepEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
-    }
-    
-    func buildRunStepsEndpointString() -> String {
-        var stepEndpoint = RestHelper.getEndpointString(method: "Get", endpoint: "RunSteps")
-        stepEndpoint = "https://" + instance + "." + stepEndpoint
-        stepEndpoint = stepEndpoint.replacingOccurrences(of: "{testRunId}", with: "\(selectedRunId)")
-        return stepEndpoint
     }
 
     @IBAction func touchedLogoutButton(_ sender: Any) {
@@ -154,17 +141,6 @@ extension TestListViewController: EndpointDelegate {
                     if self.totalRunsReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
-                case .step:
-                    let tmpRun = TestRunModel()
-                    tmpRun.extractSteps(fromData: unwrappedData[0])
-                    if tmpRun.testStepList.isEmpty {
-                        return
-                    }
-                    self.testRun.testStepList.append(contentsOf: tmpRun.testStepList)
-                    //keep calling api while there are still more steps
-                    if self.testRun.testStepList.count < totalItems {
-                        RestHelper.hitEndpoint(atEndpointString: self.buildRunStepsEndpointString() + "&startAt=\(self.testRun.testStepList.count)", withDelegate: self, username: self.username, password: self.password)
-                    }
             }
         }
     }
@@ -195,8 +171,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             
             let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
             selectedRunId = self.testRunList.testRunList[currentRunIndex].id
-            getStepsForRunOnClick()
-            runViewController.testRun = self.testRun
+            runViewController.testRun = self.testRunList.testRunList[currentRunIndex]
             runViewController.username = username
             runViewController.password = password
             runViewController.instance = instance

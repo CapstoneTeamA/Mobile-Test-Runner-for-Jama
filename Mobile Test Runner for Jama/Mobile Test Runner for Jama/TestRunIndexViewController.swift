@@ -25,7 +25,6 @@ class TestRunIndexViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         testRunNameLabel.text = testRun.name
         testStepTable.reloadData()
- 
         
     }
     
