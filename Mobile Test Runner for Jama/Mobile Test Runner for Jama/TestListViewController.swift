@@ -334,7 +334,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         
         //If cycle's cell is selected change the background color
         if selectedCycleTableViewIndex != indexPath.row {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0xC7/0xFF, green: 0xC7/0xFF, blue: 0xC7/0xFF, alpha: 1)
+            cell.backgroundColor = UIColor(colorLiteralRed: 0xE5/0xFF, green: 0xE5/0xFF, blue: 0xE5/0xFF, alpha: 1)
         } else {
             cell.backgroundColor = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
             
