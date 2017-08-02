@@ -175,16 +175,37 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
-        return buildCell(indexPath: indexPath)
+        
+        let cell = buildCell(indexPath: indexPath)
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.tintColor = UIColor.black
+        
+        cell?.setHighlighted(false, animated: true)
+    }
+    
+    public func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.tintColor = UIColor.clear
+        
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //If we unselect a test plan or cycle return
+        
         if unselectTestPlan(indexPath: indexPath) || unselectTestCycle(indexPath: indexPath) {
             return
         }
+        tableView.cellForRow(at: indexPath)?.tintColor = UIColor.black
+        tableView.deselectRow(at: indexPath, animated: true)
         //If the user taps a test run, go to the index screen for that test run
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TestRunCell" {
+            
             let runViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunIndex") as! TestRunIndexViewController
             
             let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
@@ -316,6 +337,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
         } else {
             cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            
         }
         cell.indentationLevel = 1
         cell.indentationWidth = 15.0
@@ -340,13 +362,11 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.textAlignment = .left
         //If the plan's cell is selected change the background color
     
-            if selectedCycleIndex == largeNumber {
-                //clicked plan color
-                cell.backgroundColor = UIColor(colorLiteralRed: 0xF1/0xFF, green: 0x61/0xFF, blue: 0x2A/0xFF, alpha: 1)
-            } else {
-                //unselected plan color
+        cell.backgroundColor = UIColor(colorLiteralRed: 0xF1/0xFF, green: 0x61/0xFF, blue: 0x2A/0xFF, alpha: 1)
+        
+        if selectedPlanIndex != indexPath.row {
                 cell.backgroundColor = UIColor.lightGray
-            }
+        }
         
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         return cell
