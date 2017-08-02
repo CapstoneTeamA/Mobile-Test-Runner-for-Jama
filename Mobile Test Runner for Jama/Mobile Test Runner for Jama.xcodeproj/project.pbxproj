@@ -10,7 +10,6 @@
 		133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */ = {isa = PBXBuildFile; fileRef = 133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */; };
 		133971BB1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */; };
 		133971C31F2C326700AB9D30 /* TestStepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */; };
-		133971C51F2C893800AB9D30 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 133971C41F2C893800AB9D30 /* check_icon.png */; };
 		13A342EF1F0367E9002EBC92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A342EE1F0367E9002EBC92 /* AppDelegate.swift */; };
 		13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F21F0367E9002EBC92 /* Main.storyboard */; };
 		13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F51F0367E9002EBC92 /* Assets.xcassets */; };
@@ -49,6 +48,9 @@
 		13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343B01F0F5C6E002EBC92 /* Endpoints.plist */; };
 		303AD4651F2994F5000E3988 /* LoginViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */; };
 		4D15D7D81F2A802F009A26B8 /* TestRunIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */; };
+		9092ED591F325DA700303DD0 /* check_icon_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 9092ED561F325DA700303DD0 /* check_icon_green.png */; };
+		9092ED5A1F325DA700303DD0 /* check_icon_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 9092ED571F325DA700303DD0 /* check_icon_grey.png */; };
+		9092ED5B1F325DA700303DD0 /* check_icon_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 9092ED581F325DA700303DD0 /* check_icon_red.png */; };
 		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
 		E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */; };
 		E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */; };
@@ -75,7 +77,6 @@
 		133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Jama-logo-smallwtext.png"; sourceTree = "<group>"; };
 		133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepTableViewCell.swift; sourceTree = "<group>"; };
-		133971C41F2C893800AB9D30 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
 		13A342EB1F0367E9002EBC92 /* Mobile Test Runner for Jama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Test Runner for Jama.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A342EE1F0367E9002EBC92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13A342F31F0367E9002EBC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -120,6 +121,9 @@
 		13A343B01F0F5C6E002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 		303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerUITests.swift; sourceTree = "<group>"; };
 		4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunIndexViewController.swift; sourceTree = "<group>"; };
+		9092ED561F325DA700303DD0 /* check_icon_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check_icon_green.png; path = ../../../../check_icon_green.png; sourceTree = "<group>"; };
+		9092ED571F325DA700303DD0 /* check_icon_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check_icon_grey.png; path = ../../../../check_icon_grey.png; sourceTree = "<group>"; };
+		9092ED581F325DA700303DD0 /* check_icon_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check_icon_red.png; path = ../../../../check_icon_red.png; sourceTree = "<group>"; };
 		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
 		E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtr-logo-v2.png"; sourceTree = "<group>"; };
 		E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-lightbl-redx.png"; sourceTree = "<group>"; };
@@ -153,7 +157,9 @@
 		133971B71F1B437600AB9D30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				133971C41F2C893800AB9D30 /* check_icon.png */,
+				9092ED561F325DA700303DD0 /* check_icon_green.png */,
+				9092ED571F325DA700303DD0 /* check_icon_grey.png */,
+				9092ED581F325DA700303DD0 /* check_icon_red.png */,
 				E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */,
 				E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */,
 				133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */,
@@ -405,12 +411,14 @@
 			files = (
 				13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */,
 				13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */,
+				9092ED5B1F325DA700303DD0 /* check_icon_red.png in Resources */,
 				E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */,
 				13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */,
+				9092ED591F325DA700303DD0 /* check_icon_green.png in Resources */,
 				13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */,
+				9092ED5A1F325DA700303DD0 /* check_icon_grey.png in Resources */,
 				133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */,
 				E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */,
-				133971C51F2C893800AB9D30 /* check_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

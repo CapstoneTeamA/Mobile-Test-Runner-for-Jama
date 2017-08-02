@@ -9,7 +9,10 @@
 import UIKit
 
 class TestStepTableViewCell: UITableViewCell {
-    var statusIconImageView: UIImageView!
+    var statusIconImageViewGreen: UIImageView!
+    var statusIconImageViewGrey: UIImageView!
+    var statusIconImageViewRed: UIImageView!
+
     let iconOffset: CGFloat = 22
     let nameLabelOffset: CGFloat = 50
     let iconCenterX: CGFloat = 24
@@ -27,24 +30,38 @@ class TestStepTableViewCell: UITableViewCell {
     func customInit(tableWidth: CGFloat, stepNumber: Int, stepName: String) {
         self.bounds = CGRect(x: self.bounds.minX, y: self.bounds.minY, width: UIScreen.main.bounds.width, height: self.bounds.height)
         
-        //create an image view from the image and set its position
-        let image = UIImage(named: "check_icon.png")
-        statusIconImageView = UIImageView(image: image)
-        statusIconImageView.center = CGPoint(x: iconCenterX, y: iconCenterY)
+        //create the status image view from the images and set its position and inital display attribute
+        let checkGreen = UIImage(named: "check_icon_green.png")
+        statusIconImageViewGreen = UIImageView(image: checkGreen)
+        statusIconImageViewGreen.center = CGPoint(x: iconCenterX, y: iconCenterY)
+        statusIconImageViewGreen.isHidden = true
+        let checkGrey = UIImage(named: "check_icon_grey.png")
+        statusIconImageViewGrey = UIImageView(image: checkGrey)
+        statusIconImageViewGrey.center = CGPoint(x: iconCenterX, y: iconCenterY)
+        statusIconImageViewGrey.isHidden = false
+        let checkRed = UIImage(named: "check_icon_red.png")
+        statusIconImageViewRed = UIImageView(image: checkRed)
+        statusIconImageViewRed.center = CGPoint(x: iconCenterX, y: iconCenterY)
+        statusIconImageViewRed.isHidden = true
+        
+        
         
         //Build the labels for the step number and step name
         let numberLabel = UILabel(frame: CGRect(x: self.contentView.bounds.minX, y: self.contentView.bounds.minY, width: 40, height: self.contentView.bounds.height))
-        let nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - statusIconImageView.bounds.width - numberLabel.bounds.width - nameLabelOffset , height: self.contentView.bounds.height))
+        let nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - statusIconImageViewGreen.bounds.width - numberLabel.bounds.width - nameLabelOffset , height: self.contentView.bounds.height))
         
         //set the position of the labels
-        numberLabel.center = CGPoint(x: statusIconImageView.center.x + iconOffset + numberLabel.bounds.width/2 , y: self.contentView.center.y)
+        numberLabel.center = CGPoint(x: statusIconImageViewGreen.center.x + iconOffset + numberLabel.bounds.width/2 , y: self.contentView.center.y)
         nameLabel.center = CGPoint(x: numberLabel.center.x + iconOffset + nameLabel.bounds.width/2, y: self.contentView.center.y)
         
         numberLabel.text = "\(stepNumber)"
         nameLabel.text = stepName
         
         //Add all of the subviews to the content view of the cell
-        self.contentView.addSubview(statusIconImageView)
+        self.contentView.addSubview(statusIconImageViewGreen)
+        self.contentView.addSubview(statusIconImageViewGrey)
+        self.contentView.addSubview(statusIconImageViewRed)
+
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(numberLabel)
         
