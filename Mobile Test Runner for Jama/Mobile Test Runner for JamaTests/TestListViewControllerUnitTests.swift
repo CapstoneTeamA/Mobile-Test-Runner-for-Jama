@@ -115,11 +115,16 @@ class TestListViewControllerUnitTests: XCTestCase {
     }
     
     func testBuildCell() {
-        let white = UIColor.white
-        let gray = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
-        let selectedCycleColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
-        
-      
+        let runwhite = UIColor.white
+        let unselectedCycleGray = UIColor(colorLiteralRed: 0xE5/0xFF, green: 0xE5/0xFF, blue: 0xE5/0xFF, alpha: 1)
+
+        let selectedCycleYellow = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
+        let unselectedPlanGray = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+        let selectedPlanBlue = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+    
+
+    
+    
         viewController.selectedPlanIndex = 1
         viewController.selectedCycleIndex = 1
         viewController.selectedCycleTableViewIndex = 3
@@ -130,7 +135,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(0, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
-        XCTAssertEqual(white, cell.backgroundColor)
+        XCTAssertEqual(UIColor.lightGray, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 1, section: 0))
         
@@ -139,7 +144,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(0, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
-        var currentSelectedPlanBackgroundColor = viewController.selectedCycleIndex == viewController.largeNumber ? UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1) : UIColor.lightGray
+        var currentSelectedPlanBackgroundColor = viewController.selectedCycleIndex == viewController.largeNumber ? unselectedPlanGray : selectedPlanBlue
         XCTAssertEqual(currentSelectedPlanBackgroundColor, cell.backgroundColor)
         
 
@@ -150,7 +155,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
-        XCTAssertEqual(gray, cell.backgroundColor)
+        XCTAssertEqual(unselectedCycleGray, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 3, section: 0))
         
@@ -159,7 +164,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
-        XCTAssertEqual(selectedCycleColor, cell.backgroundColor)
+        XCTAssertEqual(selectedCycleYellow, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 4, section: 0))
         XCTAssertEqual("1. testRun1", cell.textLabel?.text)
@@ -167,7 +172,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
-        XCTAssertEqual(white, cell.backgroundColor)
+        XCTAssertEqual(runwhite, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 5, section: 0))
         XCTAssertEqual("2. testRun2", cell.textLabel?.text)
@@ -175,7 +180,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
-        XCTAssertEqual(white, cell.backgroundColor)
+        XCTAssertEqual(runwhite, cell.backgroundColor)
         
         
         viewController.selectedPlanIndex = 0
@@ -189,7 +194,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(0, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
-        currentSelectedPlanBackgroundColor = viewController.selectedCycleIndex == viewController.largeNumber ? UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1) : UIColor.lightGray
+        currentSelectedPlanBackgroundColor = viewController.selectedCycleIndex == viewController.largeNumber ?  unselectedPlanGray : selectedPlanBlue
         XCTAssertEqual(currentSelectedPlanBackgroundColor, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 1, section: 0))
@@ -199,7 +204,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
-        XCTAssertEqual(gray, cell.backgroundColor)
+        XCTAssertEqual(unselectedCycleGray, cell.backgroundColor)
         
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 2, section: 0))
@@ -209,7 +214,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
-        XCTAssertEqual(selectedCycleColor, cell.backgroundColor)
+        XCTAssertEqual(selectedCycleYellow, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 3, section: 0))
         
@@ -218,7 +223,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
-        XCTAssertEqual(white, cell.backgroundColor)
+        XCTAssertEqual(runwhite, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 4, section: 0))
         XCTAssertEqual("2. testRun2", cell.textLabel?.text)
@@ -226,7 +231,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
-        XCTAssertEqual(white, cell.backgroundColor)
+        XCTAssertEqual(runwhite, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 5, section: 0))
         XCTAssertEqual("testPlan2", cell.textLabel?.text)
@@ -234,7 +239,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(0, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
-        XCTAssertEqual(white, cell.backgroundColor)
+        XCTAssertEqual(UIColor.lightGray, cell.backgroundColor)
         
         viewController.selectedCycleIndex = 0
         viewController.selectedCycleTableViewIndex = 1
@@ -246,7 +251,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
-        XCTAssertEqual(gray, cell.backgroundColor)
+        XCTAssertEqual(unselectedCycleGray, cell.backgroundColor)
         
         viewController.selectedCycleIndex = viewController.largeNumber
         viewController.selectedCycleTableViewIndex = viewController.largeNumber
@@ -258,7 +263,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(0, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestPlanCell", cell.reuseIdentifier)
-        currentSelectedPlanBackgroundColor = viewController.selectedCycleIndex == viewController.largeNumber ? UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1) : UIColor.lightGray
+        currentSelectedPlanBackgroundColor = viewController.selectedCycleIndex == viewController.largeNumber ? selectedPlanBlue : unselectedPlanGray
         XCTAssertEqual(currentSelectedPlanBackgroundColor, cell.backgroundColor)
         
         
