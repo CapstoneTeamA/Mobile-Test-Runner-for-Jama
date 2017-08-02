@@ -366,7 +366,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
         
         if selectedPlanIndex != indexPath.row {
-                cell.backgroundColor = UIColor.lightGray
+                cell.backgroundColor = UIColor(colorLiteralRed: 0xC7/0xFF, green: 0xC7/0xFF, blue: 0xC7/0xFF, alpha: 1)
         }
         
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
