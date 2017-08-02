@@ -16,6 +16,7 @@ class TestListViewController: UIViewController {
     let testPlanList: TestPlanListModel = TestPlanListModel()
     let testCycleList: TestCycleListModel = TestCycleListModel()
     let testRunList:  TestRunListModel = TestRunListModel()
+    var testRun: TestRunModel = TestRunModel()
     var currentUser: UserModel!
     var projectId = -1
     var selectedPlanId = -1
@@ -188,8 +189,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             let runViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunIndex") as! TestRunIndexViewController
             
             let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
-            runViewController.runId = self.testRunList.testRunList[currentRunIndex].id
-            runViewController.runName = self.testRunList.testRunList[currentRunIndex].name
+            runViewController.testRun = self.testRunList.testRunList[currentRunIndex]
             runViewController.username = username
             runViewController.password = password
             runViewController.instance = instance

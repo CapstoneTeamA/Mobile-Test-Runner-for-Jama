@@ -13,6 +13,7 @@ class TestRunUnitTests: XCTestCase {
     var dataWithoutAssignment: [String : AnyObject] = [:]
     var fields: [String : AnyObject] = [:]
     let run = TestRunModel()
+    
     override func setUp() {
         super.setUp()
         dataWithAssignment.updateValue(23 as AnyObject, forKey: "id")
@@ -32,7 +33,7 @@ class TestRunUnitTests: XCTestCase {
     }
     
     func testExtractRunFromDataWithoutAssignment() {
-        run.extractPlan(fromData: dataWithoutAssignment)
+        run.extractRun(fromData: dataWithoutAssignment)
         
         XCTAssertEqual("testRun", run.name)
         XCTAssertEqual(23, run.id)
@@ -41,7 +42,7 @@ class TestRunUnitTests: XCTestCase {
     }
     
     func testExtractRunFromDataWithAssignment() {
-        run.extractPlan(fromData: dataWithAssignment)
+        run.extractRun(fromData: dataWithAssignment)
         
         XCTAssertEqual("testRun", run.name)
         XCTAssertEqual(23, run.id)
