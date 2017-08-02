@@ -35,11 +35,11 @@ class TestStepTableViewCell: UITableViewCell {
         statusIconImageViewGreen = UIImageView(image: checkGreen)
         statusIconImageViewGreen.center = CGPoint(x: iconCenterX, y: iconCenterY)
         statusIconImageViewGreen.isHidden = true
-        let checkGrey = UIImage(named: "check_icon_grey.png")
+        let checkGrey = UIImage(named: "empty_icon_grey.png")
         statusIconImageViewGrey = UIImageView(image: checkGrey)
         statusIconImageViewGrey.center = CGPoint(x: iconCenterX, y: iconCenterY)
         statusIconImageViewGrey.isHidden = true
-        let checkRed = UIImage(named: "check_icon_red.png")
+        let checkRed = UIImage(named: "X_icon_red.png")
         statusIconImageViewRed = UIImageView(image: checkRed)
         statusIconImageViewRed.center = CGPoint(x: iconCenterX, y: iconCenterY)
         statusIconImageViewRed.isHidden = true
