@@ -336,7 +336,8 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         if selectedCycleTableViewIndex != indexPath.row {
             cell.backgroundColor = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
         } else {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            cell.backgroundColor = UIColor(colorLiteralRed: 0xF1/0xFF, green: 0x61/0xFF, blue: 0x2A/0xFF, alpha: 1)
+            
             
         }
         cell.indentationLevel = 1
@@ -362,7 +363,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.textAlignment = .left
         //If the plan's cell is selected change the background color
     
-        cell.backgroundColor = UIColor(colorLiteralRed: 0xF1/0xFF, green: 0x61/0xFF, blue: 0x2A/0xFF, alpha: 1)
+        cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
         
         if selectedPlanIndex != indexPath.row {
                 cell.backgroundColor = UIColor.lightGray
