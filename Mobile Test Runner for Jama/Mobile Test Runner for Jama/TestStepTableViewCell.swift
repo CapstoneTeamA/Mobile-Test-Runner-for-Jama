@@ -41,8 +41,7 @@ class TestStepTableViewCell: UITableViewCell {
         nameLabel.center = CGPoint(x: numberLabel.center.x + iconOffset + nameLabel.bounds.width/2, y: self.contentView.center.y)
         
         numberLabel.text = "\(stepNumber)"
-        //added a long string at the end to show proof of concept that the name truncates correctly
-        nameLabel.text = stepName + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        nameLabel.text = stepName
         
         //Add all of the subviews to the content view of the cell
         self.contentView.addSubview(statusIconImageView)
