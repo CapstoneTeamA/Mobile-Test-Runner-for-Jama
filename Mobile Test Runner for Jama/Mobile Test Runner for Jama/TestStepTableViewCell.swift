@@ -27,7 +27,7 @@ class TestStepTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func customInit(tableWidth: CGFloat, stepNumber: Int, stepName: String) {
+    func customInit(tableWidth: CGFloat, stepNumber: Int, stepName: String, stepStatus: String) {
         self.bounds = CGRect(x: self.bounds.minX, y: self.bounds.minY, width: UIScreen.main.bounds.width, height: self.bounds.height)
         
         //create the status image view from the images and set its position and inital display attribute
@@ -38,13 +38,26 @@ class TestStepTableViewCell: UITableViewCell {
         let checkGrey = UIImage(named: "check_icon_grey.png")
         statusIconImageViewGrey = UIImageView(image: checkGrey)
         statusIconImageViewGrey.center = CGPoint(x: iconCenterX, y: iconCenterY)
-        statusIconImageViewGrey.isHidden = false
+        statusIconImageViewGrey.isHidden = true
         let checkRed = UIImage(named: "check_icon_red.png")
         statusIconImageViewRed = UIImageView(image: checkRed)
         statusIconImageViewRed.center = CGPoint(x: iconCenterX, y: iconCenterY)
         statusIconImageViewRed.isHidden = true
-        
-        
+        if stepStatus == "PASSED" {
+            statusIconImageViewGreen.isHidden = false
+            statusIconImageViewRed.isHidden = true
+            statusIconImageViewGrey.isHidden = true
+        }
+        else if stepStatus == "FAILED" {
+            statusIconImageViewRed.isHidden = false
+            statusIconImageViewGrey.isHidden = true
+            statusIconImageViewGreen.isHidden = true
+        }
+        else {
+            statusIconImageViewGrey.isHidden = false
+            statusIconImageViewGreen.isHidden = true
+            statusIconImageViewRed.isHidden = true
+        }
         
         //Build the labels for the step number and step name
         let numberLabel = UILabel(frame: CGRect(x: self.contentView.bounds.minX, y: self.contentView.bounds.minY, width: 40, height: self.contentView.bounds.height))
