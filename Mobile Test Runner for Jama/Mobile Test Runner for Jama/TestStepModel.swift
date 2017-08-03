@@ -7,3 +7,21 @@
 //
 
 import Foundation
+
+class TestStepModel {
+    var action = ""
+    var expectedResult = ""
+    var notes = ""
+    var result = ""
+    var status = ""
+    
+    func extractStep(fromData: [String: AnyObject]) {
+        action = fromData["action"] as! String
+        expectedResult = fromData["expectedResult"] as! String
+        notes = fromData["notes"] as! String
+        if fromData["result"] != nil {
+            result = fromData["result"] as! String
+        }
+        status = fromData["status"] as! String
+    }
+}
