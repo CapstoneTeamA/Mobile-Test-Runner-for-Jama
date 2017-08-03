@@ -510,7 +510,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gvz-Ft-XC7" userLabel="inputTextBox">
-                                        <rect key="frame" x="18.666666666666657" y="55.333333333333314" width="335.33333333333337" height="331.33333333333337"/>
+                                        <rect key="frame" x="13" y="59.333333333333314" width="347.66666666666669" height="331.33333333333337"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
@@ -519,7 +519,7 @@
                                         </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgE-cu-Qsn">
-                                        <rect key="frame" x="0.0" y="386.66666666666663" width="372.66666666666669" height="55"/>
+                                        <rect key="frame" x="0.0" y="395.66666666666663" width="372.66666666666669" height="55"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
                                         <state key="normal" title="Done">
@@ -534,17 +534,17 @@
                                 <constraints>
                                     <constraint firstItem="qgE-cu-Qsn" firstAttribute="centerX" secondItem="eJc-4V-jEK" secondAttribute="centerX" id="7QF-W0-tZf"/>
                                     <constraint firstItem="JxG-OY-Tih" firstAttribute="top" secondItem="eJc-4V-jEK" secondAttribute="top" id="BEn-gC-fBx"/>
-                                    <constraint firstItem="Gvz-Ft-XC7" firstAttribute="width" secondItem="eJc-4V-jEK" secondAttribute="width" multiplier="9:10" id="CoF-OE-J8X"/>
+                                    <constraint firstItem="Gvz-Ft-XC7" firstAttribute="width" secondItem="eJc-4V-jEK" secondAttribute="width" constant="-25" id="CoF-OE-J8X"/>
                                     <constraint firstItem="JxG-OY-Tih" firstAttribute="centerX" secondItem="eJc-4V-jEK" secondAttribute="centerX" id="FSq-1l-hVi"/>
                                     <constraint firstItem="Gvz-Ft-XC7" firstAttribute="centerX" secondItem="eJc-4V-jEK" secondAttribute="centerX" id="Hib-sf-7yt"/>
                                     <constraint firstItem="JxG-OY-Tih" firstAttribute="width" secondItem="eJc-4V-jEK" secondAttribute="width" id="Li4-vt-Sak"/>
-                                    <constraint firstItem="Gvz-Ft-XC7" firstAttribute="top" secondItem="JxG-OY-Tih" secondAttribute="bottom" id="NMk-4Z-hch"/>
+                                    <constraint firstItem="Gvz-Ft-XC7" firstAttribute="top" secondItem="JxG-OY-Tih" secondAttribute="bottom" constant="4" id="NMk-4Z-hch"/>
                                     <constraint firstItem="JxG-OY-Tih" firstAttribute="height" secondItem="eJc-4V-jEK" secondAttribute="height" multiplier="1:8" id="OE5-t7-qXQ"/>
                                     <constraint firstItem="Gvz-Ft-XC7" firstAttribute="height" secondItem="eJc-4V-jEK" secondAttribute="height" multiplier="3:4" id="W2X-yH-U3S"/>
                                     <constraint firstItem="qgE-cu-Qsn" firstAttribute="height" secondItem="eJc-4V-jEK" secondAttribute="height" multiplier="1:8" id="YRt-rC-U6j"/>
                                     <constraint firstItem="qgE-cu-Qsn" firstAttribute="width" secondItem="eJc-4V-jEK" secondAttribute="width" id="adk-qB-yCB"/>
                                     <constraint firstItem="Gvz-Ft-XC7" firstAttribute="centerX" secondItem="eJc-4V-jEK" secondAttribute="centerX" id="tnh-MM-3Xl"/>
-                                    <constraint firstItem="qgE-cu-Qsn" firstAttribute="top" secondItem="Gvz-Ft-XC7" secondAttribute="bottom" id="ule-LG-ZnQ"/>
+                                    <constraint firstItem="qgE-cu-Qsn" firstAttribute="top" secondItem="Gvz-Ft-XC7" secondAttribute="bottom" constant="5" id="ule-LG-ZnQ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
