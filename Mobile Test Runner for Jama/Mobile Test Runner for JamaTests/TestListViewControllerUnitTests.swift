@@ -115,7 +115,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     }
     
     func testBuildCell() {
-        let runwhite = UIColor.white
+        let runWhite = UIColor.white
         let unselectedCycleGray = UIColor(colorLiteralRed: 0xE5/0xFF, green: 0xE5/0xFF, blue: 0xE5/0xFF, alpha: 1)
 
         let selectedCycleYellow = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
@@ -172,7 +172,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
-        XCTAssertEqual(runwhite, cell.backgroundColor)
+        XCTAssertEqual(runWhite, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 5, section: 0))
         XCTAssertEqual("2. testRun2", cell.textLabel?.text)
@@ -180,7 +180,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
-        XCTAssertEqual(runwhite, cell.backgroundColor)
+        XCTAssertEqual(runWhite, cell.backgroundColor)
         
         
         viewController.selectedPlanIndex = 0
@@ -223,7 +223,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
-        XCTAssertEqual(runwhite, cell.backgroundColor)
+        XCTAssertEqual(runWhite, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 4, section: 0))
         XCTAssertEqual("2. testRun2", cell.textLabel?.text)
@@ -231,7 +231,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
-        XCTAssertEqual(runwhite, cell.backgroundColor)
+        XCTAssertEqual(runWhite, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 5, section: 0))
         XCTAssertEqual("testPlan2", cell.textLabel?.text)

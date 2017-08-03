@@ -175,24 +175,20 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
-        
         let cell = buildCell(indexPath: indexPath)
         cell.selectionStyle = .none
         return cell
     }
     
     public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        
         let cell = tableView.cellForRow(at: indexPath)
         cell?.tintColor = UIColor.black
-        
         cell?.setHighlighted(false, animated: true)
     }
     
     public func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.tintColor = UIColor.clear
-        
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -311,7 +307,6 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
             
             cell.accessoryType = .disclosureIndicator
-            
         
         }
         return cell
@@ -337,7 +332,6 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor = UIColor(colorLiteralRed: 0xE5/0xFF, green: 0xE5/0xFF, blue: 0xE5/0xFF, alpha: 1)
         } else {
             cell.backgroundColor = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
-            
             
         }
         cell.indentationLevel = 1
