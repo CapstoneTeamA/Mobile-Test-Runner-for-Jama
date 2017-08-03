@@ -9,9 +9,7 @@
 import UIKit
 
 class TestStepTableViewCell: UITableViewCell {
-    var statusIconImageViewGreen: UIImageView!
-    var statusIconImageViewGrey: UIImageView!
-    var statusIconImageViewRed: UIImageView!
+    var statusIconImageView: UIImageView!
 
     let iconOffset: CGFloat = 22
     let nameLabelOffset: CGFloat = 50
@@ -31,49 +29,32 @@ class TestStepTableViewCell: UITableViewCell {
         self.bounds = CGRect(x: self.bounds.minX, y: self.bounds.minY, width: UIScreen.main.bounds.width, height: self.bounds.height)
         
         //create the status image view from the images and set its position and inital display attribute
-        let checkGreen = UIImage(named: "check_icon_green.png")
-        statusIconImageViewGreen = UIImageView(image: checkGreen)
-        statusIconImageViewGreen.center = CGPoint(x: iconCenterX, y: iconCenterY)
-        statusIconImageViewGreen.isHidden = true
-        let checkGrey = UIImage(named: "empty_icon_grey.png")
-        statusIconImageViewGrey = UIImageView(image: checkGrey)
-        statusIconImageViewGrey.center = CGPoint(x: iconCenterX, y: iconCenterY)
-        statusIconImageViewGrey.isHidden = true
-        let checkRed = UIImage(named: "X_icon_red.png")
-        statusIconImageViewRed = UIImageView(image: checkRed)
-        statusIconImageViewRed.center = CGPoint(x: iconCenterX, y: iconCenterY)
-        statusIconImageViewRed.isHidden = true
+        var statusIcon: UIImage
         if stepStatus == "PASSED" {
-            statusIconImageViewGreen.isHidden = false
-            statusIconImageViewRed.isHidden = true
-            statusIconImageViewGrey.isHidden = true
+            statusIcon = UIImage(named: "check_icon_green.png")!
         }
         else if stepStatus == "FAILED" {
-            statusIconImageViewRed.isHidden = false
-            statusIconImageViewGrey.isHidden = true
-            statusIconImageViewGreen.isHidden = true
+            statusIcon = UIImage(named: "X_icon_red.png")!
         }
         else {
-            statusIconImageViewGrey.isHidden = false
-            statusIconImageViewGreen.isHidden = true
-            statusIconImageViewRed.isHidden = true
+            statusIcon = UIImage(named: "empty_icon_grey.png")!
         }
+        statusIconImageView = UIImageView(image: statusIcon)
+        statusIconImageView.center = CGPoint(x: iconCenterX, y: iconCenterY)
         
         //Build the labels for the step number and step name
         let numberLabel = UILabel(frame: CGRect(x: self.contentView.bounds.minX, y: self.contentView.bounds.minY, width: 40, height: self.contentView.bounds.height))
-        let nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - statusIconImageViewGreen.bounds.width - numberLabel.bounds.width - nameLabelOffset , height: self.contentView.bounds.height))
+        let nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - statusIconImageView.bounds.width - numberLabel.bounds.width - nameLabelOffset , height: self.contentView.bounds.height))
         
         //set the position of the labels
-        numberLabel.center = CGPoint(x: statusIconImageViewGreen.center.x + iconOffset + numberLabel.bounds.width/2 , y: self.contentView.center.y)
+        numberLabel.center = CGPoint(x: statusIconImageView.center.x + iconOffset + numberLabel.bounds.width/2 , y: self.contentView.center.y)
         nameLabel.center = CGPoint(x: numberLabel.center.x + iconOffset + nameLabel.bounds.width/2, y: self.contentView.center.y)
         
         numberLabel.text = "\(stepNumber)"
         nameLabel.text = stepName
         
         //Add all of the subviews to the content view of the cell
-        self.contentView.addSubview(statusIconImageViewGreen)
-        self.contentView.addSubview(statusIconImageViewGrey)
-        self.contentView.addSubview(statusIconImageViewRed)
+        self.contentView.addSubview(statusIconImageView)
 
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(numberLabel)
