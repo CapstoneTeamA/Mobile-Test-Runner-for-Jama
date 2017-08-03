@@ -104,14 +104,8 @@ extension TestRunIndexViewController: StepIndexDelegate {
         case .pass:
             result = "PASSED"
         }
-        //If the selected status is not already selected then assign that status to the step
-        if  testRun.testStepList[currentlySelectedStepIndex].status != result {
-            testRun.testStepList[currentlySelectedStepIndex].status = result
-        } else {
-            //If the user selects a status that was already selected then unselect the status
-            //This string should be set to whatever the API needs when submitting a test run for 
-            //      a step that has not been run.
-            testRun.testStepList[currentlySelectedStepIndex].status = ""
-        }
+
+        testRun.testStepList[currentlySelectedStepIndex].status = result
+
     }
 }
