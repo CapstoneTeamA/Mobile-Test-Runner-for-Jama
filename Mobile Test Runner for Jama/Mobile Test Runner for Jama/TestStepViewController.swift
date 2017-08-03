@@ -10,8 +10,22 @@ import UIKit
 
 class TestStepViewController: UIViewController {
 
+    @IBOutlet weak var passButton: UIButton!
+    @IBOutlet weak var failButton: UIButton!
+    @IBOutlet weak var addResultsButton: UIButton!
+    @IBOutlet weak var actionTextField: UITextView!
+    @IBOutlet weak var expResultTextField: UITextView!
+    @IBOutlet weak var notesTextField: UITextView!
+    
+    var action = ""
+    var expResult = ""
+    var notes = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        actionTextField.text = action
+        expResultTextField.text = expResult
+        notesTextField.text = notes
 
         // Do any additional setup after loading the view.
     }
