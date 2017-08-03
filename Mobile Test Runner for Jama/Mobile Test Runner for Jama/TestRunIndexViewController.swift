@@ -8,13 +8,15 @@
 
 import UIKit
 
-class TestRunIndexViewController: UIViewController {
+class TestRunIndexViewController: UIViewController, UITextViewDelegate {
    
     @IBOutlet weak var cancelRun: UIBarButtonItem!
     @IBOutlet weak var testRunNameLabel: UILabel!
     @IBOutlet weak var testStepTable: UITableView!
     @IBOutlet weak var inputResultsButton: UIButton!
-    @IBOutlet weak var inputResultBox: UIView!
+    @IBOutlet weak var inputResultsBox: UIView!
+    @IBOutlet weak var inputResultsTextBox: UITextView!
+    @IBOutlet weak var inputResultsBackground: UIView!
     
     var instance = ""
     var username = ""
@@ -28,8 +30,8 @@ class TestRunIndexViewController: UIViewController {
         //hide the default back button and instead show cancel run
         self.navigationItem.hidesBackButton = true
         testRunNameLabel.text = runName
+        self.setupPopup()
         testStepTable.reloadData()
-        inputResultBox.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,30 +55,28 @@ class TestRunIndexViewController: UIViewController {
         }))
         
         present(cancelAlert, animated: true, completion: nil)
-        
-        
     }
     
+    // Used to set up text window popup, called in viewDidLoad
+    func setupPopup() {
+        inputResultsBox.isHidden = true
+        inputResultsBackground.isHidden = true
+        inputResultsTextBox.delegate = self
+    }
+    
+    // Called when 'Input Results' button is clicked
     @IBAction func enterText(_ sender: UIButton) {
-        inputResultBox.isHidden = false
-        /*
-        let inputTextAlert = UIAlertController(title: nil, message: "Enter Results", preferredStyle: UIAlertControllerStyle.alert)
-        
-        inputTextAlert.addTextField { (textField) in
-            textField.clearsOnBeginEditing = false
-            var frameRect = textField.frame
-            frameRect.size.height = 125
-            textField.frame = frameRect
+        inputResultsBackground.isHidden = false
+        inputResultsBox.isHidden = false
+    }
+    
+    // Called when 'Done' button in popup is clicked
+    @IBAction func saveText(_ sender: UIButton) {
+        inputResultsBackground.isHidden = true
+        inputResultsBox.isHidden = true
+        if testRun.result != inputResultsTextBox.text {
+            testRun.result = inputResultsTextBox.text
         }
-        
-        let confirmAction = UIAlertAction(title: "Done", style: .default) { (_) in
-            self.testRun.result = (inputTextAlert.textFields?[0].text)!
-            print(self.testRun.result)
-        }
-        
-        inputTextAlert.addAction(confirmAction)
-        present(inputTextAlert, animated: true, completion: nil)
- */
     }
 
 }
