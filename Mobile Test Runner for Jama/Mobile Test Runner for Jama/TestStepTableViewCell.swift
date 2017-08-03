@@ -55,7 +55,6 @@ class TestStepTableViewCell: UITableViewCell {
         
         //Add all of the subviews to the content view of the cell
         self.contentView.addSubview(statusIconImageView)
-
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(numberLabel)
         
