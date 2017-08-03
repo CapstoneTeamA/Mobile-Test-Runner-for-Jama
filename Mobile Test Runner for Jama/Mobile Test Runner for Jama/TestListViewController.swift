@@ -176,16 +176,33 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
-        return buildCell(indexPath: indexPath)
+        let cell = buildCell(indexPath: indexPath)
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.tintColor = UIColor.black
+        cell?.setHighlighted(false, animated: true)
+    }
+    
+    public func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.tintColor = UIColor.clear
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //If we unselect a test plan or cycle return
+        
         if unselectTestPlan(indexPath: indexPath) || unselectTestCycle(indexPath: indexPath) {
             return
         }
+        tableView.cellForRow(at: indexPath)?.tintColor = UIColor.black
+        tableView.deselectRow(at: indexPath, animated: true)
         //If the user taps a test run, go to the index screen for that test run
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TestRunCell" {
+            
             let runViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunIndex") as! TestRunIndexViewController
             
             let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
@@ -282,15 +299,14 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.textAlignment = .left
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         cell.backgroundColor = UIColor.white
-        
+        cell.indentationLevel = 1
         if self.testRunList.testRunList[0].name == "No Runs Found" {
             cell.isUserInteractionEnabled = false
             cell.textLabel?.text = self.testRunList.testRunList[currentRunIndex].name
         } else {
             cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
-            cell.indentationLevel = 1
+            
             cell.accessoryType = .disclosureIndicator
-            cell.indentationWidth = 15.0
         
         }
         return cell
@@ -313,9 +329,10 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         
         //If cycle's cell is selected change the background color
         if selectedCycleTableViewIndex != indexPath.row {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            cell.backgroundColor = UIColor(colorLiteralRed: 0xE5/0xFF, green: 0xE5/0xFF, blue: 0xE5/0xFF, alpha: 1)
         } else {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            cell.backgroundColor = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
+            
         }
         cell.indentationLevel = 1
         cell.indentationWidth = 15.0
@@ -338,17 +355,14 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.textLabel?.text = testPlanList.testPlanList[currentPlanIndex].name
         cell.textLabel?.textAlignment = .left
-        
         //If the plan's cell is selected change the background color
+    
+        cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+        
         if selectedPlanIndex != indexPath.row {
-            cell.backgroundColor = UIColor.white
-        } else {
-            if selectedCycleIndex == largeNumber {
-                cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
-            } else {
                 cell.backgroundColor = UIColor.lightGray
-            }
         }
+        
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         return cell
     }
