@@ -121,10 +121,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         let selectedCycleYellow = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
         let unselectedPlanGray = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
         let selectedPlanBlue = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
-    
 
-    
-    
         viewController.selectedPlanIndex = 1
         viewController.selectedCycleIndex = 1
         viewController.selectedCycleTableViewIndex = 3
