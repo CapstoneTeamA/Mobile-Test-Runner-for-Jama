@@ -20,14 +20,13 @@ class TestStepViewController: UIViewController {
     var action = ""
     var expResult = ""
     var notes = ""
+    var indexDelegate: StepIndexDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         actionTextField.text = action
         expResultTextField.text = expResult
         notesTextField.text = notes
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,15 +34,17 @@ class TestStepViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func didTapAddResult(_ sender: Any) {
+        //TODO handle the popup text box that the user will use to add results
     }
-    */
-
+    
+    @IBAction func didTapFail(_ sender: Any) {
+        indexDelegate.didSetStatus(status: .fail)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func didTapPass(_ sender: Any) {
+        indexDelegate.didSetStatus(status: .pass)
+        navigationController?.popViewController(animated: true)
+    }
 }

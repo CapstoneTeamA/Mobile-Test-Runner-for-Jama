@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol StepIndexDelegate {
+    func didSetStatus(status: Status)
+}
+
+enum Status {
+    case pass, fail
+}
+
 class TestRunIndexViewController: UIViewController {
    
     @IBOutlet weak var cancelRun: UIBarButtonItem!
@@ -19,6 +27,7 @@ class TestRunIndexViewController: UIViewController {
     var password = ""
     var runId = -1
     var runName = ""
+    var currentlySelectedStepIndex = -1
     var testRun: TestRunModel = TestRunModel()
     
     override func viewDidLoad() {
@@ -26,8 +35,12 @@ class TestRunIndexViewController: UIViewController {
         //hide the default back button and instead show cancel run
         self.navigationItem.hidesBackButton = true
         testRunNameLabel.text = testRun.name
-        testStepTable.reloadData()
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        testStepTable.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,8 +88,28 @@ extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource
         stepDetailController.expResult = "The purpose of this ticket is to enable the user to click on any of the test steps that are listed on the run view and navigate to a placeholder screen for that test step. For testing purposes, it is OK to implement a temporary back button on the destination screen so that you can navigate back to the test run list screen."
         
         stepDetailController.notes = "notes"
-        
+        currentlySelectedStepIndex = indexPath.row
+        stepDetailController.indexDelegate = self
         self.navigationController?.pushViewController(stepDetailController, animated: true)
 
+    }
+}
+
+extension TestRunIndexViewController: StepIndexDelegate {
+    func didSetStatus(status: Status) {
+        var result = ""
+        switch status {
+        case .fail:
+            result = "FAILED"
+        case .pass:
+            result = "PASSED"
+        }
+        //If the selected status is not already selected then assign that status to the step
+        if  testRun.testStepList[currentlySelectedStepIndex].status != result {
+            testRun.testStepList[currentlySelectedStepIndex].status = result
+        } else {
+            //If the user selects a status that was already selected then unselect the status
+            testRun.testStepList[currentlySelectedStepIndex].status = ""
+        }
     }
 }
