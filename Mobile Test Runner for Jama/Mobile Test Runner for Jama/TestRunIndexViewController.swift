@@ -19,8 +19,7 @@ class TestRunIndexViewController: UIViewController {
     var password = ""
     var runId = -1
     var runName = ""
-
-   // var testStepList : [TestSteps]
+    var testRun: TestRunModel = TestRunModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
