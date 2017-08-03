@@ -10,6 +10,7 @@ import UIKit
 
 class TestStepTableViewCell: UITableViewCell {
     var statusIconImageView: UIImageView!
+
     let iconOffset: CGFloat = 22
     let nameLabelOffset: CGFloat = 50
     let iconCenterX: CGFloat = 24
@@ -24,12 +25,21 @@ class TestStepTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func customInit(tableWidth: CGFloat, stepNumber: Int, stepName: String) {
+    func customInit(tableWidth: CGFloat, stepNumber: Int, stepName: String, stepStatus: String) {
         self.bounds = CGRect(x: self.bounds.minX, y: self.bounds.minY, width: UIScreen.main.bounds.width, height: self.bounds.height)
         
-        //create an image view from the image and set its position
-        let image = UIImage(named: "check_icon.png")
-        statusIconImageView = UIImageView(image: image)
+        //create the status image view from the images and set its position and inital display attribute
+        var statusIcon: UIImage
+        if stepStatus == "PASSED" {
+            statusIcon = UIImage(named: "check_icon_green.png")!
+        }
+        else if stepStatus == "FAILED" {
+            statusIcon = UIImage(named: "X_icon_red.png")!
+        }
+        else {
+            statusIcon = UIImage(named: "empty_icon_grey.png")!
+        }
+        statusIconImageView = UIImageView(image: statusIcon)
         statusIconImageView.center = CGPoint(x: iconCenterX, y: iconCenterY)
         
         //Build the labels for the step number and step name
