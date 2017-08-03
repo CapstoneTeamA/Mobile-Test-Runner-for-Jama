@@ -166,7 +166,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No projects found. Please contact your administrator." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atM-JS-d50">
-                                <rect key="frame" x="25" y="516" width="362.66666666666669" height="89.666666666666629"/>
+                                <rect key="frame" x="26" y="556" width="362" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="atM-JS-d50" secondAttribute="height" multiplier="303:75" id="bVH-yU-4JV"/>
                                 </constraints>
@@ -238,7 +238,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHA-VP-gmH" userLabel="ServerErrorLabel">
-                                <rect key="frame" x="186" y="395" width="42" height="20.666666666666686"/>
+                                <rect key="frame" x="186" y="435" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.63921568627450975" green="0.0" blue="0.023529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
