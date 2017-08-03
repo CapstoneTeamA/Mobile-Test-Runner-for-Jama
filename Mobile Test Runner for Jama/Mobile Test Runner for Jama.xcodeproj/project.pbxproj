@@ -47,6 +47,7 @@
 		13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */; };
 		13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343B01F0F5C6E002EBC92 /* Endpoints.plist */; };
 		303AD4651F2994F5000E3988 /* LoginViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */; };
+		309325751F32E1C700561EC4 /* mtrlogo_v8-1.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B974361F312092007BE00E /* mtrlogo_v8-1.png */; };
 		4D15D7D81F2A802F009A26B8 /* TestRunIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */; };
 		908CE85E1F32744800042C1E /* check_icon_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 908CE85B1F32744800042C1E /* check_icon_green.png */; };
 		908CE8601F32744800042C1E /* X_icon_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 908CE85D1F32744800042C1E /* X_icon_red.png */; };
@@ -54,7 +55,6 @@
 		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
 		E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */; };
 		E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */; };
-		E2B974371F312092007BE00E /* mtrlogo_v8-1.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B974361F312092007BE00E /* mtrlogo_v8-1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -412,6 +412,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				309325751F32E1C700561EC4 /* mtrlogo_v8-1.png in Resources */,
 				13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */,
 				13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */,
 				E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */,
