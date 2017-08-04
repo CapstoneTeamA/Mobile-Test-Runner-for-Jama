@@ -178,6 +178,8 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         let cell = buildCell(indexPath: indexPath)
         cell.selectionStyle = .none
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
         return cell
     }
     
