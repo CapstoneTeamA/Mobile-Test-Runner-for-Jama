@@ -212,6 +212,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             runViewController.username = username
             runViewController.password = password
             runViewController.instance = instance
+            runViewController.preserveCurrentRunStatus()
             self.navigationController?.pushViewController(runViewController, animated: true)
             return
         }
