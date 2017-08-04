@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol StepIndexDelegate {
+    func didSetStatus(status: Status)
+}
+
+enum Status {
+    case pass, fail
+}
+
 class TestRunIndexViewController: UIViewController {
    
     @IBOutlet weak var cancelRun: UIBarButtonItem!
@@ -19,15 +27,21 @@ class TestRunIndexViewController: UIViewController {
     var password = ""
     var runId = -1
     var runName = ""
+    var currentlySelectedStepIndex = -1
     var testRun: TestRunModel = TestRunModel()
-    
+    var initialStepsStatusList: [String] = []
+    var initialStepsResultsList: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         //hide the default back button and instead show cancel run
         self.navigationItem.hidesBackButton = true
         testRunNameLabel.text = testRun.name
-        testStepTable.reloadData()
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        testStepTable.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,6 +55,13 @@ class TestRunIndexViewController: UIViewController {
         
         cancelAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
+            var index = 0
+            //Run cancelled, reset all of the results and statuses to initial values
+            for step in self.testRun.testStepList {
+                step.status = self.initialStepsStatusList[index]
+                step.result = self.initialStepsResultsList[index]
+                index += 1
+            }
             self.navigationController?.popViewController(animated: true)
         }))
         
@@ -51,10 +72,17 @@ class TestRunIndexViewController: UIViewController {
         }))
         
         present(cancelAlert, animated: true, completion: nil)
-        
-        
     }
     
+    //Save all of the inital values of the statuses and
+    func preserveCurrentRunStatus() {
+        for step in testRun.testStepList {
+            let status = step.status
+            let results = step.result
+            initialStepsStatusList.append(status)
+            initialStepsResultsList.append(results)
+        }
+    }
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
@@ -75,8 +103,23 @@ extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource
         stepDetailController.expResult = "The purpose of this ticket is to enable the user to click on any of the test steps that are listed on the run view and navigate to a placeholder screen for that test step. For testing purposes, it is OK to implement a temporary back button on the destination screen so that you can navigate back to the test run list screen."
         
         stepDetailController.notes = "notes"
-        
+        currentlySelectedStepIndex = indexPath.row
+        stepDetailController.indexDelegate = self
         self.navigationController?.pushViewController(stepDetailController, animated: true)
+    }
+}
+
+extension TestRunIndexViewController: StepIndexDelegate {
+    func didSetStatus(status: Status) {
+        var result = ""
+        switch status {
+        case .fail:
+            result = "FAILED"
+        case .pass:
+            result = "PASSED"
+        }
+
+        testRun.testStepList[currentlySelectedStepIndex].status = result
 
     }
 }
