@@ -16,10 +16,13 @@ class TestStepViewController: UIViewController {
     @IBOutlet weak var actionTextField: UITextView!
     @IBOutlet weak var expResultTextField: UITextView!
     @IBOutlet weak var notesTextField: UITextView!
+    @IBOutlet weak var StepDetailTitle: UINavigationItem!
     
     var action = ""
     var expResult = ""
     var notes = ""
+    var currentIndex = 0
+    var indexLength = 0
     var indexDelegate: StepIndexDelegate!
     
     override func viewDidLoad() {
@@ -27,6 +30,8 @@ class TestStepViewController: UIViewController {
         actionTextField.text = action
         expResultTextField.text = expResult
         notesTextField.text = notes
+        self.title = "Step " + String(currentIndex+1) + "/" + String(indexLength);
+
     }
 
     override func didReceiveMemoryWarning() {

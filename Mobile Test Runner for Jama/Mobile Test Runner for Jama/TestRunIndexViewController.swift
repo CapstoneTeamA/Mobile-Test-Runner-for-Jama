@@ -99,10 +99,14 @@ extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let stepDetailController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Test Step") as! TestStepViewController
+        
         stepDetailController.action = testRun.testStepList[indexPath.row].action
         stepDetailController.expResult = testRun.testStepList[indexPath.row].expectedResult
-        
         stepDetailController.notes = testRun.testStepList[indexPath.row].notes
+        
+        stepDetailController.currentIndex = indexPath.row
+        stepDetailController.indexLength = testRun.testStepList.count
+        
         currentlySelectedStepIndex = indexPath.row
         stepDetailController.indexDelegate = self
         self.navigationController?.pushViewController(stepDetailController, animated: true)
