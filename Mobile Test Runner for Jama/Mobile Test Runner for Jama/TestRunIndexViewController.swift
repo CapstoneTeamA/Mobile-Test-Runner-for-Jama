@@ -29,7 +29,8 @@ class TestRunIndexViewController: UIViewController {
     var runName = ""
     var currentlySelectedStepIndex = -1
     var testRun: TestRunModel = TestRunModel()
-    
+    var initialStepsStatusList: [String] = []
+    var initialStepsResultsList: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         //hide the default back button and instead show cancel run
@@ -54,6 +55,13 @@ class TestRunIndexViewController: UIViewController {
         
         cancelAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
+            var index = 0
+            //Run cancelled, reset all of the results and statuses to initial values
+            for step in self.testRun.testStepList {
+                step.status = self.initialStepsStatusList[index]
+                step.result = self.initialStepsResultsList[index]
+                index += 1
+            }
             self.navigationController?.popViewController(animated: true)
         }))
         
@@ -64,10 +72,17 @@ class TestRunIndexViewController: UIViewController {
         }))
         
         present(cancelAlert, animated: true, completion: nil)
-        
-        
     }
     
+    //Save all of the inital values of the statuses and
+    func preserveCurrentRunStatus() {
+        for step in testRun.testStepList {
+            let status = step.status
+            let results = step.result
+            initialStepsStatusList.append(status)
+            initialStepsResultsList.append(results)
+        }
+    }
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
@@ -91,7 +106,6 @@ extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource
         currentlySelectedStepIndex = indexPath.row
         stepDetailController.indexDelegate = self
         self.navigationController?.pushViewController(stepDetailController, animated: true)
-
     }
 }
 
