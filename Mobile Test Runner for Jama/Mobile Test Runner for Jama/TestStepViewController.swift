@@ -48,11 +48,22 @@ class TestStepViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    
     @IBAction func didTapResetStep(_ sender: Any) {
-        //TODO reset the Results field for the step
-        indexDelegate.didSetStatus(status: .not_run)
-        navigationController?.popViewController(animated: true)
+        let clearAlert = UIAlertController(title: "Clear Step", message: "This step's status will be set to \"Not Run\" and the \"Results\" field will be cleared. Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        clearAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
+            (action: UIAlertAction!) in
+            //TODO reset the Results field for the step
+            self.indexDelegate.didSetStatus(status: .not_run)
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        clearAlert.addAction(UIAlertAction(title: "Never mind", style: .cancel, handler: {
+            (action: UIAlertAction) in
+            _ = ""
+        }))
+        
+        present(clearAlert, animated: true, completion: nil)
     }
     
 }
