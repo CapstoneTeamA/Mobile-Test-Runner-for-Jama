@@ -87,6 +87,9 @@ class RestHelper {
                 if jsonData["data"] != nil {
                 endpointData = jsonData["data"] as! Array
                 }
+                else {
+                    return ([],0)
+                }
             }
         }
         return (endpointData, totalItems)
