@@ -49,7 +49,9 @@
 		303AD4651F2994F5000E3988 /* LoginViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */; };
 		309325751F32E1C700561EC4 /* mtrlogo_v8-1.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B974361F312092007BE00E /* mtrlogo_v8-1.png */; };
 		4D15D7D81F2A802F009A26B8 /* TestRunIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */; };
-		4DBAEDDC1F3329FF00F8401A /* InputResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBAEDDB1F3329FF00F8401A /* InputResultViewController.swift */; };
+		908CE85E1F32744800042C1E /* check_icon_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 908CE85B1F32744800042C1E /* check_icon_green.png */; };
+		908CE8601F32744800042C1E /* X_icon_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 908CE85D1F32744800042C1E /* X_icon_red.png */; };
+		908CE8621F3274EE00042C1E /* empty_icon_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 908CE8611F3274EE00042C1E /* empty_icon_grey.png */; };
 		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
 		E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */; };
 		E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */; };
@@ -120,7 +122,9 @@
 		13A343B01F0F5C6E002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
 		303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerUITests.swift; sourceTree = "<group>"; };
 		4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunIndexViewController.swift; sourceTree = "<group>"; };
-		4DBAEDDB1F3329FF00F8401A /* InputResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputResultViewController.swift; sourceTree = "<group>"; };
+		908CE85B1F32744800042C1E /* check_icon_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check_icon_green.png; path = "Mobile Test Runner for Jama/check_icon_green.png"; sourceTree = SOURCE_ROOT; };
+		908CE85D1F32744800042C1E /* X_icon_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = X_icon_red.png; path = "Mobile Test Runner for Jama/X_icon_red.png"; sourceTree = SOURCE_ROOT; };
+		908CE8611F3274EE00042C1E /* empty_icon_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty_icon_grey.png; path = "Mobile Test Runner for Jama/empty_icon_grey.png"; sourceTree = SOURCE_ROOT; };
 		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
 		E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtr-logo-v2.png"; sourceTree = "<group>"; };
 		E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-lightbl-redx.png"; sourceTree = "<group>"; };

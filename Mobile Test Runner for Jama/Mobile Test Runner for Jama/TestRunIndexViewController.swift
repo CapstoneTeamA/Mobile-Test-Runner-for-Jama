@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol StepIndexDelegate {
+    func didSetStatus(status: Status)
+}
+
+enum Status {
+    case pass, fail
+}
+
 class TestRunIndexViewController: UIViewController, UITextViewDelegate {
    
     @IBOutlet weak var cancelRun: UIBarButtonItem!
@@ -24,13 +32,16 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var password = ""
     var runId = -1
     var runName = ""
+    var currentlySelectedStepIndex = -1
     var testRun: TestRunModel = TestRunModel()
+    var initialStepsStatusList: [String] = []
+    var initialStepsResultsList: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //hide the default back button and instead show cancel run
         self.navigationItem.hidesBackButton = true
-        testRunNameLabel.text = runName
+        testRunNameLabel.text = testRun.name
         self.setupPopup()
         testStepTable.reloadData()
     }
@@ -67,6 +78,16 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }))
         
         present(cancelAlert, animated: true, completion: nil)
+    }
+    
+    //Save all of the inital values of the statuses and
+    func preserveCurrentRunStatus() {
+        for step in testRun.testStepList {
+            let status = step.status
+            let results = step.result
+            initialStepsStatusList.append(status)
+            initialStepsResultsList.append(results)
+        }
     }
     
     // Used to set up text window popup, called in viewDidLoad
