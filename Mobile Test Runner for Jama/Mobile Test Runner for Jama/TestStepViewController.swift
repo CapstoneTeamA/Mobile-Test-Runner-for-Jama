@@ -47,4 +47,12 @@ class TestStepViewController: UIViewController {
         indexDelegate.didSetStatus(status: .pass)
         navigationController?.popViewController(animated: true)
     }
+    
+    
+    @IBAction func didTapResetStep(_ sender: Any) {
+        //TODO reset the Results field for the step
+        indexDelegate.didSetStatus(status: .not_run)
+        navigationController?.popViewController(animated: true)
+    }
+    
 }

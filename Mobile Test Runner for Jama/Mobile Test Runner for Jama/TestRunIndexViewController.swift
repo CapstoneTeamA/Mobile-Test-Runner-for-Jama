@@ -13,7 +13,7 @@ protocol StepIndexDelegate {
 }
 
 enum Status {
-    case pass, fail
+    case pass, fail, not_run
 }
 
 class TestRunIndexViewController: UIViewController {
@@ -117,6 +117,8 @@ extension TestRunIndexViewController: StepIndexDelegate {
             result = "FAILED"
         case .pass:
             result = "PASSED"
+        case .not_run:
+            result = "NOT_RUN"
         }
 
         testRun.testStepList[currentlySelectedStepIndex].status = result
