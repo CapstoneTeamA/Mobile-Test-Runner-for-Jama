@@ -37,7 +37,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         testPlan1.id = 23
         testPlan1.name = "testPlan1"
         testPlan1.projectId = 2
-
+        
         testPlan2.id = 31
         testPlan2.name = "testPlan2"
         testPlan2.projectId = 2
@@ -49,9 +49,11 @@ class TestListViewControllerUnitTests: XCTestCase {
         
         testRun1.id = 2323
         testRun1.name = "testRun1"
+        testRun1.status = "INPROGRESS"
         
         testRun2.id = 2324
         testRun2.name = "testRun2"
+        testRun2.status = "NOT_RUN"
         
         viewController.selectedPlanIndex = 1
         viewController.testPlanList.testPlanList.append(testPlan1)
@@ -372,6 +374,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         fields.updateValue("testRun1" as AnyObject, forKey: "name")
         fields.updateValue("desc" as AnyObject, forKey: "description")
         fields.updateValue(parentCycleId as AnyObject, forKey: "testCycle")
+        fields.updateValue("NOT_RUN" as AnyObject, forKey: "testRunStatus")
         runData.updateValue(fields as AnyObject, forKey: "fields")
         
         dataList.append(runData)
