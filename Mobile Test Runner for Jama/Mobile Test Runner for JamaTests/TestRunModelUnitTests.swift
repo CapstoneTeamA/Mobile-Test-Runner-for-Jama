@@ -20,6 +20,7 @@ class TestRunUnitTests: XCTestCase {
         dataWithoutAssignment.updateValue(23 as AnyObject, forKey: "id")
         fields.updateValue("testRun" as AnyObject, forKey: "name")
         fields.updateValue("desc" as AnyObject, forKey: "description")
+        fields.updateValue("NOT_RUN" as AnyObject, forKey: "testRunStatus")
         
         dataWithoutAssignment.updateValue(fields as AnyObject, forKey: "fields")
         
