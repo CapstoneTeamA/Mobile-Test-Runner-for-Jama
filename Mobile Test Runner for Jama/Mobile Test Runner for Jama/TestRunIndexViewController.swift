@@ -25,7 +25,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var inputResultsBox: UIView!
     @IBOutlet weak var inputResultsTextBox: UITextView!
     @IBOutlet weak var inputResultsBackground: UIView!
-    let screenSize = UIScreen.main.bounds
     
     var instance = ""
     var username = ""
@@ -103,7 +102,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBAction func enterText(_ sender: UIButton) {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
-        self.inputResultsTextBox.delegate = self
     }
     
     // Called when 'Done' button in popup is clicked
@@ -116,26 +114,23 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         inputResultsTextBox.resignFirstResponder()
     }
     
+    // Move popup when keyboard appears/hides
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.inputResultsBox.frame.origin.y += keyboardSize.height/3
+        }
+    }
+    
     func textViewShouldReturn(_ textView: UITextView) -> Bool {
         inputResultsTextBox.resignFirstResponder()
         return (true)
     }
-    
-    // Resize popup when keyboard appears/hides
-    func keyboardWillShow(notification: NSNotification) {
-        let marginWidth = (screenSize.width/10)*9
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.inputResultsBox.frame = CGRect(x: (screenSize.width-marginWidth)/2, y: 75, width: marginWidth, height: (screenSize.height-75)-keyboardSize.height)
-        }
-        inputResultsBox.reloadInputViews()
-    }
-    func keyboardWillHide(notification: NSNotification) {
-        let marginWidth = (screenSize.width/10)*9
-        let yCoord = screenSize.midY/4
-        self.inputResultsBox.frame = CGRect(x: (screenSize.width-marginWidth)/2, y: yCoord, width: marginWidth, height: (screenSize.height-75)/2)
-        inputResultsBox.reloadInputViews()
-    }
-
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
