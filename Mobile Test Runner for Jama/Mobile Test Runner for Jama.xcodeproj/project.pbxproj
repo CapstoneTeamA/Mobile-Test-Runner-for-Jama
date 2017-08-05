@@ -237,7 +237,6 @@
 				13A343271F04C2B4002EBC92 /* TestStepViewController.swift */,
 				4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */,
 				133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */,
-				4DBAEDDB1F3329FF00F8401A /* InputResultViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
