@@ -578,6 +578,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Step Detail" id="a3L-dD-bBP">
+                        <barButtonItem key="backBarButtonItem" title="Test Run" id="xox-hd-OFB"/>
                         <barButtonItem key="rightBarButtonItem" title="Clear Step" id="HoQ-oq-Dy8">
                             <connections>
                                 <action selector="didTapResetStep:" destination="RUt-e2-15a" id="h8e-2G-ANA"/>
@@ -709,7 +710,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Test Run Index" id="Bjc-ta-NLl">
+                    <navigationItem key="navigationItem" title="Test Run" id="Bjc-ta-NLl">
                         <barButtonItem key="rightBarButtonItem" title="Cancel Run" id="lHq-Lx-YPg">
                             <connections>
                                 <action selector="cancelRun:" destination="NKr-0k-Apa" id="GZk-SH-0KU"/>
