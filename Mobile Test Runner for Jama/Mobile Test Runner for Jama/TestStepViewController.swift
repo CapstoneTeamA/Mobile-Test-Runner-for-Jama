@@ -57,8 +57,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     // Used to set up text window popup, called in viewDidLoad
     func setupPopup() {
-        NotificationCenter.default.addObserver(self, selector: #selector(TestRunIndexViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(TestRunIndexViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TestStepViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TestStepViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         inputResultsBox.isHidden = true
         inputResultsBackground.isHidden = true
         inputResultsTextBox.delegate = self
