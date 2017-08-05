@@ -457,7 +457,6 @@
 				13A3433A1F04C454002EBC92 /* TestPlanModel.swift in Sources */,
 				13A343381F04C442002EBC92 /* TestPlanListModel.swift in Sources */,
 				13A343321F04C396002EBC92 /* TestRunListModel.swift in Sources */,
-				4DBAEDDC1F3329FF00F8401A /* InputResultViewController.swift in Sources */,
 				90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */,
 				13A343221F04C247002EBC92 /* LoginViewController.swift in Sources */,
 				13A343261F04C28F002EBC92 /* TestListViewController.swift in Sources */,
