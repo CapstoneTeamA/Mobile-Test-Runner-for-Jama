@@ -578,7 +578,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Step Detail" id="a3L-dD-bBP">
-                        <barButtonItem key="rightBarButtonItem" title="Reset Step" id="HoQ-oq-Dy8">
+                        <barButtonItem key="rightBarButtonItem" title="Clear Step" id="HoQ-oq-Dy8">
                             <connections>
                                 <action selector="didTapResetStep:" destination="RUt-e2-15a" id="h8e-2G-ANA"/>
                             </connections>

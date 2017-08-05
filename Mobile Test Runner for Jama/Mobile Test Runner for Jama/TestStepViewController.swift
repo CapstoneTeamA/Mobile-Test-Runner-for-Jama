@@ -49,7 +49,7 @@ class TestStepViewController: UIViewController {
     }
     
     @IBAction func didTapResetStep(_ sender: Any) {
-        let clearAlert = UIAlertController(title: "Clear Step", message: "This step's status will be set to \"Not Run\" and the \"Results\" field will be cleared. Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
+        let clearAlert = UIAlertController(title: "Clear Step", message: "This step's status will be set to \"Not Run\" and the results will be cleared. Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
         
         clearAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
