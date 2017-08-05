@@ -35,6 +35,10 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         testStepTable.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        testStepTable.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,6 +50,13 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         cancelAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
+            var index = 0
+            //Run cancelled, reset all of the results and statuses to initial values
+            for step in self.testRun.testStepList {
+                step.status = self.initialStepsStatusList[index]
+                step.result = self.initialStepsResultsList[index]
+                index += 1
+            }
             self.navigationController?.popViewController(animated: true)
         }))
         
@@ -108,14 +119,39 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //TODO this is hard coded until we implement loading real steps into the screen.
-        return 20
+        return testRun.testStepList.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         let cell = TestStepTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestStepCell")
-        cell.customInit(tableWidth: tableView.bounds.width, stepNumber: indexPath.row + 1, stepName: runName)
+        cell.customInit(tableWidth: tableView.bounds.width, stepNumber: indexPath.row + 1, stepName: testRun.testStepList[indexPath.row].action, stepStatus: testRun.testStepList[indexPath.row].status)
 
         return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let stepDetailController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Test Step") as! TestStepViewController
+        stepDetailController.action = "action"
+        stepDetailController.expResult = "The purpose of this ticket is to enable the user to click on any of the test steps that are listed on the run view and navigate to a placeholder screen for that test step. For testing purposes, it is OK to implement a temporary back button on the destination screen so that you can navigate back to the test run list screen."
+        
+        stepDetailController.notes = "notes"
+        currentlySelectedStepIndex = indexPath.row
+        stepDetailController.indexDelegate = self
+        self.navigationController?.pushViewController(stepDetailController, animated: true)
+    }
+}
+
+extension TestRunIndexViewController: StepIndexDelegate {
+    func didSetStatus(status: Status) {
+        var result = ""
+        switch status {
+        case .fail:
+            result = "FAILED"
+        case .pass:
+            result = "PASSED"
+        }
+
+        testRun.testStepList[currentlySelectedStepIndex].status = result
+
     }
 }

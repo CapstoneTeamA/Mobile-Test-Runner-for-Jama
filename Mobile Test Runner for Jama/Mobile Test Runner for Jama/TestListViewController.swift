@@ -11,9 +11,12 @@ import UIKit
 class TestListViewController: UIViewController {
     @IBOutlet weak var testList: UITableView!
     @IBOutlet weak var tmpProjectLabel: UILabel!
+    @IBOutlet weak var noPlansImage: UIImageView!
+    @IBOutlet weak var noPlansLabel: UILabel!
     let testPlanList: TestPlanListModel = TestPlanListModel()
     let testCycleList: TestCycleListModel = TestCycleListModel()
     let testRunList:  TestRunListModel = TestRunListModel()
+    var testRun: TestRunModel = TestRunModel()
     var currentUser: UserModel!
     var projectId = -1
     var selectedPlanId = -1
@@ -33,7 +36,8 @@ class TestListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.noPlansImage.isHidden = true
+        self.noPlansLabel.isHidden = true
         self.currentTestLevel = .plan
     }
     
@@ -97,6 +101,10 @@ extension TestListViewController: EndpointDelegate {
                     let tmpList = TestPlanListModel()
                     tmpList.extractPlanList(fromData: unwrappedData)
                     if tmpList.testPlanList.isEmpty {
+                        self.testList.isUserInteractionEnabled = false
+                        self.testList.separatorColor = UIColor.white
+                        self.noPlansImage.isHidden = false
+                        self.noPlansLabel.isHidden = false
                         return
                     }
                     self.testPlanList.testPlanList.append(contentsOf: tmpList.testPlanList)
@@ -111,34 +119,45 @@ extension TestListViewController: EndpointDelegate {
                 case .cycle:
                     let tmpList = TestCycleListModel()
                     tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
+                    //if there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
                     if tmpList.testCycleList.isEmpty {
-                        return
+                        let emptyCycle = TestCycleModel();
+                        tmpList.testCycleList.insert(emptyCycle, at: 0)
                     }
+                    
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
                     self.testList.reloadData()
                     
                     //keep calling api while there are still more cycles
                     if self.testCycleList.testCycleList.count < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
-                    }
+                }
                 case .run:
                     let tmpList = TestRunListModel()
                     tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
-                    if tmpList.testRunList.isEmpty {
-                        return
-                    }
-                    self.totalRunsReturnedFromServer += tmpList.testRunList.count
+                    
                     //Filter the runs returned from the API to select the assignedTo value is the current user's id
+                    self.totalRunsReturnedFromServer += tmpList.testRunList.count
+                    
                     for run in tmpList.testRunList {
                         if run.assignedTo == self.currentUser.id {
                             self.testRunList.testRunList.append(run)
                         }
                     }
+                    ////if there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
+                   
                     self.testList.reloadData()
                     //keep calling api while there are still more runs
                     if self.totalRunsReturnedFromServer < totalItems {
-                        RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.testRunList.testRunList.count)", withDelegate: self, username: self.username, password: self.password)
+                        RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password)
+                        return
                     }
+                    
+                    if self.testRunList.testRunList.isEmpty {
+                            let emptyRun = TestRunModel()
+                            self.testRunList.testRunList.insert(emptyRun, at: 0)
+                    }
+                    self.testList.reloadData()
             }
         }
     }
@@ -151,28 +170,49 @@ extension TestListViewController: EndpointDelegate {
 extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testPlanList.testPlanList.count + testCycleList.testCycleList.count + testRunList.testRunList.count
+        let numOfRun = selectedCycleIndex == largeNumber ? 0 : testRunList.testRunList.count
+        let numOfCycle = selectedPlanIndex == largeNumber ? 0 : testCycleList.testCycleList.count
+        return testPlanList.testPlanList.count + numOfCycle + numOfRun
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
-        return buildCell(indexPath: indexPath)
+        let cell = buildCell(indexPath: indexPath)
+        cell.selectionStyle = .none
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.tintColor = UIColor.black
+        cell?.setHighlighted(false, animated: true)
+    }
+    
+    public func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.tintColor = UIColor.clear
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //If we unselect a test plan or cycle return
+        
         if unselectTestPlan(indexPath: indexPath) || unselectTestCycle(indexPath: indexPath) {
             return
         }
+        tableView.cellForRow(at: indexPath)?.tintColor = UIColor.black
+        tableView.deselectRow(at: indexPath, animated: true)
         //If the user taps a test run, go to the index screen for that test run
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TestRunCell" {
+            
             let runViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunIndex") as! TestRunIndexViewController
             
             let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
-            runViewController.runId = self.testRunList.testRunList[currentRunIndex].id
-            runViewController.runName = self.testRunList.testRunList[currentRunIndex].name
+            runViewController.testRun = self.testRunList.testRunList[currentRunIndex]
             runViewController.username = username
             runViewController.password = password
             runViewController.instance = instance
+            runViewController.preserveCurrentRunStatus()
             self.navigationController?.pushViewController(runViewController, animated: true)
             return
         }
@@ -258,13 +298,20 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     func buildTestRunCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestRunCell")
         let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
-        cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
+        
         cell.textLabel?.textAlignment = .left
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         cell.backgroundColor = UIColor.white
         cell.indentationLevel = 1
-        cell.accessoryType = .disclosureIndicator
-        cell.indentationWidth = 15.0
+        if self.testRunList.testRunList[0].name == "No Runs Found" {
+            cell.isUserInteractionEnabled = false
+            cell.textLabel?.text = self.testRunList.testRunList[currentRunIndex].name
+        } else {
+            cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
+            
+            cell.accessoryType = .disclosureIndicator
+        
+        }
         return cell
     }
     
@@ -278,18 +325,24 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestCycleCell")
+        
         cell.textLabel?.text = self.testCycleList.testCycleList[currentCycleIndex].name
         cell.textLabel?.textAlignment = .left
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         
         //If cycle's cell is selected change the background color
         if selectedCycleTableViewIndex != indexPath.row {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            cell.backgroundColor = UIColor(colorLiteralRed: 0xE5/0xFF, green: 0xE5/0xFF, blue: 0xE5/0xFF, alpha: 1)
         } else {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            cell.backgroundColor = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
+            
         }
         cell.indentationLevel = 1
         cell.indentationWidth = 15.0
+        if(self.testCycleList.testCycleList[0].name == "No Cycles Found")
+        {
+            cell.isUserInteractionEnabled = false
+        }
         return cell
     }
     
@@ -305,17 +358,14 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.textLabel?.text = testPlanList.testPlanList[currentPlanIndex].name
         cell.textLabel?.textAlignment = .left
-        
         //If the plan's cell is selected change the background color
+    
+        cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+        
         if selectedPlanIndex != indexPath.row {
-            cell.backgroundColor = UIColor.white
-        } else {
-            if selectedCycleIndex == largeNumber {
-                cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
-            } else {
                 cell.backgroundColor = UIColor.lightGray
-            }
         }
+        
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         return cell
     }

@@ -10,7 +10,6 @@
 		133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */ = {isa = PBXBuildFile; fileRef = 133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */; };
 		133971BB1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */; };
 		133971C31F2C326700AB9D30 /* TestStepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */; };
-		133971C51F2C893800AB9D30 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 133971C41F2C893800AB9D30 /* check_icon.png */; };
 		13A342EF1F0367E9002EBC92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A342EE1F0367E9002EBC92 /* AppDelegate.swift */; };
 		13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F21F0367E9002EBC92 /* Main.storyboard */; };
 		13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F51F0367E9002EBC92 /* Assets.xcassets */; };
@@ -48,6 +47,7 @@
 		13A343631F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343621F04CA76002EBC92 /* ReviewTestRunViewControllerUnitTests.swift */; };
 		13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343B01F0F5C6E002EBC92 /* Endpoints.plist */; };
 		303AD4651F2994F5000E3988 /* LoginViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */; };
+		309325751F32E1C700561EC4 /* mtrlogo_v8-1.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B974361F312092007BE00E /* mtrlogo_v8-1.png */; };
 		4D15D7D81F2A802F009A26B8 /* TestRunIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */; };
 		4DBAEDDC1F3329FF00F8401A /* InputResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBAEDDB1F3329FF00F8401A /* InputResultViewController.swift */; };
 		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
@@ -76,7 +76,6 @@
 		133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Jama-logo-smallwtext.png"; sourceTree = "<group>"; };
 		133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepTableViewCell.swift; sourceTree = "<group>"; };
-		133971C41F2C893800AB9D30 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
 		13A342EB1F0367E9002EBC92 /* Mobile Test Runner for Jama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Test Runner for Jama.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A342EE1F0367E9002EBC92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13A342F31F0367E9002EBC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -125,6 +124,7 @@
 		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
 		E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtr-logo-v2.png"; sourceTree = "<group>"; };
 		E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-lightbl-redx.png"; sourceTree = "<group>"; };
+		E2B974361F312092007BE00E /* mtrlogo_v8-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtrlogo_v8-1.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,8 +155,11 @@
 		133971B71F1B437600AB9D30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				133971C41F2C893800AB9D30 /* check_icon.png */,
+				908CE8611F3274EE00042C1E /* empty_icon_grey.png */,
+				908CE85B1F32744800042C1E /* check_icon_green.png */,
+				908CE85D1F32744800042C1E /* X_icon_red.png */,
 				E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */,
+				E2B974361F312092007BE00E /* mtrlogo_v8-1.png */,
 				E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */,
 				133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */,
 			);
@@ -406,14 +409,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				309325751F32E1C700561EC4 /* mtrlogo_v8-1.png in Resources */,
 				13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */,
 				13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */,
 				E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */,
 				13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */,
 				13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */,
+				908CE85E1F32744800042C1E /* check_icon_green.png in Resources */,
+				908CE8601F32744800042C1E /* X_icon_red.png in Resources */,
+				908CE8621F3274EE00042C1E /* empty_icon_grey.png in Resources */,
 				133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */,
 				E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */,
-				133971C51F2C893800AB9D30 /* check_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,7 +637,7 @@
 				DEVELOPMENT_TEAM = 5BL5M2XBM2;
 				INFOPLIST_FILE = "Mobile Test Runner for Jama/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Jama;
+				PRODUCT_BUNDLE_IDENTIFIER = Jaca;
 				PRODUCT_NAME = $PROJECT_NAME;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -646,7 +652,7 @@
 				DEVELOPMENT_TEAM = 5BL5M2XBM2;
 				INFOPLIST_FILE = "Mobile Test Runner for Jama/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Jama;
+				PRODUCT_BUNDLE_IDENTIFIER = Jaca;
 				PRODUCT_NAME = $PROJECT_NAME;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;

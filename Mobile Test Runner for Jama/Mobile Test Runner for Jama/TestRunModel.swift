@@ -9,21 +9,31 @@
 import Foundation
 
 class TestRunModel {
-    var description = ""
+    var description = "No Runs Found"
     var id = -1
-    var name = ""
+    var name = "No Runs Found"
     var assignedTo = -1
     var result = ""
     
-    func extractPlan(fromData: [String: AnyObject]) {
+    func extractRun(fromData: [String: AnyObject]) {
         id = fromData["id"] as! Int
         let fields: [String :  AnyObject] = fromData["fields"] as! Dictionary
         name = fields["name"] as! String
+        description = fields["description"] as! String
+        
         let assignedToWrappedValue = fields["assignedTo"]
         if assignedToWrappedValue != nil {
             assignedTo = assignedToWrappedValue as! Int
         }
         
-        description = fields["description"] as! String
+        if fields["testRunSteps"] != nil {
+            let testStepFields: [[String : AnyObject]] = fields["testRunSteps"] as! Array
+        
+            for step in testStepFields {
+                let tmpStep = TestStepModel()
+                tmpStep.extractStep(fromData: step)
+                testStepList.append(tmpStep)
+            }
+        }
     }
 }
