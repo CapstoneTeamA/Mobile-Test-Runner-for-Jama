@@ -33,6 +33,15 @@ class TestStepViewController: UIViewController {
         self.title = "Step " + String(currentIndex+1) + "/" + String(indexLength);
 
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        //Needed to set all the textViews scrolled to the top when the view loads.
+        actionTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+        expResultTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+        notesTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
