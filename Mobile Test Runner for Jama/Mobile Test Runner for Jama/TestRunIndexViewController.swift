@@ -128,7 +128,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBAction func saveText(_ sender: UIButton) {
         inputResultsBackground.isHidden = true
         inputResultsBox.isHidden = true
-        if testRun.result != inputResultsTextBox.text && testRun.result != placeholderText {
+        if testRun.result != inputResultsTextBox.text && inputResultsTextBox.text != placeholderText {
             testRun.result = inputResultsTextBox.text
         }
         inputResultsTextBox.resignFirstResponder()
