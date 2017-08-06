@@ -10,7 +10,10 @@ import UIKit
 
 class TestStepTableViewCell: UITableViewCell {
     var statusIconImageView: UIImageView!
-
+    var nameLabel: UILabel!
+    var numberLabel: UILabel!
+    
+    var iconFileName = ""
     let iconOffset: CGFloat = 22
     let nameLabelOffset: CGFloat = 50
     let iconCenterX: CGFloat = 24
@@ -31,20 +34,22 @@ class TestStepTableViewCell: UITableViewCell {
         //create the status image view from the images and set its position and inital display attribute
         var statusIcon: UIImage
         if stepStatus == "PASSED" {
-            statusIcon = UIImage(named: "check_icon_green.png")!
+            iconFileName = "check_icon_green.png"
+            
         }
         else if stepStatus == "FAILED" {
-            statusIcon = UIImage(named: "X_icon_red.png")!
+            iconFileName = "X_icon_red.png"
         }
         else {
-            statusIcon = UIImage(named: "empty_icon_grey.png")!
+            iconFileName = "empty_icon_grey.png"
         }
+        statusIcon = UIImage(named: iconFileName)!
         statusIconImageView = UIImageView(image: statusIcon)
         statusIconImageView.center = CGPoint(x: iconCenterX, y: iconCenterY)
         
         //Build the labels for the step number and step name
-        let numberLabel = UILabel(frame: CGRect(x: self.contentView.bounds.minX, y: self.contentView.bounds.minY, width: 40, height: self.contentView.bounds.height))
-        let nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - statusIconImageView.bounds.width - numberLabel.bounds.width - nameLabelOffset , height: self.contentView.bounds.height))
+        numberLabel = UILabel(frame: CGRect(x: self.contentView.bounds.minX, y: self.contentView.bounds.minY, width: 40, height: self.contentView.bounds.height))
+        nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - statusIconImageView.bounds.width - numberLabel.bounds.width - nameLabelOffset , height: self.contentView.bounds.height))
         
         //set the position of the labels
         numberLabel.center = CGPoint(x: statusIconImageView.center.x + iconOffset + numberLabel.bounds.width/2 , y: self.contentView.center.y)
