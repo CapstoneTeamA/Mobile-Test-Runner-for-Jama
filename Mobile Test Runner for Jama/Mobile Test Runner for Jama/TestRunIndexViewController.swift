@@ -43,6 +43,7 @@ class TestRunIndexViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         testStepTable.reloadData()
+        //If there are no steps, display the no steps view
         if testRun.testStepList.isEmpty {
             noStepsView.isHidden = false
         } else {
@@ -91,7 +92,6 @@ class TestRunIndexViewController: UIViewController {
     }
     
     @IBAction func didTapPassRun(_ sender: Any) {
-        
         noStepStatusIcon.image = UIImage(named: "check_icon_green.png")
     }
     
@@ -140,6 +140,5 @@ extension TestRunIndexViewController: StepIndexDelegate {
         }
 
         testRun.testStepList[currentlySelectedStepIndex].status = result
-
     }
 }
