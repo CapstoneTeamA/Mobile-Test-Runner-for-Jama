@@ -125,7 +125,6 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    
     @IBAction func didTapResetStep(_ sender: Any) {
         let clearAlert = UIAlertController(title: "Clear Step", message: "This step's status will be set to \"Not Run\" and the results will be cleared. Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
         
@@ -133,6 +132,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
             (action: UIAlertAction!) in
             //TODO reset the Results field for the step
             self.indexDelegate.didSetStatus(status: .not_run)
+            self.indexDelegate.didSetResult(result: "")
             self.navigationController?.popViewController(animated: true)
         }))
         
