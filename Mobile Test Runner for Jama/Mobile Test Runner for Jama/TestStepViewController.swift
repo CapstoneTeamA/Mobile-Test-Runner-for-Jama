@@ -38,7 +38,6 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         notesTextField.text = notes
         self.setupPopup()
         self.title = "Step " + String(currentIndex+1) + "/" + String(indexLength);
-
     }
     
     override func viewWillLayoutSubviews() {

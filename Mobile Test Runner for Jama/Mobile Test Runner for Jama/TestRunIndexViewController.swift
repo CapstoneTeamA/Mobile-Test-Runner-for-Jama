@@ -186,6 +186,7 @@ extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource
         stepDetailController.action = testRun.testStepList[indexPath.row].action
         stepDetailController.expResult = testRun.testStepList[indexPath.row].expectedResult
         stepDetailController.notes = testRun.testStepList[indexPath.row].notes
+        stepDetailController.stepResult = testRun.testStepList[indexPath.row].result
         
         stepDetailController.currentIndex = indexPath.row
         stepDetailController.indexLength = testRun.testStepList.count
