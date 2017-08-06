@@ -94,6 +94,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         inputResultsBox.isHidden = true
         if self.stepResult != inputResultsTextBox.text && self.stepResult != placeholderText {
             self.stepResult = inputResultsTextBox.text
+            indexDelegate.didSetResult(result: self.stepResult)
+            
         }
         inputResultsTextBox.resignFirstResponder()
     }
