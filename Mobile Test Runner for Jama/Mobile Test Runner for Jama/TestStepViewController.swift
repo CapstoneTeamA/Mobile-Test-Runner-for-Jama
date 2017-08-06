@@ -26,6 +26,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     var notes = ""
     var stepResult = ""
     var indexDelegate: StepIndexDelegate!
+    let placeholderText = "Enter result notes here"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,13 +63,23 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         inputResultsBox.isHidden = true
         inputResultsBackground.isHidden = true
         inputResultsTextBox.delegate = self
+        setPlaceholderText()
+    }
+    
+    func setPlaceholderText() {
+        if self.stepResult == "" {
+            inputResultsTextBox.text = placeholderText
+            inputResultsTextBox.textColor = UIColor(red: 0.5882, green: 0.5882, blue: 0.5882, alpha: 1.0) /* #969696 */
+        } else {
+            inputResultsTextBox.text = self.stepResult
+        }
     }
     
     // Called when 'Done' button in popup is clicked
     @IBAction func saveText(_ sender: UIButton) {
         inputResultsBackground.isHidden = true
         inputResultsBox.isHidden = true
-        if self.stepResult != inputResultsTextBox.text {
+        if self.stepResult != inputResultsTextBox.text && self.stepResult != placeholderText {
             self.stepResult = inputResultsTextBox.text
         }
         inputResultsTextBox.resignFirstResponder()
@@ -92,5 +103,11 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         return (true)
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if inputResultsTextBox.text == placeholderText {
+            inputResultsTextBox.text = ""
+            inputResultsTextBox.textColor = UIColor.black
+        }
+    }
     
 }

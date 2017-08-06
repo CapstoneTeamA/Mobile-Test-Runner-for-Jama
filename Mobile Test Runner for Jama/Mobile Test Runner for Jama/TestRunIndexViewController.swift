@@ -10,6 +10,7 @@ import UIKit
 
 protocol StepIndexDelegate {
     func didSetStatus(status: Status)
+    func didSetResult(result: String)
 }
 
 enum Status {
@@ -35,6 +36,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var testRun: TestRunModel = TestRunModel()
     var initialStepsStatusList: [String] = []
     var initialStepsResultsList: [String] = []
+    let placeholderText = "Enter run results here"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +98,16 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         inputResultsBox.isHidden = true
         inputResultsBackground.isHidden = true
         inputResultsTextBox.delegate = self
+        setPlaceholderText()
+    }
+    
+    func setPlaceholderText() {
+        if testRun.result == "" {
+            inputResultsTextBox.text = placeholderText
+            inputResultsTextBox.textColor = UIColor(red: 0.5882, green: 0.5882, blue: 0.5882, alpha: 1.0) /* #969696 */
+        } else {
+            inputResultsTextBox.text = testRun.result
+        }
     }
     
     // Called when 'Input Results' button is clicked
@@ -108,7 +120,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBAction func saveText(_ sender: UIButton) {
         inputResultsBackground.isHidden = true
         inputResultsBox.isHidden = true
-        if testRun.result != inputResultsTextBox.text {
+        if testRun.result != inputResultsTextBox.text && testRun.result != placeholderText {
             testRun.result = inputResultsTextBox.text
         }
         inputResultsTextBox.resignFirstResponder()
@@ -130,6 +142,13 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     func textViewShouldReturn(_ textView: UITextView) -> Bool {
         inputResultsTextBox.resignFirstResponder()
         return (true)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if inputResultsTextBox.text == placeholderText {
+            inputResultsTextBox.text = ""
+            inputResultsTextBox.textColor = UIColor.black
+        }
     }
 }
 
@@ -166,8 +185,10 @@ extension TestRunIndexViewController: StepIndexDelegate {
         case .pass:
             result = "PASSED"
         }
-
         testRun.testStepList[currentlySelectedStepIndex].status = result
-
+    }
+    
+    func didSetResult(result: String) {
+        testRun.testStepList[currentlySelectedStepIndex].result = result
     }
 }
