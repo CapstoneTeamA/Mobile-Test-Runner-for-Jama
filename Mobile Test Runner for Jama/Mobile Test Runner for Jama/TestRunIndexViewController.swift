@@ -21,6 +21,8 @@ class TestRunIndexViewController: UIViewController {
     @IBOutlet weak var cancelRun: UIBarButtonItem!
     @IBOutlet weak var testRunNameLabel: UILabel!
     @IBOutlet weak var testStepTable: UITableView!
+    @IBOutlet weak var noStepsView: UIView!
+    @IBOutlet weak var noStepStatusIcon: UIImageView!
     
     var instance = ""
     var username = ""
@@ -36,12 +38,16 @@ class TestRunIndexViewController: UIViewController {
         //hide the default back button and instead show cancel run
         self.navigationItem.hidesBackButton = true
         testRunNameLabel.text = testRun.name
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         testStepTable.reloadData()
+        //If there are no steps, display the no steps view
+        if testRun.testStepList.isEmpty {
+            noStepsView.isHidden = false
+        } else {
+            noStepsView.isHidden = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,6 +89,15 @@ class TestRunIndexViewController: UIViewController {
             initialStepsResultsList.append(results)
         }
     }
+    
+    @IBAction func didTapPassRun(_ sender: Any) {
+        noStepStatusIcon.image = UIImage(named: "check_icon_green.png")
+    }
+    
+    @IBAction func didTapFailRun(_ sender: Any) {
+        noStepStatusIcon.image = UIImage(named: "X_icon_red.png")
+    }
+    
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
@@ -124,6 +139,5 @@ extension TestRunIndexViewController: StepIndexDelegate {
         }
 
         testRun.testStepList[currentlySelectedStepIndex].status = result
-
     }
 }
