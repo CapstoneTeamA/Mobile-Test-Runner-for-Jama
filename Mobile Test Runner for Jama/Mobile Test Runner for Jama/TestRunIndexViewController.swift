@@ -21,8 +21,9 @@ class TestRunIndexViewController: UIViewController {
     @IBOutlet weak var cancelRun: UIBarButtonItem!
     @IBOutlet weak var testRunNameLabel: UILabel!
     @IBOutlet weak var testStepTable: UITableView!
-    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var noStepsView: UIView!
+    @IBOutlet weak var noStepStatusIcon: UIImageView!
+    
     
     var instance = ""
     var username = ""
@@ -90,11 +91,12 @@ class TestRunIndexViewController: UIViewController {
     }
     
     @IBAction func didTapPassRun(_ sender: Any) {
-        statusLabel.text = "Passed"
+        
+        noStepStatusIcon.image = UIImage(named: "check_icon_green.png")
     }
     
     @IBAction func didTapFailRun(_ sender: Any) {
-        statusLabel.text = "Failed"
+        noStepStatusIcon.image = UIImage(named: "X_icon_red.png")
     }
     
 }
