@@ -24,7 +24,6 @@ class TestRunIndexViewController: UIViewController {
     @IBOutlet weak var noStepsView: UIView!
     @IBOutlet weak var noStepStatusIcon: UIImageView!
     
-    
     var instance = ""
     var username = ""
     var password = ""
