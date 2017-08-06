@@ -20,11 +20,14 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var inputResultsBox: UIView!
     @IBOutlet weak var inputResultsTextBox: UITextView!
     @IBOutlet weak var inputResultsButton: UIButton!
+    @IBOutlet weak var StepDetailTitle: UINavigationItem!
     
     var action = ""
     var expResult = ""
     var notes = ""
     var stepResult = ""
+    var currentIndex = 0
+    var indexLength = 0
     var indexDelegate: StepIndexDelegate!
     let placeholderText = "Enter result notes here"
     
@@ -34,6 +37,17 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         expResultTextField.text = expResult
         notesTextField.text = notes
         self.setupPopup()
+        self.title = "Step " + String(currentIndex+1) + "/" + String(indexLength);
+
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        //Needed to set all the textViews scrolled to the top when the view loads.
+        actionTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+        expResultTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+        notesTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
     }
 
     override func didReceiveMemoryWarning() {

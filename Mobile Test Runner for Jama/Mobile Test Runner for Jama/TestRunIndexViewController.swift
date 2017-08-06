@@ -26,6 +26,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var inputResultsBox: UIView!
     @IBOutlet weak var inputResultsTextBox: UITextView!
     @IBOutlet weak var inputResultsBackground: UIView!
+    @IBOutlet weak var noStepsView: UIView!
+    @IBOutlet weak var noStepStatusIcon: UIImageView!
     
     var instance = ""
     var username = ""
@@ -49,6 +51,12 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         testStepTable.reloadData()
+        //If there are no steps, display the no steps view
+        if testRun.testStepList.isEmpty {
+            noStepsView.isHidden = false
+        } else {
+            noStepsView.isHidden = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -150,6 +158,14 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             inputResultsTextBox.textColor = UIColor.black
         }
     }
+    @IBAction func didTapPassRun(_ sender: Any) {
+        noStepStatusIcon.image = UIImage(named: "check_icon_green.png")
+    }
+    
+    @IBAction func didTapFailRun(_ sender: Any) {
+        noStepStatusIcon.image = UIImage(named: "X_icon_red.png")
+    }
+    
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
@@ -166,10 +182,14 @@ extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let stepDetailController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "Test Step") as! TestStepViewController
-        stepDetailController.action = "action"
-        stepDetailController.expResult = "The purpose of this ticket is to enable the user to click on any of the test steps that are listed on the run view and navigate to a placeholder screen for that test step. For testing purposes, it is OK to implement a temporary back button on the destination screen so that you can navigate back to the test run list screen."
         
-        stepDetailController.notes = "notes"
+        stepDetailController.action = testRun.testStepList[indexPath.row].action
+        stepDetailController.expResult = testRun.testStepList[indexPath.row].expectedResult
+        stepDetailController.notes = testRun.testStepList[indexPath.row].notes
+        
+        stepDetailController.currentIndex = indexPath.row
+        stepDetailController.indexLength = testRun.testStepList.count
+        
         currentlySelectedStepIndex = indexPath.row
         stepDetailController.indexDelegate = self
         self.navigationController?.pushViewController(stepDetailController, animated: true)
