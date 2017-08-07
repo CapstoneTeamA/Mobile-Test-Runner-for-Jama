@@ -188,7 +188,7 @@
                                         <rect key="frame" x="12.5" y="0.0" width="350" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="351" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJa-8k-3bZ">
@@ -296,7 +296,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jw9-Nh-Msb">
-                                <rect key="frame" x="0.0" y="158" width="375" height="568"/>
+                                <rect key="frame" x="0.0" y="158" width="375" height="499"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -426,7 +426,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="114-Ve-vhn">
-                                <rect key="frame" x="0.0" y="545" width="375" height="122"/>
+                                <rect key="frame" x="0.0" y="501" width="375" height="122"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXM-kY-Oc6">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="122"/>
@@ -480,52 +480,52 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSP-Eo-Vq8">
-                                <rect key="frame" x="0.0" y="543" width="375" height="2"/>
+                                <rect key="frame" x="0.0" y="499" width="375" height="2"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="iWn-SL-8jU"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWW-gk-dOH">
-                                <rect key="frame" x="0.0" y="20" width="375" height="523"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="435"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tot-bH-8Vx" userLabel="Notes Label">
-                                        <rect key="frame" x="0.0" y="349" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="290.5" width="375" height="36"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0PN-4K-0Y4">
-                                        <rect key="frame" x="11.5" y="392.5" width="352" height="130.5"/>
+                                        <rect key="frame" x="11.5" y="326.5" width="352" height="108.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="L7D-uG-coc">
-                                        <rect key="frame" x="11.5" y="218" width="352" height="131"/>
+                                        <rect key="frame" x="11.5" y="181.5" width="352" height="109"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Expected Result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yk4-JF-LJd" userLabel="Notes Label">
-                                        <rect key="frame" x="0.0" y="174.5" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="145" width="375" height="36.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Qdg-x7-ory">
-                                        <rect key="frame" x="11.5" y="44" width="352" height="130.5"/>
+                                        <rect key="frame" x="11.5" y="36.5" width="352" height="108.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Op-qK-LKw" userLabel="Notes Label">
-                                        <rect key="frame" x="0.0" y="0.5" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="0.5" width="375" height="36"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="textColor"/>
@@ -640,7 +640,14 @@
                             <constraint firstItem="bCd-i8-7Uu" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="bottom" id="zUF-BD-wIH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Step Detail" id="a3L-dD-bBP"/>
+                    <navigationItem key="navigationItem" title="Step Detail" id="a3L-dD-bBP">
+                        <barButtonItem key="backBarButtonItem" title="Test Run" id="xox-hd-OFB"/>
+                        <barButtonItem key="rightBarButtonItem" title="Clear Step" id="HoQ-oq-Dy8">
+                            <connections>
+                                <action selector="didTapResetStep:" destination="RUt-e2-15a" id="h8e-2G-ANA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="ExpResultTextField" destination="L7D-uG-coc" id="BLa-pK-QEg"/>
                         <outlet property="StepDetailTitle" destination="a3L-dD-bBP" id="gfM-Hb-Jyl"/>
@@ -690,7 +697,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rM3-gm-dNb">
-                                        <rect key="frame" x="187.5" y="4" width="187.5" height="61"/>
+                                        <rect key="frame" x="187.5" y="2" width="187.5" height="61"/>
                                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Input Results">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -955,7 +962,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Test Run Index" id="Bjc-ta-NLl">
+                    <navigationItem key="navigationItem" title="Test Run" id="Bjc-ta-NLl">
                         <barButtonItem key="rightBarButtonItem" title="Cancel Run" id="lHq-Lx-YPg">
                             <connections>
                                 <action selector="cancelRun:" destination="NKr-0k-Apa" id="GZk-SH-0KU"/>
@@ -976,6 +983,7 @@
                         <outlet property="noStepsView" destination="xDR-j2-5vA" id="ZiB-ZD-XCC"/>
                         <outlet property="testRunNameLabel" destination="ukt-q7-rqc" id="9TX-3G-Tpf"/>
                         <outlet property="testStepTable" destination="7gT-7g-SHk" id="roX-jm-pwm"/>
+                        <segue destination="RUt-e2-15a" kind="show" identifier="StepDetailSegue" id="lpX-AJ-yVN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97h-qu-cpa" userLabel="First Responder" sceneMemberID="firstResponder"/>

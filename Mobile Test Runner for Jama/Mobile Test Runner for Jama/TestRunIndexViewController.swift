@@ -14,7 +14,7 @@ protocol StepIndexDelegate {
 }
 
 enum Status {
-    case pass, fail
+    case pass, fail, not_run
 }
 
 class TestRunIndexViewController: UIViewController, UITextViewDelegate {
@@ -38,6 +38,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var testRun: TestRunModel = TestRunModel()
     var initialStepsStatusList: [String] = []
     var initialStepsResultsList: [String] = []
+    var initialRunResultField = ""
     let placeholderText = "Enter run results here"
     
     override func viewDidLoad() {
@@ -77,6 +78,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
                 step.result = self.initialStepsResultsList[index]
                 index += 1
             }
+            self.testRun.result = self.initialRunResultField
             self.navigationController?.popViewController(animated: true)
         }))
         
@@ -97,6 +99,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             initialStepsStatusList.append(status)
             initialStepsResultsList.append(results)
         }
+        initialRunResultField = testRun.result
     }
     
     // Used to set up text window popup, called in viewDidLoad
@@ -205,6 +208,8 @@ extension TestRunIndexViewController: StepIndexDelegate {
             result = "FAILED"
         case .pass:
             result = "PASSED"
+        case .not_run:
+            result = "NOT_RUN"
         }
         testRun.testStepList[currentlySelectedStepIndex].status = result
     }
