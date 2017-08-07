@@ -20,6 +20,8 @@ enum Status {
 class TestRunIndexViewController: UIViewController, UITextViewDelegate {
    
     @IBOutlet weak var cancelRun: UIBarButtonItem!
+    @IBOutlet weak var blockedButton: UIButton!
+    @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var testRunNameLabel: UILabel!
     @IBOutlet weak var testStepTable: UITableView!
     @IBOutlet weak var inputResultsButton: UIButton!
@@ -90,6 +92,47 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         present(cancelAlert, animated: true, completion: nil)
     }
+    
+    //if the submit run button is hit, pop up an alert that either does nothing or submits all of the run data to the API
+    @IBAction func submitButton(_ sender: Any) {
+        let submitAlert = UIAlertController(title: "Submit Run", message: "All run data will be saved and uploaded. Are you sure you want to submit", preferredStyle: UIAlertControllerStyle.alert)
+        
+        submitAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
+            (action: UIAlertAction!) in
+            //TODO: add code to submit the run to the API
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        submitAlert.addAction(UIAlertAction(title: "Never mind", style: .cancel, handler: {
+            (action: UIAlertAction!) in
+            _ = ""
+            
+        }))
+        
+        present(submitAlert, animated: true, completion: nil)
+    }
+    
+    //if the block run button is hit, pop up an alert that either does nothing or submits the run as blocked to the API
+    @IBAction func blockedButton(_ sender: UIButton) {
+        let blockedAlert = UIAlertController(title: "Block Run", message: "This run will be marked as blocked. Are you sure you want to submit", preferredStyle: UIAlertControllerStyle.alert)
+        
+        blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
+            (action: UIAlertAction!) in
+            //TODO: add code to submit the run as blocked to the API
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        blockedAlert.addAction(UIAlertAction(title: "Never mind", style: .cancel, handler: {
+            (action: UIAlertAction!) in
+            _ = ""
+            
+        }))
+        
+        present(blockedAlert, animated: true, completion: nil)
+    }
+    
+    
+    
     
     //Save all of the inital values of the statuses and
     func preserveCurrentRunStatus() {
