@@ -130,7 +130,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         
         clearAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
-            //TODO reset the Results field for the step
+            //Reset the Result and Status fields for the step
             self.indexDelegate.didSetStatus(status: .not_run)
             self.indexDelegate.didSetResult(result: "")
             self.navigationController?.popViewController(animated: true)
