@@ -13,6 +13,7 @@ class TestRunModel {
     var id = -1
     var name = "No Runs Found"
     var assignedTo = -1
+    var result = ""
     var status = ""
     var testStepList: [TestStepModel] = []
     
