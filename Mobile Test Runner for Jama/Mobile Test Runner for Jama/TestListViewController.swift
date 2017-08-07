@@ -100,14 +100,20 @@ extension TestListViewController: EndpointDelegate {
                 case .plan:
                     let tmpList = TestPlanListModel()
                     tmpList.extractPlanList(fromData: unwrappedData)
-                    if tmpList.testPlanList.isEmpty {
+                    for plan in tmpList.testPlanList {
+                        if plan.archived == false{
+                            self.testPlanList.testPlanList.append(plan)
+                        }
+                    }
+                    if self.testPlanList.testPlanList.isEmpty {
                         self.testList.isUserInteractionEnabled = false
                         self.testList.separatorColor = UIColor.white
                         self.noPlansImage.isHidden = false
                         self.noPlansLabel.isHidden = false
                         return
                     }
-                    self.testPlanList.testPlanList.append(contentsOf: tmpList.testPlanList)
+                    
+                
                     //self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
             
                     //reload Data in view
@@ -120,7 +126,7 @@ extension TestListViewController: EndpointDelegate {
                     let tmpList = TestCycleListModel()
                     tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
                     //if there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
-                    if tmpList.testCycleList.isEmpty {
+                    if tmpList.testCycleList.isEmpty && self.testCycleList.testCycleList.isEmpty {
                         let emptyCycle = TestCycleModel();
                         tmpList.testCycleList.insert(emptyCycle, at: 0)
                     }

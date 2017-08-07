@@ -24,7 +24,7 @@ class TestCycleModelUnitTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExtractPlanFromData() {
+    func testExtractCycleFromData() {
         testCycle.extractCycle(fromData: data)
         
         XCTAssertEqual(2323, testCycle.id)
