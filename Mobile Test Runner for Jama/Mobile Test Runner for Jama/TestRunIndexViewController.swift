@@ -10,17 +10,24 @@ import UIKit
 
 protocol StepIndexDelegate {
     func didSetStatus(status: Status)
+    func didSetResult(result: String)
 }
 
 enum Status {
-    case pass, fail
+    case pass, fail, not_run
 }
 
-class TestRunIndexViewController: UIViewController {
+class TestRunIndexViewController: UIViewController, UITextViewDelegate {
    
     @IBOutlet weak var cancelRun: UIBarButtonItem!
     @IBOutlet weak var testRunNameLabel: UILabel!
     @IBOutlet weak var testStepTable: UITableView!
+    @IBOutlet weak var inputResultsButton: UIButton!
+    @IBOutlet weak var inputResultsBox: UIView!
+    @IBOutlet weak var inputResultsTextBox: UITextView!
+    @IBOutlet weak var inputResultsBackground: UIView!
+    @IBOutlet weak var noStepsView: UIView!
+    @IBOutlet weak var noStepStatusIcon: UIImageView!
     
     var instance = ""
     var username = ""
@@ -31,17 +38,26 @@ class TestRunIndexViewController: UIViewController {
     var testRun: TestRunModel = TestRunModel()
     var initialStepsStatusList: [String] = []
     var initialStepsResultsList: [String] = []
+    var initialRunResultField = ""
+    let placeholderText = "Enter run results here"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //hide the default back button and instead show cancel run
         self.navigationItem.hidesBackButton = true
         testRunNameLabel.text = testRun.name
-        
-        
+        self.setupPopup()
+        testStepTable.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         testStepTable.reloadData()
+        //If there are no steps, display the no steps view
+        if testRun.testStepList.isEmpty {
+            noStepsView.isHidden = false
+        } else {
+            noStepsView.isHidden = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,6 +78,7 @@ class TestRunIndexViewController: UIViewController {
                 step.result = self.initialStepsResultsList[index]
                 index += 1
             }
+            self.testRun.result = self.initialRunResultField
             self.navigationController?.popViewController(animated: true)
         }))
         
@@ -82,7 +99,76 @@ class TestRunIndexViewController: UIViewController {
             initialStepsStatusList.append(status)
             initialStepsResultsList.append(results)
         }
+        initialRunResultField = testRun.result
     }
+    
+    // Used to set up text window popup, called in viewDidLoad
+    func setupPopup() {
+        NotificationCenter.default.addObserver(self, selector: #selector(TestRunIndexViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TestRunIndexViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        inputResultsBox.isHidden = true
+        inputResultsBackground.isHidden = true
+        inputResultsTextBox.delegate = self
+        setPlaceholderText()
+    }
+    
+    func setPlaceholderText() {
+        if testRun.result == "" {
+            inputResultsTextBox.text = placeholderText
+            inputResultsTextBox.textColor = UIColor(red: 0.5882, green: 0.5882, blue: 0.5882, alpha: 1.0) /* #969696 */
+        } else {
+            inputResultsTextBox.text = testRun.result
+        }
+    }
+    
+    // Called when 'Input Results' button is clicked
+    @IBAction func enterText(_ sender: UIButton) {
+        inputResultsBackground.isHidden = false
+        inputResultsBox.isHidden = false
+    }
+    
+    // Called when 'Done' button in popup is clicked
+    @IBAction func saveText(_ sender: UIButton) {
+        inputResultsBackground.isHidden = true
+        inputResultsBox.isHidden = true
+        if testRun.result != inputResultsTextBox.text && inputResultsTextBox.text != placeholderText {
+            testRun.result = inputResultsTextBox.text
+        }
+        inputResultsTextBox.resignFirstResponder()
+    }
+    
+    // Move popup when keyboard appears/hides
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.inputResultsBox.frame.origin.y += keyboardSize.height/3
+        }
+    }
+    
+    func textViewShouldReturn(_ textView: UITextView) -> Bool {
+        inputResultsTextBox.resignFirstResponder()
+        return (true)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if inputResultsTextBox.text == placeholderText {
+            inputResultsTextBox.text = ""
+            inputResultsTextBox.textColor = UIColor.black
+        }
+    }
+    @IBAction func didTapPassRun(_ sender: Any) {
+        noStepStatusIcon.image = UIImage(named: "check_icon_green.png")
+    }
+    
+    @IBAction func didTapFailRun(_ sender: Any) {
+        noStepStatusIcon.image = UIImage(named: "X_icon_red.png")
+    }
+    
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
@@ -103,6 +189,7 @@ extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource
         stepDetailController.action = testRun.testStepList[indexPath.row].action
         stepDetailController.expResult = testRun.testStepList[indexPath.row].expectedResult
         stepDetailController.notes = testRun.testStepList[indexPath.row].notes
+        stepDetailController.stepResult = testRun.testStepList[indexPath.row].result
         
         stepDetailController.currentIndex = indexPath.row
         stepDetailController.indexLength = testRun.testStepList.count
@@ -121,9 +208,13 @@ extension TestRunIndexViewController: StepIndexDelegate {
             result = "FAILED"
         case .pass:
             result = "PASSED"
+        case .not_run:
+            result = "NOT_RUN"
         }
-
         testRun.testStepList[currentlySelectedStepIndex].status = result
-
+    }
+    
+    func didSetResult(result: String) {
+        testRun.testStepList[currentlySelectedStepIndex].result = result
     }
 }
