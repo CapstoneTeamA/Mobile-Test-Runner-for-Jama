@@ -212,8 +212,8 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         run.testStepList.append(step3)
         run.result = "This is the initial result"
         viewController.testRun = run
-        
-        let result = viewController.JSONStringify()
+
+        let result = viewController.buildPutJson()
         print(result)
     }
 }

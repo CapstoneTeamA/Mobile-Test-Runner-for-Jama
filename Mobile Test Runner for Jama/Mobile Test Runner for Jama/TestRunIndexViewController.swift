@@ -172,13 +172,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     
     //TODO make the link between the button and the setting of the status for the run
     //TODO make confirmation popup that this will submit the test run
-    //TODO make
     
-    //make the put request with the test run data
-    func submitTestRun() {
-        let putEndpoint = buildTestRunEndpointString()
-        RestHelper.hitEndpoint(atEndpointString: putEndpoint, withDelegate: self, httpMethod: "Put", username: username, password: password)
-    }
     
     //build the endpoint for submitting the test run
     func buildTestRunEndpointString() -> String {
@@ -188,59 +182,64 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     }
     
     //build the JSON body of the put request
-    func JSONStringify() -> String{
-        var stringJSON = ""
-        var index = 0
-        
-        // build the "testRunSteps"
-        var testRunString = "\"testRunSteps\": ["
-        for step in testRun.testStepList {
-            testRunString += "{" + "\"action\": " + "\"" + step.action + "\"" + ","
-            testRunString += "\"expectedResult\": " + "\"" + step.expectedResult + "\"" + ","
-            testRunString += "\"notes\": " + "\"" + step.notes + "\"" + ","
-            testRunString += "\"result\": " + "\"" + step.result + "\"" + ","
-            testRunString += "\"status\" :" + "\"" + step.status + "\"" + "}"
-            if index != testRun.testStepList.endIndex - 1 {
-                testRunString += ","
-            }
-            index += 1
+    func buildPutJson() -> Data {
+        let stepList = NSMutableArray()
+        for step in self.testRun.testStepList {
+            let nsStep : NSDictionary = [
+                "action": step.action as NSString,
+                "expectedResult": step.expectedResult as NSString,
+                "notes": step.notes as NSString,
+                "result": step.result as NSString,
+                "status": step.status as NSString
+            ]
+            stepList.add(nsStep)
         }
-        testRunString += "]"
+ 
+        let fields : NSDictionary = [
+            "testRunSteps" : stepList as NSArray,
+            "actualResults" : self.testRun.result as NSString,
+            "testRunStatus" : self.testRun.testStatus as NSString
+        ]
         
-        // build the "actualResults"
-        var actualResultsString = "\"actualResults\": "
-        actualResultsString += "\"" + self.testRun.result + "\""
-
-        // build the "testRunStatus"
-        var testRunStatusString = "\"testRunStatus\": "
-        testRunStatusString += "\"" + self.testRun.testStatus + "\""
+        let dictionary: NSDictionary = [
+            "fields" : fields
+        ]
         
-        //build the whole JSON body
-        stringJSON += "{" + "\"fields\" : {" + testRunString + "," + actualResultsString + "," + testRunStatusString + "}}"
-        return stringJSON
-    }
-  /*  func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
-        let options = prettyPrinted ? JSONSerialization.WritingOptions.prettyPrinted : JSONSerialization.WritingOptions(rawValue: 0)
-        if JSONSerialization.isValidJSONObject(value) {
+        if JSONSerialization.isValidJSONObject(dictionary) {
             do{
-                let data = try JSONSerialization.data(withJSONObject: value, options: options)
-                if let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-                    return string as String
-                }
+                let data = try JSONSerialization.data(withJSONObject: dictionary)
+                return data
             }catch {
                 print("error")
             }
         }
-        return ""
+        else {
+            print("invalid JSON Object")
+        }
+        return Data()
     }
-    */
-}
 
-//TODO implement this extension
-extension TestRunIndexViewController: EndpointDelegate{
-    func didLoadEndpoint(data: [[String: AnyObject]]?, totalItems: Int) {
-        //if it returns 200, show confirmation that results submitted
-        //if it returns anything other than 200, show error message
+
+    //make the put request with the test run data
+   func submitTestRun() {
+        let endpointStr = buildTestRunEndpointString()
+        var request = RestHelper.prepareHttpRequest(atEndpointString: endpointStr, username: username, password: password, httpMethod: "Put")
+        let parameters = buildPutJson()
+        
+        request?.httpMethod = "PUT"
+        request?.httpBody = parameters
+    
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error!)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+                print(httpResponse!) //grab this and display to the user
+            }
+        })
+        
+        dataTask.resume()
     }
 }
 
