@@ -35,6 +35,9 @@ class TestRunModel {
                 tmpStep.extractStep(fromData: step)
                 testStepList.append(tmpStep)
             }
+            if fields["actualResults"] != nil {
+                result = fields["actualResults"] as! String
+            }
         }
     }
 }
