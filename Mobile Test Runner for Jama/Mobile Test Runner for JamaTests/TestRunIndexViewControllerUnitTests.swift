@@ -118,16 +118,19 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         run.testStepList.append(step1)
         run.testStepList.append(step2)
         run.testStepList.append(step3)
+        run.result = "This is the initial result"
         viewController.testRun = run
         viewController.preserveCurrentRunStatus()
         
-        run.testStepList[0].status = "NOT_RUN"
-        run.testStepList[1].status = "PASSED"
-        run.testStepList[2].status = "FAILED"
+        viewController.testRun.testStepList[0].status = "NOT_RUN"
+        viewController.testRun.testStepList[1].status = "PASSED"
+        viewController.testRun.testStepList[2].status = "FAILED"
         
-        run.testStepList[0].result = "new result 1"
-        run.testStepList[1].result = "new result 2"
-        run.testStepList[2].result = "new result 3"
+        viewController.testRun.testStepList[0].result = "new result 1"
+        viewController.testRun.testStepList[1].result = "new result 2"
+        viewController.testRun.testStepList[2].result = "new result 3"
+        
+        viewController.testRun.result = "This is the new result"
         
         XCTAssertEqual("PASSED", viewController.initialStepsStatusList[0])
         XCTAssertEqual("FAILED", viewController.initialStepsStatusList[1])
@@ -136,6 +139,51 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         XCTAssertEqual("step 1 results", viewController.initialStepsResultsList[0])
         XCTAssertEqual("step 2 results", viewController.initialStepsResultsList[1])
         XCTAssertEqual("step 3 results", viewController.initialStepsResultsList[2])
+        
+        XCTAssertEqual("This is the initial result", viewController.initialRunResultField)
+    }
+    
+    func testDidSetStatus() {
+        let step = TestStepModel()
+
+        step.action = "test step action"
+        step.status = "NOT_RUN"
+        step.result = "step 1 results"
+        
+        let run = TestRunModel()
+        run.testStepList.append(step)
+        
+        viewController.testRun = run
+        viewController.currentlySelectedStepIndex = 0
+        //Ensure run initially set to not run
+        XCTAssertEqual("NOT_RUN", viewController.testRun.testStepList[0].status)
+        
+        viewController.didSetStatus(status: .fail)
+        XCTAssertEqual("FAILED", viewController.testRun.testStepList[0].status)
+        
+        viewController.didSetStatus(status: .pass)
+        XCTAssertEqual("PASSED", viewController.testRun.testStepList[0].status)
+        
+        viewController.didSetStatus(status: .not_run)
+        XCTAssertEqual("NOT_RUN", viewController.testRun.testStepList[0].status)
+    }
+    
+    func testDidSetResult() {
+        let step = TestStepModel()
+        
+        step.action = "test step action"
+        step.status = "NOT_RUN"
+        step.result = "initial result"
+        
+        let run = TestRunModel()
+        run.testStepList.append(step)
+        
+        viewController.testRun = run
+        viewController.currentlySelectedStepIndex = 0
+        XCTAssertEqual("initial result", viewController.testRun.testStepList[0].result)
+        
+        viewController.didSetResult(result: "new result")
+        XCTAssertEqual("new result", viewController.testRun.testStepList[0].result)
     }
     
 }

@@ -27,6 +27,10 @@ class TestRunModel {
             assignedTo = assignedToWrappedValue as! Int
         }
         
+        if fields["actualResults"] != nil {
+            result = fields["actualResults"] as! String
+        }
+        
         if fields["testRunSteps"] != nil {
             let testStepFields: [[String : AnyObject]] = fields["testRunSteps"] as! Array
         
@@ -34,9 +38,6 @@ class TestRunModel {
                 let tmpStep = TestStepModel()
                 tmpStep.extractStep(fromData: step)
                 testStepList.append(tmpStep)
-            }
-            if fields["actualResults"] != nil {
-                result = fields["actualResults"] as! String
             }
         }
     }

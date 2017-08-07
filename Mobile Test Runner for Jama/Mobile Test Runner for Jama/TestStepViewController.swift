@@ -95,7 +95,6 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         if self.stepResult != inputResultsTextBox.text && self.stepResult != placeholderText {
             self.stepResult = inputResultsTextBox.text
             indexDelegate.didSetResult(result: self.stepResult)
-            
         }
         inputResultsTextBox.resignFirstResponder()
     }
