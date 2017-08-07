@@ -298,9 +298,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jw9-Nh-Msb">
                                 <rect key="frame" x="0.0" y="158" width="375" height="568"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="568" id="08H-v0-ec9"/>
-                                </constraints>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -387,6 +384,7 @@
                             <constraint firstItem="LwG-d3-PFR" firstAttribute="leading" secondItem="Jw9-Nh-Msb" secondAttribute="leading" id="XhW-By-hzr"/>
                             <constraint firstItem="XBs-RX-qYO" firstAttribute="leading" secondItem="Rez-5u-Hfc" secondAttribute="leadingMargin" id="dHA-Ag-8XF"/>
                             <constraint firstItem="VeV-l0-ABz" firstAttribute="top" secondItem="XBs-RX-qYO" secondAttribute="bottom" constant="8" id="dX1-nk-2Jh"/>
+                            <constraint firstItem="INj-Pt-cDa" firstAttribute="top" secondItem="Jw9-Nh-Msb" secondAttribute="bottom" id="fGF-b3-awG"/>
                             <constraint firstItem="Jw9-Nh-Msb" firstAttribute="top" secondItem="LwG-d3-PFR" secondAttribute="bottom" id="iD7-nE-nO6"/>
                             <constraint firstItem="LwG-d3-PFR" firstAttribute="width" secondItem="Rez-5u-Hfc" secondAttribute="width" id="jgd-7U-fiM"/>
                             <constraint firstItem="VeV-l0-ABz" firstAttribute="width" secondItem="XBs-RX-qYO" secondAttribute="width" id="l3F-MR-qfl"/>
@@ -932,7 +930,8 @@
                             <constraint firstItem="w7O-Ml-k6v" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="GLQ-sj-7BF"/>
                             <constraint firstItem="eJc-4V-jEK" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" multiplier="9:10" id="Gyh-bU-gZB"/>
                             <constraint firstItem="7gT-7g-SHk" firstAttribute="centerX" secondItem="29g-Lj-zF6" secondAttribute="centerX" id="IFg-Ys-KUv"/>
-                            <constraint firstItem="rM3-gm-dNb" firstAttribute="top" secondItem="7gT-7g-SHk" secondAttribute="bottom" constant="4" id="Jcy-ps-Vcw"/>
+                            <constraint firstItem="rM3-gm-dNb" firstAttribute="top" secondItem="7gT-7g-SHk" secondAttribute="bottom" constant="2" id="Jcy-ps-Vcw"/>
+                            <constraint firstItem="7gT-7g-SHk" firstAttribute="top" secondItem="Arf-ao-gXm" secondAttribute="bottom" constant="42" id="OTY-99-hJj"/>
                             <constraint firstItem="eQ6-Hy-uXH" firstAttribute="top" secondItem="7gT-7g-SHk" secondAttribute="bottom" id="OiE-uV-W2g"/>
                             <constraint firstItem="gXa-Dc-LxK" firstAttribute="top" secondItem="eQ6-Hy-uXH" secondAttribute="bottom" id="Qj4-n4-aPM"/>
                             <constraint firstItem="eJc-4V-jEK" firstAttribute="centerX" secondItem="29g-Lj-zF6" secondAttribute="centerX" id="SF4-YG-mhY"/>
