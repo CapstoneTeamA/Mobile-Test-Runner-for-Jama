@@ -186,4 +186,34 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         XCTAssertEqual("new result", viewController.testRun.testStepList[0].result)
     }
     
+    func testEndpointCorrect() {
+        viewController.instance = "test-instance"
+        viewController.runId = 56
+        XCTAssertEqual(viewController.buildTestRunEndpointString(), "https://test-instance.jamacloud.com/rest/latest/testruns/56")
+    }
+    
+    //TODO need to fix the assertion for this
+    func testJSONBodyCorrect() {
+        let step1 = TestStepModel()
+        let step2 = TestStepModel()
+        let step3 = TestStepModel()
+        step1.action = "test step action"
+        step1.status = "PASSED"
+        step1.result = "step 1 results"
+        step2.action = "test step action 2"
+        step2.status = "FAILED"
+        step2.result = "step 2 results"
+        step3.action = "test step action 3"
+        step3.status = "NOT_RUN"
+        step3.result = "step 3 results"
+        
+        run.testStepList.append(step1)
+        run.testStepList.append(step2)
+        run.testStepList.append(step3)
+        run.result = "This is the initial result"
+        viewController.testRun = run
+        
+        let result = viewController.JSONStringify()
+        print(result)
+    }
 }

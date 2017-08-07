@@ -96,6 +96,26 @@ class RestHelper {
         }
         let session = URLSession.shared
         
+       // if(httpMethod == "Put"){
+         //   let task = session.dataTask(with: request) {
+           //     (data, response, error) in
+        //    }
+          //  let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            //    if (error != nil) {
+              //      print(error)
+          //      } else {
+            //        let httpResponse = response as? HTTPURLResponse
+              //      print(httpResponse)
+      //          }
+        //    })
+            
+     //       dataTask.resume()
+     //   }
+
+        
+
+        
+        
         //Asynchronous task to run in the background that hits the delegate when it finishes if successful.
         let task = session.dataTask(with: request) {
             (data,response,error) in

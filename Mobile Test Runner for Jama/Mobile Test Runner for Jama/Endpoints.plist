@@ -7,7 +7,10 @@
 	<key>Patch</key>
 	<string></string>
 	<key>Put</key>
-	<dict/>
+	<dict>
+		<key>TestRuns</key>
+		<string>jamacloud.com/rest/latest/testruns/{id}</string>
+	</dict>
 	<key>Get</key>
 	<dict>
 		<key>TestRuns</key>

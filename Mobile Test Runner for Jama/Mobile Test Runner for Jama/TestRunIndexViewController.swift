@@ -91,7 +91,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         present(cancelAlert, animated: true, completion: nil)
     }
     
-    //Save all of the inital values of the statuses and
+    //Save all of the inital values of the statuses
     func preserveCurrentRunStatus() {
         for step in testRun.testStepList {
             let status = step.status
@@ -168,8 +168,82 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBAction func didTapFailRun(_ sender: Any) {
         noStepStatusIcon.image = UIImage(named: "X_icon_red.png")
     }
+
     
+    //TODO make the link between the button and the setting of the status for the run
+    //TODO make confirmation popup that this will submit the test run
+    //TODO make
+    
+    //make the put request with the test run data
+    func submitTestRun() {
+        let putEndpoint = buildTestRunEndpointString()
+        RestHelper.hitEndpoint(atEndpointString: putEndpoint, withDelegate: self, httpMethod: "Put", username: username, password: password)
+    }
+    
+    //build the endpoint for submitting the test run
+    func buildTestRunEndpointString() -> String {
+        var endpoint = RestHelper.getEndpointString(method: "Put", endpoint: "TestRuns")
+        endpoint = "https://" + instance + "." + endpoint
+        return endpoint.replacingOccurrences(of: "{id}", with: "\(runId)")
+    }
+    
+    //build the JSON body of the put request
+    func JSONStringify() -> String{
+        var stringJSON = ""
+        var index = 0
+        
+        // build the "testRunSteps"
+        var testRunString = "\"testRunSteps\": ["
+        for step in testRun.testStepList {
+            testRunString += "{" + "\"action\": " + "\"" + step.action + "\"" + ","
+            testRunString += "\"expectedResult\": " + "\"" + step.expectedResult + "\"" + ","
+            testRunString += "\"notes\": " + "\"" + step.notes + "\"" + ","
+            testRunString += "\"result\": " + "\"" + step.result + "\"" + ","
+            testRunString += "\"status\" :" + "\"" + step.status + "\"" + "}"
+            if index != testRun.testStepList.endIndex - 1 {
+                testRunString += ","
+            }
+            index += 1
+        }
+        testRunString += "]"
+        
+        // build the "actualResults"
+        var actualResultsString = "\"actualResults\": "
+        actualResultsString += "\"" + self.testRun.result + "\""
+
+        // build the "testRunStatus"
+        var testRunStatusString = "\"testRunStatus\": "
+        testRunStatusString += "\"" + self.testRun.testStatus + "\""
+        
+        //build the whole JSON body
+        stringJSON += "{" + "\"fields\" : {" + testRunString + "," + actualResultsString + "," + testRunStatusString + "}}"
+        return stringJSON
+    }
+  /*  func JSONStringify(value: AnyObject,prettyPrinted:Bool = false) -> String{
+        let options = prettyPrinted ? JSONSerialization.WritingOptions.prettyPrinted : JSONSerialization.WritingOptions(rawValue: 0)
+        if JSONSerialization.isValidJSONObject(value) {
+            do{
+                let data = try JSONSerialization.data(withJSONObject: value, options: options)
+                if let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
+                    return string as String
+                }
+            }catch {
+                print("error")
+            }
+        }
+        return ""
+    }
+    */
 }
+
+//TODO implement this extension
+extension TestRunIndexViewController: EndpointDelegate{
+    func didLoadEndpoint(data: [[String: AnyObject]]?, totalItems: Int) {
+        //if it returns 200, show confirmation that results submitted
+        //if it returns anything other than 200, show error message
+    }
+}
+
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
