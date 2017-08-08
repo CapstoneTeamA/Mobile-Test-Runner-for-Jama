@@ -342,7 +342,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No plans found. Please contact your administrator." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeV-l0-ABz">
-                                <rect key="frame" x="56.5" y="465" width="262.5" height="64.5"/>
+                                <rect key="frame" x="56.5" y="465" width="262.5" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="VeV-l0-ABz" secondAttribute="height" multiplier="303:75" id="KSZ-o2-upA"/>
                                 </constraints>
@@ -865,7 +865,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TzA-TL-KAC" userLabel="Top Divider">
                                 <rect key="frame" x="0.0" y="104" width="375" height="9.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.96583253145217896" green="0.46620351076126099" blue="0.21295166015625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="bjx-gS-mFi"/>
                                 </constraints>
