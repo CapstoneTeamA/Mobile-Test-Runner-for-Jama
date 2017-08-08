@@ -18,6 +18,7 @@ class TestRunListModel {
             if run["itemType"] as! Int != testRunItemTypeId || fields["testCycle"] as! Int != parentId{
                 break
             }
+        
             let tmpRun = TestRunModel()
             tmpRun.extractRun(fromData: run)
             testRunList.append(tmpRun)

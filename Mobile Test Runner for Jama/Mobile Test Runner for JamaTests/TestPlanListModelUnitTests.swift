@@ -39,12 +39,14 @@ class TestPlanListModelUnitTests: XCTestCase {
         plan1Data.updateValue(projectId as AnyObject, forKey: "project")
         plan1Data.updateValue(fields1 as AnyObject, forKey: "fields")
         plan1Data.updateValue(testPlanType as AnyObject, forKey: "itemType")
+        plan1Data.updateValue(false as AnyObject, forKey: "archived")
         
         fields2.updateValue(plan2Name as AnyObject, forKey: "name")
         plan2Data.updateValue(id2 as AnyObject, forKey: "id")
         plan2Data.updateValue(projectId as AnyObject, forKey: "project")
         plan2Data.updateValue(fields2 as AnyObject, forKey: "fields")
         plan2Data.updateValue(testPlanType as AnyObject, forKey: "itemType")
+        plan2Data.updateValue(false as AnyObject, forKey: "archived")
         
         data.append(plan1Data)
         data.append(plan2Data)

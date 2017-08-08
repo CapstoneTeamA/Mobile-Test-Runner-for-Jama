@@ -24,6 +24,8 @@ class TestRunListModelUnitTests: XCTestCase {
     var run2Desc = "desc2"
     var run1AssignedToId = 31
     var testRunItemType = 37
+    var run1Status = "INPROGRESS"
+    var run2Status = "NOT_RUN"
     
     override func setUp() {
         super.setUp()
@@ -36,10 +38,12 @@ class TestRunListModelUnitTests: XCTestCase {
         run1DataFields.updateValue(run1Desc as AnyObject, forKey: "description")
         run1DataFields.updateValue(run1AssignedToId as AnyObject, forKey: "assignedTo")
         run1DataFields.updateValue(parentTestCycleId as AnyObject, forKey: "testCycle")
+        run1DataFields.updateValue(run1Status as AnyObject, forKey: "testRunStatus")
         
         run2DataFields.updateValue(run2Name as AnyObject, forKey: "name")
         run2DataFields.updateValue(run2Desc as AnyObject, forKey: "description")
         run2DataFields.updateValue(parentTestCycleId as AnyObject, forKey: "testCycle")
+        run2DataFields.updateValue(run2Status as AnyObject, forKey: "testRunStatus")
         //Run 2 will not have an assignedTo to simulate an unassigned test run.
         
         run1Data.updateValue(run1DataFields as AnyObject, forKey: "fields")
@@ -85,10 +89,12 @@ class TestRunListModelUnitTests: XCTestCase {
         XCTAssertEqual(run1Id, testRunList.testRunList[0].id)
         XCTAssertEqual(run1Desc, testRunList.testRunList[0].description)
         XCTAssertEqual(run1AssignedToId, testRunList.testRunList[0].assignedTo)
+        XCTAssertEqual(run1Status, testRunList.testRunList[0].status)
         
         XCTAssertEqual(run2Name, testRunList.testRunList[1].name)
         XCTAssertEqual(run2Id, testRunList.testRunList[1].id)
         XCTAssertEqual(run2Desc, testRunList.testRunList[1].description)
         XCTAssertEqual(-1, testRunList.testRunList[1].assignedTo)
+        XCTAssertEqual(run2Status, testRunList.testRunList[1].status)
     }
 }
