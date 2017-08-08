@@ -20,8 +20,6 @@ enum Status {
 class TestRunIndexViewController: UIViewController, UITextViewDelegate {
    
     @IBOutlet weak var cancelRun: UIBarButtonItem!
-    @IBOutlet weak var blockedButton: UIButton!
-    @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var testRunNameLabel: UILabel!
     @IBOutlet weak var testStepTable: UITableView!
     @IBOutlet weak var inputResultsButton: UIButton!

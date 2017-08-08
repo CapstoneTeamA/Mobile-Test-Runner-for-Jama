@@ -188,7 +188,7 @@
                                         <rect key="frame" x="12.5" y="0.0" width="350" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="351" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJa-8k-3bZ">
@@ -987,7 +987,6 @@
                         <outlet property="inputResultsTextBox" destination="Gvz-Ft-XC7" id="00B-sV-cVH"/>
                         <outlet property="noStepStatusIcon" destination="wQD-Tc-mfT" id="UFz-f3-4Q9"/>
                         <outlet property="noStepsView" destination="xDR-j2-5vA" id="ZiB-ZD-XCC"/>
-                        <outlet property="submitButton" destination="miI-Kx-Bj4" id="LRa-yx-e6Q"/>
                         <outlet property="testRunNameLabel" destination="ukt-q7-rqc" id="9TX-3G-Tpf"/>
                         <outlet property="testStepTable" destination="7gT-7g-SHk" id="roX-jm-pwm"/>
                         <segue destination="RUt-e2-15a" kind="show" identifier="StepDetailSegue" id="lpX-AJ-yVN"/>
