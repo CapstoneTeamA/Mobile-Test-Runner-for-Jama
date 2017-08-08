@@ -25,6 +25,11 @@ class TestRunUnitTests: XCTestCase {
         
         fields.updateValue("testRun" as AnyObject, forKey: "name")
         fields.updateValue("desc" as AnyObject, forKey: "description")
+        fields.updateValue("NOT_RUN" as AnyObject, forKey: "testRunStatus")
+        dataWithoutAssignment.updateValue(fields as AnyObject, forKey: "fields")
+        
+        fields.updateValue(19 as AnyObject, forKey: "assignedTo")
+        dataWithAssignment.updateValue(fields as AnyObject, forKey: "fields")
     }
     
     override func tearDown() {
@@ -33,7 +38,6 @@ class TestRunUnitTests: XCTestCase {
     }
     
     func testExtractRunFromDataWithoutAssignment() {
-        dataWithoutAssignment.updateValue(fields as AnyObject, forKey: "fields")
         run.extractRun(fromData: dataWithoutAssignment)
         
         XCTAssertEqual("testRun", run.name)
