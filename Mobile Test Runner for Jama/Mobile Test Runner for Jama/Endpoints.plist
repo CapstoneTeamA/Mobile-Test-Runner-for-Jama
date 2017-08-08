@@ -5,7 +5,10 @@
 	<key>Delete</key>
 	<string></string>
 	<key>Patch</key>
-	<string></string>
+	<dict>
+		<key>TestRuns</key>
+		<string>jamacloud.com/rest/latest/testruns/{id}</string>
+	</dict>
 	<key>Put</key>
 	<dict>
 		<key>TestRuns</key>

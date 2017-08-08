@@ -228,7 +228,29 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     }
     
     //build the JSON body of the put request
-    func buildPutJson() -> Data {
+    func buildPATCHactualResults() -> Data {
+        let dictionary: NSDictionary = [
+            "op" : "replace",
+            "value" : self.testRun.result as NSString,
+            "path" : "/fields/actualResults"
+        ]
+        
+        if JSONSerialization.isValidJSONObject(dictionary) {
+            do{
+                let data = try JSONSerialization.data(withJSONObject: dictionary)
+                return data
+            }catch {
+                print("error")
+            }
+        }
+        else {
+            print("invalid JSON Object")
+        }
+        return Data()
+    }
+    
+    //build the JSON body of the put request
+    func buildPATCHTestSteps() -> Data {
         let stepList = NSMutableArray()
         for step in self.testRun.testStepList {
             let nsStep : NSDictionary = [
@@ -240,15 +262,33 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             ]
             stepList.add(nsStep)
         }
- 
-        let fields : NSDictionary = [
-            "testRunSteps" : stepList as NSArray,
-            "actualResults" : self.testRun.result as NSString,
-            "testRunStatus" : self.testRun.testStatus as NSString
-        ]
         
         let dictionary: NSDictionary = [
-            "fields" : fields
+            "op" : "replace",
+            "value" : stepList as NSArray,
+            "path" : "/fields/testRunSteps"
+        ]
+        
+        if JSONSerialization.isValidJSONObject(dictionary) {
+            do{
+                let data = try JSONSerialization.data(withJSONObject: dictionary)
+                return data
+            }catch {
+                print("error")
+            }
+        }
+        else {
+            print("invalid JSON Object")
+        }
+        return Data()
+    }
+
+    //build the JSON body of the put request
+    func buildPATCHtestStatus() -> Data {
+        let dictionary: NSDictionary = [
+            "op" : "replace",
+            "value" : self.testRun.testStatus as NSString,
+            "path" : "/fields/testRunStatus"
         ]
         
         if JSONSerialization.isValidJSONObject(dictionary) {
@@ -270,13 +310,13 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
    func submitTestRun() {
         let endpointStr = buildTestRunEndpointString()
         var request = RestHelper.prepareHttpRequest(atEndpointString: endpointStr, username: username, password: password, httpMethod: "Put")
-        let parameters = buildPutJson()
-        
-        request?.httpMethod = "PUT"
-        request?.httpBody = parameters
+    
+        request?.httpMethod = "PATCH"
+        request?.httpBody = buildPATCHTestSteps()
+
     
         let session = URLSession.shared
-        let dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
+        var dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 print(error!)
             } else {
@@ -285,6 +325,28 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             }
         })
         
+        request?.httpBody = buildPATCHtestStatus()
+    
+        dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
+        if (error != nil) {
+            print(error!)
+        } else {
+            let httpResponse = response as? HTTPURLResponse
+            print(httpResponse!) //grab this and display to the user
+        }
+        })
+    
+        request?.httpBody = buildPATCHactualResults()()
+    
+        dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error!)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+                print(httpResponse!) //grab this and display to the user
+            }
+        })
+    
         dataTask.resume()
     }
 }
