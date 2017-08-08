@@ -32,7 +32,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var instance = ""
     var username = ""
     var password = ""
-    var runId = -1
     var runName = ""
     var currentlySelectedStepIndex = -1
     var testRun: TestRunModel = TestRunModel()
@@ -99,6 +98,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         submitAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
             //TODO: add code to submit the run to the API
+            self.submitTestRun()
             self.navigationController?.popViewController(animated: true)
         }))
         
@@ -118,6 +118,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
             //TODO: add code to submit the run as blocked to the API
+            self.testRun.testStatus = "BLOCKED"
+            self.submitTestRun()
             self.navigationController?.popViewController(animated: true)
         }))
         
@@ -205,10 +207,12 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     }
     @IBAction func didTapPassRun(_ sender: Any) {
         noStepStatusIcon.image = UIImage(named: "check_icon_green.png")
+        testRun.testStatus = "PASSED"
     }
     
     @IBAction func didTapFailRun(_ sender: Any) {
         noStepStatusIcon.image = UIImage(named: "X_icon_red.png")
+        testRun.testStatus = "FAILED"
     }
 
     
@@ -220,7 +224,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     func buildTestRunEndpointString() -> String {
         var endpoint = RestHelper.getEndpointString(method: "Put", endpoint: "TestRuns")
         endpoint = "https://" + instance + "." + endpoint
-        return endpoint.replacingOccurrences(of: "{id}", with: "\(runId)")
+        return endpoint.replacingOccurrences(of: "{id}", with: "\(testRun.id)")
     }
     
     //build the JSON body of the put request
