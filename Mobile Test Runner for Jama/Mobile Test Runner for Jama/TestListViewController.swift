@@ -139,11 +139,12 @@ extension TestListViewController: EndpointDelegate {
                     //keep calling api while there are still more cycles
                     if self.totalCyclesReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
-                }
+                    }
                     if tmpList.testCycleList.isEmpty && self.testCycleList.testCycleList.isEmpty {
                         let emptyCycle = TestCycleModel();
                         self.testCycleList.testCycleList.insert(emptyCycle, at: 0)
-                }
+                    }
+                    self.testList.reloadData()
                 
                 case .run:
                     let tmpList = TestRunListModel()
