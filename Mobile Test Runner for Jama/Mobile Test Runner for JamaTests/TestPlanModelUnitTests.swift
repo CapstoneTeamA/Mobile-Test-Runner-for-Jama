@@ -18,6 +18,7 @@ class TestPlanModelUnitTests: XCTestCase {
         data.updateValue(2323 as AnyObject, forKey: "id")
         data.updateValue(23 as AnyObject, forKey: "project")
         data.updateValue(fields as AnyObject, forKey: "fields")
+        data.updateValue(false as AnyObject, forKey: "archived")
     }
     
     override func tearDown() {
@@ -31,5 +32,6 @@ class TestPlanModelUnitTests: XCTestCase {
         XCTAssertEqual(2323, testPlan.id)
         XCTAssertEqual(23, testPlan.projectId)
         XCTAssertEqual("plan1", testPlan.name)
+        XCTAssertEqual(false, testPlan.archived)
     }
 }

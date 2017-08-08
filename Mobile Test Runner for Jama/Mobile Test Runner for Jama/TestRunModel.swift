@@ -14,6 +14,7 @@ class TestRunModel {
     var name = "No Runs Found"
     var assignedTo = -1
     var result = ""
+    var status = ""
     var testStepList: [TestStepModel] = []
     var testStatus = ""
     
@@ -22,7 +23,7 @@ class TestRunModel {
         let fields: [String :  AnyObject] = fromData["fields"] as! Dictionary
         name = fields["name"] as! String
         description = fields["description"] as! String
-        
+        status = fields["testRunStatus"] as! String
         let assignedToWrappedValue = fields["assignedTo"]
         if assignedToWrappedValue != nil {
             assignedTo = assignedToWrappedValue as! Int

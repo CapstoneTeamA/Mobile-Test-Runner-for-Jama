@@ -16,6 +16,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     let instance = "test-instance"
     let font = UIFont(name: "Helvetica Neue", size: 20.0)
     let currentUser = UserModel()
+    
     override func setUp() {
         super.setUp()
         viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestList") as! TestListViewController
@@ -33,14 +34,18 @@ class TestListViewControllerUnitTests: XCTestCase {
         let testCycle2 = TestCycleModel()
         let testRun1 = TestRunModel()
         let testRun2 = TestRunModel()
+        let testRun3 = TestRunModel()
         
         testPlan1.id = 23
         testPlan1.name = "testPlan1"
         testPlan1.projectId = 2
-
+        testPlan1.archived = false
+        
         testPlan2.id = 31
         testPlan2.name = "testPlan2"
         testPlan2.projectId = 2
+        testPlan2.archived = false
+        
         testCycle1.id = 123
         testCycle1.name = "testCycle1"
         
@@ -49,9 +54,16 @@ class TestListViewControllerUnitTests: XCTestCase {
         
         testRun1.id = 2323
         testRun1.name = "testRun1"
+        testRun1.status = "INPROGRESS"
         
         testRun2.id = 2324
         testRun2.name = "testRun2"
+        testRun2.status = "NOT_RUN"
+        
+        testRun3.id = 2325
+        testRun2.name = "testRun3"
+        testRun2.status = "FAILED"
+        
         
         viewController.selectedPlanIndex = 1
         viewController.testPlanList.testPlanList.append(testPlan1)
@@ -60,6 +72,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         viewController.testCycleList.testCycleList.append(testCycle2)
         viewController.testRunList.testRunList.append(testRun1)
         viewController.testRunList.testRunList.append(testRun2)
+        viewController.testRunList.testRunList.append(testRun3)
         
     }
     
@@ -172,13 +185,20 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(runWhite, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 5, section: 0))
-        XCTAssertEqual("2. testRun2", cell.textLabel?.text)
+        XCTAssertEqual("2. testRun3", cell.textLabel?.text)
         XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
         XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
         XCTAssertEqual(runWhite, cell.backgroundColor)
         
+        cell = viewController.buildCell(indexPath: IndexPath(row: 6, section: 0))
+        XCTAssertEqual("3. No Runs Found", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
+        XCTAssertEqual(runWhite, cell.backgroundColor)
         
         viewController.selectedPlanIndex = 0
         viewController.selectedCycleIndex = 1
@@ -223,7 +243,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(runWhite, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 4, section: 0))
-        XCTAssertEqual("2. testRun2", cell.textLabel?.text)
+        XCTAssertEqual("2. testRun3", cell.textLabel?.text)
         XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
@@ -231,6 +251,14 @@ class TestListViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(runWhite, cell.backgroundColor)
         
         cell = viewController.buildCell(indexPath: IndexPath(row: 5, section: 0))
+        XCTAssertEqual("3. No Runs Found", cell.textLabel?.text)
+        XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
+        XCTAssertEqual(1, cell.indentationLevel)
+        XCTAssertEqual(font, cell.textLabel?.font)
+        XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
+        XCTAssertEqual(runWhite, cell.backgroundColor)
+        
+        cell = viewController.buildCell(indexPath: IndexPath(row: 6, section: 0))
         XCTAssertEqual("testPlan2", cell.textLabel?.text)
         XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
         XCTAssertEqual(0, cell.indentationLevel)
@@ -241,14 +269,14 @@ class TestListViewControllerUnitTests: XCTestCase {
         viewController.selectedCycleIndex = 0
         viewController.selectedCycleTableViewIndex = 1
         viewController.selectedPlanIndex = 0
-        cell = viewController.buildCell(indexPath: IndexPath(row: 4, section: 0))
+        cell = viewController.buildCell(indexPath: IndexPath(row: 3, section: 0))
         
-        XCTAssertEqual("testCycle2", cell.textLabel?.text)
+        XCTAssertEqual("2. testRun3", cell.textLabel?.text)
         XCTAssertEqual(NSTextAlignment.left, cell.textLabel?.textAlignment)
         XCTAssertEqual(1, cell.indentationLevel)
         XCTAssertEqual(font, cell.textLabel?.font)
-        XCTAssertEqual("TestCycleCell", cell.reuseIdentifier)
-        XCTAssertEqual(unselectedCycleGray, cell.backgroundColor)
+        XCTAssertEqual("TestRunCell", cell.reuseIdentifier)
+        XCTAssertEqual(runWhite, cell.backgroundColor)
         
         viewController.selectedCycleIndex = viewController.largeNumber
         viewController.selectedCycleTableViewIndex = viewController.largeNumber
@@ -314,6 +342,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         planData.updateValue(23 as AnyObject, forKey: "id")
         planData.updateValue(1 as AnyObject, forKey: "project")
         planData.updateValue(35 as AnyObject, forKey: "itemType")
+        planData.updateValue(false as AnyObject, forKey: "archived")
         fields.updateValue("testPlan" as AnyObject, forKey: "name")
         planData.updateValue(fields as AnyObject, forKey: "fields")
         
@@ -372,6 +401,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         fields.updateValue("testRun1" as AnyObject, forKey: "name")
         fields.updateValue("desc" as AnyObject, forKey: "description")
         fields.updateValue(parentCycleId as AnyObject, forKey: "testCycle")
+        fields.updateValue("NOT_RUN" as AnyObject, forKey: "testRunStatus")
         runData.updateValue(fields as AnyObject, forKey: "fields")
         
         dataList.append(runData)
@@ -399,7 +429,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     }
     
     func testDidTapTestPlanCellAfterSelectedPlan() {
-        let tableIndexToTap = 5
+        let tableIndexToTap = 6
         let planIndexForTappedCell = 1
         
         viewController.selectedPlanIndex = 0
@@ -431,7 +461,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     }
     
     func testDidTapTestCycleCellAfterSelectedCycle() {
-        let tableIndexToTap = 5
+        let tableIndexToTap = 6
         viewController.selectedPlanIndex = 1
         viewController.selectedCycleIndex = 0
         viewController.selectedCycleTableViewIndex = 2

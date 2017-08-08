@@ -29,6 +29,8 @@ class TestListViewController: UIViewController {
     var selectedCycleIndex = 1000000
     var selectedCycleTableViewIndex = -1
     var totalRunsReturnedFromServer = 0
+    var totalPlansReturnedFromServer = 0
+    var totalCyclesReturnedFromServer = 0
     var currentTestLevel = TestLevel.plan
     enum TestLevel {
         case plan, cycle, run
@@ -100,38 +102,49 @@ extension TestListViewController: EndpointDelegate {
                 case .plan:
                     let tmpList = TestPlanListModel()
                     tmpList.extractPlanList(fromData: unwrappedData)
-                    if tmpList.testPlanList.isEmpty {
+                    
+                    self.totalPlansReturnedFromServer += tmpList.testPlanList.count
+                    
+                    for plan in tmpList.testPlanList {
+                        if plan.archived == false{
+                            self.testPlanList.testPlanList.append(plan)
+                        }
+                    }
+                    
+                    //self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
+            
+                    //reload Data in view
+                    self.testList.reloadData()
+                    //keep calling api while there is still more plans to get
+                    if self.totalPlansReturnedFromServer < totalItems {
+                        RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
+                    }
+                    if self.testPlanList.testPlanList.isEmpty {
                         self.testList.isUserInteractionEnabled = false
                         self.testList.separatorColor = UIColor.white
                         self.noPlansImage.isHidden = false
                         self.noPlansLabel.isHidden = false
                         return
                     }
-                    self.testPlanList.testPlanList.append(contentsOf: tmpList.testPlanList)
-                    //self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
-            
-                    //reload Data in view
-                    self.testList.reloadData()
-                    //keep calling api while there is still more plans to get
-                    if self.testPlanList.testPlanList.count < totalItems {
-                        RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
-                    }
                 case .cycle:
                     let tmpList = TestCycleListModel()
                     tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
                     //if there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
-                    if tmpList.testCycleList.isEmpty {
-                        let emptyCycle = TestCycleModel();
-                        tmpList.testCycleList.insert(emptyCycle, at: 0)
-                    }
+                    
+                    self.totalCyclesReturnedFromServer += tmpList.testCycleList.count
                     
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
                     self.testList.reloadData()
                     
                     //keep calling api while there are still more cycles
-                    if self.testCycleList.testCycleList.count < totalItems {
+                    if self.totalCyclesReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
                 }
+                    if tmpList.testCycleList.isEmpty && self.testCycleList.testCycleList.isEmpty {
+                        let emptyCycle = TestCycleModel();
+                        self.testCycleList.testCycleList.insert(emptyCycle, at: 0)
+                }
+                
                 case .run:
                     let tmpList = TestRunListModel()
                     tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
@@ -140,7 +153,7 @@ extension TestListViewController: EndpointDelegate {
                     self.totalRunsReturnedFromServer += tmpList.testRunList.count
                     
                     for run in tmpList.testRunList {
-                        if run.assignedTo == self.currentUser.id {
+                        if run.assignedTo == self.currentUser.id && run.status == "NOT_RUN"  {
                             self.testRunList.testRunList.append(run)
                         }
                     }

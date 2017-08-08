@@ -84,7 +84,12 @@ class RestHelper {
                 //as these are not returned wrapped in an array.
                 endpointData.append(jsonData["data"] as! Dictionary)
             } else {
+                if jsonData["data"] != nil {
                 endpointData = jsonData["data"] as! Array
+                }
+                else {
+                    return ([],0)
+                }
             }
         }
         return (endpointData, totalItems)
