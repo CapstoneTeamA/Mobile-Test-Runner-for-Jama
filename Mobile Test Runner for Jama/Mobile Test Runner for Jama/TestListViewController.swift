@@ -153,7 +153,7 @@ extension TestListViewController: EndpointDelegate {
                     self.totalRunsReturnedFromServer += tmpList.testRunList.count
                     
                     for run in tmpList.testRunList {
-                        if run.assignedTo == self.currentUser.id && run.status != "BLOCKED" && run.status != "PASSED" && run.status != "FAILED"  {
+                        if run.assignedTo == self.currentUser.id && run.status == "NOT_RUN"  {
                             self.testRunList.testRunList.append(run)
                         }
                     }
