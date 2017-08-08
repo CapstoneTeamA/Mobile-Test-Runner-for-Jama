@@ -16,6 +16,7 @@ class TestRunModel {
     var result = ""
     var status = ""
     var testStepList: [TestStepModel] = []
+    var testStatus = ""
     
     func extractRun(fromData: [String: AnyObject]) {
         id = fromData["id"] as! Int

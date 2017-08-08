@@ -100,7 +100,7 @@ class RestHelper {
             return
         }
         let session = URLSession.shared
-        
+
         //Asynchronous task to run in the background that hits the delegate when it finishes if successful.
         let task = session.dataTask(with: request) {
             (data,response,error) in
