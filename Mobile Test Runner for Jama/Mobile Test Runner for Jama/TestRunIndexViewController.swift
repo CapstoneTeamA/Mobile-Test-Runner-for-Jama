@@ -336,7 +336,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }
         })
     
-        request?.httpBody = buildPATCHactualResults()()
+        request?.httpBody = buildPATCHactualResults()
     
         dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
