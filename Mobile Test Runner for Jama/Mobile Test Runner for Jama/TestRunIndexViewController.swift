@@ -97,7 +97,16 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         submitAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
-            //TODO: add code to submit the run to the API
+            self.testRun.testStatus = "PASSED"
+            for step in self.testRun.testStepList {
+                if step.status == "FAILED" {
+                    self.testRun.testStatus = "FAILED"
+                    break
+                }
+                if step.status == "NOT_RUN" {
+                    self.testRun.testStatus = "INPROGRESS"
+                }
+            }
             self.submitTestRun()
             self.navigationController?.popViewController(animated: true)
         }))
@@ -118,7 +127,12 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
             //TODO: add code to submit the run as blocked to the API
-            self.testRun.testStatus = "BLOCKED"
+            for step in self.testRun.testStepList {
+                if step.status == "NOT_RUN" {
+                    step.status = "BLOCKED"
+                }
+            }
+            
             self.submitTestRun()
             self.navigationController?.popViewController(animated: true)
         }))
@@ -222,7 +236,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     
     //build the endpoint for submitting the test run
     func buildTestRunEndpointString() -> String {
-        var endpoint = RestHelper.getEndpointString(method: "Put", endpoint: "TestRuns")
+        var endpoint = RestHelper.getEndpointString(method: "Patch", endpoint: "TestRuns")
         endpoint = "https://" + instance + "." + endpoint
         return endpoint.replacingOccurrences(of: "{id}", with: "\(testRun.id)")
     }
@@ -230,9 +244,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     //build the JSON body of the put request
     func buildPATCHactualResults() -> Data {
         let dictionary: NSDictionary = [
-            "op" : "replace",
-            "value" : self.testRun.result as NSString,
-            "path" : "/fields/actualResults"
+            "op" : "add",
+            "path" : "/fields/actualResults",
+            "value" : self.testRun.result as NSString
         ]
         
         if JSONSerialization.isValidJSONObject(dictionary) {
@@ -265,8 +279,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         let dictionary: NSDictionary = [
             "op" : "replace",
-            "value" : stepList as NSArray,
-            "path" : "/fields/testRunSteps"
+            "path" : "/fields/testRunSteps",
+            "value" : stepList as NSArray
         ]
         
         if JSONSerialization.isValidJSONObject(dictionary) {
@@ -287,8 +301,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     func buildPATCHtestStatus() -> Data {
         let dictionary: NSDictionary = [
             "op" : "replace",
-            "value" : self.testRun.testStatus as NSString,
-            "path" : "/fields/testRunStatus"
+            "path" : "/fields/testRunStatus",
+            "value" : self.testRun.testStatus as NSString
         ]
         
         if JSONSerialization.isValidJSONObject(dictionary) {
@@ -309,12 +323,11 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     //make the put request with the test run data
    func submitTestRun() {
         let endpointStr = buildTestRunEndpointString()
-        var request = RestHelper.prepareHttpRequest(atEndpointString: endpointStr, username: username, password: password, httpMethod: "Put")
+        var request = RestHelper.prepareHttpRequest(atEndpointString: endpointStr, username: username, password: password, httpMethod: "PATCH")
     
         request?.httpMethod = "PATCH"
         request?.httpBody = buildPATCHTestSteps()
 
-    
         let session = URLSession.shared
         var dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
@@ -324,18 +337,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
                 print(httpResponse!) //grab this and display to the user
             }
         })
-        
-        request?.httpBody = buildPATCHtestStatus()
-    
-        dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
-        if (error != nil) {
-            print(error!)
-        } else {
-            let httpResponse = response as? HTTPURLResponse
-            print(httpResponse!) //grab this and display to the user
-        }
-        })
-    
+        dataTask.resume()
+        sleep(1)
         request?.httpBody = buildPATCHactualResults()
     
         dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
@@ -346,9 +349,24 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
                 print(httpResponse!) //grab this and display to the user
             }
         })
-    
         dataTask.resume()
+    
+        if testRun.testStepList.isEmpty {
+            sleep(1)
+            request?.httpBody = buildPATCHtestStatus()
+    
+            dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
+                if (error != nil) {
+                    print(error!)
+                } else {
+                    let httpResponse = response as? HTTPURLResponse
+                    print(httpResponse!) //grab this and display to the user
+                }
+            })
+            dataTask.resume()
+        }
     }
+ 
 }
 
 
