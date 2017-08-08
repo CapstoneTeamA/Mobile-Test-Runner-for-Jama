@@ -865,7 +865,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TzA-TL-KAC" userLabel="Top Divider">
                                 <rect key="frame" x="0.0" y="104" width="375" height="9.5"/>
-                                <color key="backgroundColor" red="0.96583253145217896" green="0.46620351076126099" blue="0.21295166015625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.94509803921568625" green="0.38039215686274508" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="bjx-gS-mFi"/>
                                 </constraints>
