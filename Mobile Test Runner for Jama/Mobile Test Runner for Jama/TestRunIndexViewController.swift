@@ -97,14 +97,18 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         submitAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
-            self.testRun.testStatus = "PASSED"
-            for step in self.testRun.testStepList {
-                if step.status == "FAILED" {
-                    self.testRun.testStatus = "FAILED"
-                    break
-                }
-                if step.status == "NOT_RUN" {
-                    self.testRun.testStatus = "INPROGRESS"
+            if self.testRun.testStepList.isEmpty {
+                
+            } else {
+                self.testRun.testStatus = "PASSED"
+                for step in self.testRun.testStepList {
+                    if step.status == "FAILED" {
+                        self.testRun.testStatus = "FAILED"
+                        break
+                    }
+                    if step.status == "NOT_RUN" {
+                        self.testRun.testStatus = "INPROGRESS"
+                    }
                 }
             }
             self.submitTestRun()
@@ -127,9 +131,13 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
             //TODO: add code to submit the run as blocked to the API
-            for step in self.testRun.testStepList {
-                if step.status == "NOT_RUN" {
-                    step.status = "BLOCKED"
+            if self.testRun.testStepList.isEmpty {
+                self.testRun.testStatus = "BLOCKED"
+            } else {
+                for step in self.testRun.testStepList {
+                    if step.status == "NOT_RUN" {
+                        step.status = "BLOCKED"
+                    }
                 }
             }
             
@@ -321,23 +329,28 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
 
 
     //make the put request with the test run data
-   func submitTestRun() {
+    func submitTestRun() {
         let endpointStr = buildTestRunEndpointString()
         var request = RestHelper.prepareHttpRequest(atEndpointString: endpointStr, username: username, password: password, httpMethod: "PATCH")
     
         request?.httpMethod = "PATCH"
-        request?.httpBody = buildPATCHTestSteps()
-
+        
         let session = URLSession.shared
-        var dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error!)
-            } else {
-                let httpResponse = response as? HTTPURLResponse
-                print(httpResponse!) //grab this and display to the user
-            }
-        })
-        dataTask.resume()
+        var dataTask: URLSessionDataTask!
+        if self.testRun.testStepList.isEmpty != true {
+            request?.httpBody = buildPATCHTestSteps()
+
+            
+            dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
+                if (error != nil) {
+                    print(error!)
+                } else {
+                    let httpResponse = response as? HTTPURLResponse
+                    print(httpResponse!) //grab this and display to the user
+                }
+            })
+            dataTask.resume()
+        }
         sleep(1)
         request?.httpBody = buildPATCHactualResults()
     
