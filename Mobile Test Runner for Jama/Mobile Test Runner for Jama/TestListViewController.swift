@@ -125,7 +125,7 @@ extension TestListViewController: EndpointDelegate {
                         self.noPlansImage.isHidden = false
                         self.noPlansLabel.isHidden = false
                         return
-                }
+                    }
                 case .cycle:
                     let tmpList = TestCycleListModel()
                     tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
