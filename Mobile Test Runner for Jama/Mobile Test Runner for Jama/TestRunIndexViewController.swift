@@ -13,6 +13,10 @@ protocol StepIndexDelegate {
     func didSetResult(result: String)
 }
 
+protocol RestPutDelegate {
+    func didPutTestRun(responseCode: Int)
+}
+
 enum Status {
     case pass, fail, not_run
 }
@@ -38,6 +42,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var initialStepsStatusList: [String] = []
     var initialStepsResultsList: [String] = []
     var initialRunResultField = ""
+    var currentUser: UserModel!
+    var testRunDelegate: TestRunDelegate!
     let placeholderText = "Enter run results here"
     
     override func viewDidLoad() {
@@ -47,6 +53,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         testRunNameLabel.text = testRun.name
         self.setupPopup()
         testStepTable.reloadData()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,22 +104,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         submitAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
-            if self.testRun.testStepList.isEmpty {
-                
-            } else {
-                self.testRun.testStatus = "PASSED"
-                for step in self.testRun.testStepList {
-                    if step.status == "FAILED" {
-                        self.testRun.testStatus = "FAILED"
-                        break
-                    }
-                    if step.status == "NOT_RUN" {
-                        self.testRun.testStatus = "INPROGRESS"
-                    }
-                }
-            }
-            self.submitTestRun()
-            self.navigationController?.popViewController(animated: true)
+            RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
         }))
         
         submitAlert.addAction(UIAlertAction(title: "Never mind", style: .cancel, handler: {
@@ -130,19 +122,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
             (action: UIAlertAction!) in
-            //TODO: add code to submit the run as blocked to the API
-            if self.testRun.testStepList.isEmpty {
-                self.testRun.testStatus = "BLOCKED"
-            } else {
-                for step in self.testRun.testStepList {
-                    if step.status == "NOT_RUN" {
-                        step.status = "BLOCKED"
-                    }
-                }
-            }
-            
-            self.submitTestRun()
-            self.navigationController?.popViewController(animated: true)
+            self.setupBlockedStatus()
+            RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(),withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
         }))
         
         blockedAlert.addAction(UIAlertAction(title: "Never mind", style: .cancel, handler: {
@@ -154,8 +135,19 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         present(blockedAlert, animated: true, completion: nil)
     }
     
-    
-    
+    //TODO find out how to deal with the "If you have a blocked step, every step after it must be blocked as well"
+    //  issue with the API
+    func setupBlockedStatus() {
+        if self.testRun.testStepList.isEmpty {
+            self.testRun.testStatus = "BLOCKED"
+        } else {
+            for step in self.testRun.testStepList {
+                if step.status == "NOT_RUN" {
+                    step.status = "BLOCKED"
+                }
+            }
+        }
+    }
     
     //Save all of the inital values of the statuses and
     func preserveCurrentRunStatus() {
@@ -237,151 +229,54 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         testRun.testStatus = "FAILED"
     }
 
-    
-    //TODO make the link between the button and the setting of the status for the run
     //TODO make confirmation popup that this will submit the test run
-    
-    
     //build the endpoint for submitting the test run
-    func buildTestRunEndpointString() -> String {
-        var endpoint = RestHelper.getEndpointString(method: "Patch", endpoint: "TestRuns")
+    func buildTestRunPutEndpointString() -> String {
+        var endpoint = RestHelper.getEndpointString(method: "Put", endpoint: "TestRuns")
         endpoint = "https://" + instance + "." + endpoint
         return endpoint.replacingOccurrences(of: "{id}", with: "\(testRun.id)")
     }
     
-    //build the JSON body of the put request
-    func buildPATCHactualResults() -> Data {
-        let dictionary: NSDictionary = [
-            "op" : "add",
-            "path" : "/fields/actualResults",
-            "value" : self.testRun.result as NSString
-        ]
+    func buildPutRunBody() -> Data {
+        var stepList: [[String : AnyObject]] = []
         
-        if JSONSerialization.isValidJSONObject(dictionary) {
-            do{
-                let data = try JSONSerialization.data(withJSONObject: dictionary)
-                return data
-            }catch {
-                print("error")
-            }
-        }
-        else {
-            print("invalid JSON Object")
-        }
-        return Data()
-    }
-    
-    //build the JSON body of the put request
-    func buildPATCHTestSteps() -> Data {
-        let stepList = NSMutableArray()
+        //build the testRunSteps value for the API call
         for step in self.testRun.testStepList {
-            let nsStep : NSDictionary = [
-                "action": step.action as NSString,
-                "expectedResult": step.expectedResult as NSString,
-                "notes": step.notes as NSString,
-                "result": step.result as NSString,
-                "status": step.status as NSString
+            let stepDict: [String : AnyObject] = [
+                "action" : step.action as AnyObject,
+                "expectedResult": step.expectedResult as AnyObject,
+                "notes": step.notes as AnyObject,
+                "result": step.result as AnyObject,
+                "status": step.status as AnyObject
             ]
-            stepList.add(nsStep)
+            stepList.append(stepDict)
         }
         
-        let dictionary: NSDictionary = [
-            "op" : "replace",
-            "path" : "/fields/testRunSteps",
-            "value" : stepList as NSArray
-        ]
+        var body: [String : AnyObject] = [:]
+        //Add the needed values to update a test run
+        body.updateValue(self.currentUser.id as AnyObject, forKey: "assignedTo")
+        body.updateValue(self.testRun.result as AnyObject, forKey: "actualResults")
         
-        if JSONSerialization.isValidJSONObject(dictionary) {
-            do{
-                let data = try JSONSerialization.data(withJSONObject: dictionary)
+        //If there are no steps, submit a status. Otherwise submit the test steps
+        //If the run has steps the status is a derived value based on the steps
+        if self.testRun.testStepList.isEmpty {
+            body.updateValue(self.testRun.testStatus as AnyObject, forKey: "testRunStatus")
+        } else {
+            body.updateValue(stepList as AnyObject , forKey: "testRunSteps")
+        }
+        //Set the test run PUT values into a dictionary with "fields" as a key.
+        let fields: [String : AnyObject] = ["fields" : body as AnyObject]
+        if JSONSerialization.isValidJSONObject(body) {
+            do {
+                let data = try JSONSerialization.data(withJSONObject: fields)
                 return data
-            }catch {
+            } catch {
                 print("error")
             }
         }
-        else {
-            print("invalid JSON Object")
-        }
         return Data()
     }
-
-    //build the JSON body of the put request
-    func buildPATCHtestStatus() -> Data {
-        let dictionary: NSDictionary = [
-            "op" : "replace",
-            "path" : "/fields/testRunStatus",
-            "value" : self.testRun.testStatus as NSString
-        ]
-        
-        if JSONSerialization.isValidJSONObject(dictionary) {
-            do{
-                let data = try JSONSerialization.data(withJSONObject: dictionary)
-                return data
-            }catch {
-                print("error")
-            }
-        }
-        else {
-            print("invalid JSON Object")
-        }
-        return Data()
-    }
-
-
-    //make the put request with the test run data
-    func submitTestRun() {
-        let endpointStr = buildTestRunEndpointString()
-        var request = RestHelper.prepareHttpRequest(atEndpointString: endpointStr, username: username, password: password, httpMethod: "PATCH")
-    
-        request?.httpMethod = "PATCH"
-        
-        let session = URLSession.shared
-        var dataTask: URLSessionDataTask!
-        if self.testRun.testStepList.isEmpty != true {
-            request?.httpBody = buildPATCHTestSteps()
-
-            
-            dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
-                if (error != nil) {
-                    print(error!)
-                } else {
-                    let httpResponse = response as? HTTPURLResponse
-                    print(httpResponse!) //grab this and display to the user
-                }
-            })
-            dataTask.resume()
-        }
-        sleep(1)
-        request?.httpBody = buildPATCHactualResults()
-    
-        dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error!)
-            } else {
-                let httpResponse = response as? HTTPURLResponse
-                print(httpResponse!) //grab this and display to the user
-            }
-        })
-        dataTask.resume()
-    
-        if testRun.testStepList.isEmpty {
-            sleep(1)
-            request?.httpBody = buildPATCHtestStatus()
-    
-            dataTask = session.dataTask(with: request!, completionHandler: { (data, response, error) -> Void in
-                if (error != nil) {
-                    print(error!)
-                } else {
-                    let httpResponse = response as? HTTPURLResponse
-                    print(httpResponse!) //grab this and display to the user
-                }
-            })
-            dataTask.resume()
-        }
-    }
- 
 }
-
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -428,5 +323,30 @@ extension TestRunIndexViewController: StepIndexDelegate {
     
     func didSetResult(result: String) {
         testRun.testStepList[currentlySelectedStepIndex].result = result
+    }
+    
+
+}
+
+extension TestRunIndexViewController: RestPutDelegate {
+    func didPutTestRun(responseCode: Int) {
+        if responseCode == 200 {
+            self.testRunDelegate.didUpdateTestRun()
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+           
+        } else {
+            let updateFailedAlert = UIAlertController(title: "Run not updated", message: "Attempt to update this run has failed. Try again.", preferredStyle: UIAlertControllerStyle.alert)
+            DispatchQueue.main.async {
+                self.present(updateFailedAlert, animated: true, completion: nil)
+            }
+            
+            let when = DispatchTime.now() + 3
+            DispatchQueue.main.asyncAfter(deadline: when){
+                // your code with delay
+                updateFailedAlert.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 }

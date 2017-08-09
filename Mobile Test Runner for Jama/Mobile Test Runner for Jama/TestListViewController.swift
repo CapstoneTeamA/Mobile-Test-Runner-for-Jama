@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TestRunDelegate {
+    func didUpdateTestRun()
+}
+
 class TestListViewController: UIViewController {
     @IBOutlet weak var testList: UITableView!
     @IBOutlet weak var tmpProjectLabel: UILabel!
@@ -32,6 +36,7 @@ class TestListViewController: UIViewController {
     var totalPlansReturnedFromServer = 0
     var totalCyclesReturnedFromServer = 0
     var currentTestLevel = TestLevel.plan
+    var displayTestRunAlert = false
     enum TestLevel {
         case plan, cycle, run
     }
@@ -46,6 +51,21 @@ class TestListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         let endpoint = buildTestPlanEndpointString()
         RestHelper.hitEndpoint(atEndpointString: endpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if displayTestRunAlert {
+            let updateSuccededAlert = UIAlertController(title: "Run updated", message: "Test run was successfully committed.", preferredStyle: UIAlertControllerStyle.alert)
+            let hideAlert = DispatchTime.now() + 3
+            self.present(updateSuccededAlert, animated: true, completion: nil)
+
+        
+            DispatchQueue.main.asyncAfter(deadline: hideAlert){
+                // your code with delay
+                updateSuccededAlert.dismiss(animated: true, completion: nil)
+            }
+        }
+        displayTestRunAlert = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -225,7 +245,9 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             runViewController.username = username
             runViewController.password = password
             runViewController.instance = instance
+            runViewController.currentUser = currentUser
             runViewController.preserveCurrentRunStatus()
+            runViewController.testRunDelegate = self
             self.navigationController?.pushViewController(runViewController, animated: true)
             return
         }
@@ -383,4 +405,10 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
+}
+
+extension TestListViewController: TestRunDelegate {
+    func didUpdateTestRun() {
+        displayTestRunAlert = true
+    }
 }

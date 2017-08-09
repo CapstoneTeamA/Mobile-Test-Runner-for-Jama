@@ -137,4 +137,25 @@ class RestHelper {
         }
         task.resume()
     }
+    
+    static func hitPutEndpoint(atEndpointString: String, withDelegate: RestPutDelegate, username: String, password: String, httpBodyData: Data) {
+        var request = RestHelper.prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: "PUT")
+        
+        let session = URLSession.shared
+        var dataTask: URLSessionDataTask!
+        request?.httpBody = httpBodyData
+            
+        dataTask = session.dataTask(with: request!, completionHandler: {
+            (data, response, error) -> Void in
+            if (error != nil) {
+                print(error!)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+                print(httpResponse!) //grab this and display to the user
+                withDelegate.didPutTestRun(responseCode: (httpResponse?.statusCode)!)
+            }
+        })
+        dataTask.resume()
+    }
+    
 }
