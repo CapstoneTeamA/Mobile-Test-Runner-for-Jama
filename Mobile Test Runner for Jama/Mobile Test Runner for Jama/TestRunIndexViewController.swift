@@ -341,8 +341,6 @@ extension TestRunIndexViewController: StepIndexDelegate {
     func didSetResult(result: String) {
         testRun.testStepList[currentlySelectedStepIndex].result = result
     }
-    
-
 }
 
 extension TestRunIndexViewController: RestPutDelegate {
