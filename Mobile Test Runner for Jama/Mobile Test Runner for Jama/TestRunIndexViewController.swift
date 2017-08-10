@@ -149,8 +149,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         present(blockedAlert, animated: true, completion: nil)
     }
     
-    //TODO find out how to deal with the "If you have a blocked step, every step after it must be blocked as well"
-    //  issue with the API
     func setupBlockedStatus() {
         if self.testRun.testStepList.isEmpty {
             self.testRun.testStatus = "BLOCKED"
