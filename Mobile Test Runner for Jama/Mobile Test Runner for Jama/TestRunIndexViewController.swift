@@ -22,7 +22,6 @@ enum Status {
 }
 
 class TestRunIndexViewController: UIViewController, UITextViewDelegate {
-   
     @IBOutlet weak var blockButton: UIButton!
     @IBOutlet weak var cancelRun: UIBarButtonItem!
     @IBOutlet weak var testRunNameLabel: UILabel!
@@ -54,7 +53,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         testRunNameLabel.text = testRun.name
         self.setupPopup()
         testStepTable.reloadData()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,7 +123,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     //if the block run button is hit, pop up an alert that either does nothing or submits the run as blocked to the API
     @IBAction func blockedButton(_ sender: UIButton) {
         //Ensure that blocking will be allowed by the API
-        if testRun.testStepList.last?.status != "NOT_RUN" {
+        if testRun.testStepList.isEmpty == false && testRun.testStepList.last?.status != "NOT_RUN" {
             let cannotBlockAlert = UIAlertController(title: "Cannot Block Run", message: "A run cannot be blocked if the last step has a status.", preferredStyle: .alert)
             cannotBlockAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {
                 (action: UIAlertAction!) in
@@ -134,6 +132,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             present(cannotBlockAlert, animated: true, completion: nil)
             return
         }
+        //If the user is able to block the run, create confirmation alert
         let blockedAlert = UIAlertController(title: "Block Run", message: "This run will be marked as blocked. Are you sure you want to submit?", preferredStyle: UIAlertControllerStyle.alert)
         
         blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
@@ -147,7 +146,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             _ = ""
             
         }))
-        
         present(blockedAlert, animated: true, completion: nil)
     }
     
@@ -238,11 +236,14 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             inputResultsTextBox.textColor = UIColor.black
         }
     }
+    
+    //Button only visible when there are no steps in this run, allowing the user to pass the whole run.
     @IBAction func didTapPassRun(_ sender: Any) {
         noStepStatusIcon.image = UIImage(named: "check_icon_green.png")
         testRun.testStatus = "PASSED"
     }
     
+    //Button only visible when there are no steps in this run, allowing the user to fail the whole run
     @IBAction func didTapFailRun(_ sender: Any) {
         noStepStatusIcon.image = UIImage(named: "X_icon_red.png")
         testRun.testStatus = "FAILED"
@@ -348,6 +349,7 @@ extension TestRunIndexViewController: StepIndexDelegate {
 
 extension TestRunIndexViewController: RestPutDelegate {
     func didPutTestRun(responseCode: Int) {
+        //If the update is successful, inform delegate and pop to the test list view
         if responseCode == 200 {
             self.testRunDelegate.didUpdateTestRun()
             DispatchQueue.main.async {
@@ -355,14 +357,14 @@ extension TestRunIndexViewController: RestPutDelegate {
             }
            
         } else {
+            //Create an alert to inform the user that the update failed
             let updateFailedAlert = UIAlertController(title: "Run not updated", message: "Attempt to update this run has failed. Try again.", preferredStyle: UIAlertControllerStyle.alert)
             DispatchQueue.main.async {
                 self.present(updateFailedAlert, animated: true, completion: nil)
             }
-            
-            let when = DispatchTime.now() + 3
-            DispatchQueue.main.asyncAfter(deadline: when){
-                // your code with delay
+            //Set the alert to show for 3 seconds.
+            let hideAlert = DispatchTime.now() + 3
+            DispatchQueue.main.asyncAfter(deadline: hideAlert){
                 updateFailedAlert.dismiss(animated: true, completion: nil)
             }
         }

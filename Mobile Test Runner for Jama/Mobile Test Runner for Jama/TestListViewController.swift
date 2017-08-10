@@ -54,17 +54,19 @@ class TestListViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        //If a test run has just updated before this view appeared
         if displayTestRunAlert {
+            //Alert the user that the update was successful
             let updateSuccededAlert = UIAlertController(title: "Run updated", message: "Test run was successfully committed.", preferredStyle: UIAlertControllerStyle.alert)
+            //Present alert and hide it after 3 seconds
             let hideAlert = DispatchTime.now() + 3
             self.present(updateSuccededAlert, animated: true, completion: nil)
-
         
             DispatchQueue.main.asyncAfter(deadline: hideAlert){
-                // your code with delay
                 updateSuccededAlert.dismiss(animated: true, completion: nil)
             }
         }
+        //Unset the flag for test run updates.
         displayTestRunAlert = false
     }
 
