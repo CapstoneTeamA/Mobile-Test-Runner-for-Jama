@@ -23,6 +23,7 @@ enum Status {
 
 class TestRunIndexViewController: UIViewController, UITextViewDelegate {
    
+    @IBOutlet weak var blockButton: UIButton!
     @IBOutlet weak var cancelRun: UIBarButtonItem!
     @IBOutlet weak var testRunNameLabel: UILabel!
     @IBOutlet weak var testStepTable: UITableView!
@@ -64,6 +65,11 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         } else {
             noStepsView.isHidden = true
         }
+        
+        //If we want to set the color of the blocked button to indicate that the user cannot block this run
+//        if testRun.testStepList.isEmpty == false && testRun.testStepList.last?.status != "NOT_RUN" {
+//            blockButton.backgroundColor = UIColor.lightText
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -118,6 +124,16 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     
     //if the block run button is hit, pop up an alert that either does nothing or submits the run as blocked to the API
     @IBAction func blockedButton(_ sender: UIButton) {
+        //Ensure that blocking will be allowed by the API
+        if testRun.testStepList.last?.status != "NOT_RUN" {
+            let cannotBlockAlert = UIAlertController(title: "Cannot Block Run", message: "A run cannot be blocked if the last step has a status.", preferredStyle: .alert)
+            cannotBlockAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {
+                (action: UIAlertAction!) in
+                _ = ""
+            }))
+            present(cannotBlockAlert, animated: true, completion: nil)
+            return
+        }
         let blockedAlert = UIAlertController(title: "Block Run", message: "This run will be marked as blocked. Are you sure you want to submit?", preferredStyle: UIAlertControllerStyle.alert)
         
         blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
@@ -141,9 +157,12 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         if self.testRun.testStepList.isEmpty {
             self.testRun.testStatus = "BLOCKED"
         } else {
-            for step in self.testRun.testStepList {
+            //Go through the steps in reverse order and block until a step has a status
+            for step in self.testRun.testStepList.reversed() {
                 if step.status == "NOT_RUN" {
                     step.status = "BLOCKED"
+                } else {
+                    break
                 }
             }
         }
@@ -229,7 +248,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         testRun.testStatus = "FAILED"
     }
 
-    //TODO make confirmation popup that this will submit the test run
     //build the endpoint for submitting the test run
     func buildTestRunPutEndpointString() -> String {
         var endpoint = RestHelper.getEndpointString(method: "Put", endpoint: "TestRuns")
