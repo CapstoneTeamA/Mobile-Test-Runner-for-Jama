@@ -96,6 +96,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
             self.stepResult = inputResultsTextBox.text
             indexDelegate.didSetResult(result: self.stepResult)
         }
+        setPlaceholderText()
         inputResultsTextBox.resignFirstResponder()
     }
     
