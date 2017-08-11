@@ -57,6 +57,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBAction func didTapAddResult(_ sender: Any) {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
+        self.navigationController?.view.addSubview(inputResultsBackground)
+        self.navigationController?.view.addSubview(inputResultsBox)
     }
     
     @IBAction func didTapFail(_ sender: Any) {
