@@ -44,6 +44,7 @@ class TestRunUnitTests: XCTestCase {
         XCTAssertEqual(23, run.id)
         XCTAssertEqual("desc", run.description)
         XCTAssertEqual(-1, run.assignedTo)
+        XCTAssertEqual("NOT_RUN", run.testStatus)
     }
     
     func testExtractRunFromDataWithAssignment() {

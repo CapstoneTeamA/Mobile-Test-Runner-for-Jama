@@ -89,12 +89,12 @@ class TestRunListModelUnitTests: XCTestCase {
         XCTAssertEqual(run1Id, testRunList.testRunList[0].id)
         XCTAssertEqual(run1Desc, testRunList.testRunList[0].description)
         XCTAssertEqual(run1AssignedToId, testRunList.testRunList[0].assignedTo)
-        XCTAssertEqual(run1Status, testRunList.testRunList[0].status)
+        XCTAssertEqual(run1Status, testRunList.testRunList[0].testStatus)
         
         XCTAssertEqual(run2Name, testRunList.testRunList[1].name)
         XCTAssertEqual(run2Id, testRunList.testRunList[1].id)
         XCTAssertEqual(run2Desc, testRunList.testRunList[1].description)
         XCTAssertEqual(-1, testRunList.testRunList[1].assignedTo)
-        XCTAssertEqual(run2Status, testRunList.testRunList[1].status)
+        XCTAssertEqual(run2Status, testRunList.testRunList[1].testStatus)
     }
 }
