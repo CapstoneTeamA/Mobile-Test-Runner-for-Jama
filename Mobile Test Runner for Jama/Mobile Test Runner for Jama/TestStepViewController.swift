@@ -55,6 +55,10 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         expectedResultsTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
         notesTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        expandActionTextView()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -78,23 +82,11 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func didTapActionHeader(_ sender: Any) {
-        if actionTextViewHeightContraint.constant != 0 {
-            actionTextViewHeightContraint.constant = 0
-        } else {
-            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * 9 / 12 - 6
-        }
-        expectedResultsTextViewHeightConstraint.constant = 0
-        notesTextViewHeightConstraint.constant = 0
+        expandActionTextView()
     }
     
     @IBAction func didTapExpectedResultsHeader(_ sender: Any) {
-        if expectedResultsTextViewHeightConstraint.constant != 0 {
-            expectedResultsTextViewHeightConstraint.constant = 0
-        } else {
-            expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * 9 / 12 - 6
-        }
-        actionTextViewHeightContraint.constant = 0
-        notesTextViewHeightConstraint.constant = 0
+        expandExpectedResultsTextView()
     }
     
     
@@ -108,6 +100,29 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         expectedResultsTextViewHeightConstraint.constant = 0
     }
     
+    func expandActionTextView() {
+        expandNotesTextView()
+    }
+    
+    func expandExpectedResultsTextView() {
+        if expectedResultsTextViewHeightConstraint.constant != 0 {
+            expectedResultsTextViewHeightConstraint.constant = 0
+        } else {
+            expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * 9 / 12 - 6
+        }
+        actionTextViewHeightContraint.constant = 0
+        notesTextViewHeightConstraint.constant = 0
+    }
+    
+    func expandNotesTextView() {
+        if actionTextViewHeightContraint.constant != 0 {
+            actionTextViewHeightContraint.constant = 0
+        } else {
+            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * 9 / 12 - 6
+        }
+        expectedResultsTextViewHeightConstraint.constant = 0
+        notesTextViewHeightConstraint.constant = 0
+    }
     
     
     // Used to set up text window popup, called in viewDidLoad
