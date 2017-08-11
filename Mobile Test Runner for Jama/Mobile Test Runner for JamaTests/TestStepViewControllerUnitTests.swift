@@ -54,7 +54,8 @@ class TestStepViewControllerUnitTests: XCTestCase {
     }
     
     func testExpandTextViews() {
-        let expectedTextViewHeight = (viewController.actionTextView.superview?.frame.height)! * 9 / 12 - 6
+        //56 is the combined height of the title area, top dividing bar, and spaces between buttons
+        let expectedTextViewHeight = (viewController.actionTextView.superview?.frame.height)! * 9 / 12 - 56
         viewController.actionTextViewHeightContraint.constant = 0
         
         //Test expanding and then collapsing the action section
@@ -74,5 +75,16 @@ class TestStepViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(expectedTextViewHeight, viewController.notesTextViewHeightConstraint.constant)
         viewController.expandNotesTextView()
         XCTAssertEqual(0, viewController.notesTextViewHeightConstraint.constant)
+    }
+    
+    func testAlignHeaderButtonsContents() {
+        viewController.alignHeaderButtonContents()
+        
+        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.actionButton.imageEdgeInsets)
+        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.actionButton.titleEdgeInsets)
+        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.expectedResultButton.imageEdgeInsets)
+        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.expectedResultButton.titleEdgeInsets)
+        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.notesButton.imageEdgeInsets)
+        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.notesButton.titleEdgeInsets)
     }
 }

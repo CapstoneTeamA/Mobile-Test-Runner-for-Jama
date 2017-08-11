@@ -31,17 +31,19 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var expectedResultButton: UIButton!
     @IBOutlet weak var notesButton: UIButton!
+    @IBOutlet weak var runNameLabel: UILabel!
     
     var action = ""
     var expResult = ""
     var notes = ""
     var stepResult = ""
+    var runName = ""
     var currentIndex = 0
     var indexLength = 0
     var indexDelegate: StepIndexDelegate!
     let placeholderText = "Enter result notes here"
-    let rightArrowImage = UIImage.init(named: "right_chevron.png")
-    let downArrowImage = UIImage.init(named: "down_chevron.png")
+    let rightArrowStr = "small_right_chevron.png"
+    let downArrowStr = "small_down_chevron.png"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,17 +52,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         notesTextView.text = notes
         self.setupPopup()
         self.title = "Step " + String(currentIndex+1) + "/" + String(indexLength);
-        
-        actionTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
-        expectedResultsTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
-        notesTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        //Needed to set all the textViews scrolled to the top when the view loads.
-
+        self.runNameLabel.text = runName
+        alignHeaderButtonContents()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,51 +94,73 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         expandNotesTextView()
     }
     
+    func alignHeaderButtonContents() {
+        actionButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        actionButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        expectedResultButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        expectedResultButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        notesButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        notesButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+    }
+    
     func expandActionTextView() {
+        //If the text view is showing collapse, otherwise expand in remaining space and set the button image to down arrow
         if actionTextViewHeightContraint.constant != 0 {
             actionTextViewHeightContraint.constant = 0
-            actionButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
+            actionButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
         } else {
-            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * 9 / 12 - 6
-            actionButton.setImage(UIImage.init(named: "down_chevron.png"), for: .normal)
-           // actionButton.imageView?.image = UIImage.init(named: "down_chevron.png")
+            //56 is the combined height of the title area, top dividing bar, and spaces between buttons
+            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * 9 / 12 - 56
+            actionButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
         }
+        //Set the other text views heights to 0
         expectedResultsTextViewHeightConstraint.constant = 0
         notesTextViewHeightConstraint.constant = 0
-        expectedResultButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
-        notesButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
+        //Set the other buttons images to right chevrons
+        expectedResultButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+        notesButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+        //scroll the text view to the top
+        actionTextView.scrollRectToVisible(CGRect.zero, animated: false)
     }
     
     func expandExpectedResultsTextView() {
+        //If the text view is showing collapse, otherwise expand in remaining space and set the button image to down arrow
         if expectedResultsTextViewHeightConstraint.constant != 0 {
             expectedResultsTextViewHeightConstraint.constant = 0
-            expectedResultButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
+            expectedResultButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
         } else {
-            expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * 9 / 12 - 6
-            expectedResultButton.setImage(UIImage.init(named: "down_chevron.png"), for: .normal)
-            //expectedResultButton.imageView?.image = UIImage.init(named: "down_chevron.png")
+            //56 is the combined height of the title area, top dividing bar, and spaces between buttons
+            expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * 9 / 12 - 56
+            expectedResultButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
         }
+        //Set the other text views heights to 0
         actionTextViewHeightContraint.constant = 0
         notesTextViewHeightConstraint.constant = 0
-        actionButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
-        //actionButton.imageView?.image = UIImage.init(named: "right_chevron.png")
-        notesButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
-        //notesButton.imageView?.image = UIImage.init(named: "right_chevron.png")
-        
+        //Set the other buttons images to right chevrons
+        actionButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+        notesButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+        //scroll the text view to the top
+        expectedResultsTextView.scrollRectToVisible(CGRect.zero, animated: false)
     }
     
     func expandNotesTextView() {
+        //If the text view is showing collapse, otherwise expand in remaining space and set the button image to down arrow
         if notesTextViewHeightConstraint.constant != 0 {
             notesTextViewHeightConstraint.constant = 0
-            notesButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
+            notesButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
         } else {
-            notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * 9 / 12 - 6
-            notesButton.setImage(UIImage.init(named: "down_chevron.png"), for: .normal)
+            //56 is the combined height of the title area, top dividing bar, and spaces between buttons
+            notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * 9 / 12 - 56
+            notesButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
         }
+        //Set the other text views heights to 0
         actionTextViewHeightContraint.constant = 0
         expectedResultsTextViewHeightConstraint.constant = 0
-        actionButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
-        expectedResultButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
+        //Set the other buttons images to right chevrons
+        actionButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+        expectedResultButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+        //scroll the text view to the top
+        notesTextView.scrollRectToVisible(CGRect.zero, animated: false)
     }
     
     
