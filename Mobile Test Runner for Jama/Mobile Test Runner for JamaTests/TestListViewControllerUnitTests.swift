@@ -54,15 +54,15 @@ class TestListViewControllerUnitTests: XCTestCase {
         
         testRun1.id = 2323
         testRun1.name = "testRun1"
-        testRun1.status = "INPROGRESS"
+        testRun1.testStatus = "INPROGRESS"
         
         testRun2.id = 2324
         testRun2.name = "testRun2"
-        testRun2.status = "NOT_RUN"
+        testRun2.testStatus = "NOT_RUN"
         
         testRun3.id = 2325
         testRun2.name = "testRun3"
-        testRun2.status = "FAILED"
+        testRun2.testStatus = "FAILED"
         
         
         viewController.selectedPlanIndex = 1
@@ -536,5 +536,25 @@ class TestListViewControllerUnitTests: XCTestCase {
     func testDefaultRunVals() {
         let testRun = TestRunModel()
         XCTAssertEqual(testRun.name, "No Runs Found")
+    }
+    
+    func testDisplayTestRunAlertInitiallyFalse() {
+        viewController.loadView()
+        
+        XCTAssertFalse(viewController.displayTestRunAlert)
+    }
+    
+    func testDisplayTestRunAlertTrueOnApiUpdate() {
+        //displayTestRunAlert initially false
+        viewController.loadView()
+        XCTAssertFalse(viewController.displayTestRunAlert)
+        
+        //after api update displayTestRunAlert set to true
+        viewController.didUpdateTestRun()
+        XCTAssertTrue(viewController.displayTestRunAlert)
+        
+        //After the viewDidAppear is called displayTestRunAlert is reset to false
+        viewController.viewDidAppear(false)
+        XCTAssertFalse(viewController.displayTestRunAlert)
     }
  }
