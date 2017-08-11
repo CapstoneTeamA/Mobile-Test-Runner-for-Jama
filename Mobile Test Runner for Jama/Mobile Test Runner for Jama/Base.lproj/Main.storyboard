@@ -341,10 +341,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No plans found. Please contact your administrator." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeV-l0-ABz">
-                                <rect key="frame" x="56.5" y="465" width="262.5" height="65"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No test plans found. Please contact your administrator." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeV-l0-ABz">
+                                <rect key="frame" x="57" y="465" width="263" height="95.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="VeV-l0-ABz" secondAttribute="height" multiplier="303:75" id="KSZ-o2-upA"/>
+                                    <constraint firstAttribute="width" secondItem="VeV-l0-ABz" secondAttribute="height" multiplier="303:110" id="KSZ-o2-upA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.3445105664" green="0.34528696850000001" blue="0.3571347594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -410,7 +410,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dL-pN-r0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2953.6231884057975" y="138.58695652173915"/>
+            <point key="canvasLocation" x="2952.8000000000002" y="138.0809595202399"/>
         </scene>
         <!--Test Step-->
         <scene sceneID="SDY-2C-hHe">
