@@ -669,7 +669,7 @@
         <!--Test Run Index-->
         <scene sceneID="zfG-eL-1OD">
             <objects>
-                <viewController storyboardIdentifier="TestRunIndex" title="Test Run Index" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NKr-0k-Apa" customClass="TestRunIndexViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TestRunIndex" title="Test Run Index" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NKr-0k-Apa" customClass="TestRunIndexViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Arf-ao-gXm"/>
                         <viewControllerLayoutGuide type="bottom" id="gXa-Dc-LxK"/>
