@@ -79,7 +79,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         //if the cancel run button is hit, pop up an alert that either does nothing or goes back a screen to select a different run.
         let cancelAlert = UIAlertController(title: "Cancel Run", message: "All run data will be lost. Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
         
-        cancelAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
+        cancelAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .cancel, handler: {
             (action: UIAlertAction!) in
             var index = 0
             //Run cancelled, reset all of the results and statuses to initial values
@@ -92,7 +92,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             self.navigationController?.popViewController(animated: true)
         }))
         
-        cancelAlert.addAction(UIAlertAction(title: "Never mind", style: .cancel, handler: {
+        cancelAlert.addAction(UIAlertAction(title: "Never mind", style: .default, handler: {
             (action: UIAlertAction!) in
             _ = ""
             
@@ -106,12 +106,12 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBAction func submitButton(_ sender: Any) {
         let submitAlert = UIAlertController(title: "Submit Run", message: "All run data will be saved and uploaded. Are you sure you want to submit?", preferredStyle: UIAlertControllerStyle.alert)
         
-        submitAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
+        submitAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .cancel, handler: {
             (action: UIAlertAction!) in
             RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
         }))
         
-        submitAlert.addAction(UIAlertAction(title: "Never mind", style: .cancel, handler: {
+        submitAlert.addAction(UIAlertAction(title: "Never mind", style: .default, handler: {
             (action: UIAlertAction!) in
             _ = ""
             
@@ -135,13 +135,13 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         //If the user is able to block the run, create confirmation alert
         let blockedAlert = UIAlertController(title: "Block Run", message: "This run will be marked as blocked. Are you sure you want to submit?", preferredStyle: UIAlertControllerStyle.alert)
         
-        blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
+        blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .cancel, handler: {
             (action: UIAlertAction!) in
             self.setupBlockedStatus()
             RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(),withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
         }))
         
-        blockedAlert.addAction(UIAlertAction(title: "Never mind", style: .cancel, handler: {
+        blockedAlert.addAction(UIAlertAction(title: "Never mind", style: .default, handler: {
             (action: UIAlertAction!) in
             _ = ""
             

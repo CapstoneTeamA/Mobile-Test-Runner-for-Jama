@@ -130,7 +130,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBAction func didTapResetStep(_ sender: Any) {
         let clearAlert = UIAlertController(title: "Clear Step", message: "This step's status will be set to \"Not Run\" and the results will be cleared. Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
         
-        clearAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
+        clearAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .cancel, handler: {
             (action: UIAlertAction!) in
             //Reset the Result and Status fields for the step
             self.indexDelegate.didSetStatus(status: .not_run)
@@ -138,7 +138,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
             self.navigationController?.popViewController(animated: true)
         }))
         
-        clearAlert.addAction(UIAlertAction(title: "Never mind", style: .cancel, handler: {
+        clearAlert.addAction(UIAlertAction(title: "Never mind", style: .default, handler: {
             (action: UIAlertAction) in
             _ = ""
         }))
