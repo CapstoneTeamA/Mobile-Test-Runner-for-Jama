@@ -982,6 +982,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="blockButton" destination="B8F-ke-ULJ" id="viU-1L-PgP"/>
                         <outlet property="cancelRun" destination="lHq-Lx-YPg" id="rMz-b9-Nhz"/>
                         <outlet property="inputResultsBackground" destination="w7O-Ml-k6v" id="KiZ-wS-xRa"/>
                         <outlet property="inputResultsBox" destination="eJc-4V-jEK" id="vrq-In-l6J"/>
