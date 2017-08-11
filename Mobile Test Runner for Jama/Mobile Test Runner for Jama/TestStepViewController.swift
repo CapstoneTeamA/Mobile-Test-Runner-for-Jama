@@ -91,17 +91,17 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func didTapNotesHeader(_ sender: Any) {
-        if notesTextViewHeightConstraint.constant != 0 {
-            notesTextViewHeightConstraint.constant = 0
-        } else {
-            notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * 9 / 12 - 6
-        }
-        actionTextViewHeightContraint.constant = 0
-        expectedResultsTextViewHeightConstraint.constant = 0
+        expandNotesTextView()
     }
     
     func expandActionTextView() {
-        expandNotesTextView()
+        if actionTextViewHeightContraint.constant != 0 {
+            actionTextViewHeightContraint.constant = 0
+        } else {
+            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * 9 / 12 - 6
+        }
+        expectedResultsTextViewHeightConstraint.constant = 0
+        notesTextViewHeightConstraint.constant = 0
     }
     
     func expandExpectedResultsTextView() {
@@ -115,13 +115,13 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     }
     
     func expandNotesTextView() {
-        if actionTextViewHeightContraint.constant != 0 {
-            actionTextViewHeightContraint.constant = 0
+        if notesTextViewHeightConstraint.constant != 0 {
+            notesTextViewHeightConstraint.constant = 0
         } else {
-            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * 9 / 12 - 6
+            notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * 9 / 12 - 6
         }
+        actionTextViewHeightContraint.constant = 0
         expectedResultsTextViewHeightConstraint.constant = 0
-        notesTextViewHeightConstraint.constant = 0
     }
     
     
