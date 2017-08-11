@@ -209,6 +209,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         if testRun.result != inputResultsTextBox.text && inputResultsTextBox.text != placeholderText {
             testRun.result = inputResultsTextBox.text
         }
+        setPlaceholderText()
         inputResultsTextBox.resignFirstResponder()
     }
     
