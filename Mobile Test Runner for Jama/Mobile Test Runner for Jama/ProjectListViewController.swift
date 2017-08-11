@@ -14,6 +14,7 @@ class ProjectListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noProjectsLabel: UILabel!
     @IBOutlet weak var noProjectsImage: UIImageView!
+    @IBOutlet weak var noProjectsMargin: UIView!
     var currentUser: UserModel = UserModel()
     var projectList: ProjectListModel = ProjectListModel()
     var username = ""
@@ -22,6 +23,7 @@ class ProjectListViewController: UIViewController {
     var endpointString = ""
     
     
+
     let noProjectsMessage = "No projects found. Please contact your administrator."
     let serverErrorMessage = "Server Error"
     
@@ -38,6 +40,7 @@ class ProjectListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
         noProjectsLabel.isHidden = true
         noProjectsImage.isHidden = true
+        noProjectsMargin.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,18 +64,21 @@ class ProjectListViewController: UIViewController {
             noProjectsLabel.isHidden = false
             noProjectsImage.isHidden = false
             noProjectsLabel.text = noProjectsMessage
+            noProjectsMargin.isHidden = false
             formatEmptyProjectMessage()
         }
         else {
             //set both image and label to invisible
             noProjectsLabel.isHidden = true
             noProjectsImage.isHidden = true
+            noProjectsMargin.isHidden = true
         }
     }
     
     func formatEmptyProjectMessage() {
         view.bringSubview(toFront: noProjectsLabel)
         view.bringSubview(toFront: noProjectsImage)
+        view.bringSubview(toFront: noProjectsMargin)
         collectionView.backgroundColor = UIColor.white
     }
     
@@ -107,6 +113,7 @@ extension ProjectListViewController: EndpointDelegate {
         DispatchQueue.main.async {
             self.noProjectsImage.isHidden = true
             self.noProjectsLabel.isHidden = true
+            self.noProjectsMargin.isHidden = true
             //Boolean that will determine if we should load the data into the view automatically if 
             //"scroll to bottom" lazy loading is enabled.
 //            let isInitialAPICall = self.projectList.projectList.count == 0

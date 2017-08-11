@@ -37,7 +37,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     var currentIndex = 0
     var indexLength = 0
     var indexDelegate: StepIndexDelegate!
-    let placeholderText = "Enter result notes here"
+    let placeholderText = "Enter actual results here"
     let rightArrowStr = "small_right_chevron.png"
     let downArrowStr = "small_down_chevron.png"
     
@@ -64,6 +64,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBAction func didTapAddResult(_ sender: Any) {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
+        self.navigationController?.view.addSubview(inputResultsBackground)
+        self.navigationController?.view.addSubview(inputResultsBox)
     }
     
     @IBAction func didTapFail(_ sender: Any) {
@@ -91,12 +93,15 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     }
     
     func alignHeaderButtonContents() {
-        actionButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        actionButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        expectedResultButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        expectedResultButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        notesButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        notesButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        let imageInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        let titleInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        //Set the insets for all the accordion buttons to layout the image and title of the button
+        actionButton.imageEdgeInsets = imageInset
+        actionButton.titleEdgeInsets = titleInset
+        expectedResultButton.imageEdgeInsets = imageInset
+        expectedResultButton.titleEdgeInsets = titleInset
+        notesButton.imageEdgeInsets = imageInset
+        notesButton.titleEdgeInsets = titleInset
     }
     
     func expandActionTextView() {
@@ -183,10 +188,11 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBAction func saveText(_ sender: UIButton) {
         inputResultsBackground.isHidden = true
         inputResultsBox.isHidden = true
-        if self.stepResult != inputResultsTextBox.text && self.stepResult != placeholderText {
+        if self.stepResult != inputResultsTextBox.text && inputResultsTextBox.text != placeholderText {
             self.stepResult = inputResultsTextBox.text
             indexDelegate.didSetResult(result: self.stepResult)
         }
+        setPlaceholderText()
         inputResultsTextBox.resignFirstResponder()
     }
     

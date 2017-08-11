@@ -44,7 +44,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var initialRunResultField = ""
     var currentUser: UserModel!
     var testRunDelegate: TestRunDelegate!
-    let placeholderText = "Enter run results here"
+    let placeholderText = "Enter actual results here"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -198,6 +198,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBAction func enterText(_ sender: UIButton) {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
+        self.navigationController?.view.addSubview(inputResultsBackground)
+        self.navigationController?.view.addSubview(inputResultsBox)
     }
     
     // Called when 'Done' button in popup is clicked
@@ -207,6 +209,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         if testRun.result != inputResultsTextBox.text && inputResultsTextBox.text != placeholderText {
             testRun.result = inputResultsTextBox.text
         }
+        setPlaceholderText()
         inputResultsTextBox.resignFirstResponder()
     }
     
