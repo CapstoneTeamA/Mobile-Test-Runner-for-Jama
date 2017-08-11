@@ -13,14 +13,21 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var passButton: UIButton!
     @IBOutlet weak var failButton: UIButton!
     @IBOutlet weak var addResultsButton: UIButton!
-    @IBOutlet weak var actionTextField: UITextView!
-    @IBOutlet weak var expResultTextField: UITextView!
-    @IBOutlet weak var notesTextField: UITextView!
     @IBOutlet weak var inputResultsBackground: UIView!
     @IBOutlet weak var inputResultsBox: UIView!
     @IBOutlet weak var inputResultsTextBox: UITextView!
     @IBOutlet weak var inputResultsButton: UIButton!
     @IBOutlet weak var StepDetailTitle: UINavigationItem!
+    
+    @IBOutlet weak var actionTextView: UITextView!
+    @IBOutlet weak var expectedResultsTextView: UITextView!
+    @IBOutlet weak var notesTextView: UITextView!
+    
+    @IBOutlet weak var actionTextViewHeightContraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var expectedResultsTextViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var notesTextViewHeightConstraint: NSLayoutConstraint!
     
     var action = ""
     var expResult = ""
@@ -33,9 +40,9 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        actionTextField.text = action
-        expResultTextField.text = expResult
-        notesTextField.text = notes
+        actionTextView.text = action
+        expectedResultsTextView.text = expResult
+        notesTextView.text = notes
         self.setupPopup()
         self.title = "Step " + String(currentIndex+1) + "/" + String(indexLength);
     }
@@ -44,9 +51,9 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         super.viewWillLayoutSubviews()
         
         //Needed to set all the textViews scrolled to the top when the view loads.
-        actionTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
-        expResultTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
-        notesTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+        actionTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+        expectedResultsTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+        notesTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +75,40 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         indexDelegate.didSetStatus(status: .pass)
         navigationController?.popViewController(animated: true)
     }
+    
+    
+    @IBAction func didTapActionHeader(_ sender: Any) {
+        if actionTextViewHeightContraint.constant != 0 {
+            actionTextViewHeightContraint.constant = 0
+        } else {
+            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * 9 / 12 - 6
+        }
+        expectedResultsTextViewHeightConstraint.constant = 0
+        notesTextViewHeightConstraint.constant = 0
+    }
+    
+    @IBAction func didTapExpectedResultsHeader(_ sender: Any) {
+        if expectedResultsTextViewHeightConstraint.constant != 0 {
+            expectedResultsTextViewHeightConstraint.constant = 0
+        } else {
+            expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * 9 / 12 - 6
+        }
+        actionTextViewHeightContraint.constant = 0
+        notesTextViewHeightConstraint.constant = 0
+    }
+    
+    
+    @IBAction func didTapNotesHeader(_ sender: Any) {
+        if notesTextViewHeightConstraint.constant != 0 {
+            notesTextViewHeightConstraint.constant = 0
+        } else {
+            notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * 9 / 12 - 6
+        }
+        actionTextViewHeightContraint.constant = 0
+        expectedResultsTextViewHeightConstraint.constant = 0
+    }
+    
+    
     
     // Used to set up text window popup, called in viewDidLoad
     func setupPopup() {
