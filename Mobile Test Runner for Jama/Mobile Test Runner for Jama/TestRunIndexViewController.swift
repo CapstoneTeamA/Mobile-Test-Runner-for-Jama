@@ -198,6 +198,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBAction func enterText(_ sender: UIButton) {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
+        self.navigationController?.view.addSubview(inputResultsBackground)
+        self.navigationController?.view.addSubview(inputResultsBox)
     }
     
     // Called when 'Done' button in popup is clicked
