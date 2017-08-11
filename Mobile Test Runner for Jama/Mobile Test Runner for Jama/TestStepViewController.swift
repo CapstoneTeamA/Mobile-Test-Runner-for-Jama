@@ -18,15 +18,11 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var inputResultsTextBox: UITextView!
     @IBOutlet weak var inputResultsButton: UIButton!
     @IBOutlet weak var StepDetailTitle: UINavigationItem!
-    
     @IBOutlet weak var actionTextView: UITextView!
     @IBOutlet weak var expectedResultsTextView: UITextView!
     @IBOutlet weak var notesTextView: UITextView!
-    
     @IBOutlet weak var actionTextViewHeightContraint: NSLayoutConstraint!
-    
     @IBOutlet weak var expectedResultsTextViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var notesTextViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var expectedResultButton: UIButton!
