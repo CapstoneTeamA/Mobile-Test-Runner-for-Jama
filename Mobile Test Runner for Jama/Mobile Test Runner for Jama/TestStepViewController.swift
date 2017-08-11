@@ -29,7 +29,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     var currentIndex = 0
     var indexLength = 0
     var indexDelegate: StepIndexDelegate!
-    let placeholderText = "Enter result notes here"
+    let placeholderText = "Enter actual results here"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +92,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBAction func saveText(_ sender: UIButton) {
         inputResultsBackground.isHidden = true
         inputResultsBox.isHidden = true
-        if self.stepResult != inputResultsTextBox.text && self.stepResult != placeholderText {
+        if self.stepResult != inputResultsTextBox.text && inputResultsTextBox.text != placeholderText {
             self.stepResult = inputResultsTextBox.text
             indexDelegate.didSetResult(result: self.stepResult)
         }

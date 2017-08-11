@@ -44,7 +44,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var initialRunResultField = ""
     var currentUser: UserModel!
     var testRunDelegate: TestRunDelegate!
-    let placeholderText = "Enter run results here"
+    let placeholderText = "Enter actual results here"
     
     override func viewDidLoad() {
         super.viewDidLoad()
