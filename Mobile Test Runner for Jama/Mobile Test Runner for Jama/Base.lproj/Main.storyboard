@@ -188,7 +188,7 @@
                                         <rect key="frame" x="12.5" y="0.0" width="350" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="351" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJa-8k-3bZ">
@@ -488,11 +488,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWW-gk-dOH">
                                 <rect key="frame" x="0.0" y="64" width="375" height="435"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1e-iC-eME">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1e-iC-eME">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="36.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="  Action">
+                                        <state key="normal" title="  Action" image="down_chevron.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -508,11 +507,10 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcP-7h-pXF">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcP-7h-pXF">
                                         <rect key="frame" x="0.0" y="38.5" width="375" height="36.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="  Expected Results">
+                                        <state key="normal" title="  Expected Results" image="right_chevron.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -528,11 +526,10 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FE8-ge-51F">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FE8-ge-51F">
                                         <rect key="frame" x="0.0" y="77" width="375" height="36.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="  Notes">
+                                        <state key="normal" title="  Notes" image="right_chevron.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -664,9 +661,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="StepDetailTitle" destination="a3L-dD-bBP" id="gfM-Hb-Jyl"/>
+                        <outlet property="actionButton" destination="Q1e-iC-eME" id="ek0-3e-RUP"/>
                         <outlet property="actionTextView" destination="j7z-pb-nHp" id="fSy-Oz-74S"/>
                         <outlet property="actionTextViewHeightContraint" destination="eQP-yN-0y4" id="jc3-lq-h2Y"/>
                         <outlet property="addResultsButton" destination="tnj-KD-mnB" id="dnf-qi-f3W"/>
+                        <outlet property="expectedResultButton" destination="dcP-7h-pXF" id="xID-Na-T2U"/>
                         <outlet property="expectedResultsTextView" destination="8ZR-DR-O4d" id="9vY-gp-9EH"/>
                         <outlet property="expectedResultsTextViewHeightConstraint" destination="bYk-v3-2xJ" id="VJQ-iT-kkC"/>
                         <outlet property="failButton" destination="kRQ-iu-ksj" id="Dgs-lQ-hTj"/>
@@ -674,6 +673,7 @@
                         <outlet property="inputResultsBox" destination="NMp-X4-ZTH" id="ALd-x0-xQw"/>
                         <outlet property="inputResultsButton" destination="CUx-cG-4zO" id="lrC-iS-Hv7"/>
                         <outlet property="inputResultsTextBox" destination="4sy-ju-mtu" id="NrM-UR-Yzj"/>
+                        <outlet property="notesButton" destination="FE8-ge-51F" id="My2-K0-Rzn"/>
                         <outlet property="notesTextView" destination="BC4-4i-yzl" id="Kap-pC-0zT"/>
                         <outlet property="notesTextViewHeightConstraint" destination="9ju-vS-ALo" id="jEN-al-Djp"/>
                         <outlet property="passButton" destination="JXM-kY-Oc6" id="WBg-iC-cgs"/>
@@ -1036,8 +1036,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="down_chevron.png" width="32" height="32"/>
         <image name="empty_icon_grey.png" width="32" height="32"/>
         <image name="folder-lightbl-redx.png" width="814" height="814"/>
         <image name="mtrlogo_v8-1.png" width="1099" height="408"/>
+        <image name="right_chevron.png" width="32" height="32"/>
     </resources>
 </document>

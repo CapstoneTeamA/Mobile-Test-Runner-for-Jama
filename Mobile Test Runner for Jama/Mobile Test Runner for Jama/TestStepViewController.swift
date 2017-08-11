@@ -28,6 +28,9 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var expectedResultsTextViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var notesTextViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var expectedResultButton: UIButton!
+    @IBOutlet weak var notesButton: UIButton!
     
     var action = ""
     var expResult = ""
@@ -37,6 +40,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     var indexLength = 0
     var indexDelegate: StepIndexDelegate!
     let placeholderText = "Enter result notes here"
+    let rightArrowImage = UIImage.init(named: "right_chevron.png")
+    let downArrowImage = UIImage.init(named: "down_chevron.png")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,15 +50,17 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         notesTextView.text = notes
         self.setupPopup()
         self.title = "Step " + String(currentIndex+1) + "/" + String(indexLength);
+        
+        actionTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+        expectedResultsTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+        notesTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
         //Needed to set all the textViews scrolled to the top when the view loads.
-        actionTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
-        expectedResultsTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
-        notesTextView.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -97,31 +104,48 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     func expandActionTextView() {
         if actionTextViewHeightContraint.constant != 0 {
             actionTextViewHeightContraint.constant = 0
+            actionButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
         } else {
             actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * 9 / 12 - 6
+            actionButton.setImage(UIImage.init(named: "down_chevron.png"), for: .normal)
+           // actionButton.imageView?.image = UIImage.init(named: "down_chevron.png")
         }
         expectedResultsTextViewHeightConstraint.constant = 0
         notesTextViewHeightConstraint.constant = 0
+        expectedResultButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
+        notesButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
     }
     
     func expandExpectedResultsTextView() {
         if expectedResultsTextViewHeightConstraint.constant != 0 {
             expectedResultsTextViewHeightConstraint.constant = 0
+            expectedResultButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
         } else {
             expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * 9 / 12 - 6
+            expectedResultButton.setImage(UIImage.init(named: "down_chevron.png"), for: .normal)
+            //expectedResultButton.imageView?.image = UIImage.init(named: "down_chevron.png")
         }
         actionTextViewHeightContraint.constant = 0
         notesTextViewHeightConstraint.constant = 0
+        actionButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
+        //actionButton.imageView?.image = UIImage.init(named: "right_chevron.png")
+        notesButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
+        //notesButton.imageView?.image = UIImage.init(named: "right_chevron.png")
+        
     }
     
     func expandNotesTextView() {
         if notesTextViewHeightConstraint.constant != 0 {
             notesTextViewHeightConstraint.constant = 0
+            notesButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
         } else {
             notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * 9 / 12 - 6
+            notesButton.setImage(UIImage.init(named: "down_chevron.png"), for: .normal)
         }
         actionTextViewHeightContraint.constant = 0
         expectedResultsTextViewHeightConstraint.constant = 0
+        actionButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
+        expectedResultButton.setImage(UIImage.init(named: "right_chevron.png"), for: .normal)
     }
     
     
