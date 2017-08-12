@@ -55,7 +55,10 @@ class TestStepViewControllerUnitTests: XCTestCase {
     
     func testExpandTextViews() {
         //56 is the combined height of the title area, top dividing bar, and spaces between buttons
-        let expectedTextViewHeight = (viewController.actionTextView.superview?.frame.height)! * 9 / 12 - 56
+        let heightRatio = viewController.textViewHeightRatio
+        let totalSpaceBetweenButtons = viewController.totalSpaceBetweenButtons
+        let titleAndDividerHeight = viewController.titleAndDividerHeight
+        let expectedTextViewHeight = (viewController.actionTextView.superview?.frame.height)! * heightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
         viewController.actionTextViewHeightContraint.constant = 0
         
         //Test expanding and then collapsing the action section
