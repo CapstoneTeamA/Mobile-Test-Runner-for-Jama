@@ -246,28 +246,27 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     func togglePassButton() {
         if noStepRunStatusLabel.text == testRunStatusStr + "Pass" {
             noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
-            noStepPassButton.setTitleColor(UIColor.lightGray, for: .normal)
+            noStepPassButton.setImage(UIImage.init(named: "PASS_UNSELECTED.png"), for: .normal)
             testRun.testStatus = "NOT_RUN"
         } else {
             noStepRunStatusLabel.text = testRunStatusStr + "Pass"
-            noStepPassButton.setTitleColor(UIColor.init(red: 0x33/0xFF, green: 0xA1/0xFF, blue: 0x2B/0xFF, alpha: 1), for: .normal)
-            noStepFailButton.setTitleColor(UIColor.lightGray, for: .normal)
+            noStepPassButton.setImage(UIImage.init(named: "PASS.png"), for: .normal)
             testRun.testStatus = "PASSED"
         }
+        noStepFailButton.setImage(UIImage.init(named: "FAIL_UNSELECTED.png"), for: .normal)
     }
     
     func toggleFailButton() {
         if noStepRunStatusLabel.text == testRunStatusStr + "Fail" {
             noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
-            noStepFailButton.setTitleColor(UIColor.lightGray, for: .normal)
+            noStepFailButton.setImage(UIImage.init(named: "FAIL_UNSELECTED.png"), for: .normal)
             testRun.testStatus = "NOT_RUN"
         } else {
             noStepRunStatusLabel.text = testRunStatusStr + "Fail"
-            //A30007
-            noStepFailButton.setTitleColor(UIColor.init(red: 0xA3/0xFF, green: 0x00/0xFF, blue: 0x07/0xFF, alpha: 1), for: .normal)
-            noStepPassButton.setTitleColor(UIColor.lightGray, for: .normal)
+            noStepFailButton.setImage(UIImage.init(named: "FAIL.png"), for: .normal)
             testRun.testStatus = "FAILED"
         }
+        noStepPassButton.setImage(UIImage.init(named: "PASS_UNSELECTED.png"), for: .normal)
     }
     
     //Button only visible when there are no steps in this run, allowing the user to pass the whole run.
