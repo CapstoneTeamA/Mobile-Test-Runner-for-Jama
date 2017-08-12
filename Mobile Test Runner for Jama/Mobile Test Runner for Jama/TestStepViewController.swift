@@ -112,16 +112,29 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         notesButton.titleEdgeInsets = titleInset
     }
     
-    func expandActionTextView() {
-        //If the text view is showing collapse, otherwise expand in remaining space and set the button image to down arrow
-        if actionTextViewHeightContraint.constant != 0 {
-            actionTextViewHeightContraint.constant = 0
-            actionButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+    func expandOrCollapseTextView(heightConstraint: NSLayoutConstraint, button: UIButton) {
+        if heightConstraint.constant != 0 {
+            heightConstraint.constant = 0
+            button.setImage(UIImage.init(named: rightArrowStr), for: .normal)
         } else {
             //Make the text view as large as it can be while still fitting in its superview.
-            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
-            actionButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
+            heightConstraint.constant = (actionTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
+            button.setImage(UIImage.init(named: downArrowStr), for: .normal)
         }
+    }
+    
+    func expandActionTextView() {
+        //If the text view is showing collapse, otherwise expand in remaining space and set the button image to down arrow
+//        if actionTextViewHeightContraint.constant != 0 {
+//            actionTextViewHeightContraint.constant = 0
+//            actionButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+//        } else {
+//            //Make the text view as large as it can be while still fitting in its superview.
+//            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
+//            actionButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
+//        }
+        
+        expandOrCollapseTextView(heightConstraint: actionTextViewHeightContraint, button: actionButton)
         //Set the other text views heights to 0
         expectedResultsTextViewHeightConstraint.constant = 0
         notesTextViewHeightConstraint.constant = 0
@@ -134,14 +147,16 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     func expandExpectedResultsTextView() {
         //If the text view is showing collapse, otherwise expand in remaining space and set the button image to down arrow
-        if expectedResultsTextViewHeightConstraint.constant != 0 {
-            expectedResultsTextViewHeightConstraint.constant = 0
-            expectedResultButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-        } else {
-            //Make the text view as large as it can be while still fitting in its superview.
-            expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
-            expectedResultButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
-        }
+//        if expectedResultsTextViewHeightConstraint.constant != 0 {
+//            expectedResultsTextViewHeightConstraint.constant = 0
+//            expectedResultButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+//        } else {
+//            //Make the text view as large as it can be while still fitting in its superview.
+//            expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
+//            expectedResultButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
+//        }
+
+        expandOrCollapseTextView(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
         //Set the other text views heights to 0
         actionTextViewHeightContraint.constant = 0
         notesTextViewHeightConstraint.constant = 0
@@ -154,14 +169,16 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     func expandNotesTextView() {
         //If the text view is showing collapse, otherwise expand in remaining space and set the button image to down arrow
-        if notesTextViewHeightConstraint.constant != 0 {
-            notesTextViewHeightConstraint.constant = 0
-            notesButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-        } else {
-            //Make the text view as large as it can be while still fitting in its superview.
-            notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
-            notesButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
-        }
+//        if notesTextViewHeightConstraint.constant != 0 {
+//            notesTextViewHeightConstraint.constant = 0
+//            notesButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+//        } else {
+//            //Make the text view as large as it can be while still fitting in its superview.
+//            notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
+//            notesButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
+//        }
+        
+        expandOrCollapseTextView(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
         //Set the other text views heights to 0
         actionTextViewHeightContraint.constant = 0
         expectedResultsTextViewHeightConstraint.constant = 0
