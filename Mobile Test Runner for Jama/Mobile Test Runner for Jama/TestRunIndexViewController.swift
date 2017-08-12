@@ -47,7 +47,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var currentUser: UserModel!
     var testRunDelegate: TestRunDelegate!
     let placeholderText = "Enter actual results here"
-    let testRunStatusStr = "Test Run Status: "
+    let testRunStatusNotRunStr = "Test Run Status: Not Run"
+    let testRunStatusPassStr = "Test Run Status: Pass"
+    let testRunStatusFailStr = "Test Run Status: Fail"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +60,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         testStepTable.reloadData()
         
         //Since a run with no steps cannot be in progress, it must initially be not run.
-        noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
+        noStepRunStatusLabel.text = testRunStatusNotRunStr
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -240,12 +242,12 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     }
     
     func togglePassButton() {
-        if noStepRunStatusLabel.text == testRunStatusStr + "Pass" {
-            noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
+        if noStepRunStatusLabel.text == testRunStatusPassStr {
+            noStepRunStatusLabel.text = testRunStatusNotRunStr
             noStepPassButton.setImage(UIImage.init(named: "PASS_UNSELECTED.png"), for: .normal)
             testRun.testStatus = "NOT_RUN"
         } else {
-            noStepRunStatusLabel.text = testRunStatusStr + "Pass"
+            noStepRunStatusLabel.text = testRunStatusPassStr
             noStepPassButton.setImage(UIImage.init(named: "PASS.png"), for: .normal)
             testRun.testStatus = "PASSED"
         }
@@ -253,12 +255,12 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     }
     
     func toggleFailButton() {
-        if noStepRunStatusLabel.text == testRunStatusStr + "Fail" {
-            noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
+        if noStepRunStatusLabel.text == testRunStatusFailStr {
+            noStepRunStatusLabel.text = testRunStatusNotRunStr
             noStepFailButton.setImage(UIImage.init(named: "FAIL_UNSELECTED.png"), for: .normal)
             testRun.testStatus = "NOT_RUN"
         } else {
-            noStepRunStatusLabel.text = testRunStatusStr + "Fail"
+            noStepRunStatusLabel.text = testRunStatusFailStr 
             noStepFailButton.setImage(UIImage.init(named: "FAIL.png"), for: .normal)
             testRun.testStatus = "FAILED"
         }

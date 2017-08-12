@@ -267,31 +267,31 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         let run = TestRunModel()
         run.testStatus = "NOT_RUN"
         viewController.testRun = run
-        XCTAssertEqual(viewController.testRunStatusStr + "Not Run", viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusNotRunStr , viewController.noStepRunStatusLabel.text)
         
         //Toggle pass button when neither button is selected
         viewController.togglePassButton()
-        XCTAssertEqual(viewController.testRunStatusStr + "Pass", viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusPassStr, viewController.noStepRunStatusLabel.text)
         XCTAssertEqual(UIImage.init(named: "PASS.png"), viewController.noStepPassButton.currentImage)
         XCTAssertEqual("PASSED", viewController.testRun.testStatus)
         XCTAssertEqual(UIImage.init(named: "FAIL_UNSELECTED.png"), viewController.noStepFailButton.currentImage)
         
         //Toggle pass button when pass button is selected
         viewController.togglePassButton()
-        XCTAssertEqual(viewController.testRunStatusStr + "Not Run", viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusNotRunStr, viewController.noStepRunStatusLabel.text)
         XCTAssertEqual(UIImage.init(named: "PASS_UNSELECTED.png"), viewController.noStepPassButton.currentImage)
         XCTAssertEqual("NOT_RUN", viewController.testRun.testStatus)
         XCTAssertEqual(UIImage.init(named: "FAIL_UNSELECTED.png"), viewController.noStepFailButton.currentImage)
         
         //Set up view controller so state where fail button is selected
         viewController.noStepFailButton.setImage(UIImage.init(named: "FAIL.png"), for: .normal)
-        viewController.noStepRunStatusLabel.text = viewController.testRunStatusStr + "Fail"
+        viewController.noStepRunStatusLabel.text = viewController.testRunStatusFailStr
         viewController.noStepPassButton.setImage(UIImage.init(named: "PASS_UNSELECTED.png"), for: .normal)
         viewController.testRun.testStatus = "FAILED"
         
         //Toggle pass button when fail button is selected
         viewController.togglePassButton()
-        XCTAssertEqual(viewController.testRunStatusStr + "Pass", viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusPassStr, viewController.noStepRunStatusLabel.text)
         XCTAssertEqual(UIImage.init(named: "PASS.png"), viewController.noStepPassButton.currentImage)
         XCTAssertEqual("PASSED", viewController.testRun.testStatus)
         XCTAssertEqual(UIImage.init(named: "FAIL_UNSELECTED.png"), viewController.noStepFailButton.currentImage)
@@ -301,31 +301,31 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         let run = TestRunModel()
         run.testStatus = "NOT_RUN"
         viewController.testRun = run
-        XCTAssertEqual(viewController.testRunStatusStr + "Not Run", viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusNotRunStr, viewController.noStepRunStatusLabel.text)
         
         //Toggle fail button when neither button is selected
         viewController.toggleFailButton()
-        XCTAssertEqual(viewController.testRunStatusStr + "Fail", viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusFailStr, viewController.noStepRunStatusLabel.text)
         XCTAssertEqual(UIImage.init(named: "FAIL.png"), viewController.noStepFailButton.currentImage)
         XCTAssertEqual("FAILED", viewController.testRun.testStatus)
         XCTAssertEqual(UIImage.init(named: "PASS_UNSELECTED.png"), viewController.noStepPassButton.currentImage)
         
         //Toggle fail button when fail button is selected
         viewController.toggleFailButton()
-        XCTAssertEqual(viewController.testRunStatusStr + "Not Run", viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusNotRunStr, viewController.noStepRunStatusLabel.text)
         XCTAssertEqual(UIImage.init(named: "FAIL_UNSELECTED.png"), viewController.noStepFailButton.currentImage)
         XCTAssertEqual("NOT_RUN", viewController.testRun.testStatus)
         XCTAssertEqual(UIImage.init(named: "PASS_UNSELECTED.png"), viewController.noStepPassButton.currentImage)
         
         //Set up view controller so state where pass button is selected
         viewController.noStepPassButton.setImage(UIImage.init(named: "PASS.png"), for: .normal)
-        viewController.noStepRunStatusLabel.text = viewController.testRunStatusStr + "Pass"
+        viewController.noStepRunStatusLabel.text = viewController.testRunStatusPassStr
         viewController.noStepFailButton.setImage(UIImage.init(named: "FAIL_UNSELECTED.png"), for: .normal)
         viewController.testRun.testStatus = "PASSED"
         
         //Toggle fail button when pass button is selected
         viewController.toggleFailButton()
-        XCTAssertEqual(viewController.testRunStatusStr + "Fail", viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusFailStr, viewController.noStepRunStatusLabel.text)
         XCTAssertEqual(UIImage.init(named: "FAIL.png"), viewController.noStepFailButton.currentImage)
         XCTAssertEqual("FAILED", viewController.testRun.testStatus)
         XCTAssertEqual(UIImage.init(named: "PASS_UNSELECTED.png"), viewController.noStepPassButton.currentImage)
