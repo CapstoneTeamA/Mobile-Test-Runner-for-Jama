@@ -59,7 +59,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         self.setupPopup()
         testStepTable.reloadData()
         
-        //Since a run with no steps cannot be in progress, it must initially be not run.
+        //TODO this will end up being changed to an "In progress" string
         noStepRunStatusLabel.text = testRunStatusNotRunStr
     }
     
