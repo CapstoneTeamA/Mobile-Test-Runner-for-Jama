@@ -113,6 +113,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     func expandActionTextView() {
         expandOrCollapseTextView(heightConstraint: actionTextViewHeightContraint, button: actionButton)
+        //Collapse the other text views and set their button icons
         collapseTextViewNotSelected(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
         collapseTextViewNotSelected(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
         //scroll the text view to the top
@@ -121,6 +122,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     func expandExpectedResultsTextView() {
         expandOrCollapseTextView(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
+        //Collapse the other text views and set their button icons
         collapseTextViewNotSelected(heightConstraint: actionTextViewHeightContraint, button: actionButton)
         collapseTextViewNotSelected(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
         //scroll the text view to the top
@@ -129,6 +131,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     func expandNotesTextView() {
         expandOrCollapseTextView(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
+        //Collapse the other text views and set their button icons
         collapseTextViewNotSelected(heightConstraint: actionTextViewHeightContraint, button: actionButton)
         collapseTextViewNotSelected(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
         //scroll the text view to the top
