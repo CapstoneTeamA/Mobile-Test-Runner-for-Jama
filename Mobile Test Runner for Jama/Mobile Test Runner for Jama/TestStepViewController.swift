@@ -28,6 +28,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var expectedResultButton: UIButton!
     @IBOutlet weak var notesButton: UIButton!
     @IBOutlet weak var runNameLabel: UILabel!
+    @IBOutlet weak var runTitleLabel: UILabel!
+    @IBOutlet weak var titleDivider: UIView!
     
     var action = ""
     var expResult = ""
@@ -40,6 +42,9 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     let placeholderText = "Enter actual results here"
     let rightArrowStr = "small_right_chevron.png"
     let downArrowStr = "small_down_chevron.png"
+    var titleAndDividerHeight: CGFloat = 0
+    let textViewHeightRatio: CGFloat = 9/12 //Each of the 3 buttons are 1/12 the height of the superview
+    let totalSpaceBetweenButtons: CGFloat = 6 //6 is 2px for each of the 3 buttons.
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +54,9 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         self.setupPopup()
         self.title = "Step " + String(currentIndex+1) + "/" + String(indexLength);
         self.runNameLabel.text = runName
+        
+        //get the height of the title section to set the textviews' alignment
+        titleAndDividerHeight = runNameLabel.frame.height + titleDivider.frame.height
         alignHeaderButtonContents()
     }
     
@@ -110,8 +118,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
             actionTextViewHeightContraint.constant = 0
             actionButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
         } else {
-            //56 is the combined height of the title area, top dividing bar, and spaces between buttons
-            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * 9 / 12 - 56
+            //Make the text view as large as it can be while still fitting in its superview.
+            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
             actionButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
         }
         //Set the other text views heights to 0
@@ -130,8 +138,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
             expectedResultsTextViewHeightConstraint.constant = 0
             expectedResultButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
         } else {
-            //56 is the combined height of the title area, top dividing bar, and spaces between buttons
-            expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * 9 / 12 - 56
+            //Make the text view as large as it can be while still fitting in its superview.
+            expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
             expectedResultButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
         }
         //Set the other text views heights to 0
@@ -150,8 +158,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
             notesTextViewHeightConstraint.constant = 0
             notesButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
         } else {
-            //56 is the combined height of the title area, top dividing bar, and spaces between buttons
-            notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * 9 / 12 - 56
+            //Make the text view as large as it can be while still fitting in its superview.
+            notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
             notesButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
         }
         //Set the other text views heights to 0

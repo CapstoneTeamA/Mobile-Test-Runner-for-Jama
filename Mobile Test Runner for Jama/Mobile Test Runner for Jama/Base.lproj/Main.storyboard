@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -188,7 +188,7 @@
                                         <rect key="frame" x="12.5" y="0.0" width="350" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="351" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJa-8k-3bZ">
@@ -712,6 +712,8 @@
                         <outlet property="notesTextViewHeightConstraint" destination="9ju-vS-ALo" id="jEN-al-Djp"/>
                         <outlet property="passButton" destination="JXM-kY-Oc6" id="WBg-iC-cgs"/>
                         <outlet property="runNameLabel" destination="70c-cN-ElQ" id="4Ue-ZX-JD8"/>
+                        <outlet property="runTitleLabel" destination="70c-cN-ElQ" id="MH7-4k-bO9"/>
+                        <outlet property="titleDivider" destination="Vrx-6G-dwV" id="Pks-G8-biG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HLn-5V-LkP" userLabel="First Responder" sceneMemberID="firstResponder"/>
