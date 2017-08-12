@@ -60,6 +60,7 @@
 		E2840AEE1F3E9C1B00559EF1 /* PASS.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AEB1F3E9C1B00559EF1 /* PASS.png */; };
 		E2840AF11F3EA06A00559EF1 /* BLOCK.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AEF1F3EA06A00559EF1 /* BLOCK.png */; };
 		E2840AF21F3EA06A00559EF1 /* UPLOAD.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AF01F3EA06A00559EF1 /* UPLOAD.png */; };
+		E2840AF41F3EA2B800559EF1 /* PHOTO.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AF31F3EA2B800559EF1 /* PHOTO.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		E2840AEB1F3E9C1B00559EF1 /* PASS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PASS.png; sourceTree = "<group>"; };
 		E2840AEF1F3EA06A00559EF1 /* BLOCK.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BLOCK.png; sourceTree = "<group>"; };
 		E2840AF01F3EA06A00559EF1 /* UPLOAD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UPLOAD.png; sourceTree = "<group>"; };
+		E2840AF31F3EA2B800559EF1 /* PHOTO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PHOTO.png; sourceTree = "<group>"; };
 		E2B974361F312092007BE00E /* mtrlogo_v8-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtrlogo_v8-1.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,6 +181,7 @@
 				E2840AEA1F3E9C1B00559EF1 /* NOTES.png */,
 				E2840AEB1F3E9C1B00559EF1 /* PASS.png */,
 				E2840AEF1F3EA06A00559EF1 /* BLOCK.png */,
+				E2840AF31F3EA2B800559EF1 /* PHOTO.png */,
 				E2840AF01F3EA06A00559EF1 /* UPLOAD.png */,
 				133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */,
 			);
@@ -427,6 +430,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2840AF41F3EA2B800559EF1 /* PHOTO.png in Resources */,
 				309325751F32E1C700561EC4 /* mtrlogo_v8-1.png in Resources */,
 				E2840AF11F3EA06A00559EF1 /* BLOCK.png in Resources */,
 				E2840AF21F3EA06A00559EF1 /* UPLOAD.png in Resources */,
