@@ -56,6 +56,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         testRunNameLabel.text = testRun.name
         self.setupPopup()
         testStepTable.reloadData()
+        
+        //Since a run with no steps cannot be in progress, it must initially be not run.
+        noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,9 +69,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         } else {
             noStepsView.isHidden = true
         }
-        
-        //Since a run with no steps cannot be in progress, it must initially be not run.
-        noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
     }
     
     override func didReceiveMemoryWarning() {
