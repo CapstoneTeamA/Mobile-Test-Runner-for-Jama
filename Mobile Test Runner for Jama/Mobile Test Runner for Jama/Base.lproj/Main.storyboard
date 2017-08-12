@@ -726,22 +726,13 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_icon_grey.png" translatesAutoresizingMaskIntoConstraints="NO" id="wQD-Tc-mfT">
-                                                        <rect key="frame" x="179" y="19" width="32" height="32"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="32" id="iaV-YZ-Kl0"/>
-                                                            <constraint firstAttribute="width" constant="32" id="sHA-2z-5Fq"/>
-                                                        </constraints>
-                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="nRI-nh-DFo" firstAttribute="leading" secondItem="Hbu-th-o48" secondAttribute="leading" constant="8" id="5r4-BM-Y1b"/>
                                                     <constraint firstAttribute="width" constant="225" id="ONK-G8-Pvh"/>
                                                     <constraint firstAttribute="height" constant="60" id="ZsL-iv-Kde"/>
-                                                    <constraint firstItem="wQD-Tc-mfT" firstAttribute="leading" secondItem="nRI-nh-DFo" secondAttribute="trailing" constant="20" id="fkj-4o-3RB"/>
                                                     <constraint firstItem="nRI-nh-DFo" firstAttribute="top" secondItem="Hbu-th-o48" secondAttribute="top" constant="8" id="hWc-EZ-kPm"/>
-                                                    <constraint firstItem="wQD-Tc-mfT" firstAttribute="centerY" secondItem="nRI-nh-DFo" secondAttribute="centerY" id="pKs-q6-5Hb"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a status for this run" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZo-4K-9kz">
@@ -764,7 +755,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ms8-Um-3Wt">
-                                                <rect key="frame" x="40" y="105.5" width="125" height="91"/>
+                                                <rect key="frame" x="40" y="105.5" width="126" height="91"/>
                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.63137254899999995" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="91" id="Lg5-hr-MFR"/>
@@ -778,7 +769,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jl7-Qg-0zm">
-                                                <rect key="frame" x="210.5" y="105" width="124.5" height="91"/>
+                                                <rect key="frame" x="209" y="105" width="126" height="91"/>
                                                 <color key="backgroundColor" red="0.63921568630000003" green="0.0" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="91" id="y04-zH-Fxr"/>
@@ -795,7 +786,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="UZo-4K-9kz" firstAttribute="top" secondItem="LVu-gK-Vj5" secondAttribute="top" constant="50" id="3ah-DJ-Egf"/>
-                                            <constraint firstItem="ms8-Um-3Wt" firstAttribute="width" secondItem="LVu-gK-Vj5" secondAttribute="width" multiplier="1:3" id="71F-dj-Rpe"/>
+                                            <constraint firstItem="ms8-Um-3Wt" firstAttribute="width" secondItem="LVu-gK-Vj5" secondAttribute="width" multiplier="1:3" constant="1" id="71F-dj-Rpe"/>
                                             <constraint firstItem="OiI-TS-a6P" firstAttribute="centerX" secondItem="LVu-gK-Vj5" secondAttribute="centerX" constant="8" id="Ct7-YE-xy3"/>
                                             <constraint firstItem="OiI-TS-a6P" firstAttribute="top" secondItem="LVu-gK-Vj5" secondAttribute="top" constant="8" id="F66-5N-bTz"/>
                                             <constraint firstItem="Hbu-th-o48" firstAttribute="centerX" secondItem="LVu-gK-Vj5" secondAttribute="centerX" id="F6j-aT-Cua"/>
@@ -803,7 +794,7 @@
                                             <constraint firstItem="UZo-4K-9kz" firstAttribute="centerX" secondItem="LVu-gK-Vj5" secondAttribute="centerX" id="I6a-YS-qYY"/>
                                             <constraint firstAttribute="height" constant="303" id="QfF-Ao-pkq"/>
                                             <constraint firstItem="OiI-TS-a6P" firstAttribute="width" secondItem="LVu-gK-Vj5" secondAttribute="width" id="bFt-Ck-iHG"/>
-                                            <constraint firstItem="jl7-Qg-0zm" firstAttribute="width" secondItem="LVu-gK-Vj5" secondAttribute="width" multiplier="1:3" id="cQQ-Mv-B59"/>
+                                            <constraint firstItem="jl7-Qg-0zm" firstAttribute="width" secondItem="LVu-gK-Vj5" secondAttribute="width" multiplier="1:3" constant="1" id="cQQ-Mv-B59"/>
                                             <constraint firstAttribute="trailing" secondItem="jl7-Qg-0zm" secondAttribute="trailing" constant="40" id="gS5-4O-lsb"/>
                                             <constraint firstAttribute="bottom" secondItem="Hbu-th-o48" secondAttribute="bottom" constant="8" id="kmV-Ze-KQk"/>
                                             <constraint firstItem="ms8-Um-3Wt" firstAttribute="top" secondItem="UZo-4K-9kz" secondAttribute="bottom" constant="26.333333333333314" id="nvA-f2-9Hi"/>
@@ -1005,7 +996,9 @@
                         <outlet property="inputResultsBox" destination="eJc-4V-jEK" id="vrq-In-l6J"/>
                         <outlet property="inputResultsButton" destination="rM3-gm-dNb" id="R52-Wl-RVn"/>
                         <outlet property="inputResultsTextBox" destination="Gvz-Ft-XC7" id="00B-sV-cVH"/>
-                        <outlet property="noStepStatusIcon" destination="wQD-Tc-mfT" id="UFz-f3-4Q9"/>
+                        <outlet property="noStepFailButton" destination="jl7-Qg-0zm" id="I2a-X4-Wuz"/>
+                        <outlet property="noStepPassButton" destination="ms8-Um-3Wt" id="a97-o5-eMK"/>
+                        <outlet property="noStepRunStatusLabel" destination="nRI-nh-DFo" id="wtr-ye-R3e"/>
                         <outlet property="noStepsView" destination="xDR-j2-5vA" id="ZiB-ZD-XCC"/>
                         <outlet property="testRunNameLabel" destination="ukt-q7-rqc" id="9TX-3G-Tpf"/>
                         <outlet property="testStepTable" destination="7gT-7g-SHk" id="roX-jm-pwm"/>
@@ -1036,7 +1029,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="empty_icon_grey.png" width="32" height="32"/>
         <image name="folder-lightbl-redx.png" width="814" height="814"/>
         <image name="mtrlogo_v8-1.png" width="1099" height="408"/>
     </resources>

@@ -31,7 +31,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var inputResultsTextBox: UITextView!
     @IBOutlet weak var inputResultsBackground: UIView!
     @IBOutlet weak var noStepsView: UIView!
-    @IBOutlet weak var noStepStatusIcon: UIImageView!
+    @IBOutlet weak var noStepPassButton: UIButton!
+    @IBOutlet weak var noStepFailButton: UIButton!
+    @IBOutlet weak var noStepRunStatusLabel: UILabel!
     
     var instance = ""
     var username = ""
@@ -45,6 +47,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var currentUser: UserModel!
     var testRunDelegate: TestRunDelegate!
     let placeholderText = "Enter actual results here"
+    let testRunStatusStr = "Test Run Status: "
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -240,14 +243,31 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     
     //Button only visible when there are no steps in this run, allowing the user to pass the whole run.
     @IBAction func didTapPassRun(_ sender: Any) {
-        noStepStatusIcon.image = UIImage(named: "check_icon_green.png")
-        testRun.testStatus = "PASSED"
+        if noStepRunStatusLabel.text == testRunStatusStr + "Pass" {
+            noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
+            noStepPassButton.setTitleColor(UIColor.lightGray, for: .normal)
+            testRun.testStatus = "NOT_RUN"
+        } else {
+            noStepRunStatusLabel.text = testRunStatusStr + "Pass"
+            noStepPassButton.setTitleColor(UIColor.init(red: 0x33/0xFF, green: 0xA1/0xFF, blue: 0x2B/0xFF, alpha: 1), for: .normal)
+            noStepFailButton.setTitleColor(UIColor.lightGray, for: .normal)
+            testRun.testStatus = "PASSED"
+        }
     }
     
     //Button only visible when there are no steps in this run, allowing the user to fail the whole run
     @IBAction func didTapFailRun(_ sender: Any) {
-        noStepStatusIcon.image = UIImage(named: "X_icon_red.png")
-        testRun.testStatus = "FAILED"
+        if noStepRunStatusLabel.text == testRunStatusStr + "Fail" {
+            noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
+            noStepFailButton.setTitleColor(UIColor.lightGray, for: .normal)
+            testRun.testStatus = "NOT_RUN"
+        } else {
+            noStepRunStatusLabel.text = testRunStatusStr + "Fail"
+            //A30007
+            noStepFailButton.setTitleColor(UIColor.init(red: 0xA3/0xFF, green: 0x00/0xFF, blue: 0x07/0xFF, alpha: 1), for: .normal)
+            noStepPassButton.setTitleColor(UIColor.lightGray, for: .normal)
+            testRun.testStatus = "FAILED"
+        }
     }
 
     //build the endpoint for submitting the test run
