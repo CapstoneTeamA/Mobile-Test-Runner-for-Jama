@@ -95,7 +95,6 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         expandExpectedResultsTextView()
     }
     
-    
     @IBAction func didTapNotesHeader(_ sender: Any) {
         expandNotesTextView()
     }
@@ -112,6 +111,36 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         notesButton.titleEdgeInsets = titleInset
     }
     
+    func expandActionTextView() {
+        expandOrCollapseTextView(heightConstraint: actionTextViewHeightContraint, button: actionButton)
+        collapseTextViewNotSelected(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
+        collapseTextViewNotSelected(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
+        //scroll the text view to the top
+        actionTextView.scrollRectToVisible(CGRect.zero, animated: false)
+    }
+    
+    func expandExpectedResultsTextView() {
+        expandOrCollapseTextView(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
+        collapseTextViewNotSelected(heightConstraint: actionTextViewHeightContraint, button: actionButton)
+        collapseTextViewNotSelected(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
+        //scroll the text view to the top
+        expectedResultsTextView.scrollRectToVisible(CGRect.zero, animated: false)
+    }
+    
+    func expandNotesTextView() {
+        expandOrCollapseTextView(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
+        collapseTextViewNotSelected(heightConstraint: actionTextViewHeightContraint, button: actionButton)
+        collapseTextViewNotSelected(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
+        //scroll the text view to the top
+        notesTextView.scrollRectToVisible(CGRect.zero, animated: false)
+    }
+    
+    func collapseTextViewNotSelected(heightConstraint: NSLayoutConstraint, button: UIButton) {
+        heightConstraint.constant = 0
+        button.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+    }
+    
+    //Determine if the text view needs to be expanded or collapsed
     func expandOrCollapseTextView(heightConstraint: NSLayoutConstraint, button: UIButton) {
         if heightConstraint.constant != 0 {
             heightConstraint.constant = 0
@@ -122,73 +151,6 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
             button.setImage(UIImage.init(named: downArrowStr), for: .normal)
         }
     }
-    
-    func expandActionTextView() {
-        //If the text view is showing collapse, otherwise expand in remaining space and set the button image to down arrow
-//        if actionTextViewHeightContraint.constant != 0 {
-//            actionTextViewHeightContraint.constant = 0
-//            actionButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-//        } else {
-//            //Make the text view as large as it can be while still fitting in its superview.
-//            actionTextViewHeightContraint.constant = (actionTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
-//            actionButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
-//        }
-        
-        expandOrCollapseTextView(heightConstraint: actionTextViewHeightContraint, button: actionButton)
-        //Set the other text views heights to 0
-        expectedResultsTextViewHeightConstraint.constant = 0
-        notesTextViewHeightConstraint.constant = 0
-        //Set the other buttons images to right chevrons
-        expectedResultButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-        notesButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-        //scroll the text view to the top
-        actionTextView.scrollRectToVisible(CGRect.zero, animated: false)
-    }
-    
-    func expandExpectedResultsTextView() {
-        //If the text view is showing collapse, otherwise expand in remaining space and set the button image to down arrow
-//        if expectedResultsTextViewHeightConstraint.constant != 0 {
-//            expectedResultsTextViewHeightConstraint.constant = 0
-//            expectedResultButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-//        } else {
-//            //Make the text view as large as it can be while still fitting in its superview.
-//            expectedResultsTextViewHeightConstraint.constant = (expectedResultsTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
-//            expectedResultButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
-//        }
-
-        expandOrCollapseTextView(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
-        //Set the other text views heights to 0
-        actionTextViewHeightContraint.constant = 0
-        notesTextViewHeightConstraint.constant = 0
-        //Set the other buttons images to right chevrons
-        actionButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-        notesButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-        //scroll the text view to the top
-        expectedResultsTextView.scrollRectToVisible(CGRect.zero, animated: false)
-    }
-    
-    func expandNotesTextView() {
-        //If the text view is showing collapse, otherwise expand in remaining space and set the button image to down arrow
-//        if notesTextViewHeightConstraint.constant != 0 {
-//            notesTextViewHeightConstraint.constant = 0
-//            notesButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-//        } else {
-//            //Make the text view as large as it can be while still fitting in its superview.
-//            notesTextViewHeightConstraint.constant = (notesTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
-//            notesButton.setImage(UIImage.init(named: downArrowStr), for: .normal)
-//        }
-        
-        expandOrCollapseTextView(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
-        //Set the other text views heights to 0
-        actionTextViewHeightContraint.constant = 0
-        expectedResultsTextViewHeightConstraint.constant = 0
-        //Set the other buttons images to right chevrons
-        actionButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-        expectedResultButton.setImage(UIImage.init(named: rightArrowStr), for: .normal)
-        //scroll the text view to the top
-        notesTextView.scrollRectToVisible(CGRect.zero, animated: false)
-    }
-    
     
     // Used to set up text window popup, called in viewDidLoad
     func setupPopup() {

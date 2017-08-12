@@ -54,7 +54,6 @@ class TestStepViewControllerUnitTests: XCTestCase {
     }
     
     func testExpandTextViews() {
-        //56 is the combined height of the title area, top dividing bar, and spaces between buttons
         let heightRatio = viewController.textViewHeightRatio
         let totalSpaceBetweenButtons = viewController.totalSpaceBetweenButtons
         let titleAndDividerHeight = viewController.titleAndDividerHeight
