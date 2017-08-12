@@ -48,8 +48,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var testRunDelegate: TestRunDelegate!
     let placeholderText = "Enter actual results here"
     let testRunStatusNotRunStr = "Test Run Status: Not Run"
-    let testRunStatusPassStr = "Test Run Status: Pass"
-    let testRunStatusFailStr = "Test Run Status: Fail"
+    let testRunStatusPassStr = "Test Run Status: Passed"
+    let testRunStatusFailStr = "Test Run Status: Failed"
     
     override func viewDidLoad() {
         super.viewDidLoad()
