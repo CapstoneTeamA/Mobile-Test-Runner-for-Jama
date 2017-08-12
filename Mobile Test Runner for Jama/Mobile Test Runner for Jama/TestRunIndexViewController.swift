@@ -67,12 +67,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             noStepsView.isHidden = true
         }
         
+        //Since a run with no steps cannot be in progress, it must initially be not run.
         noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
-        
-        //If we want to set the color of the blocked button to indicate that the user cannot block this run
-//        if testRun.testStepList.isEmpty == false && testRun.testStepList.last?.status != "NOT_RUN" {
-//            blockButton.backgroundColor = UIColor.lightText
-//        }
     }
     
     override func didReceiveMemoryWarning() {
