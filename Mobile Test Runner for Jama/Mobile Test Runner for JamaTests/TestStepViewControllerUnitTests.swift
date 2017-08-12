@@ -78,13 +78,15 @@ class TestStepViewControllerUnitTests: XCTestCase {
     }
     
     func testAlignHeaderButtonsContents() {
+        let expectedImageInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        let expectedTitleInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         viewController.alignHeaderButtonContents()
         
-        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.actionButton.imageEdgeInsets)
-        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.actionButton.titleEdgeInsets)
-        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.expectedResultButton.imageEdgeInsets)
-        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.expectedResultButton.titleEdgeInsets)
-        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.notesButton.imageEdgeInsets)
-        XCTAssertEqual(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0), viewController.notesButton.titleEdgeInsets)
+        XCTAssertEqual(expectedImageInsets, viewController.actionButton.imageEdgeInsets)
+        XCTAssertEqual(expectedTitleInsets, viewController.actionButton.titleEdgeInsets)
+        XCTAssertEqual(expectedImageInsets, viewController.expectedResultButton.imageEdgeInsets)
+        XCTAssertEqual(expectedTitleInsets, viewController.expectedResultButton.titleEdgeInsets)
+        XCTAssertEqual(expectedImageInsets, viewController.notesButton.imageEdgeInsets)
+        XCTAssertEqual(expectedTitleInsets, viewController.notesButton.titleEdgeInsets)
     }
 }
