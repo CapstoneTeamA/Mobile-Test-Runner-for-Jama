@@ -55,6 +55,11 @@
 		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
 		E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */; };
 		E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */; };
+		E2840AEC1F3E9C1B00559EF1 /* FAIL.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AE91F3E9C1B00559EF1 /* FAIL.png */; };
+		E2840AED1F3E9C1B00559EF1 /* NOTES.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AEA1F3E9C1B00559EF1 /* NOTES.png */; };
+		E2840AEE1F3E9C1B00559EF1 /* PASS.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AEB1F3E9C1B00559EF1 /* PASS.png */; };
+		E2840AF11F3EA06A00559EF1 /* BLOCK.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AEF1F3EA06A00559EF1 /* BLOCK.png */; };
+		E2840AF21F3EA06A00559EF1 /* UPLOAD.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AF01F3EA06A00559EF1 /* UPLOAD.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +133,11 @@
 		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
 		E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtr-logo-v2.png"; sourceTree = "<group>"; };
 		E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-lightbl-redx.png"; sourceTree = "<group>"; };
+		E2840AE91F3E9C1B00559EF1 /* FAIL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FAIL.png; sourceTree = "<group>"; };
+		E2840AEA1F3E9C1B00559EF1 /* NOTES.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NOTES.png; sourceTree = "<group>"; };
+		E2840AEB1F3E9C1B00559EF1 /* PASS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PASS.png; sourceTree = "<group>"; };
+		E2840AEF1F3EA06A00559EF1 /* BLOCK.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BLOCK.png; sourceTree = "<group>"; };
+		E2840AF01F3EA06A00559EF1 /* UPLOAD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UPLOAD.png; sourceTree = "<group>"; };
 		E2B974361F312092007BE00E /* mtrlogo_v8-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtrlogo_v8-1.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +175,11 @@
 				E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */,
 				E2B974361F312092007BE00E /* mtrlogo_v8-1.png */,
 				E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */,
+				E2840AE91F3E9C1B00559EF1 /* FAIL.png */,
+				E2840AEA1F3E9C1B00559EF1 /* NOTES.png */,
+				E2840AEB1F3E9C1B00559EF1 /* PASS.png */,
+				E2840AEF1F3EA06A00559EF1 /* BLOCK.png */,
+				E2840AF01F3EA06A00559EF1 /* UPLOAD.png */,
 				133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */,
 			);
 			name = Resources;
@@ -413,10 +428,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				309325751F32E1C700561EC4 /* mtrlogo_v8-1.png in Resources */,
+				E2840AF11F3EA06A00559EF1 /* BLOCK.png in Resources */,
+				E2840AF21F3EA06A00559EF1 /* UPLOAD.png in Resources */,
 				13A342F91F0367E9002EBC92 /* LaunchScreen.storyboard in Resources */,
 				13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */,
+				E2840AEC1F3E9C1B00559EF1 /* FAIL.png in Resources */,
+				E2840AEE1F3E9C1B00559EF1 /* PASS.png in Resources */,
 				E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */,
 				13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */,
+				E2840AED1F3E9C1B00559EF1 /* NOTES.png in Resources */,
 				13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */,
 				908CE85E1F32744800042C1E /* check_icon_green.png in Resources */,
 				908CE8601F32744800042C1E /* X_icon_red.png in Resources */,
