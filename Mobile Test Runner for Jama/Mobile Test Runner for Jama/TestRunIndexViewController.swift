@@ -67,6 +67,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             noStepsView.isHidden = true
         }
         
+        noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
+        
         //If we want to set the color of the blocked button to indicate that the user cannot block this run
 //        if testRun.testStepList.isEmpty == false && testRun.testStepList.last?.status != "NOT_RUN" {
 //            blockButton.backgroundColor = UIColor.lightText
@@ -241,8 +243,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    //Button only visible when there are no steps in this run, allowing the user to pass the whole run.
-    @IBAction func didTapPassRun(_ sender: Any) {
+    func togglePassButton() {
         if noStepRunStatusLabel.text == testRunStatusStr + "Pass" {
             noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
             noStepPassButton.setTitleColor(UIColor.lightGray, for: .normal)
@@ -255,8 +256,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    //Button only visible when there are no steps in this run, allowing the user to fail the whole run
-    @IBAction func didTapFailRun(_ sender: Any) {
+    func toggleFailButton() {
         if noStepRunStatusLabel.text == testRunStatusStr + "Fail" {
             noStepRunStatusLabel.text = testRunStatusStr + "Not Run"
             noStepFailButton.setTitleColor(UIColor.lightGray, for: .normal)
@@ -268,6 +268,16 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             noStepPassButton.setTitleColor(UIColor.lightGray, for: .normal)
             testRun.testStatus = "FAILED"
         }
+    }
+    
+    //Button only visible when there are no steps in this run, allowing the user to pass the whole run.
+    @IBAction func didTapPassRun(_ sender: Any) {
+        togglePassButton()
+    }
+    
+    //Button only visible when there are no steps in this run, allowing the user to fail the whole run
+    @IBAction func didTapFailRun(_ sender: Any) {
+        toggleFailButton()
     }
 
     //build the endpoint for submitting the test run
