@@ -320,7 +320,7 @@ extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource
         
         stepDetailController.currentIndex = indexPath.row
         stepDetailController.indexLength = testRun.testStepList.count
-        
+        stepDetailController.runName = testRun.name
         currentlySelectedStepIndex = indexPath.row
         stepDetailController.indexDelegate = self
         self.navigationController?.pushViewController(stepDetailController, animated: true)

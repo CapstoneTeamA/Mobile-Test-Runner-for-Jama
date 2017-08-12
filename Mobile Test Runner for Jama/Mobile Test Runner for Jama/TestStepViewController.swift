@@ -13,40 +13,55 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var passButton: UIButton!
     @IBOutlet weak var failButton: UIButton!
     @IBOutlet weak var addResultsButton: UIButton!
-    @IBOutlet weak var actionTextField: UITextView!
-    @IBOutlet weak var expResultTextField: UITextView!
-    @IBOutlet weak var notesTextField: UITextView!
     @IBOutlet weak var inputResultsBackground: UIView!
     @IBOutlet weak var inputResultsBox: UIView!
     @IBOutlet weak var inputResultsTextBox: UITextView!
     @IBOutlet weak var inputResultsButton: UIButton!
     @IBOutlet weak var StepDetailTitle: UINavigationItem!
+    @IBOutlet weak var actionTextView: UITextView!
+    @IBOutlet weak var expectedResultsTextView: UITextView!
+    @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var actionTextViewHeightContraint: NSLayoutConstraint!
+    @IBOutlet weak var expectedResultsTextViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var notesTextViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var expectedResultButton: UIButton!
+    @IBOutlet weak var notesButton: UIButton!
+    @IBOutlet weak var runNameLabel: UILabel!
+    @IBOutlet weak var runTitleLabel: UILabel!
+    @IBOutlet weak var titleDivider: UIView!
     
     var action = ""
     var expResult = ""
     var notes = ""
     var stepResult = ""
+    var runName = ""
     var currentIndex = 0
     var indexLength = 0
     var indexDelegate: StepIndexDelegate!
     let placeholderText = "Enter actual results here"
+    let rightArrowStr = "small_right_chevron.png"
+    let downArrowStr = "small_down_chevron.png"
+    var titleAndDividerHeight: CGFloat = 0
+    let textViewHeightRatio: CGFloat = 9/12 //Each of the 3 buttons are 1/12 the height of the superview
+    let totalSpaceBetweenButtons: CGFloat = 6 //6 is 2px for each of the 3 buttons.
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        actionTextField.text = action
-        expResultTextField.text = expResult
-        notesTextField.text = notes
+        actionTextView.text = action
+        expectedResultsTextView.text = expResult
+        notesTextView.text = notes
         self.setupPopup()
         self.title = "Step " + String(currentIndex+1) + "/" + String(indexLength);
+        self.runNameLabel.text = runName
+        
+        //get the height of the title section to set the textviews' alignment
+        titleAndDividerHeight = runNameLabel.frame.height + titleDivider.frame.height
+        alignHeaderButtonContents()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        //Needed to set all the textViews scrolled to the top when the view loads.
-        actionTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
-        expResultTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
-        notesTextField.scrollRangeToVisible(NSRange.init(location: 0, length: 0))
+    override func viewDidAppear(_ animated: Bool) {
+        expandActionTextView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,6 +84,75 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBAction func didTapPass(_ sender: Any) {
         indexDelegate.didSetStatus(status: .pass)
         navigationController?.popViewController(animated: true)
+    }
+    
+    
+    @IBAction func didTapActionHeader(_ sender: Any) {
+        expandActionTextView()
+    }
+    
+    @IBAction func didTapExpectedResultsHeader(_ sender: Any) {
+        expandExpectedResultsTextView()
+    }
+    
+    @IBAction func didTapNotesHeader(_ sender: Any) {
+        expandNotesTextView()
+    }
+    
+    func alignHeaderButtonContents() {
+        let imageInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        let titleInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        //Set the insets for all the accordion buttons to layout the image and title of the button
+        actionButton.imageEdgeInsets = imageInset
+        actionButton.titleEdgeInsets = titleInset
+        expectedResultButton.imageEdgeInsets = imageInset
+        expectedResultButton.titleEdgeInsets = titleInset
+        notesButton.imageEdgeInsets = imageInset
+        notesButton.titleEdgeInsets = titleInset
+    }
+    
+    func expandActionTextView() {
+        expandOrCollapseTextView(heightConstraint: actionTextViewHeightContraint, button: actionButton)
+        //Collapse the other text views and set their button icons
+        collapseTextViewNotSelected(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
+        collapseTextViewNotSelected(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
+        //scroll the text view to the top
+        actionTextView.scrollRectToVisible(CGRect.zero, animated: false)
+    }
+    
+    func expandExpectedResultsTextView() {
+        expandOrCollapseTextView(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
+        //Collapse the other text views and set their button icons
+        collapseTextViewNotSelected(heightConstraint: actionTextViewHeightContraint, button: actionButton)
+        collapseTextViewNotSelected(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
+        //scroll the text view to the top
+        expectedResultsTextView.scrollRectToVisible(CGRect.zero, animated: false)
+    }
+    
+    func expandNotesTextView() {
+        expandOrCollapseTextView(heightConstraint: notesTextViewHeightConstraint, button: notesButton)
+        //Collapse the other text views and set their button icons
+        collapseTextViewNotSelected(heightConstraint: actionTextViewHeightContraint, button: actionButton)
+        collapseTextViewNotSelected(heightConstraint: expectedResultsTextViewHeightConstraint, button: expectedResultButton)
+        //scroll the text view to the top
+        notesTextView.scrollRectToVisible(CGRect.zero, animated: false)
+    }
+    
+    func collapseTextViewNotSelected(heightConstraint: NSLayoutConstraint, button: UIButton) {
+        heightConstraint.constant = 0
+        button.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+    }
+    
+    //Determine if the text view needs to be expanded or collapsed
+    func expandOrCollapseTextView(heightConstraint: NSLayoutConstraint, button: UIButton) {
+        if heightConstraint.constant != 0 {
+            heightConstraint.constant = 0
+            button.setImage(UIImage.init(named: rightArrowStr), for: .normal)
+        } else {
+            //Make the text view as large as it can be while still fitting in its superview.
+            heightConstraint.constant = (actionTextView.superview?.frame.height)! * textViewHeightRatio - titleAndDividerHeight - totalSpaceBetweenButtons
+            button.setImage(UIImage.init(named: downArrowStr), for: .normal)
+        }
     }
     
     // Used to set up text window popup, called in viewDidLoad
