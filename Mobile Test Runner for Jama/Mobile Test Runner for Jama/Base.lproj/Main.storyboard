@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Cp-yS-FkN">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -160,13 +160,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder-lightbl-redx.png" translatesAutoresizingMaskIntoConstraints="NO" id="hD8-m1-bId" userLabel="noProjectsImage">
-                                <rect key="frame" x="57" y="215" width="262" height="262"/>
+                                <rect key="frame" x="57" y="217.5" width="262" height="262"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hD8-m1-bId" secondAttribute="height" multiplier="1:1" id="8cz-eH-1cn"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No projects found. Please contact your administrator." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atM-JS-d50">
-                                <rect key="frame" x="23.5" y="483" width="328" height="81"/>
+                                <rect key="frame" x="23.5" y="485.5" width="328" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="atM-JS-d50" secondAttribute="height" multiplier="303:75" id="bVH-yU-4JV"/>
                                 </constraints>
@@ -175,7 +175,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OOj-1o-RZK">
-                                <rect key="frame" x="0.0" y="114" width="375" height="543"/>
+                                <rect key="frame" x="0.0" y="119" width="375" height="538"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="1000" id="BdS-cu-LOg">
                                     <size key="itemSize" width="350" height="60"/>
@@ -188,7 +188,7 @@
                                         <rect key="frame" x="12.5" y="0.0" width="350" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="351" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJa-8k-3bZ">
@@ -226,6 +226,13 @@
                                 <color key="textColor" red="0.18250317258883253" green="0.18250317258883253" blue="0.18250317258883253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYY-xA-36m" userLabel="MarginFixer">
+                                <rect key="frame" x="-0.5" y="114" width="375" height="5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="0IC-1E-eMg"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h28-EN-tPd" userLabel="TopDivider">
                                 <rect key="frame" x="0.0" y="104" width="375" height="10"/>
                                 <color key="backgroundColor" red="0.96583253145217896" green="0.46620351076126099" blue="0.21295166015625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -241,7 +248,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHA-VP-gmH" userLabel="ServerErrorLabel">
-                                <rect key="frame" x="166.5" y="375.5" width="42" height="21"/>
+                                <rect key="frame" x="166.5" y="378" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.63921568627450975" green="0.0" blue="0.023529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -257,9 +264,11 @@
                             <constraint firstItem="qcD-9G-aW0" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="L9f-GI-9De"/>
                             <constraint firstItem="ELL-qg-OTg" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="NJQ-uH-2mS"/>
                             <constraint firstItem="OOj-1o-RZK" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="OJv-ib-oQe"/>
+                            <constraint firstItem="wYY-xA-36m" firstAttribute="width" secondItem="h28-EN-tPd" secondAttribute="width" id="R93-P4-UNh"/>
                             <constraint firstItem="QHA-VP-gmH" firstAttribute="centerY" secondItem="OOj-1o-RZK" secondAttribute="centerY" id="TlY-fi-1mx"/>
                             <constraint firstItem="hD8-m1-bId" firstAttribute="centerX" secondItem="OOj-1o-RZK" secondAttribute="centerX" id="Uql-11-GWz"/>
                             <constraint firstItem="cSb-8O-36Q" firstAttribute="top" secondItem="OOj-1o-RZK" secondAttribute="bottom" constant="10" id="WsT-Bx-K3N"/>
+                            <constraint firstItem="wYY-xA-36m" firstAttribute="top" secondItem="h28-EN-tPd" secondAttribute="bottom" id="XV1-iz-1zi"/>
                             <constraint firstItem="atM-JS-d50" firstAttribute="centerX" secondItem="hD8-m1-bId" secondAttribute="centerX" id="dS7-PT-T3v"/>
                             <constraint firstItem="hD8-m1-bId" firstAttribute="width" secondItem="OOj-1o-RZK" secondAttribute="width" multiplier="7:10" id="dfI-aD-bWk"/>
                             <constraint firstItem="hD8-m1-bId" firstAttribute="centerY" secondItem="OOj-1o-RZK" secondAttribute="centerY" constant="-40" id="djs-zh-Ce3"/>
@@ -267,15 +276,17 @@
                             <constraint firstItem="h28-EN-tPd" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="evr-8w-D6t"/>
                             <constraint firstItem="qcD-9G-aW0" firstAttribute="width" secondItem="OsK-JF-zhz" secondAttribute="width" id="nAf-Jd-bTd"/>
                             <constraint firstItem="atM-JS-d50" firstAttribute="top" secondItem="hD8-m1-bId" secondAttribute="bottom" constant="6" id="opu-5W-2yM"/>
-                            <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="h28-EN-tPd" secondAttribute="bottom" id="p4z-wq-dab"/>
+                            <constraint firstItem="OOj-1o-RZK" firstAttribute="top" secondItem="h28-EN-tPd" secondAttribute="bottom" constant="5" id="p4z-wq-dab"/>
                             <constraint firstItem="h28-EN-tPd" firstAttribute="top" secondItem="qcD-9G-aW0" secondAttribute="bottom" id="rdg-Je-9Ai"/>
                             <constraint firstItem="qcD-9G-aW0" firstAttribute="top" secondItem="bwx-3Z-i5u" secondAttribute="bottom" id="sBZ-OZ-FiU"/>
+                            <constraint firstItem="wYY-xA-36m" firstAttribute="centerX" secondItem="OsK-JF-zhz" secondAttribute="centerX" id="vcB-Qb-Mbi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="OOj-1o-RZK" id="a3r-SZ-EpG"/>
                         <outlet property="noProjectsImage" destination="hD8-m1-bId" id="tma-OV-wFa"/>
                         <outlet property="noProjectsLabel" destination="atM-JS-d50" id="35O-Ny-oec"/>
+                        <outlet property="noProjectsMargin" destination="wYY-xA-36m" id="KTe-FL-ozp"/>
                         <outlet property="serverErrorLabel" destination="QHA-VP-gmH" id="wF5-Jj-3B2"/>
                         <segue destination="b7n-lk-QU3" kind="show" identifier="ProjectListSegue" id="ZVZ-Vv-N56"/>
                     </connections>
@@ -306,7 +317,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rFr-a9-8Js" id="mSU-nv-LVR">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -314,7 +325,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1mn-LC-0ox" id="q9h-Zr-M4H">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -322,7 +333,7 @@
                                         <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B1E-R0-Lnn" id="acE-da-uOf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -341,10 +352,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No plans found. Please contact your administrator." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeV-l0-ABz">
-                                <rect key="frame" x="56.5" y="465" width="262.5" height="65"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No test plans found. Please contact your administrator." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeV-l0-ABz">
+                                <rect key="frame" x="57" y="465" width="263" height="95.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="VeV-l0-ABz" secondAttribute="height" multiplier="303:75" id="KSZ-o2-upA"/>
+                                    <constraint firstAttribute="width" secondItem="VeV-l0-ABz" secondAttribute="height" multiplier="303:110" id="KSZ-o2-upA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.3445105664" green="0.34528696850000001" blue="0.3571347594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -410,7 +421,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dL-pN-r0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2953.6231884057975" y="138.58695652173915"/>
+            <point key="canvasLocation" x="2952.8000000000002" y="138.0809595202399"/>
         </scene>
         <!--Test Step-->
         <scene sceneID="SDY-2C-hHe">
@@ -669,7 +680,7 @@
         <!--Test Run Index-->
         <scene sceneID="zfG-eL-1OD">
             <objects>
-                <viewController storyboardIdentifier="TestRunIndex" title="Test Run Index" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NKr-0k-Apa" customClass="TestRunIndexViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TestRunIndex" title="Test Run Index" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NKr-0k-Apa" customClass="TestRunIndexViewController" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Arf-ao-gXm"/>
                         <viewControllerLayoutGuide type="bottom" id="gXa-Dc-LxK"/>
@@ -687,7 +698,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k0v-dr-JEK" id="2iW-Ca-kqn" customClass="TestStepTableViewCell" customModule="Mobile_Test_Runner_for_Jama" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -982,6 +993,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="blockButton" destination="B8F-ke-ULJ" id="viU-1L-PgP"/>
                         <outlet property="cancelRun" destination="lHq-Lx-YPg" id="rMz-b9-Nhz"/>
                         <outlet property="inputResultsBackground" destination="w7O-Ml-k6v" id="KiZ-wS-xRa"/>
                         <outlet property="inputResultsBox" destination="eJc-4V-jEK" id="vrq-In-l6J"/>

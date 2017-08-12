@@ -29,7 +29,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     var currentIndex = 0
     var indexLength = 0
     var indexDelegate: StepIndexDelegate!
-    let placeholderText = "Enter result notes here"
+    let placeholderText = "Enter actual results here"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +57,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBAction func didTapAddResult(_ sender: Any) {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
+        self.navigationController?.view.addSubview(inputResultsBackground)
+        self.navigationController?.view.addSubview(inputResultsBox)
     }
     
     @IBAction func didTapFail(_ sender: Any) {
@@ -92,10 +94,11 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBAction func saveText(_ sender: UIButton) {
         inputResultsBackground.isHidden = true
         inputResultsBox.isHidden = true
-        if self.stepResult != inputResultsTextBox.text && self.stepResult != placeholderText {
+        if self.stepResult != inputResultsTextBox.text && inputResultsTextBox.text != placeholderText {
             self.stepResult = inputResultsTextBox.text
             indexDelegate.didSetResult(result: self.stepResult)
         }
+        setPlaceholderText()
         inputResultsTextBox.resignFirstResponder()
     }
     
@@ -127,7 +130,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBAction func didTapResetStep(_ sender: Any) {
         let clearAlert = UIAlertController(title: "Clear Step", message: "This step's status will be set to \"Not Run\" and the results will be cleared. Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
         
-        clearAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .default, handler: {
+        clearAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .cancel, handler: {
             (action: UIAlertAction!) in
             //Reset the Result and Status fields for the step
             self.indexDelegate.didSetStatus(status: .not_run)
@@ -135,7 +138,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
             self.navigationController?.popViewController(animated: true)
         }))
         
-        clearAlert.addAction(UIAlertAction(title: "Never mind", style: .cancel, handler: {
+        clearAlert.addAction(UIAlertAction(title: "Never mind", style: .default, handler: {
             (action: UIAlertAction) in
             _ = ""
         }))

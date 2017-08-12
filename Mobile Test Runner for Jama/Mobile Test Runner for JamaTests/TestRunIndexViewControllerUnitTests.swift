@@ -186,4 +186,81 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         XCTAssertEqual("new result", viewController.testRun.testStepList[0].result)
     }
     
+    func testSetupBlockedStatus() {
+        let step1 = TestStepModel()
+        let step2 = TestStepModel()
+        let step3 = TestStepModel()
+
+        step1.status = "NOT_RUN"
+        step2.status = "NOT_RUN"
+        step3.status = "NOT_RUN"
+        
+        run.testStepList.append(step1)
+        run.testStepList.append(step2)
+        run.testStepList.append(step3)
+        
+        viewController.testRun = run
+        
+        viewController.setupBlockedStatus()
+        
+        XCTAssertEqual("BLOCKED", viewController.testRun.testStepList[0].status)
+        XCTAssertEqual("BLOCKED", viewController.testRun.testStepList[1].status)
+        XCTAssertEqual("BLOCKED", viewController.testRun.testStepList[2].status)
+        
+        step1.status = "NOT_RUN"
+        step2.status = "PASSED"
+        step3.status = "NOT_RUN"
+        
+        run.testStepList = []
+        run.testStepList.append(step1)
+        run.testStepList.append(step2)
+        run.testStepList.append(step3)
+        
+        viewController.testRun = run
+        
+        viewController.setupBlockedStatus()
+        
+        //Ensure that if there are steps with statuses then only the steps after the last step with a status
+        //  is changed to BLOCKED
+        XCTAssertEqual("NOT_RUN", viewController.testRun.testStepList[0].status)
+        XCTAssertEqual("PASSED", viewController.testRun.testStepList[1].status)
+        XCTAssertEqual("BLOCKED", viewController.testRun.testStepList[2].status)
+        
+        step1.status = "FAILED"
+        step2.status = "NOT_RUN"
+        step3.status = "NOT_RUN"
+        
+        run.testStepList = []
+        run.testStepList.append(step1)
+        run.testStepList.append(step2)
+        run.testStepList.append(step3)
+        
+        viewController.testRun = run
+        
+        viewController.setupBlockedStatus()
+        
+        //Ensure that all steps after the last step with a status are changed to BLOCKED
+        XCTAssertEqual("FAILED", viewController.testRun.testStepList[0].status)
+        XCTAssertEqual("BLOCKED", viewController.testRun.testStepList[1].status)
+        XCTAssertEqual("BLOCKED", viewController.testRun.testStepList[2].status)
+        
+        step1.status = "NOT_RUN"
+        step2.status = "PASSED"
+        step3.status = "FAILED"
+        
+        run.testStepList = []
+        run.testStepList.append(step1)
+        run.testStepList.append(step2)
+        run.testStepList.append(step3)
+        
+        viewController.testRun = run
+        
+        viewController.setupBlockedStatus()
+        
+        //Ensure that if the last step has a status other than NOT_RUN then none of the statuses are changed
+        XCTAssertEqual("NOT_RUN", viewController.testRun.testStepList[0].status)
+        XCTAssertEqual("PASSED", viewController.testRun.testStepList[1].status)
+        XCTAssertEqual("FAILED", viewController.testRun.testStepList[2].status)
+    }
+    
 }

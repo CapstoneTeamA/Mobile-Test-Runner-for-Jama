@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TestRunDelegate {
+    func didUpdateTestRun()
+}
+
 class TestListViewController: UIViewController {
     @IBOutlet weak var testList: UITableView!
     @IBOutlet weak var tmpProjectLabel: UILabel!
@@ -32,6 +36,7 @@ class TestListViewController: UIViewController {
     var totalPlansReturnedFromServer = 0
     var totalCyclesReturnedFromServer = 0
     var currentTestLevel = TestLevel.plan
+    var displayTestRunAlert = false
     enum TestLevel {
         case plan, cycle, run
     }
@@ -46,6 +51,23 @@ class TestListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         let endpoint = buildTestPlanEndpointString()
         RestHelper.hitEndpoint(atEndpointString: endpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //If a test run has just updated before this view appeared
+        if displayTestRunAlert {
+            //Alert the user that the update was successful
+            let updateSuccededAlert = UIAlertController(title: "Run updated", message: "Test run was successfully committed.", preferredStyle: UIAlertControllerStyle.alert)
+            //Present alert and hide it after 3 seconds
+            let hideAlert = DispatchTime.now() + 3
+            self.present(updateSuccededAlert, animated: true, completion: nil)
+        
+            DispatchQueue.main.asyncAfter(deadline: hideAlert){
+                updateSuccededAlert.dismiss(animated: true, completion: nil)
+            }
+        }
+        //Unset the flag for test run updates.
+        displayTestRunAlert = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -154,7 +176,7 @@ extension TestListViewController: EndpointDelegate {
                     self.totalRunsReturnedFromServer += tmpList.testRunList.count
                     
                     for run in tmpList.testRunList {
-                        if run.assignedTo == self.currentUser.id && run.status == "NOT_RUN"  {
+                        if run.assignedTo == self.currentUser.id && run.testStatus == "NOT_RUN"  {
                             self.testRunList.testRunList.append(run)
                         }
                     }
@@ -226,7 +248,9 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             runViewController.username = username
             runViewController.password = password
             runViewController.instance = instance
+            runViewController.currentUser = currentUser
             runViewController.preserveCurrentRunStatus()
+            runViewController.testRunDelegate = self
             self.navigationController?.pushViewController(runViewController, animated: true)
             return
         }
@@ -384,4 +408,10 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
+}
+
+extension TestListViewController: TestRunDelegate {
+    func didUpdateTestRun() {
+        displayTestRunAlert = true
+    }
 }
