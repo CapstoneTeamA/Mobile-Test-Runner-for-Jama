@@ -151,17 +151,16 @@ extension TestListViewController: EndpointDelegate {
                 case .cycle:
                     let tmpList = TestCycleListModel()
                     tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
-                    //if there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
                     
                     self.totalCyclesReturnedFromServer += tmpList.testCycleList.count
                     
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
-                    self.testList.reloadData()
                     
                     //keep calling api while there are still more cycles
                     if self.totalCyclesReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
+                    //if there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
                     if tmpList.testCycleList.isEmpty && self.testCycleList.testCycleList.isEmpty {
                         let emptyCycle = TestCycleModel();
                         self.testCycleList.testCycleList.insert(emptyCycle, at: 0)
@@ -180,14 +179,14 @@ extension TestListViewController: EndpointDelegate {
                             self.testRunList.testRunList.append(run)
                         }
                     }
-                    ////if there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
-                   
-                    self.testList.reloadData()
+                    
                     //keep calling api while there are still more runs
                     if self.totalRunsReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password)
                         return
                     }
+                    
+                    ////if there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
                     
                     if self.testRunList.testRunList.isEmpty {
                             let emptyRun = TestRunModel()
