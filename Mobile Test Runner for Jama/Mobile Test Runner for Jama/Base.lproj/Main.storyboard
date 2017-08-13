@@ -788,7 +788,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This run has no steps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiI-TS-a6P">
-                                                <rect key="frame" x="8" y="8" width="414" height="31"/>
+                                                <rect key="frame" x="0.0" y="8" width="414" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="j3N-7C-xTS"/>
                                                 </constraints>
@@ -833,7 +833,7 @@
                                             <constraint firstItem="W8B-bg-BAg" firstAttribute="centerY" secondItem="LVu-gK-Vj5" secondAttribute="centerY" id="4dF-BN-Lek"/>
                                             <constraint firstItem="jl7-Qg-0zm" firstAttribute="leading" secondItem="W8B-bg-BAg" secondAttribute="trailing" constant="5" id="7zc-gT-HgO"/>
                                             <constraint firstItem="W8B-bg-BAg" firstAttribute="height" secondItem="jl7-Qg-0zm" secondAttribute="height" id="A3u-j0-Wpn"/>
-                                            <constraint firstItem="OiI-TS-a6P" firstAttribute="centerX" secondItem="LVu-gK-Vj5" secondAttribute="centerX" constant="8" id="Ct7-YE-xy3"/>
+                                            <constraint firstItem="OiI-TS-a6P" firstAttribute="centerX" secondItem="LVu-gK-Vj5" secondAttribute="centerX" id="Ct7-YE-xy3"/>
                                             <constraint firstItem="OiI-TS-a6P" firstAttribute="top" secondItem="LVu-gK-Vj5" secondAttribute="top" constant="8" id="F66-5N-bTz"/>
                                             <constraint firstItem="Hbu-th-o48" firstAttribute="centerX" secondItem="LVu-gK-Vj5" secondAttribute="centerX" id="F6j-aT-Cua"/>
                                             <constraint firstItem="UZo-4K-9kz" firstAttribute="centerX" secondItem="LVu-gK-Vj5" secondAttribute="centerX" id="I6a-YS-qYY"/>
