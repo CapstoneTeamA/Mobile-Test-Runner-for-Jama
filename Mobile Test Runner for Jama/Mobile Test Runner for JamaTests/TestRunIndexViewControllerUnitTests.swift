@@ -331,4 +331,3 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         XCTAssertEqual(UIImage.init(named: "PASS_UNSELECTED.png"), viewController.noStepPassButton.currentImage)
     }
 }
-
