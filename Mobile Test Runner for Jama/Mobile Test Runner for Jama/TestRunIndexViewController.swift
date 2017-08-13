@@ -31,7 +31,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var inputResultsTextBox: UITextView!
     @IBOutlet weak var inputResultsBackground: UIView!
     @IBOutlet weak var noStepsView: UIView!
-    @IBOutlet weak var noStepStatusIcon: UIImageView!
+    @IBOutlet weak var noStepPassButton: UIButton!
+    @IBOutlet weak var noStepFailButton: UIButton!
+    @IBOutlet weak var noStepRunStatusLabel: UILabel!
     
     var instance = ""
     var username = ""
@@ -45,6 +47,13 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var currentUser: UserModel!
     var testRunDelegate: TestRunDelegate!
     let placeholderText = "Enter actual results here"
+    let testRunStatusNotRunStr = "Test Run Status: Not Run"
+    let testRunStatusPassStr = "Test Run Status: Passed"
+    let testRunStatusFailStr = "Test Run Status: Failed"
+    let selectedPassButtonImage = UIImage.init(named: "PASS.png")
+    let notSelectedPassButtonImage = UIImage.init(named: "PASS_UNSELECTED.png")
+    let selectedFailButtonImage = UIImage.init(named: "FAIL.png")
+    let notSelectedFailButtonImage = UIImage.init(named: "FAIL_UNSELECTED.png")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +62,13 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         testRunNameLabel.text = testRun.name
         self.setupPopup()
         testStepTable.reloadData()
+        
+        //TODO this will end up being changed to an "In progress" string
+        noStepRunStatusLabel.text = testRunStatusNotRunStr
+        //By definition the buttons will be unselected when this view loads.
+        //There was a small difference setting these in the storyboard vs here that was affecting testing so these were added.
+        noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
+        noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,11 +79,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         } else {
             noStepsView.isHidden = true
         }
-        
-        //If we want to set the color of the blocked button to indicate that the user cannot block this run
-//        if testRun.testStepList.isEmpty == false && testRun.testStepList.last?.status != "NOT_RUN" {
-//            blockButton.backgroundColor = UIColor.lightText
-//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -238,16 +249,46 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    func togglePassButton() {
+        //If the status label is the passing string then unselect the button and replace passing status with not run
+        if noStepRunStatusLabel.text == testRunStatusPassStr {
+            noStepRunStatusLabel.text = testRunStatusNotRunStr
+            noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
+            testRun.testStatus = "NOT_RUN"
+        } else {
+            //Toggle pass button on, set test status and label and change pass button image to selected image
+            noStepRunStatusLabel.text = testRunStatusPassStr
+            noStepPassButton.setImage(selectedPassButtonImage, for: .normal)
+            testRun.testStatus = "PASSED"
+        }
+        //Make sure the fail button image is the not selected image.
+        noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
+    }
+    
+    func toggleFailButton() {
+        //If the status label is the failing string then unselect the button and replace the failing status with not run
+        if noStepRunStatusLabel.text == testRunStatusFailStr {
+            noStepRunStatusLabel.text = testRunStatusNotRunStr
+            noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
+            testRun.testStatus = "NOT_RUN"
+        } else {
+            //Toggle fail button on, set test status and label and change the fail button image to selected image
+            noStepRunStatusLabel.text = testRunStatusFailStr 
+            noStepFailButton.setImage(selectedFailButtonImage, for: .normal)
+            testRun.testStatus = "FAILED"
+        }
+        //Make sure the pass button image is the not selected image.
+        noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
+    }
+    
     //Button only visible when there are no steps in this run, allowing the user to pass the whole run.
     @IBAction func didTapPassRun(_ sender: Any) {
-        noStepStatusIcon.image = UIImage(named: "check_icon_green.png")
-        testRun.testStatus = "PASSED"
+        togglePassButton()
     }
     
     //Button only visible when there are no steps in this run, allowing the user to fail the whole run
     @IBAction func didTapFailRun(_ sender: Any) {
-        noStepStatusIcon.image = UIImage(named: "X_icon_red.png")
-        testRun.testStatus = "FAILED"
+        toggleFailButton()
     }
 
     //build the endpoint for submitting the test run
