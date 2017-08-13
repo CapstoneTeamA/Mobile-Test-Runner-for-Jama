@@ -107,6 +107,13 @@ class TestListViewController: UIViewController {
         runEndpoint = runEndpoint.replacingOccurrences(of: "{testCycleId}", with: "\(selectedTestCycleId)")
         return runEndpoint
     }
+    
+    func scrollToLastRow() {
+        let numberOfSections =  self.testList.numberOfSections
+        let numberOfRows = self.testList.numberOfRows(inSection: numberOfSections - 1)
+        let indexPath = IndexPath(row: numberOfRows - 1, section: numberOfSections - 1)
+        self.testList.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+    }
 
     @IBAction func touchedLogoutButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
@@ -166,6 +173,11 @@ extension TestListViewController: EndpointDelegate {
                         self.testCycleList.testCycleList.insert(emptyCycle, at: 0)
                     }
                     self.testList.reloadData()
+                    
+                    //At the last test plan, auto scroll down to make the cycle cell visible
+                    if self.selectedPlanIndex == self.totalPlansReturnedFromServer - 1 {
+                        self.scrollToLastRow()
+                }
                 
                 case .run:
                     let tmpList = TestRunListModel()
