@@ -111,7 +111,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mtrlogo_v8-1.png" translatesAutoresizingMaskIntoConstraints="NO" id="9wk-Au-Oog">
-                                <rect key="frame" x="60" y="553" width="294" height="109"/>
+                                <rect key="frame" x="60" y="554" width="294" height="109"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9wk-Au-Oog" secondAttribute="height" multiplier="2.7:1" id="aqR-B1-FWO"/>
                                 </constraints>
@@ -519,7 +519,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcP-7h-pXF">
-                                        <rect key="frame" x="0.0" y="94" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="94" width="414" height="42"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="  Expected Results">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -529,7 +529,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8ZR-DR-O4d" userLabel="Expected Results Text View">
-                                        <rect key="frame" x="0.0" y="137" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="136" width="414" height="0.0"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="bYk-v3-2xJ"/>
@@ -538,7 +538,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FE8-ge-51F">
-                                        <rect key="frame" x="0.0" y="139" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="138" width="414" height="42"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="  Notes">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -548,7 +548,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BC4-4i-yzl" userLabel="Notes Text View">
-                                        <rect key="frame" x="0.0" y="182" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="180" width="414" height="0.0"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="9ju-vS-ALo"/>
@@ -779,10 +779,9 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a status for this run:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZo-4K-9kz">
-                                                <rect key="frame" x="40" y="50" width="334" height="29"/>
+                                                <rect key="frame" x="0.0" y="50" width="414" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="29" id="ZEK-Jj-mxt"/>
-                                                    <constraint firstAttribute="width" constant="334" id="jlZ-hg-mDT"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -842,6 +841,7 @@
                                             <constraint firstItem="OiI-TS-a6P" firstAttribute="width" secondItem="LVu-gK-Vj5" secondAttribute="width" id="bFt-Ck-iHG"/>
                                             <constraint firstItem="jl7-Qg-0zm" firstAttribute="centerY" secondItem="LVu-gK-Vj5" secondAttribute="centerY" id="gC8-9K-FIx"/>
                                             <constraint firstAttribute="bottom" secondItem="Hbu-th-o48" secondAttribute="bottom" constant="8" id="kmV-Ze-KQk"/>
+                                            <constraint firstItem="UZo-4K-9kz" firstAttribute="width" secondItem="LVu-gK-Vj5" secondAttribute="width" id="pVi-jJ-VlK"/>
                                             <constraint firstItem="W8B-bg-BAg" firstAttribute="leading" secondItem="ms8-Um-3Wt" secondAttribute="trailing" constant="5" id="qzm-RR-3st"/>
                                             <constraint firstItem="ms8-Um-3Wt" firstAttribute="centerY" secondItem="LVu-gK-Vj5" secondAttribute="centerY" id="reS-ZF-KqP"/>
                                         </constraints>
