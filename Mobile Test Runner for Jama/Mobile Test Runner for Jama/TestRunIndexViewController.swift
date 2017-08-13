@@ -50,6 +50,10 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     let testRunStatusNotRunStr = "Test Run Status: Not Run"
     let testRunStatusPassStr = "Test Run Status: Passed"
     let testRunStatusFailStr = "Test Run Status: Failed"
+    let selectedPassButtonImage = UIImage.init(named: "PASS.png")
+    let notSelectedPassButtonImage = UIImage.init(named: "PASS_UNSELECTED.png")
+    let selectedFailButtonImage = UIImage.init(named: "FAIL.png")
+    let notSelectedFailButtonImage = UIImage.init(named: "FAIL_UNSELECTED.png")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +65,10 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         //TODO this will end up being changed to an "In progress" string
         noStepRunStatusLabel.text = testRunStatusNotRunStr
+        //By definition the buttons will be unselected when this view loads.
+        //There was a small difference setting these in the storyboard vs here that was affecting testing so these were added.
+        noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
+        noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -245,32 +253,32 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         //If the status label is the passing string then unselect the button and replace passing status with not run
         if noStepRunStatusLabel.text == testRunStatusPassStr {
             noStepRunStatusLabel.text = testRunStatusNotRunStr
-            noStepPassButton.setImage(UIImage.init(named: "PASS_UNSELECTED.png"), for: .normal)
+            noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
             testRun.testStatus = "NOT_RUN"
         } else {
             //Toggle pass button on, set test status and label and change pass button image to selected image
             noStepRunStatusLabel.text = testRunStatusPassStr
-            noStepPassButton.setImage(UIImage.init(named: "PASS.png"), for: .normal)
+            noStepPassButton.setImage(selectedPassButtonImage, for: .normal)
             testRun.testStatus = "PASSED"
         }
         //Make sure the fail button image is the not selected image.
-        noStepFailButton.setImage(UIImage.init(named: "FAIL_UNSELECTED.png"), for: .normal)
+        noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
     }
     
     func toggleFailButton() {
         //If the status label is the failing string then unselect the button and replace the failing status with not run
         if noStepRunStatusLabel.text == testRunStatusFailStr {
             noStepRunStatusLabel.text = testRunStatusNotRunStr
-            noStepFailButton.setImage(UIImage.init(named: "FAIL_UNSELECTED.png"), for: .normal)
+            noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
             testRun.testStatus = "NOT_RUN"
         } else {
             //Toggle fail button on, set test status and label and change the fail button image to selected image
             noStepRunStatusLabel.text = testRunStatusFailStr 
-            noStepFailButton.setImage(UIImage.init(named: "FAIL.png"), for: .normal)
+            noStepFailButton.setImage(selectedFailButtonImage, for: .normal)
             testRun.testStatus = "FAILED"
         }
         //Make sure the pass button image is the not selected image.
-        noStepPassButton.setImage(UIImage.init(named: "PASS_UNSELECTED.png"), for: .normal)
+        noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
     }
     
     //Button only visible when there are no steps in this run, allowing the user to pass the whole run.
