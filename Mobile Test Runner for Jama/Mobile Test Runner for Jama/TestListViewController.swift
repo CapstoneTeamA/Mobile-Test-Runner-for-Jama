@@ -132,15 +132,14 @@ extension TestListViewController: EndpointDelegate {
                             self.testPlanList.testPlanList.append(plan)
                         }
                     }
-                    
-                    //self.testPlanList.testPlanList.sort(by: self.comparePlans(lhs:rhs:))
-            
                     //reload Data in view
                     self.testList.reloadData()
+                    
                     //keep calling api while there is still more plans to get
                     if self.totalPlansReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
+                    //If there are no plans show the No Plans image and label
                     if self.testPlanList.testPlanList.isEmpty {
                         self.testList.isUserInteractionEnabled = false
                         self.testList.separatorColor = UIColor.white
@@ -150,12 +149,12 @@ extension TestListViewController: EndpointDelegate {
                     }
                 case .cycle:
                     let tmpList = TestCycleListModel()
+                    
                     tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
-                    
                     self.totalCyclesReturnedFromServer += tmpList.testCycleList.count
-                    
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
-                    
+                    self.testList.reloadData()
+                   
                     //keep calling api while there are still more cycles
                     if self.totalCyclesReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
@@ -164,35 +163,33 @@ extension TestListViewController: EndpointDelegate {
                     if tmpList.testCycleList.isEmpty && self.testCycleList.testCycleList.isEmpty {
                         let emptyCycle = TestCycleModel();
                         self.testCycleList.testCycleList.insert(emptyCycle, at: 0)
+                        self.testList.reloadData()
                     }
-                    self.testList.reloadData()
-                
                 case .run:
                     let tmpList = TestRunListModel()
-                    tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
                     
-                    //Filter the runs returned from the API to select the assignedTo value is the current user's id
+                    tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
                     self.totalRunsReturnedFromServer += tmpList.testRunList.count
                     
+                    //Filter the runs returned from the API to select the assignedTo value is the current user's id
                     for run in tmpList.testRunList {
                         if run.assignedTo == self.currentUser.id && run.testStatus == "NOT_RUN"  {
                             self.testRunList.testRunList.append(run)
                         }
                     }
+                    self.testList.reloadData()
                     
                     //keep calling api while there are still more runs
                     if self.totalRunsReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password)
                         return
                     }
-                    
-                    ////if there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
-                    
+                    //if there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
                     if self.testRunList.testRunList.isEmpty {
-                            let emptyRun = TestRunModel()
-                            self.testRunList.testRunList.insert(emptyRun, at: 0)
+                        let emptyRun = TestRunModel()
+                        self.testRunList.testRunList.insert(emptyRun, at: 0)
+                        self.testList.reloadData()
                     }
-                    self.testList.reloadData()
             }
         }
     }
