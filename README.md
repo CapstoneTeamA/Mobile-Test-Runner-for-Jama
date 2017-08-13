@@ -1,11 +1,11 @@
-# Mobile Test Runner For Jama
+# Mobile Test Runner For Jama Software
 
-The Mobile test runner for Jama app is an iPhone application that will allow the users of the Jama product development platform to easily execute test plans, and test cases to manage testing in real-time. Users can view run, and submit their test cases.
+The Mobile test runner for Jama Software app is an iPhone application that will allow the users of the Jama Software product development platform to easily execute test plans, and test cases to manage testing in real-time. Users can view run, and submit their test cases.
 
 ## Operation
 
 1. Clone the Git repository 
-2. Open “Mobile Test Runner For Jama” in Xcode 8
+2. Open “Mobile Test Runner For Jama Software” in Xcode 8
 
 ### Prerequisites
 
@@ -15,7 +15,7 @@ The Mobile test runner for Jama app is an iPhone application that will allow the
 
 ## Tools Utilized
 
-* Jama’s REST [API](https://dev.jamasoftware.com/rest)
+* Jama Software’s REST [API](https://dev.jamasoftware.com/rest)
 * API Development Support: [Postman](https://www.getpostman.com/)
 * Continuous Integration: [Travis](https://travis-ci.org/)
 * Source Control: [Git](https://github.com/)
@@ -28,7 +28,7 @@ The Mobile test runner for Jama app is an iPhone application that will allow the
 
 ## Running Tests
 
-Mobile Test Runner for Jama was built using Test Driven Development. 
+Mobile Test Runner for Jama Software was built using Test Driven Development. 
 In the folders: JamaTests, and JamaUITests you will find all of the test code used throughout development. 
 
 These tests can be run by hitting <Command U> within Xcode, or by selecting Product/Test from the dropdown menu. 
@@ -46,13 +46,15 @@ Information on these tests can be found in the Jama test [README.md](Mobile-Test
 * Jason Ritz
 * David Wagg
 
-## License
+## License and References
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/CapstoneTeamA/Mobile-Test-Runner-for-Jama/blob/master/LICENSE) file for details.
+
+Various icons rousourced from [Natalia Jacquier](https://www.iconfinder.com/natuke)
 
 
 ## Acknowledgements
 
-* Our Sponsors: Iman Bilal & Eric Rickson at [Jama](https://www.jamasoftware.com/)
+* Our Sponsors: Iman Bilal & Eric Rickson at [Jama Software](https://www.jamasoftware.com/)
 * Warren Harrison at PSU’s [Capstone Program](http://wiki.cs.pdx.edu/capstone/) 
 * Janaka Jayawardena, Director of Information Technologies, Maseeh College of Engineering and Computer Science at PSU
