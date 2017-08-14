@@ -15,10 +15,10 @@ enum TestListCellType {
 class TestListTableViewCell: UITableViewCell {
     var icon: UIImageView!
     var nameLabel: UILabel!
-    var nameLabelOffset: CGFloat = 5
     var indentWidth: CGFloat = 10
-    var acccessoryViewOffset: CGFloat = 30
-//    let rightChevron = UIImage.init(named: "small_right_chevron.png")
+    var acccessoryViewOffset: CGFloat = 35
+    var fontSize: CGFloat = 20
+    let rightChevron = UIImage.init(named: "small_right_chevron.png")
     let downChevron = UIImage.init(named: "small_down_chevron.png")
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,39 +32,43 @@ class TestListTableViewCell: UITableViewCell {
     }
     
     func customInit(tableWidth: CGFloat, cellType: TestListCellType) {
-        let image = downChevron
+        let image = rightChevron
         icon = UIImageView(image: image)
-        icon.isHidden = true
         switch cellType {
         case .testPlan:
-            indentWidth = 0
+            indentWidth = 4
+            backgroundColor = UIColor.init(red: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
             break
             
         case .testCycle:
             indentWidth = 20
+            fontSize = 18
+            backgroundColor = UIColor.init(red: 0xE6/0xFF, green: 0xE6/0xFF, blue: 0xE6/0xFF, alpha: 1)
             break
             
         case .testRun:
-            indentWidth = 30
+            icon.isHidden = true
+            indentWidth = 20
+            fontSize = 17
+            backgroundColor = UIColor.white
             break
         }
         
-        icon.center = CGPoint(x: tableWidth - (image?.size.width)!/2 - 8, y: self.contentView.bounds.height/2)
-        nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - nameLabelOffset - acccessoryViewOffset - indentWidth, height: self.contentView.bounds.height))
-        nameLabel.center = CGPoint(x: indentWidth + nameLabelOffset + nameLabel.bounds.width/2, y: self.contentView.center.y)
+        icon.center = CGPoint(x: icon.bounds.width/2 + indentWidth, y: self.contentView.bounds.height/2)
+        nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - icon.bounds.width - acccessoryViewOffset - indentWidth, height: self.contentView.bounds.height))
+        nameLabel.center = CGPoint(x: 6 + indentWidth + icon.bounds.width  + nameLabel.bounds.width/2, y: self.contentView.center.y)
         
-        nameLabel.font = UIFont(name: "Helvetica Neue", size: 20.0)
+        nameLabel.font = UIFont(name: "Helvetica Neue", size: fontSize)
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(icon)
     }
     
     func selectCell() {
         icon.image = downChevron
-        icon.isHidden = false
     }
     
     func unselectCell() {
-        icon.isHidden = true
+        icon.image = rightChevron
     }
 
 }

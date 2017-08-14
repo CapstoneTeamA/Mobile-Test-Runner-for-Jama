@@ -336,7 +336,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
        
         cell.customInit(tableWidth: testList.frame.width, cellType: .testRun)
-        cell.backgroundColor = UIColor.white
+//        cell.backgroundColor = UIColor.white
         if self.testRunList.testRunList[0].name == "No Runs Found" {
             cell.isUserInteractionEnabled = false
             cell.nameLabel.text = self.testRunList.testRunList[currentRunIndex].name
@@ -363,10 +363,10 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         
         //If cycle's cell is selected change the background color
         if selectedCycleTableViewIndex != indexPath.row {
-            cell.backgroundColor = UIColor.white
+//            cell.backgroundColor = UIColor.white
         } else {
             cell.selectCell()
-            cell.backgroundColor = UIColor.white
+//            cell.backgroundColor = UIColor.white
         }
 
         if(self.testCycleList.testCycleList[0].name == "No Cycles Found")
@@ -393,10 +393,10 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         //If the plan's cell is selected change the background color
     
         //cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
-        cell.backgroundColor = UIColor.white
+//        cell.backgroundColor = UIColor.white
         if selectedPlanIndex == indexPath.row {
                 //cell.backgroundColor = UIColor.lightGray
-            cell.backgroundColor = UIColor.white
+//            cell.backgroundColor = UIColor.white
             cell.selectCell()
         }
         return cell
