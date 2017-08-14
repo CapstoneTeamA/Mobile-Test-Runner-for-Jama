@@ -20,7 +20,7 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="Main View">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -155,7 +155,7 @@
                         <viewControllerLayoutGuide type="top" id="bwx-3Z-i5u"/>
                         <viewControllerLayoutGuide type="bottom" id="cSb-8O-36Q"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="OsK-JF-zhz" userLabel="MainView">
+                    <view key="view" contentMode="scaleToFill" id="OsK-JF-zhz" userLabel="Main View">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -217,7 +217,7 @@
                                     <outlet property="delegate" destination="67N-f7-6S3" id="tQP-G9-jSP"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a project to view:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="qcD-9G-aW0">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a project to view:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcD-9G-aW0">
                                 <rect key="frame" x="0.0" y="64" width="414" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="BXr-eF-8Yi"/>
@@ -226,7 +226,7 @@
                                 <color key="textColor" red="0.18250317258883253" green="0.18250317258883253" blue="0.18250317258883253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYY-xA-36m" userLabel="MarginFixer">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYY-xA-36m" userLabel="Margin Fixer View">
                                 <rect key="frame" x="0.0" y="114" width="414" height="5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -303,7 +303,7 @@
                         <viewControllerLayoutGuide type="top" id="hkT-vr-wmT"/>
                         <viewControllerLayoutGuide type="bottom" id="jOc-nP-z75"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Rez-5u-Hfc">
+                    <view key="view" contentMode="scaleToFill" id="Rez-5u-Hfc" userLabel="Main View">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -343,7 +343,7 @@
                                     <outlet property="delegate" destination="b7n-lk-QU3" id="MxS-b2-09A"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a test to run:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="ZK8-jV-Ohl">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a test to run:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZK8-jV-Ohl">
                                 <rect key="frame" x="107" y="64" width="200" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3Qf-16-L93"/>
@@ -431,11 +431,11 @@
                         <viewControllerLayoutGuide type="top" id="kzJ-PQ-I07"/>
                         <viewControllerLayoutGuide type="bottom" id="bCd-i8-7Uu"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3yT-jW-SLq">
+                    <view key="view" contentMode="scaleToFill" id="3yT-jW-SLq" userLabel="Main View">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="114-Ve-vhn">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="114-Ve-vhn" userLabel="Bottom Button View">
                                 <rect key="frame" x="0.0" y="570" width="414" height="122"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXM-kY-Oc6">
@@ -489,14 +489,14 @@
                                     <constraint firstItem="JXM-kY-Oc6" firstAttribute="leading" secondItem="114-Ve-vhn" secondAttribute="leading" id="tcP-vD-cmu"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSP-Eo-Vq8">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSP-Eo-Vq8" userLabel="Bottom Divider View">
                                 <rect key="frame" x="0.0" y="568" width="414" height="2"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="iWn-SL-8jU"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWW-gk-dOH">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWW-gk-dOH" userLabel="Main Body View">
                                 <rect key="frame" x="0.0" y="64" width="414" height="504"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1e-iC-eME">
@@ -728,7 +728,7 @@
                         <viewControllerLayoutGuide type="top" id="Arf-ao-gXm"/>
                         <viewControllerLayoutGuide type="bottom" id="gXa-Dc-LxK"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="29g-Lj-zF6" userLabel="MainView">
+                    <view key="view" contentMode="scaleToFill" id="29g-Lj-zF6" userLabel="Main View">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -754,7 +754,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDR-j2-5vA">
                                 <rect key="frame" x="0.0" y="114" width="414" height="456"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVu-gK-Vj5">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVu-gK-Vj5" userLabel="Centering Body View">
                                         <rect key="frame" x="0.0" y="46" width="414" height="364"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hbu-th-o48" userLabel="Status label view">
@@ -857,7 +857,7 @@
                                     <constraint firstItem="LVu-gK-Vj5" firstAttribute="width" secondItem="xDR-j2-5vA" secondAttribute="width" id="f2u-32-Gw5"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQ6-Hy-uXH" userLabel="ButtonView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQ6-Hy-uXH" userLabel="Button View">
                                 <rect key="frame" x="0.0" y="570" width="414" height="122"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miI-Kx-Bj4">
@@ -904,7 +904,7 @@
                                     <constraint firstItem="miI-Kx-Bj4" firstAttribute="leading" secondItem="eQ6-Hy-uXH" secondAttribute="leading" id="zcM-io-xeM"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="ukt-q7-rqc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukt-q7-rqc">
                                 <rect key="frame" x="0.0" y="64" width="414" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="m8Q-8m-bbS"/>
@@ -924,14 +924,14 @@
                                 <rect key="frame" x="0.0" y="570" width="414" height="2"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7O-Ml-k6v" userLabel="popUpBackgroundView">
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7O-Ml-k6v" userLabel="Popup Background View">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJc-4V-jEK" userLabel="popUpView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJc-4V-jEK" userLabel="Popup View">
                                 <rect key="frame" x="21" y="221" width="372" height="294"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gvz-Ft-XC7" userLabel="inputTextBox">
