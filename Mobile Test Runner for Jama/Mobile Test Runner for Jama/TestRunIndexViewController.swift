@@ -323,7 +323,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         //If the run has steps the status is a derived value based on the steps
         if self.testRun.testStepList.isEmpty {
             if self.testRun.testStatus == "NOT_RUN"{
-                self.testRun.testStatus = "IN_PROGRESS"
+                self.testRun.testStatus = "INPROGRESS"
             }
             body.updateValue(self.testRun.testStatus as AnyObject, forKey: "testRunStatus")
         } else {
