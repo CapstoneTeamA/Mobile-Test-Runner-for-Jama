@@ -48,6 +48,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var testRunDelegate: TestRunDelegate!
     let placeholderText = "Enter actual results here"
     let testRunStatusNotRunStr = "Test Run Status: Not Run"
+    let testRunStatusInProgressStr = "Test Run Status: In Progress"
     let testRunStatusPassStr = "Test Run Status: Passed"
     let testRunStatusFailStr = "Test Run Status: Failed"
     let selectedPassButtonImage = UIImage.init(named: "PASS.png")
@@ -63,8 +64,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         self.setupPopup()
         testStepTable.reloadData()
         
-        //TODO this will end up being changed to an "In progress" string
-        noStepRunStatusLabel.text = testRunStatusNotRunStr
+        
+        noStepRunStatusLabel.text = testRunStatusInProgressStr
         //By definition the buttons will be unselected when this view loads.
         //There was a small difference setting these in the storyboard vs here that was affecting testing so these were added.
         noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
@@ -321,6 +322,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         //If there are no steps, submit a status. Otherwise submit the test steps
         //If the run has steps the status is a derived value based on the steps
         if self.testRun.testStepList.isEmpty {
+            if self.testRun.testStatus == "NOT_RUN"{
+                self.testRun.testStatus = "IN_PROGRESS"
+            }
             body.updateValue(self.testRun.testStatus as AnyObject, forKey: "testRunStatus")
         } else {
             body.updateValue(stepList as AnyObject , forKey: "testRunSteps")
