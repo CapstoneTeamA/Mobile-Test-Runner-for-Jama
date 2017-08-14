@@ -80,8 +80,8 @@ class TestStepViewControllerUnitTests: XCTestCase {
     }
     
     func testAlignHeaderButtonsContents() {
-        let expectedImageInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        let expectedTitleInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        let expectedImageInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
+        let expectedTitleInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
         viewController.alignHeaderButtonContents()
         
         XCTAssertEqual(expectedImageInsets, viewController.actionButton.imageEdgeInsets)

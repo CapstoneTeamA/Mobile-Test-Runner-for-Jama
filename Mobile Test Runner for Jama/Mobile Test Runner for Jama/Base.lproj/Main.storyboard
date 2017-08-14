@@ -567,7 +567,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdO-sM-9Y6" userLabel="Title Label">
-                                                <rect key="frame" x="26" y="0.0" width="362" height="40"/>
+                                                <rect key="frame" x="12" y="0.0" width="390" height="40"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -575,7 +575,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="HdO-sM-9Y6" firstAttribute="width" secondItem="7Th-uG-TdP" secondAttribute="width" multiplier="7:8" id="d7B-Kl-uJy"/>
+                                            <constraint firstItem="HdO-sM-9Y6" firstAttribute="width" secondItem="7Th-uG-TdP" secondAttribute="width" constant="-24" id="d7B-Kl-uJy"/>
                                             <constraint firstItem="HdO-sM-9Y6" firstAttribute="top" secondItem="7Th-uG-TdP" secondAttribute="top" id="hdv-NP-GPo"/>
                                             <constraint firstAttribute="height" constant="40" id="kzg-QN-ACd"/>
                                             <constraint firstItem="HdO-sM-9Y6" firstAttribute="centerX" secondItem="7Th-uG-TdP" secondAttribute="centerX" id="sCa-yv-UQr"/>
@@ -913,7 +913,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukt-q7-rqc">
-                                <rect key="frame" x="26" y="64" width="362" height="40"/>
+                                <rect key="frame" x="12" y="64" width="390" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="m8Q-8m-bbS"/>
                                 </constraints>
@@ -1018,7 +1018,7 @@
                             <constraint firstItem="eJc-4V-jEK" firstAttribute="height" secondItem="29g-Lj-zF6" secondAttribute="height" multiplier="2:5" id="eMj-ft-8cc"/>
                             <constraint firstItem="eJc-4V-jEK" firstAttribute="centerY" secondItem="29g-Lj-zF6" secondAttribute="centerY" id="fTv-XJ-dg1"/>
                             <constraint firstItem="xDR-j2-5vA" firstAttribute="top" secondItem="TzA-TL-KAC" secondAttribute="bottom" id="gUe-t6-XHC"/>
-                            <constraint firstItem="ukt-q7-rqc" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" multiplier="7:8" id="gY6-yz-Q8B"/>
+                            <constraint firstItem="ukt-q7-rqc" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" constant="-24" id="gY6-yz-Q8B"/>
                             <constraint firstItem="xDR-j2-5vA" firstAttribute="centerX" secondItem="7gT-7g-SHk" secondAttribute="centerX" id="h0s-9Y-KGu"/>
                             <constraint firstItem="miI-Kx-Bj4" firstAttribute="top" secondItem="1ZF-DZ-CxQ" secondAttribute="bottom" id="mwq-76-Ca4"/>
                             <constraint firstItem="eQ6-Hy-uXH" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="puI-b5-3xR"/>
