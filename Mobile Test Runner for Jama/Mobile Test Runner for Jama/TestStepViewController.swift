@@ -27,10 +27,9 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var expectedResultButton: UIButton!
     @IBOutlet weak var notesButton: UIButton!
-    @IBOutlet weak var runNameLabel: UILabel!
-    @IBOutlet weak var runTitleLabel: UILabel!
     @IBOutlet weak var titleDivider: UIView!
-    
+    @IBOutlet weak var runNameLabel: UILabel!
+ 
     var action = ""
     var expResult = ""
     var notes = ""
