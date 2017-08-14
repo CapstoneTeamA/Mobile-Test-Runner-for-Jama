@@ -36,21 +36,21 @@ class TestListTableViewCell: UITableViewCell {
         icon = UIImageView(image: image)
         switch cellType {
         case .testPlan:
-            indentWidth = 4
-            backgroundColor = UIColor.init(red: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            indentWidth = 12
+            backgroundColor = UIColor.white
             break
             
         case .testCycle:
-            indentWidth = 20
+            indentWidth = 28
             fontSize = 18
-            backgroundColor = UIColor.init(red: 0xE6/0xFF, green: 0xE6/0xFF, blue: 0xE6/0xFF, alpha: 1)
+            backgroundColor = UIColor.init(red: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
             break
             
         case .testRun:
             icon.isHidden = true
-            indentWidth = 20
+            indentWidth = 28
             fontSize = 17
-            backgroundColor = UIColor.white
+            backgroundColor = UIColor.init(red: 0xE6/0xFF, green: 0xE6/0xFF, blue: 0xE6/0xFF, alpha: 1)
             break
         }
         
