@@ -855,7 +855,7 @@
                                 <rect key="frame" x="0.0" y="588.66666666666652" width="414" height="103.33333333333337"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miI-Kx-Bj4" userLabel="Submit Button">
-                                        <rect key="frame" x="7" y="0.0" width="103.66666666666667" height="103.33333333333337"/>
+                                        <rect key="frame" x="56.666666666666657" y="0.0" width="103.66666666666669" height="103.33333333333337"/>
                                         <state key="normal" image="UPLOAD.png">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
@@ -864,7 +864,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8F-ke-ULJ">
-                                        <rect key="frame" x="105.66666666666666" y="0.0" width="103.66666666666666" height="103.33333333333337"/>
+                                        <rect key="frame" x="155.33333333333337" y="0.0" width="103.66666666666663" height="103.33333333333337"/>
                                         <state key="normal" image="BLOCK.png">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
@@ -873,7 +873,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rM3-gm-dNb" userLabel="Input Button">
-                                        <rect key="frame" x="204.33333333333337" y="0.0" width="103.66666666666663" height="103.33333333333337"/>
+                                        <rect key="frame" x="254.00000000000003" y="0.0" width="103.66666666666671" height="103.33333333333337"/>
                                         <state key="normal" image="NOTES.png">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
@@ -881,31 +881,18 @@
                                             <action selector="enterText:" destination="NKr-0k-Apa" eventType="touchUpInside" id="Yk8-yL-2R4"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juQ-5o-cSv" userLabel="Photo Button">
-                                        <rect key="frame" x="303" y="-0.66666666666662877" width="103.66666666666669" height="103.33333333333337"/>
-                                        <state key="normal" image="PHOTO.png">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didTapAddPhoto:" destination="NKr-0k-Apa" eventType="touchUpInside" id="YhK-4H-IMK"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="B8F-ke-ULJ" firstAttribute="height" secondItem="eQ6-Hy-uXH" secondAttribute="height" id="3XS-8Z-mU9"/>
                                     <constraint firstAttribute="width" secondItem="eQ6-Hy-uXH" secondAttribute="height" multiplier="4:1" id="6SP-J3-QQs"/>
-                                    <constraint firstItem="juQ-5o-cSv" firstAttribute="height" secondItem="eQ6-Hy-uXH" secondAttribute="height" id="KzX-ty-jCg"/>
+                                    <constraint firstItem="B8F-ke-ULJ" firstAttribute="centerX" secondItem="eQ6-Hy-uXH" secondAttribute="centerX" id="J2H-Ds-n1a"/>
                                     <constraint firstItem="miI-Kx-Bj4" firstAttribute="height" secondItem="eQ6-Hy-uXH" secondAttribute="height" id="PXL-07-Nm4"/>
-                                    <constraint firstItem="miI-Kx-Bj4" firstAttribute="leading" secondItem="eQ6-Hy-uXH" secondAttribute="leading" constant="7" id="THD-Jx-xTk"/>
-                                    <constraint firstItem="juQ-5o-cSv" firstAttribute="top" secondItem="eQ6-Hy-uXH" secondAttribute="top" id="TO7-pH-Hc7"/>
                                     <constraint firstItem="B8F-ke-ULJ" firstAttribute="top" secondItem="eQ6-Hy-uXH" secondAttribute="top" id="VuZ-0E-scT"/>
                                     <constraint firstItem="rM3-gm-dNb" firstAttribute="width" secondItem="eQ6-Hy-uXH" secondAttribute="width" multiplier="1:4" id="bPI-Qw-dYc"/>
                                     <constraint firstItem="miI-Kx-Bj4" firstAttribute="top" secondItem="eQ6-Hy-uXH" secondAttribute="top" id="bmr-c7-XjT"/>
-                                    <constraint firstItem="juQ-5o-cSv" firstAttribute="width" secondItem="eQ6-Hy-uXH" secondAttribute="width" multiplier="1:4" id="bnB-Zr-wAR"/>
                                     <constraint firstItem="B8F-ke-ULJ" firstAttribute="width" secondItem="eQ6-Hy-uXH" secondAttribute="width" multiplier="1:4" id="gjF-mB-CXO"/>
                                     <constraint firstItem="miI-Kx-Bj4" firstAttribute="width" secondItem="eQ6-Hy-uXH" secondAttribute="width" multiplier="1:4" id="h86-5z-4dK"/>
-                                    <constraint firstItem="juQ-5o-cSv" firstAttribute="leading" secondItem="rM3-gm-dNb" secondAttribute="trailing" constant="-5" id="hBu-ZU-j9j"/>
                                     <constraint firstItem="B8F-ke-ULJ" firstAttribute="leading" secondItem="miI-Kx-Bj4" secondAttribute="trailing" constant="-5" id="lhQ-gB-IJH"/>
                                     <constraint firstItem="rM3-gm-dNb" firstAttribute="height" secondItem="eQ6-Hy-uXH" secondAttribute="height" id="pRP-c5-38z"/>
                                     <constraint firstItem="rM3-gm-dNb" firstAttribute="top" secondItem="eQ6-Hy-uXH" secondAttribute="top" id="rle-V4-RJJ"/>
@@ -1048,7 +1035,6 @@
                         <outlet property="noStepPassButton" destination="ms8-Um-3Wt" id="a97-o5-eMK"/>
                         <outlet property="noStepRunStatusLabel" destination="nRI-nh-DFo" id="wtr-ye-R3e"/>
                         <outlet property="noStepsView" destination="xDR-j2-5vA" id="ZiB-ZD-XCC"/>
-                        <outlet property="photoButton" destination="juQ-5o-cSv" id="FiJ-jG-AOo"/>
                         <outlet property="testRunNameLabel" destination="ukt-q7-rqc" id="9TX-3G-Tpf"/>
                         <outlet property="testStepTable" destination="7gT-7g-SHk" id="roX-jm-pwm"/>
                         <segue destination="RUt-e2-15a" kind="show" identifier="StepDetailSegue" id="lpX-AJ-yVN"/>
@@ -1082,7 +1068,6 @@
         <image name="FAIL.png" width="512" height="512"/>
         <image name="NOTES.png" width="512" height="512"/>
         <image name="PASS.png" width="512" height="512"/>
-        <image name="PHOTO.png" width="512" height="512"/>
         <image name="UPLOAD.png" width="512" height="512"/>
         <image name="folder-lightbl-redx.png" width="814" height="814"/>
         <image name="mtrlogo_v8-1.png" width="1099" height="408"/>
