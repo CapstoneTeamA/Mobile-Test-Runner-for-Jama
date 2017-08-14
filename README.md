@@ -1,6 +1,6 @@
 # Mobile Test Runner For Jama Software
 
-The Mobile test runner for Jama Software app is an iPhone application that will allow the users of the Jama Software product development platform to easily execute test plans, and test cases to manage testing in real-time. Users can view run, and submit their test cases.
+The Mobile test runner for Jama Software app is an iPhone application that will allow the users of the Jama Software product development platform to easily manage and execute their assigned test runs in real-time. Users can view, run, and submit their assigned test runs.
 
 ## Operation
 
