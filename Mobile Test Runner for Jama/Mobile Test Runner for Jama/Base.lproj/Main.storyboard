@@ -223,7 +223,7 @@
                                     <constraint firstAttribute="height" constant="40" id="BXr-eF-8Yi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" red="0.18250317258883253" green="0.18250317258883253" blue="0.18250317258883253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYY-xA-36m" userLabel="Margin Fixer View">
