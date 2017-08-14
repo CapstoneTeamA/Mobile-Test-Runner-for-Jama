@@ -435,72 +435,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="114-Ve-vhn">
-                                <rect key="frame" x="0.0" y="570" width="414" height="122"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="114-Ve-vhn" userLabel="ButtonView">
+                                <rect key="frame" x="0.0" y="588.66666666666652" width="414" height="103.33333333333337"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXM-kY-Oc6">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="122"/>
-                                        <color key="backgroundColor" red="0.20000000000000001" green="0.63137254899999995" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="105"/>
-                                        <state key="normal" title="✓">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXM-kY-Oc6">
+                                        <rect key="frame" x="7" y="0.0" width="104" height="103.33333333333337"/>
+                                        <state key="normal" image="PASS.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="didTapPass:" destination="RUt-e2-15a" eventType="touchUpInside" id="5nV-o4-RBv"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRQ-iu-ksj">
-                                        <rect key="frame" x="207" y="61" width="207" height="61"/>
-                                        <color key="backgroundColor" red="0.63881748910000002" green="8.8419670650000007e-05" blue="0.026509014890000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="52"/>
-                                        <state key="normal" title="✕">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRQ-iu-ksj">
+                                        <rect key="frame" x="105.99999999999999" y="0.0" width="103.66666666666664" height="103.33333333333337"/>
+                                        <state key="normal" image="FAIL.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="didTapFail:" destination="RUt-e2-15a" eventType="touchUpInside" id="lrh-wr-PWj"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnj-KD-mnB">
-                                        <rect key="frame" x="207" y="0.0" width="207" height="61"/>
-                                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="Add Results">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnj-KD-mnB" userLabel="Input Button">
+                                        <rect key="frame" x="204.66666666666669" y="0.0" width="103.66666666666669" height="103.33333333333337"/>
+                                        <state key="normal" image="NOTES.png">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
                                             <action selector="didTapAddResult:" destination="RUt-e2-15a" eventType="touchUpInside" id="UIr-a2-cKg"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8r-G9-ByA" userLabel="Photo Button">
+                                        <rect key="frame" x="303.33333333333326" y="0.0" width="103.66666666666669" height="103.33333333333337"/>
+                                        <state key="normal" image="PHOTO.png">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didTapAddPhoto:" destination="RUt-e2-15a" eventType="touchUpInside" id="F8Y-UR-j61"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="JXM-kY-Oc6" secondAttribute="bottom" id="3KF-Rj-G3D"/>
-                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="width" secondItem="JXM-kY-Oc6" secondAttribute="width" id="3qS-j9-rmn"/>
-                                    <constraint firstAttribute="height" constant="122" id="6Zm-cd-QLe"/>
-                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="leading" secondItem="JXM-kY-Oc6" secondAttribute="trailing" id="Cym-II-hNR"/>
-                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:2" id="L9u-gS-URD"/>
-                                    <constraint firstAttribute="bottom" secondItem="kRQ-iu-ksj" secondAttribute="bottom" id="LiM-wc-8W4"/>
-                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="height" secondItem="JXM-kY-Oc6" secondAttribute="height" multiplier="1:2" id="Qf7-iu-RCU"/>
-                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="width" secondItem="JXM-kY-Oc6" secondAttribute="width" id="SoN-rI-tqm"/>
-                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="height" secondItem="JXM-kY-Oc6" secondAttribute="height" multiplier="1:2" id="VUN-Rl-6xb"/>
-                                    <constraint firstAttribute="trailing" secondItem="kRQ-iu-ksj" secondAttribute="trailing" id="WcU-45-1SB"/>
+                                    <constraint firstItem="f8r-G9-ByA" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="5JW-g3-NlY"/>
+                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="leading" secondItem="JXM-kY-Oc6" secondAttribute="trailing" constant="-5" id="Cym-II-hNR"/>
+                                    <constraint firstItem="f8r-G9-ByA" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="Hg8-oA-82S"/>
+                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="Hqv-RW-xYK"/>
+                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="L9u-gS-URD"/>
+                                    <constraint firstItem="f8r-G9-ByA" firstAttribute="leading" secondItem="tnj-KD-mnB" secondAttribute="trailing" constant="-5" id="LxG-3U-CVg"/>
+                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="Mpv-lh-yrq"/>
+                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="ce1-IE-ewt"/>
+                                    <constraint firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="height" multiplier="4:1" id="fXI-3E-Hbj"/>
                                     <constraint firstItem="JXM-kY-Oc6" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="j7s-nm-B3i"/>
+                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="lcW-1L-uV3"/>
+                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="leading" secondItem="kRQ-iu-ksj" secondAttribute="trailing" constant="-5" id="q3f-u0-cde"/>
                                     <constraint firstItem="tnj-KD-mnB" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="sAf-eb-Ztp"/>
-                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="leading" secondItem="JXM-kY-Oc6" secondAttribute="trailing" id="tSt-6C-2JM"/>
-                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="leading" secondItem="114-Ve-vhn" secondAttribute="leading" id="tcP-vD-cmu"/>
+                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="leading" secondItem="114-Ve-vhn" secondAttribute="leading" constant="7" id="tcP-vD-cmu"/>
+                                    <constraint firstItem="f8r-G9-ByA" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="w81-dz-LTR"/>
+                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="xY2-Fz-Ys3"/>
+                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="y6g-dc-xiP"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSP-Eo-Vq8">
-                                <rect key="frame" x="0.0" y="568" width="414" height="2"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSP-Eo-Vq8" userLabel="Bottom Divider">
+                                <rect key="frame" x="0.0" y="578.66666666666663" width="414" height="10"/>
+                                <color key="backgroundColor" red="0.94509803920000002" green="0.3803921569" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="iWn-SL-8jU"/>
+                                    <constraint firstAttribute="height" constant="10" id="iWn-SL-8jU"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWW-gk-dOH">
-                                <rect key="frame" x="0.0" y="64" width="414" height="504"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWW-gk-dOH" userLabel="ContentView">
+                                <rect key="frame" x="0.0" y="64" width="414" height="514.66666666666663"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1e-iC-eME">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="42"/>
+                                        <rect key="frame" x="0.0" y="50" width="414" height="43.333333333333343"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="  Action">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -510,7 +517,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="j7z-pb-nHp" userLabel="Action Text View">
-                                        <rect key="frame" x="0.0" y="92" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="93.333333333333343" width="414" height="0.0"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="eQP-yN-0y4"/>
@@ -519,7 +526,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcP-7h-pXF">
-                                        <rect key="frame" x="0.0" y="94" width="414" height="42"/>
+                                        <rect key="frame" x="0.0" y="95.333333333333343" width="414" height="43.333333333333314"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="  Expected Results">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -529,7 +536,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8ZR-DR-O4d" userLabel="Expected Results Text View">
-                                        <rect key="frame" x="0.0" y="136" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="138.66666666666666" width="414" height="0.0"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="bYk-v3-2xJ"/>
@@ -538,7 +545,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FE8-ge-51F">
-                                        <rect key="frame" x="0.0" y="138" width="414" height="42"/>
+                                        <rect key="frame" x="0.0" y="140.66666666666663" width="414" height="43.333333333333343"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="  Notes">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -548,7 +555,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BC4-4i-yzl" userLabel="Notes Text View">
-                                        <rect key="frame" x="0.0" y="180" width="414" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="184" width="414" height="0.0"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="9ju-vS-ALo"/>
@@ -711,6 +718,7 @@
                         <outlet property="notesTextView" destination="BC4-4i-yzl" id="Kap-pC-0zT"/>
                         <outlet property="notesTextViewHeightConstraint" destination="9ju-vS-ALo" id="jEN-al-Djp"/>
                         <outlet property="passButton" destination="JXM-kY-Oc6" id="WBg-iC-cgs"/>
+                        <outlet property="photoButton" destination="f8r-G9-ByA" id="oyS-QU-VtV"/>
                         <outlet property="runNameLabel" destination="70c-cN-ElQ" id="4Ue-ZX-JD8"/>
                         <outlet property="runTitleLabel" destination="70c-cN-ElQ" id="MH7-4k-bO9"/>
                         <outlet property="titleDivider" destination="Vrx-6G-dwV" id="Pks-G8-biG"/>
@@ -893,7 +901,7 @@
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="enterText:" destination="NKr-0k-Apa" eventType="touchUpInside" id="f1C-a1-7Ym"/>
+                                            <action selector="didTapAddPhoto:" destination="NKr-0k-Apa" eventType="touchUpInside" id="YhK-4H-IMK"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1054,6 +1062,7 @@
                         <outlet property="noStepPassButton" destination="ms8-Um-3Wt" id="a97-o5-eMK"/>
                         <outlet property="noStepRunStatusLabel" destination="nRI-nh-DFo" id="wtr-ye-R3e"/>
                         <outlet property="noStepsView" destination="xDR-j2-5vA" id="ZiB-ZD-XCC"/>
+                        <outlet property="photoButton" destination="juQ-5o-cSv" id="FiJ-jG-AOo"/>
                         <outlet property="testRunNameLabel" destination="ukt-q7-rqc" id="9TX-3G-Tpf"/>
                         <outlet property="testStepTable" destination="7gT-7g-SHk" id="roX-jm-pwm"/>
                         <segue destination="RUt-e2-15a" kind="show" identifier="StepDetailSegue" id="lpX-AJ-yVN"/>
@@ -1084,7 +1093,9 @@
     </scenes>
     <resources>
         <image name="BLOCK.png" width="512" height="512"/>
+        <image name="FAIL.png" width="512" height="512"/>
         <image name="NOTES.png" width="512" height="512"/>
+        <image name="PASS.png" width="512" height="512"/>
         <image name="PHOTO.png" width="512" height="512"/>
         <image name="UPLOAD.png" width="512" height="512"/>
         <image name="folder-lightbl-redx.png" width="814" height="814"/>

@@ -34,6 +34,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var noStepPassButton: UIButton!
     @IBOutlet weak var noStepFailButton: UIButton!
     @IBOutlet weak var noStepRunStatusLabel: UILabel!
+    @IBOutlet weak var photoButton: UIButton!
     
     var instance = ""
     var username = ""
@@ -337,6 +338,12 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }
         return Data()
     }
+    
+    // When photo button on bottom panel is clicked
+    @IBAction func didTapAddPhoto(_ sender: Any) {
+        // TODO: add camera/image picker stuff
+    }
+    
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
