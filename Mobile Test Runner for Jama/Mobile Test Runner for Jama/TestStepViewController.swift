@@ -30,7 +30,6 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var runNameLabel: UILabel!
     @IBOutlet weak var runTitleLabel: UILabel!
     @IBOutlet weak var titleDivider: UIView!
-    @IBOutlet weak var photoButton: UIButton!
     
     var action = ""
     var expResult = ""
@@ -229,11 +228,6 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         }))
         
         present(clearAlert, animated: true, completion: nil)
-    }
-    
-    // When photo button on bottom panel is clicked
-    @IBAction func didTapAddPhoto(_ sender: Any) {
-        // TODO: add camera/image picker stuff
     }
     
 }

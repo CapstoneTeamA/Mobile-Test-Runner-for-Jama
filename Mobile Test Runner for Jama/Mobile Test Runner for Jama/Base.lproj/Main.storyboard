@@ -439,7 +439,7 @@
                                 <rect key="frame" x="0.0" y="588.66666666666652" width="414" height="103.33333333333337"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXM-kY-Oc6">
-                                        <rect key="frame" x="7" y="0.0" width="104" height="103.33333333333337"/>
+                                        <rect key="frame" x="56.333333333333343" y="0.0" width="104" height="103.33333333333337"/>
                                         <state key="normal" image="PASS.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -448,7 +448,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRQ-iu-ksj">
-                                        <rect key="frame" x="105.99999999999999" y="0.0" width="103.66666666666664" height="103.33333333333337"/>
+                                        <rect key="frame" x="155.33333333333337" y="0.0" width="103.66666666666663" height="103.33333333333337"/>
                                         <state key="normal" image="FAIL.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -457,7 +457,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnj-KD-mnB" userLabel="Input Button">
-                                        <rect key="frame" x="204.66666666666669" y="0.0" width="103.66666666666669" height="103.33333333333337"/>
+                                        <rect key="frame" x="254.00000000000003" y="0.0" width="103.66666666666671" height="103.33333333333337"/>
                                         <state key="normal" image="NOTES.png">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
@@ -465,33 +465,20 @@
                                             <action selector="didTapAddResult:" destination="RUt-e2-15a" eventType="touchUpInside" id="UIr-a2-cKg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8r-G9-ByA" userLabel="Photo Button">
-                                        <rect key="frame" x="303.33333333333326" y="0.0" width="103.66666666666669" height="103.33333333333337"/>
-                                        <state key="normal" image="PHOTO.png">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didTapAddPhoto:" destination="RUt-e2-15a" eventType="touchUpInside" id="F8Y-UR-j61"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="f8r-G9-ByA" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="5JW-g3-NlY"/>
                                     <constraint firstItem="kRQ-iu-ksj" firstAttribute="leading" secondItem="JXM-kY-Oc6" secondAttribute="trailing" constant="-5" id="Cym-II-hNR"/>
-                                    <constraint firstItem="f8r-G9-ByA" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="Hg8-oA-82S"/>
                                     <constraint firstItem="tnj-KD-mnB" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="Hqv-RW-xYK"/>
                                     <constraint firstItem="JXM-kY-Oc6" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="L9u-gS-URD"/>
-                                    <constraint firstItem="f8r-G9-ByA" firstAttribute="leading" secondItem="tnj-KD-mnB" secondAttribute="trailing" constant="-5" id="LxG-3U-CVg"/>
                                     <constraint firstItem="kRQ-iu-ksj" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="Mpv-lh-yrq"/>
+                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="centerX" secondItem="114-Ve-vhn" secondAttribute="centerX" id="UgI-oW-4ta"/>
                                     <constraint firstItem="kRQ-iu-ksj" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="ce1-IE-ewt"/>
                                     <constraint firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="height" multiplier="4:1" id="fXI-3E-Hbj"/>
                                     <constraint firstItem="JXM-kY-Oc6" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="j7s-nm-B3i"/>
                                     <constraint firstItem="tnj-KD-mnB" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="lcW-1L-uV3"/>
                                     <constraint firstItem="tnj-KD-mnB" firstAttribute="leading" secondItem="kRQ-iu-ksj" secondAttribute="trailing" constant="-5" id="q3f-u0-cde"/>
                                     <constraint firstItem="tnj-KD-mnB" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="sAf-eb-Ztp"/>
-                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="leading" secondItem="114-Ve-vhn" secondAttribute="leading" constant="7" id="tcP-vD-cmu"/>
-                                    <constraint firstItem="f8r-G9-ByA" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="w81-dz-LTR"/>
                                     <constraint firstItem="kRQ-iu-ksj" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="xY2-Fz-Ys3"/>
                                     <constraint firstItem="JXM-kY-Oc6" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="y6g-dc-xiP"/>
                                 </constraints>
@@ -718,7 +705,6 @@
                         <outlet property="notesTextView" destination="BC4-4i-yzl" id="Kap-pC-0zT"/>
                         <outlet property="notesTextViewHeightConstraint" destination="9ju-vS-ALo" id="jEN-al-Djp"/>
                         <outlet property="passButton" destination="JXM-kY-Oc6" id="WBg-iC-cgs"/>
-                        <outlet property="photoButton" destination="f8r-G9-ByA" id="oyS-QU-VtV"/>
                         <outlet property="runNameLabel" destination="70c-cN-ElQ" id="4Ue-ZX-JD8"/>
                         <outlet property="runTitleLabel" destination="70c-cN-ElQ" id="MH7-4k-bO9"/>
                         <outlet property="titleDivider" destination="Vrx-6G-dwV" id="Pks-G8-biG"/>
