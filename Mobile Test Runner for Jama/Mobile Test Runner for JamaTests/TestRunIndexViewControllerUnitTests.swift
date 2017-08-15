@@ -267,7 +267,7 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         let run = TestRunModel()
         run.testStatus = "NOT_RUN"
         viewController.testRun = run
-        XCTAssertEqual(viewController.testRunStatusNotRunStr , viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusInProgressStr , viewController.noStepRunStatusLabel.text)
         XCTAssertEqual(viewController.notSelectedFailButtonImage, viewController.noStepFailButton.currentImage)
         XCTAssertEqual(viewController.notSelectedPassButtonImage, viewController.noStepPassButton.currentImage)
         
@@ -303,7 +303,7 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         let run = TestRunModel()
         run.testStatus = "NOT_RUN"
         viewController.testRun = run
-        XCTAssertEqual(viewController.testRunStatusNotRunStr, viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusInProgressStr, viewController.noStepRunStatusLabel.text)
         XCTAssertEqual(viewController.notSelectedFailButtonImage, viewController.noStepFailButton.currentImage)
         XCTAssertEqual(viewController.notSelectedPassButtonImage, viewController.noStepPassButton.currentImage)
         
