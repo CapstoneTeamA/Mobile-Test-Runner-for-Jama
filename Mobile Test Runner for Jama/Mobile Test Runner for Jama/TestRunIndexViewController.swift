@@ -48,6 +48,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var testRunDelegate: TestRunDelegate!
     let placeholderText = "Enter actual results here"
     let testRunStatusNotRunStr = "Test Run Status: Not Run"
+    let testRunStatusInProgressStr = "Test Run Status: In Progress"
     let testRunStatusPassStr = "Test Run Status: Passed"
     let testRunStatusFailStr = "Test Run Status: Failed"
     let selectedPassButtonImage = UIImage.init(named: "PASS.png")
@@ -248,9 +249,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     func togglePassButton() {
         //If the status label is the passing string then unselect the button and replace passing status with not run
         if noStepRunStatusLabel.text == testRunStatusPassStr {
-            noStepRunStatusLabel.text = testRunStatusNotRunStr
+            noStepRunStatusLabel.text = testRunStatusInProgressStr
             noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
-            testRun.testStatus = "NOT_RUN"
+            testRun.testStatus = "INPROGRESS"
         } else {
             //Toggle pass button on, set test status and label and change pass button image to selected image
             noStepRunStatusLabel.text = testRunStatusPassStr
@@ -262,11 +263,11 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     }
     
     func toggleFailButton() {
-        //If the status label is the failing string then unselect the button and replace the failing status with not run
+        //If the status label is the failing string then unselect the button and replace the failing status with in progress
         if noStepRunStatusLabel.text == testRunStatusFailStr {
-            noStepRunStatusLabel.text = testRunStatusNotRunStr
+            noStepRunStatusLabel.text = testRunStatusInProgressStr
             noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
-            testRun.testStatus = "NOT_RUN"
+            testRun.testStatus = "INPROGRESS"
         } else {
             //Toggle fail button on, set test status and label and change the fail button image to selected image
             noStepRunStatusLabel.text = testRunStatusFailStr 
@@ -317,6 +318,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         //If there are no steps, submit a status. Otherwise submit the test steps
         //If the run has steps the status is a derived value based on the steps
         if self.testRun.testStepList.isEmpty {
+            if self.testRun.testStatus == "NOT_RUN"{
+                self.testRun.testStatus = "INPROGRESS"
+            }
             body.updateValue(self.testRun.testStatus as AnyObject, forKey: "testRunStatus")
         } else {
             body.updateValue(stepList as AnyObject , forKey: "testRunSteps")
