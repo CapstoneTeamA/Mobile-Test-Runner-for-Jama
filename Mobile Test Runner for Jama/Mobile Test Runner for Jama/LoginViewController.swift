@@ -110,7 +110,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 extension LoginViewController: EndpointDelegate{
     func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
         //Enable login button once async function returns.
-        //This can take a while if you provide a bad instance name.
         DispatchQueue.main.async {
             self.loginButton.isEnabled = true
         }
@@ -131,11 +130,9 @@ extension LoginViewController: EndpointDelegate{
         DispatchQueue.main.async {
             //Make sure that the authorization error message is hidden
             self.unauthorizedLabel.isHidden = true
-            //Extract the users name and will eventually call a segue to next screen.
+            //Extract the current user's information from the API returned data.
             self.currentUser.extractUser(fromData: unwrappedData[0])
-            //Extract the users name and will eventually call a segue to next screen.
             
-            //This should be replaced in the future by using a singleton for the current user and using a segue.
             let viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProjectListViewController") as! ProjectListViewController
             viewController.currentUser = self.currentUser
             viewController.username = self.userNameTextBox.text!

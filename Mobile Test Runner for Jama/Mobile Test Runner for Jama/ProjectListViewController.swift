@@ -58,9 +58,9 @@ class ProjectListViewController: UIViewController {
     }
     
     func checkProjectListEmpty() {
-        //if there's nothing in the list
+        //If there's nothing in the list
         if (self.projectList.projectList.isEmpty) {
-            //show the image and the words
+            //Show the image and the words
             noProjectsLabel.isHidden = false
             noProjectsImage.isHidden = false
             noProjectsLabel.text = noProjectsMessage
@@ -68,7 +68,7 @@ class ProjectListViewController: UIViewController {
             formatEmptyProjectMessage()
         }
         else {
-            //set both image and label to invisible
+            //Set both image and label to invisible
             noProjectsLabel.isHidden = true
             noProjectsImage.isHidden = true
             noProjectsMargin.isHidden = true
@@ -87,24 +87,13 @@ class ProjectListViewController: UIViewController {
         return lhs.name.uppercased() < rhs.name.uppercased()
     }
     
-//  Useful to make sure that giant project lists are handled okay.
-//    func debugHugeProjectList(){
-//        for ndx in 0...1000 {
-//            let tmpProject = ProjectModel()
-//            tmpProject.name = "project \(ndx)"
-//            self.projectList.projectList.append(tmpProject)
-//        }
-//    }
     func endpointErrorOccured(){
         serverErrorLabel.isHidden = false
     }
 }
 
-
-
 extension ProjectListViewController: EndpointDelegate {
     func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
-        //set image to invisible ASAP
         
         guard let unwrappedData = data else {
             endpointErrorOccured()
@@ -114,23 +103,14 @@ extension ProjectListViewController: EndpointDelegate {
             self.noProjectsImage.isHidden = true
             self.noProjectsLabel.isHidden = true
             self.noProjectsMargin.isHidden = true
-            //Boolean that will determine if we should load the data into the view automatically if 
-            //"scroll to bottom" lazy loading is enabled.
-//            let isInitialAPICall = self.projectList.projectList.count == 0
-            
+   
             let tmpList = ProjectListModel()
             tmpList.extractProjectList(fromData: unwrappedData)
             self.projectList.projectList.append(contentsOf: tmpList.projectList)
-            
-            //It looks like the API returns the list sorted but it seems like we should make sure
             self.projectList.projectList.sort(by: self.compareProjectNames(lhs:rhs:))
-//            self.debugHugeProjectList()
             
-            //Since we are lazy loading the list only load the data into the view if it is the initial data
-            //This if statement is commented out so the collection will continuously reloaded as the API returns a page
-//            if isInitialAPICall {
-            self.collectionView.reloadData() //After async call, reload the collection data
-//            }
+            //After async call, reload the collection data
+            self.collectionView.reloadData()
             
             //As long as there are more Projects that we need to get from the API keep calling for them.
             if self.collectionView.numberOfItems(inSection: 0) < totalItems {
@@ -141,7 +121,6 @@ extension ProjectListViewController: EndpointDelegate {
         }
     }
 }
-
 
 extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //How many cells will the collection view have
@@ -165,19 +144,6 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         self.navigationController?.pushViewController(testViewController, animated: true)
     }
     
-    //This is to be used if we want to detect the user has scrolled to the bottom of the list and reload the data then.
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let scrollHeight = scrollView.frame.size.height
-//        let scrollViewContentHeight = scrollView.contentSize.height
-//        let scrollOffset = scrollView.contentOffset.y
-//        
-//        if scrollHeight + scrollOffset == scrollViewContentHeight {
-//            if collectionView.numberOfItems(inSection: 0) < projectList.projectList.count {
-//                collectionView.reloadData()
-//            }
-//        }
-//    }
-    
     func buildCell(indexPath: IndexPath) -> ProjectCollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProjectCollectionViewCell
         cell.projectCellLabel.text = projectList.projectList[indexPath.row].name
@@ -185,7 +151,6 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         return cell
     }
     
-    //Make the cell all pretty
     func prepCell(forCell: ProjectCollectionViewCell) {
         forCell.layer.cornerRadius = 5.0
         forCell.layer.shadowColor = UIColor.lightGray.cgColor
@@ -195,5 +160,4 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         forCell.layer.masksToBounds = false
         forCell.layer.shadowPath = UIBezierPath(roundedRect: forCell.bounds, cornerRadius: forCell.contentView.layer.cornerRadius).cgPath
     }
-
 }
