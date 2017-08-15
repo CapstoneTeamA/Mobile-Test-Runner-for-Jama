@@ -15,7 +15,7 @@ protocol EndpointDelegate {
 class RestHelper {
     
     static func getEndpointString(method: String, endpoint: String) -> String{
-        //Get the Endpoints plist, using the http method string select the correct dictionary of endpoints, then grab and return the endpoint
+        //Get the Endpoints plist, using the http method string select the correct dictionary of endpoints, then grab and return the endpoint.
         if let plist = Bundle.main.path(forResource: "Endpoints", ofType: "plist"), let dict = NSDictionary(contentsOfFile: plist) as? [String : AnyObject] {
             guard let httpDict: [String : AnyObject] = dict[method] as? Dictionary else {
                 print("HTTP method does not exist. Ensure method is all caps")
@@ -36,7 +36,7 @@ class RestHelper {
         let loginString = username + ":" + password
         let loginData = loginString.data(using: String.Encoding.utf8)
         
-        //encode the username and password into the 64bit string expected for basic auth
+        //Encode the username and password into the 64bit string expected for basic auth
         guard let base64LoginString = loginData?.base64EncodedString() else {
             print("Could not encode user info for test")
             return URLRequest(url: url)
@@ -80,7 +80,7 @@ class RestHelper {
         } else {
             //user authorized, parse data section of response and print greeting
             if jsonData["data"] is Dictionary<String,AnyObject> {
-                //this is needed for endpoints that only return a single object e.g. currentUser
+                //This is needed for endpoints that only return a single object e.g. currentUser
                 //as these are not returned wrapped in an array.
                 endpointData.append(jsonData["data"] as! Dictionary)
             } else {
@@ -128,7 +128,7 @@ class RestHelper {
                 var totalItems = 0
                 (endpointData, totalItems) = self.processRestJson(jsonData: jsonData)
                 
-                //Call on the provided delegate
+                //Call on the provided delegate.
                 withDelegate.didLoadEndpoint(data: endpointData, totalItems: totalItems)
                 
             } catch {
@@ -151,7 +151,7 @@ class RestHelper {
                 print(error!)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-                print(httpResponse!) //grab this and display to the user
+                print(httpResponse!) //Grab this and display to the user.
                 withDelegate.didPutTestRun(responseCode: (httpResponse?.statusCode)!)
             }
         })

@@ -57,7 +57,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //hide the default back button and instead show cancel run
+        //Hide the default back button and instead show cancel run
         self.navigationItem.hidesBackButton = true
         testRunNameLabel.text = testRun.name
         self.setupPopup()
@@ -79,11 +79,11 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        //Dispose of any resources that can be recreated.
     }
     
     @IBAction func cancelRun(_ sender: UIBarButtonItem) {
-        //if the cancel run button is hit, pop up an alert that either does nothing or goes back a screen to select a different run.
+        //If the cancel run button is hit, pop up an alert that either does nothing or goes back a screen to select a different run.
         let cancelAlert = UIAlertController(title: "Cancel Run", message: "All run data will be lost. Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
         
         cancelAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .cancel, handler: {
@@ -109,7 +109,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     }
     
 
-    //if the submit run button is hit, pop up an alert that either does nothing or submits all of the run data to the API
+    //If the submit run button is hit, pop up an alert that either does nothing or submits all of the run data to the API
     @IBAction func submitButton(_ sender: Any) {
         let submitAlert = UIAlertController(title: "Submit Run", message: "All run data will be saved and uploaded. Are you sure you want to submit?", preferredStyle: UIAlertControllerStyle.alert)
         
@@ -127,7 +127,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         present(submitAlert, animated: true, completion: nil)
     }
     
-    //if the block run button is hit, pop up an alert that either does nothing or submits the run as blocked to the API
+    //If the block run button is hit, pop up an alert that either does nothing or submits the run as blocked to the API
     @IBAction func blockedButton(_ sender: UIButton) {
         //Ensure that blocking will be allowed by the API
         if testRun.testStepList.isEmpty == false && testRun.testStepList.last?.status != "NOT_RUN" {
@@ -182,7 +182,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         initialRunResultField = testRun.result
     }
     
-    // Used to set up text window popup, called in viewDidLoad
+    //Used to set up text window popup, called in viewDidLoad
     func setupPopup() {
         NotificationCenter.default.addObserver(self, selector: #selector(TestRunIndexViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TestRunIndexViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -201,7 +201,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    // Called when 'Input Results' button is clicked
+    //Called when 'Input Results' button is clicked
     @IBAction func enterText(_ sender: UIButton) {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
@@ -209,7 +209,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         self.navigationController?.view.addSubview(inputResultsBox)
     }
     
-    // Called when 'Done' button in popup is clicked
+    //Called when 'Done' button in popup is clicked
     @IBAction func saveText(_ sender: UIButton) {
         inputResultsBackground.isHidden = true
         inputResultsBox.isHidden = true
@@ -220,7 +220,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         inputResultsTextBox.resignFirstResponder()
     }
     
-    // Move popup when keyboard appears/hides
+    //Move popup when keyboard appears/hides
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
@@ -287,7 +287,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         toggleFailButton()
     }
 
-    //build the endpoint for submitting the test run
+    //Build the endpoint for submitting the test run
     func buildTestRunPutEndpointString() -> String {
         var endpoint = RestHelper.getEndpointString(method: "Put", endpoint: "TestRuns")
         endpoint = "https://" + instance + "." + endpoint
@@ -297,7 +297,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     func buildPutRunBody() -> Data {
         var stepList: [[String : AnyObject]] = []
         
-        //build the testRunSteps value for the API call
+        //Build the testRunSteps value for the API call
         for step in self.testRun.testStepList {
             let stepDict: [String : AnyObject] = [
                 "action" : step.action as AnyObject,
