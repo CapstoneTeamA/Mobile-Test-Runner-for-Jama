@@ -46,6 +46,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var initialRunResultField = ""
     var currentUser: UserModel!
     var testRunDelegate: TestRunDelegate!
+    var popupOriginY: CGFloat = 0
     let placeholderText = "Enter actual results here"
     let testRunStatusNotRunStr = "Test Run Status: Not Run"
     let testRunStatusInProgressStr = "Test Run Status: In Progress"
@@ -212,6 +213,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         inputResultsBox.isHidden = false
         self.navigationController?.view.addSubview(inputResultsBackground)
         self.navigationController?.view.addSubview(inputResultsBox)
+        popupOriginY = self.inputResultsBox.frame.origin.y
     }
     
     // Called when 'Done' button in popup is clicked
@@ -228,13 +230,15 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     // Move popup when keyboard appears/hides
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
+            if popupOriginY == self.inputResultsBox.frame.origin.y {
+                self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
+            }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.inputResultsBox.frame.origin.y += keyboardSize.height/3
+        if popupOriginY != self.inputResultsBox.frame.origin.y {
+            self.inputResultsBox.frame.origin.y = popupOriginY
         }
     }
     

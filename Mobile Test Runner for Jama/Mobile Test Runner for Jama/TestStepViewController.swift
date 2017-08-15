@@ -38,7 +38,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     var currentIndex = 0
     var indexLength = 0
     var indexDelegate: StepIndexDelegate!
-    let placeholderText = "Enter actual results here"
+    var popupOriginY: CGFloat = 0
+    let placeholderText = "Enter results here"
     let rightArrowStr = "small_right_chevron.png"
     let downArrowStr = "small_down_chevron.png"
     var titleAndDividerHeight: CGFloat = 0
@@ -73,6 +74,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         inputResultsBox.isHidden = false
         self.navigationController?.view.addSubview(inputResultsBackground)
         self.navigationController?.view.addSubview(inputResultsBox)
+        popupOriginY = self.inputResultsBox.frame.origin.y
     }
     
     @IBAction func didTapFail(_ sender: Any) {
@@ -188,13 +190,15 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     // Move popup when keyboard appears/hides
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
+            if popupOriginY == self.inputResultsBox.frame.origin.y {
+                self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
+            }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.inputResultsBox.frame.origin.y += keyboardSize.height/3
+        if popupOriginY != self.inputResultsBox.frame.origin.y {
+            self.inputResultsBox.frame.origin.y = popupOriginY
         }
     }
     
