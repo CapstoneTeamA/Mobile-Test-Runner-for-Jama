@@ -24,7 +24,6 @@ class ProjectModel {
         id = fromData["id"] as! Int
         name = fields["name"] as! String
         
-        //Appearently projectKey is not a required field on all projects.
         guard fields["projectKey"] != nil  else{
             return
         }

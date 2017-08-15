@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		130BFF8E1F36C3B2005F1660 /* TestRunIndexViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130BFF8D1F36C3B2005F1660 /* TestRunIndexViewControllerUnitTests.swift */; };
-		133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */ = {isa = PBXBuildFile; fileRef = 133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */; };
 		133971BB1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */; };
 		133971C31F2C326700AB9D30 /* TestStepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */; };
 		1379B5141F3D8502004E7231 /* small_down_chevron.png in Resources */ = {isa = PBXBuildFile; fileRef = 1379B5121F3D8502004E7231 /* small_down_chevron.png */; };
@@ -56,7 +55,6 @@
 		908CE8601F32744800042C1E /* X_icon_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 908CE85D1F32744800042C1E /* X_icon_red.png */; };
 		908CE8621F3274EE00042C1E /* empty_icon_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 908CE8611F3274EE00042C1E /* empty_icon_grey.png */; };
 		90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1E2381F0D787F00D66830 /* MaxTextLength.swift */; };
-		E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */; };
 		E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */ = {isa = PBXBuildFile; fileRef = E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */; };
 		E2840AED1F3E9C1B00559EF1 /* NOTES.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AEA1F3E9C1B00559EF1 /* NOTES.png */; };
 		E2840AEE1F3E9C1B00559EF1 /* PASS.png in Resources */ = {isa = PBXBuildFile; fileRef = E2840AEB1F3E9C1B00559EF1 /* PASS.png */; };
@@ -87,7 +85,6 @@
 
 /* Begin PBXFileReference section */
 		130BFF8D1F36C3B2005F1660 /* TestRunIndexViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunIndexViewControllerUnitTests.swift; sourceTree = "<group>"; };
-		133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Jama-logo-smallwtext.png"; sourceTree = "<group>"; };
 		133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepTableViewCell.swift; sourceTree = "<group>"; };
 		1379B5121F3D8502004E7231 /* small_down_chevron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_down_chevron.png; sourceTree = "<group>"; };
@@ -140,7 +137,6 @@
 		908CE85D1F32744800042C1E /* X_icon_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = X_icon_red.png; path = "Mobile Test Runner for Jama/X_icon_red.png"; sourceTree = SOURCE_ROOT; };
 		908CE8611F3274EE00042C1E /* empty_icon_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty_icon_grey.png; path = "Mobile Test Runner for Jama/empty_icon_grey.png"; sourceTree = SOURCE_ROOT; };
 		90D1E2381F0D787F00D66830 /* MaxTextLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxTextLength.swift; sourceTree = "<group>"; };
-		E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mtr-logo-v2.png"; sourceTree = "<group>"; };
 		E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-lightbl-redx.png"; sourceTree = "<group>"; };
 		E2840AEA1F3E9C1B00559EF1 /* NOTES.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NOTES.png; sourceTree = "<group>"; };
 		E2840AEB1F3E9C1B00559EF1 /* PASS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PASS.png; sourceTree = "<group>"; };
@@ -188,7 +184,6 @@
 				908CE85D1F32744800042C1E /* X_icon_red.png */,
 				E247FFBD1F206FB500E2A65C /* folder-lightbl-redx.png */,
 				E2B974361F312092007BE00E /* mtrlogo_v8-1.png */,
-				E247FFBB1F206E5B00E2A65C /* mtr-logo-v2.png */,
 				E2840AFD1F3ED3ED00559EF1 /* FAIL.png */,
 				E2840B051F3F98E900559EF1 /* FAIL_UNSELECTED.png */,
 				E2840AEA1F3E9C1B00559EF1 /* NOTES.png */,
@@ -197,7 +192,6 @@
 				E2840AFB1F3ED3E900559EF1 /* BLOCK.png */,
 				E2840AF31F3EA2B800559EF1 /* PHOTO.png */,
 				E2840AF91F3ECC8200559EF1 /* UPLOAD.png */,
-				133971B81F1B45DB00AB9D30 /* Jama-logo-smallwtext.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -453,7 +447,6 @@
 				E2840AEE1F3E9C1B00559EF1 /* PASS.png in Resources */,
 				E2840B061F3F98E900559EF1 /* FAIL_UNSELECTED.png in Resources */,
 				1379B5141F3D8502004E7231 /* small_down_chevron.png in Resources */,
-				E247FFBC1F206E5B00E2A65C /* mtr-logo-v2.png in Resources */,
 				13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */,
 				E2840AFC1F3ED3E900559EF1 /* BLOCK.png in Resources */,
 				E2840AED1F3E9C1B00559EF1 /* NOTES.png in Resources */,
@@ -463,7 +456,6 @@
 				908CE85E1F32744800042C1E /* check_icon_green.png in Resources */,
 				908CE8601F32744800042C1E /* X_icon_red.png in Resources */,
 				908CE8621F3274EE00042C1E /* empty_icon_grey.png in Resources */,
-				133971B91F1B45DB00AB9D30 /* Jama-logo-smallwtext.png in Resources */,
 				E2840B081F3F98F100559EF1 /* PASS_UNSELECTED.png in Resources */,
 				E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */,
 			);
