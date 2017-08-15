@@ -253,9 +253,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     func togglePassButton() {
         //If the status label is the passing string then unselect the button and replace passing status with not run
         if noStepRunStatusLabel.text == testRunStatusPassStr {
-            noStepRunStatusLabel.text = testRunStatusNotRunStr
+            noStepRunStatusLabel.text = testRunStatusInProgressStr
             noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
-            testRun.testStatus = "NOT_RUN"
+            testRun.testStatus = "INPROGRESS"
         } else {
             //Toggle pass button on, set test status and label and change pass button image to selected image
             noStepRunStatusLabel.text = testRunStatusPassStr
@@ -267,11 +267,11 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     }
     
     func toggleFailButton() {
-        //If the status label is the failing string then unselect the button and replace the failing status with not run
+        //If the status label is the failing string then unselect the button and replace the failing status with in progress
         if noStepRunStatusLabel.text == testRunStatusFailStr {
-            noStepRunStatusLabel.text = testRunStatusNotRunStr
+            noStepRunStatusLabel.text = testRunStatusInProgressStr
             noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
-            testRun.testStatus = "NOT_RUN"
+            testRun.testStatus = "INPROGRESS"
         } else {
             //Toggle fail button on, set test status and label and change the fail button image to selected image
             noStepRunStatusLabel.text = testRunStatusFailStr 
