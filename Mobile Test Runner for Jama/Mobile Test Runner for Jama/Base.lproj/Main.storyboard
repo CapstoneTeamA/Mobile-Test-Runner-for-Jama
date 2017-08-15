@@ -439,7 +439,10 @@
                                 <rect key="frame" x="0.0" y="588.66666666666652" width="414" height="103.33333333333337"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXM-kY-Oc6">
-                                        <rect key="frame" x="52" y="0.0" width="103.66666666666666" height="103.33333333333337"/>
+                                        <rect key="frame" x="48" y="5.3333333333333712" width="93" height="93"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="JXM-kY-Oc6" secondAttribute="height" multiplier="1:1" id="792-w9-TIV"/>
+                                        </constraints>
                                         <state key="normal" image="PASS.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -448,7 +451,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnj-KD-mnB" userLabel="Input Button">
-                                        <rect key="frame" x="155.66666666666669" y="0.0" width="103.66666666666669" height="103.33333333333337"/>
+                                        <rect key="frame" x="161" y="5.3333333333333712" width="93.333333333333343" height="93"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="tnj-KD-mnB" secondAttribute="height" multiplier="1:1" id="7Ae-sJ-iez"/>
+                                        </constraints>
                                         <state key="normal" image="NOTES.png">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
@@ -457,7 +463,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRQ-iu-ksj">
-                                        <rect key="frame" x="259.33333333333331" y="-0.66666666666662877" width="103.33333333333337" height="103.33333333333337"/>
+                                        <rect key="frame" x="274.33333333333331" y="5.3333333333333712" width="93" height="93"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="kRQ-iu-ksj" secondAttribute="height" multiplier="1:1" id="apf-bv-9dO"/>
+                                        </constraints>
                                         <state key="normal" image="FAIL.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -469,18 +478,15 @@
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="tnj-KD-mnB" firstAttribute="centerX" secondItem="114-Ve-vhn" secondAttribute="centerX" id="DZb-c2-fbp"/>
-                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="leading" secondItem="JXM-kY-Oc6" secondAttribute="trailing" id="Fje-R9-3vO"/>
-                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="leading" secondItem="tnj-KD-mnB" secondAttribute="trailing" id="Gbb-gm-whW"/>
-                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="Hqv-RW-xYK"/>
-                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="L9u-gS-URD"/>
-                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="Mpv-lh-yrq"/>
-                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="ce1-IE-ewt"/>
+                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="leading" secondItem="JXM-kY-Oc6" secondAttribute="trailing" constant="20" id="Fje-R9-3vO"/>
+                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="centerY" secondItem="114-Ve-vhn" secondAttribute="centerY" id="GMh-xK-fLZ"/>
+                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="leading" secondItem="tnj-KD-mnB" secondAttribute="trailing" constant="20" id="Gbb-gm-whW"/>
+                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="centerY" secondItem="114-Ve-vhn" secondAttribute="centerY" id="Gk6-BB-Z6n"/>
+                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" multiplier="9:10" id="Hqv-RW-xYK"/>
                                     <constraint firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="height" multiplier="4:1" id="fXI-3E-Hbj"/>
-                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="j7s-nm-B3i"/>
-                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="lcW-1L-uV3"/>
-                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="sAf-eb-Ztp"/>
-                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="xY2-Fz-Ys3"/>
-                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="y6g-dc-xiP"/>
+                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="centerY" secondItem="114-Ve-vhn" secondAttribute="centerY" id="nrF-sN-bZu"/>
+                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" multiplier="9:10" id="xY2-Fz-Ys3"/>
+                                    <constraint firstItem="JXM-kY-Oc6" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" multiplier="9:10" id="y6g-dc-xiP"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSP-Eo-Vq8" userLabel="Bottom Divider">
@@ -863,7 +869,10 @@
                                 <rect key="frame" x="0.0" y="588.66666666666652" width="414" height="103.33333333333337"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miI-Kx-Bj4" userLabel="Submit Button">
-                                        <rect key="frame" x="51.666666666666657" y="0.0" width="103.66666666666669" height="103.33333333333337"/>
+                                        <rect key="frame" x="47.666666666666671" y="5.3333333333333712" width="93.333333333333329" height="93"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="miI-Kx-Bj4" secondAttribute="height" multiplier="1:1" id="RKC-Ur-WxC"/>
+                                        </constraints>
                                         <state key="normal" image="UPLOAD.png">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
@@ -871,17 +880,11 @@
                                             <action selector="submitButton:" destination="NKr-0k-Apa" eventType="touchUpInside" id="c2n-tz-5Wt"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8F-ke-ULJ">
-                                        <rect key="frame" x="155.33333333333337" y="0.0" width="103.66666666666663" height="103.33333333333337"/>
-                                        <state key="normal" image="BLOCK.png">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="blockedButton:" destination="NKr-0k-Apa" eventType="touchUpInside" id="gfa-UW-uER"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rM3-gm-dNb" userLabel="Input Button">
-                                        <rect key="frame" x="259" y="0.0" width="103.66666666666669" height="103.33333333333337"/>
+                                        <rect key="frame" x="161" y="4.6666666666667425" width="93" height="93"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="rM3-gm-dNb" secondAttribute="height" multiplier="1:1" id="hlU-c3-nGY"/>
+                                        </constraints>
                                         <state key="normal" image="NOTES.png">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
@@ -889,22 +892,31 @@
                                             <action selector="enterText:" destination="NKr-0k-Apa" eventType="touchUpInside" id="Yk8-yL-2R4"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8F-ke-ULJ">
+                                        <rect key="frame" x="274" y="5.6666666666667425" width="93" height="93"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="B8F-ke-ULJ" secondAttribute="height" multiplier="1:1" id="QXS-I5-X1j"/>
+                                        </constraints>
+                                        <state key="normal" image="BLOCK.png">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="blockedButton:" destination="NKr-0k-Apa" eventType="touchUpInside" id="gfa-UW-uER"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="B8F-ke-ULJ" firstAttribute="height" secondItem="eQ6-Hy-uXH" secondAttribute="height" id="3XS-8Z-mU9"/>
                                     <constraint firstAttribute="width" secondItem="eQ6-Hy-uXH" secondAttribute="height" multiplier="4:1" id="6SP-J3-QQs"/>
-                                    <constraint firstItem="B8F-ke-ULJ" firstAttribute="centerX" secondItem="eQ6-Hy-uXH" secondAttribute="centerX" id="J2H-Ds-n1a"/>
-                                    <constraint firstItem="miI-Kx-Bj4" firstAttribute="height" secondItem="eQ6-Hy-uXH" secondAttribute="height" id="PXL-07-Nm4"/>
-                                    <constraint firstItem="B8F-ke-ULJ" firstAttribute="top" secondItem="eQ6-Hy-uXH" secondAttribute="top" id="VuZ-0E-scT"/>
-                                    <constraint firstItem="rM3-gm-dNb" firstAttribute="width" secondItem="eQ6-Hy-uXH" secondAttribute="width" multiplier="1:4" id="bPI-Qw-dYc"/>
-                                    <constraint firstItem="miI-Kx-Bj4" firstAttribute="top" secondItem="eQ6-Hy-uXH" secondAttribute="top" id="bmr-c7-XjT"/>
-                                    <constraint firstItem="B8F-ke-ULJ" firstAttribute="width" secondItem="eQ6-Hy-uXH" secondAttribute="width" multiplier="1:4" id="gjF-mB-CXO"/>
-                                    <constraint firstItem="miI-Kx-Bj4" firstAttribute="width" secondItem="eQ6-Hy-uXH" secondAttribute="width" multiplier="1:4" id="h86-5z-4dK"/>
-                                    <constraint firstItem="B8F-ke-ULJ" firstAttribute="leading" secondItem="miI-Kx-Bj4" secondAttribute="trailing" id="lhQ-gB-IJH"/>
-                                    <constraint firstItem="rM3-gm-dNb" firstAttribute="height" secondItem="eQ6-Hy-uXH" secondAttribute="height" id="pRP-c5-38z"/>
-                                    <constraint firstItem="rM3-gm-dNb" firstAttribute="top" secondItem="eQ6-Hy-uXH" secondAttribute="top" id="rle-V4-RJJ"/>
-                                    <constraint firstItem="rM3-gm-dNb" firstAttribute="leading" secondItem="B8F-ke-ULJ" secondAttribute="trailing" id="rw7-of-cEL"/>
+                                    <constraint firstItem="rM3-gm-dNb" firstAttribute="centerY" secondItem="eQ6-Hy-uXH" secondAttribute="centerY" id="9fr-6B-HZd"/>
+                                    <constraint firstItem="miI-Kx-Bj4" firstAttribute="trailing" secondItem="rM3-gm-dNb" secondAttribute="leading" constant="-20" id="I3S-mC-V08"/>
+                                    <constraint firstItem="rM3-gm-dNb" firstAttribute="centerX" secondItem="eQ6-Hy-uXH" secondAttribute="centerX" id="Lz8-eL-27a"/>
+                                    <constraint firstItem="miI-Kx-Bj4" firstAttribute="height" secondItem="eQ6-Hy-uXH" secondAttribute="height" multiplier="9:10" id="PXL-07-Nm4"/>
+                                    <constraint firstItem="B8F-ke-ULJ" firstAttribute="centerY" secondItem="eQ6-Hy-uXH" secondAttribute="centerY" id="PwN-wH-urA"/>
+                                    <constraint firstItem="B8F-ke-ULJ" firstAttribute="height" secondItem="eQ6-Hy-uXH" secondAttribute="height" multiplier="9:10" id="Sd9-vt-eRR"/>
+                                    <constraint firstItem="miI-Kx-Bj4" firstAttribute="centerY" secondItem="eQ6-Hy-uXH" secondAttribute="centerY" id="Uet-M4-RhH"/>
+                                    <constraint firstItem="B8F-ke-ULJ" firstAttribute="leading" secondItem="rM3-gm-dNb" secondAttribute="trailing" constant="20" id="Y5X-ed-QcI"/>
+                                    <constraint firstItem="rM3-gm-dNb" firstAttribute="height" secondItem="eQ6-Hy-uXH" secondAttribute="height" multiplier="9:10" id="pRP-c5-38z"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukt-q7-rqc">
@@ -1072,11 +1084,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BLOCK.png" width="512" height="512"/>
-        <image name="FAIL.png" width="512" height="512"/>
-        <image name="NOTES.png" width="512" height="512"/>
-        <image name="PASS.png" width="512" height="512"/>
-        <image name="UPLOAD.png" width="512" height="512"/>
+        <image name="BLOCK.png" width="392" height="395"/>
+        <image name="FAIL.png" width="391" height="391"/>
+        <image name="NOTES.png" width="393" height="393"/>
+        <image name="PASS.png" width="391" height="389"/>
+        <image name="UPLOAD.png" width="393" height="392"/>
         <image name="folder-lightbl-redx.png" width="814" height="814"/>
         <image name="mtrlogo_v8-1.png" width="1099" height="408"/>
     </resources>
