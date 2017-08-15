@@ -10,6 +10,7 @@ import UIKit
 
 protocol TestRunDelegate {
     func didUpdateTestRun()
+    func removeUpdatedItemFromTable()
 }
 
 class TestListViewController: UIViewController {
@@ -37,6 +38,7 @@ class TestListViewController: UIViewController {
     var totalCyclesReturnedFromServer = 0
     var currentTestLevel = TestLevel.plan
     var displayTestRunAlert = false
+    var selectedRunIndex = -1
     enum TestLevel {
         case plan, cycle, run
     }
@@ -252,8 +254,8 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             
             let runViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TestRunIndex") as! TestRunIndexViewController
             
-            let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
-            runViewController.testRun = self.testRunList.testRunList[currentRunIndex]
+            selectedRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
+            runViewController.testRun = self.testRunList.testRunList[selectedRunIndex]
             runViewController.username = username
             runViewController.password = password
             runViewController.instance = instance
@@ -422,5 +424,10 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
 extension TestListViewController: TestRunDelegate {
     func didUpdateTestRun() {
         displayTestRunAlert = true
+    }
+    
+    func removeUpdatedItemFromTable() {
+        testRunList.testRunList.remove(at: selectedRunIndex)
+        self.testList.reloadData()
     }
 }
