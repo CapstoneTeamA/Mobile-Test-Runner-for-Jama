@@ -439,7 +439,7 @@
                                 <rect key="frame" x="0.0" y="588.66666666666652" width="414" height="103.33333333333337"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXM-kY-Oc6">
-                                        <rect key="frame" x="51.333333333333343" y="0.0" width="104" height="103.33333333333337"/>
+                                        <rect key="frame" x="52" y="0.0" width="103.66666666666666" height="103.33333333333337"/>
                                         <state key="normal" image="PASS.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -447,17 +447,8 @@
                                             <action selector="didTapPass:" destination="RUt-e2-15a" eventType="touchUpInside" id="5nV-o4-RBv"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRQ-iu-ksj">
-                                        <rect key="frame" x="155.33333333333337" y="0.0" width="103.66666666666663" height="103.33333333333337"/>
-                                        <state key="normal" image="FAIL.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didTapFail:" destination="RUt-e2-15a" eventType="touchUpInside" id="lrh-wr-PWj"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnj-KD-mnB" userLabel="Input Button">
-                                        <rect key="frame" x="259" y="0.0" width="103.66666666666669" height="103.33333333333337"/>
+                                        <rect key="frame" x="155.66666666666669" y="0.0" width="103.66666666666669" height="103.33333333333337"/>
                                         <state key="normal" image="NOTES.png">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
@@ -465,19 +456,28 @@
                                             <action selector="didTapAddResult:" destination="RUt-e2-15a" eventType="touchUpInside" id="UIr-a2-cKg"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRQ-iu-ksj">
+                                        <rect key="frame" x="259.33333333333331" y="-0.66666666666662877" width="103.33333333333337" height="103.33333333333337"/>
+                                        <state key="normal" image="FAIL.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didTapFail:" destination="RUt-e2-15a" eventType="touchUpInside" id="lrh-wr-PWj"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="leading" secondItem="JXM-kY-Oc6" secondAttribute="trailing" id="Cym-II-hNR"/>
+                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="centerX" secondItem="114-Ve-vhn" secondAttribute="centerX" id="DZb-c2-fbp"/>
+                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="leading" secondItem="JXM-kY-Oc6" secondAttribute="trailing" id="Fje-R9-3vO"/>
+                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="leading" secondItem="tnj-KD-mnB" secondAttribute="trailing" id="Gbb-gm-whW"/>
                                     <constraint firstItem="tnj-KD-mnB" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="Hqv-RW-xYK"/>
                                     <constraint firstItem="JXM-kY-Oc6" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="L9u-gS-URD"/>
                                     <constraint firstItem="kRQ-iu-ksj" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="Mpv-lh-yrq"/>
-                                    <constraint firstItem="kRQ-iu-ksj" firstAttribute="centerX" secondItem="114-Ve-vhn" secondAttribute="centerX" id="UgI-oW-4ta"/>
                                     <constraint firstItem="kRQ-iu-ksj" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="ce1-IE-ewt"/>
                                     <constraint firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="height" multiplier="4:1" id="fXI-3E-Hbj"/>
                                     <constraint firstItem="JXM-kY-Oc6" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="j7s-nm-B3i"/>
                                     <constraint firstItem="tnj-KD-mnB" firstAttribute="width" secondItem="114-Ve-vhn" secondAttribute="width" multiplier="1:4" id="lcW-1L-uV3"/>
-                                    <constraint firstItem="tnj-KD-mnB" firstAttribute="leading" secondItem="kRQ-iu-ksj" secondAttribute="trailing" id="q3f-u0-cde"/>
                                     <constraint firstItem="tnj-KD-mnB" firstAttribute="top" secondItem="114-Ve-vhn" secondAttribute="top" id="sAf-eb-Ztp"/>
                                     <constraint firstItem="kRQ-iu-ksj" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="xY2-Fz-Ys3"/>
                                     <constraint firstItem="JXM-kY-Oc6" firstAttribute="height" secondItem="114-Ve-vhn" secondAttribute="height" id="y6g-dc-xiP"/>
