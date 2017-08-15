@@ -72,7 +72,7 @@ class TestListViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        //Dispose of any resources that can be recreated.
     }
     
     func buildTestPlanEndpointString() -> String {
@@ -227,8 +227,8 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+   
         //If we unselect a test plan or cycle return
-        
         if unselectTestPlan(indexPath: indexPath) || unselectTestCycle(indexPath: indexPath) {
             return
         }

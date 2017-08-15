@@ -62,11 +62,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         testRunNameLabel.text = testRun.name
         self.setupPopup()
         testStepTable.reloadData()
-        
-        //TODO this will end up being changed to an "In progress" string
         noStepRunStatusLabel.text = testRunStatusNotRunStr
-        //By definition the buttons will be unselected when this view loads.
-        //There was a small difference setting these in the storyboard vs here that was affecting testing so these were added.
         noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
         noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
     }
