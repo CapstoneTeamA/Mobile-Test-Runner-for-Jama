@@ -19,7 +19,7 @@ The login view controller handles the user interactions made on the login view s
 It sets up the username, password, and instance text boxes. Handles the keyboard for user input, checks for valid input, and then sends a basic auth request to the REST API. On login fail it presents the user with an error message, on login success it passes off to the projectsView screen. 
 
 #### ProjectListViewController
-The project list view controller handles the user interactions for the project list view screen found in the main storyboard. It calls the Jama API to get all of the projects available to the user and displays them in a collection view subview. 
+The project list view controller handles the user interactions for the project list view screen found in the main storyboard. It calls the Jama Software API to get all of the projects available to the user and displays them in a collection view subview. 
 
 ### Utils Folder
 * MaxTextLength.swift - Allows for setting of a max acceptible length of input into text boxes. This field can be found in the attributes inspector panel for the text boxes in Xcode 
