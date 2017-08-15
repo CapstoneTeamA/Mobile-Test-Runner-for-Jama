@@ -52,7 +52,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 
 Various icons resourced from [Natalia Jacquier](https://www.iconfinder.com/natuke)
 
-
 ## Acknowledgements
 
 * Our Sponsors: Iman Bilal & Eric Rickson at [Jama Software](https://www.jamasoftware.com/)
