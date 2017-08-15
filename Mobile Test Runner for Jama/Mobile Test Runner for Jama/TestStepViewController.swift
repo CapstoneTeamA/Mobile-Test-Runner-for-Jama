@@ -74,7 +74,6 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         inputResultsBox.isHidden = false
         self.navigationController?.view.addSubview(inputResultsBackground)
         self.navigationController?.view.addSubview(inputResultsBox)
-        popupOriginY = self.inputResultsBox.frame.origin.y
     }
     
     @IBAction func didTapFail(_ sender: Any) {
@@ -158,6 +157,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     // Used to set up text window popup, called in viewDidLoad
     func setupPopup() {
+        popupOriginY = self.inputResultsBox.frame.origin.y
         NotificationCenter.default.addObserver(self, selector: #selector(TestStepViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TestStepViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         inputResultsBox.isHidden = true
