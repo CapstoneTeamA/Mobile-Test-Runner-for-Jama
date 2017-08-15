@@ -172,12 +172,11 @@ extension TestListViewController: EndpointDelegate {
                         self.testCycleList.testCycleList.insert(emptyCycle, at: 0)
                         self.testList.reloadData()
                     }
-                    self.testList.reloadData()
                     
                     //At the last test plan, auto scroll down to make the cycle cell visible
                     if self.selectedPlanIndex == self.totalPlansReturnedFromServer - 1 {
                         self.scrollToLastRow()
-                }
+                    }
                 
                 case .run:
                     let tmpList = TestRunListModel()
