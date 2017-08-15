@@ -63,7 +63,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         testRunNameLabel.text = testRun.name
         self.setupPopup()
         testStepTable.reloadData()
-        noStepRunStatusLabel.text = testRunStatusNotRunStr
+        noStepRunStatusLabel.text = testRunStatusInProgressStr
         noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
         noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
     }
