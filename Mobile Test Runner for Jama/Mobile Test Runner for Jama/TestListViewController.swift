@@ -375,16 +375,14 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = self.testCycleList.testCycleList[currentCycleIndex].name
         
         //If cycle's cell is selected change the background color
-        if selectedCycleTableViewIndex != indexPath.row {
-//            cell.backgroundColor = UIColor.white
-        } else {
+        if selectedCycleTableViewIndex == indexPath.row {
             cell.selectCell()
-//            cell.backgroundColor = UIColor.white
         }
 
         if(self.testCycleList.testCycleList[0].name == "No Cycles Found")
         {
             cell.isUserInteractionEnabled = false
+            cell.icon.isHidden = true
         }
         return cell
     }

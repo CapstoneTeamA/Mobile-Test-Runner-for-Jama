@@ -37,7 +37,7 @@ class TestListTableViewCell: UITableViewCell {
         switch cellType {
         case .testPlan:
             indentWidth = 12
-            backgroundColor = UIColor.white
+            backgroundColor = UIColor.init(red: 0xE6/0xFF, green: 0xE6/0xFF, blue: 0xE6/0xFF, alpha: 1)
             break
             
         case .testCycle:
@@ -50,7 +50,7 @@ class TestListTableViewCell: UITableViewCell {
             icon.isHidden = true
             indentWidth = 28
             fontSize = 17
-            backgroundColor = UIColor.init(red: 0xE6/0xFF, green: 0xE6/0xFF, blue: 0xE6/0xFF, alpha: 1)
+            backgroundColor = UIColor.white
             break
         }
         
