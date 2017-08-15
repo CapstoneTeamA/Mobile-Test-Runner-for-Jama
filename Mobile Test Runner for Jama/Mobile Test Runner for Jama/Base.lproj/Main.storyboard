@@ -235,14 +235,14 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h28-EN-tPd" userLabel="TopDivider">
                                 <rect key="frame" x="0.0" y="104" width="414" height="10"/>
-                                <color key="backgroundColor" red="0.96583253145217896" green="0.46620351076126099" blue="0.21295166015625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.46666666666666667" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="e9D-xB-OfC"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELL-qg-OTg" userLabel="BottomDivider">
                                 <rect key="frame" x="0.0" y="726" width="414" height="10"/>
-                                <color key="backgroundColor" red="0.94509803921568625" green="0.38039215686274508" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.96469300985336304" green="0.46756166219711304" blue="0.2126733660697937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="BJK-1V-eId"/>
                                 </constraints>
@@ -930,7 +930,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TzA-TL-KAC" userLabel="Top Divider">
                                 <rect key="frame" x="0.0" y="104" width="414" height="10"/>
-                                <color key="backgroundColor" red="0.94509803921568625" green="0.38039215686274508" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.46666666666666667" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="bjx-gS-mFi"/>
                                 </constraints>
