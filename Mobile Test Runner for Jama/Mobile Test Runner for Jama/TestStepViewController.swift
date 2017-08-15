@@ -27,10 +27,9 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var expectedResultButton: UIButton!
     @IBOutlet weak var notesButton: UIButton!
-    @IBOutlet weak var runNameLabel: UILabel!
-    @IBOutlet weak var runTitleLabel: UILabel!
     @IBOutlet weak var titleDivider: UIView!
-    
+    @IBOutlet weak var runNameLabel: UILabel!
+ 
     var action = ""
     var expResult = ""
     var notes = ""
@@ -100,8 +99,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     }
     
     func alignHeaderButtonContents() {
-        let imageInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        let titleInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        let imageInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
+        let titleInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
         //Set the insets for all the accordion buttons to layout the image and title of the button
         actionButton.imageEdgeInsets = imageInset
         actionButton.titleEdgeInsets = titleInset
