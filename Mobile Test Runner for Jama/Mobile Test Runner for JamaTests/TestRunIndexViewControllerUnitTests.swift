@@ -280,9 +280,9 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         
         //Toggle pass button when pass button is selected
         viewController.togglePassButton()
-        XCTAssertEqual(viewController.testRunStatusNotRunStr, viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusInProgressStr, viewController.noStepRunStatusLabel.text)
         XCTAssertEqual(viewController.notSelectedPassButtonImage, viewController.noStepPassButton.currentImage)
-        XCTAssertEqual("NOT_RUN", viewController.testRun.testStatus)
+        XCTAssertEqual("INPROGRESS", viewController.testRun.testStatus)
         XCTAssertEqual(viewController.notSelectedFailButtonImage, viewController.noStepFailButton.currentImage)
         
         //Set up view controller to state where fail button is selected
@@ -316,9 +316,9 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         
         //Toggle fail button when fail button is selected
         viewController.toggleFailButton()
-        XCTAssertEqual(viewController.testRunStatusNotRunStr, viewController.noStepRunStatusLabel.text)
+        XCTAssertEqual(viewController.testRunStatusInProgressStr, viewController.noStepRunStatusLabel.text)
         XCTAssertEqual(viewController.notSelectedFailButtonImage, viewController.noStepFailButton.currentImage)
-        XCTAssertEqual("NOT_RUN", viewController.testRun.testStatus)
+        XCTAssertEqual("INPROGRESS", viewController.testRun.testStatus)
         XCTAssertEqual(viewController.notSelectedPassButtonImage, viewController.noStepPassButton.currentImage)
         
         //Set up view controller to state where pass button is selected
