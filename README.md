@@ -50,7 +50,7 @@ Information on these tests can be found in the Jama test [README.md](Mobile-Test
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/CapstoneTeamA/Mobile-Test-Runner-for-Jama/blob/master/LICENSE) file for details.
 
-Various icons rousourced from [Natalia Jacquier](https://www.iconfinder.com/natuke)
+Various icons resourced from [Natalia Jacquier](https://www.iconfinder.com/natuke)
 
 
 ## Acknowledgements
