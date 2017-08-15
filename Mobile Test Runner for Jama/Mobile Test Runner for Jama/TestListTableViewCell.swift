@@ -20,6 +20,12 @@ class TestListTableViewCell: UITableViewCell {
     var fontSize: CGFloat = 20
     let rightChevron = UIImage.init(named: "small_right_chevron.png")
     let downChevron = UIImage.init(named: "small_down_chevron.png")
+    let planIndentLevel: CGFloat = 12
+    let cycleIndentLevel: CGFloat = 28
+    let runIndentLevel: CGFloat = 28
+    let planBackgroundColor = UIColor.init(red: 0xE6/0xFF, green: 0xE6/0xFF, blue: 0xE6/0xFF, alpha: 1)
+    let cycleBackgroundColor = UIColor.init(red: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+    let runBackgroundColor = UIColor.white
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,21 +42,21 @@ class TestListTableViewCell: UITableViewCell {
         icon = UIImageView(image: image)
         switch cellType {
         case .testPlan:
-            indentWidth = 12
-            backgroundColor = UIColor.init(red: 0xE6/0xFF, green: 0xE6/0xFF, blue: 0xE6/0xFF, alpha: 1)
+            indentWidth = planIndentLevel
+            backgroundColor = planBackgroundColor
             break
             
         case .testCycle:
-            indentWidth = 28
+            indentWidth = cycleIndentLevel
             fontSize = 18
-            backgroundColor = UIColor.init(red: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
+            backgroundColor = cycleBackgroundColor
             break
             
         case .testRun:
             icon.isHidden = true
-            indentWidth = 28
+            indentWidth = runIndentLevel
             fontSize = 17
-            backgroundColor = UIColor.white
+            backgroundColor = runBackgroundColor
             break
         }
         
@@ -59,6 +65,7 @@ class TestListTableViewCell: UITableViewCell {
         nameLabel.center = CGPoint(x: 6 + indentWidth + icon.bounds.width  + nameLabel.bounds.width/2, y: self.contentView.center.y)
         
         nameLabel.font = UIFont(name: "Helvetica Neue", size: fontSize)
+        nameLabel.textAlignment = .left
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(icon)
     }

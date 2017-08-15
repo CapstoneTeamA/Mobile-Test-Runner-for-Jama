@@ -273,7 +273,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         getCyclesForPlanOnClick()
     }
     
-    func buildCell(indexPath: IndexPath) -> UITableViewCell {
+    func buildCell(indexPath: IndexPath) -> TestListTableViewCell {
         //If the cell needs to be a testRun cell
         if indexPath.row > selectedCycleTableViewIndex && indexPath.row <= selectedCycleTableViewIndex + testRunList.testRunList.count {
             return buildTestRunCell(indexPath: indexPath)
@@ -344,12 +344,11 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         selectedPlanId = testPlanList.testPlanList[selectedPlanIndex].id
     }
     
-    func buildTestRunCell(indexPath: IndexPath) -> UITableViewCell {
+    func buildTestRunCell(indexPath: IndexPath) -> TestListTableViewCell {
         let cell = TestListTableViewCell(style: .default, reuseIdentifier: "TestRunCell")
         let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
        
         cell.customInit(tableWidth: testList.frame.width, cellType: .testRun)
-//        cell.backgroundColor = UIColor.white
         if self.testRunList.testRunList[0].name == "No Runs Found" {
             cell.isUserInteractionEnabled = false
             cell.nameLabel.text = self.testRunList.testRunList[currentRunIndex].name
@@ -361,7 +360,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func buildTestCycleCell(indexPath: IndexPath) -> UITableViewCell {
+    func buildTestCycleCell(indexPath: IndexPath) -> TestListTableViewCell {
         //Find the index into the testCycleList to get the cycle name for the current cell
         var currentCycleIndex = largeNumber
         if indexPath.row <= selectedCycleTableViewIndex {
@@ -387,7 +386,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func buildTestPlanCell(indexPath: IndexPath) -> UITableViewCell {
+    func buildTestPlanCell(indexPath: IndexPath) -> TestListTableViewCell {
         let cell = TestListTableViewCell(style: .default, reuseIdentifier: "TestPlanCell")
         var currentPlanIndex = largeNumber
         
@@ -401,18 +400,11 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.nameLabel.text = testPlanList.testPlanList[currentPlanIndex].name
         
-        //If the plan's cell is selected change the background color
-    
-        //cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
-//        cell.backgroundColor = UIColor.white
         if selectedPlanIndex == indexPath.row {
-                //cell.backgroundColor = UIColor.lightGray
-//            cell.backgroundColor = UIColor.white
             cell.selectCell()
         }
         return cell
     }
-
 }
 
 extension TestListViewController: TestRunDelegate {
