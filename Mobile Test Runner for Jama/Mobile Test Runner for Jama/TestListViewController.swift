@@ -72,7 +72,7 @@ class TestListViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        //Dispose of any resources that can be recreated.
     }
     
     func buildTestPlanEndpointString() -> String {
@@ -123,7 +123,6 @@ class TestListViewController: UIViewController {
 extension TestListViewController: EndpointDelegate {
     func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
         guard let unwrappedData = data else {
-            //Do and Error work for a nil data returned from the endpoint
             return
         }
         DispatchQueue.main.async {
@@ -139,10 +138,10 @@ extension TestListViewController: EndpointDelegate {
                             self.testPlanList.testPlanList.append(plan)
                         }
                     }
-                    //reload Data in view
+                    //Reload Data in view
                     self.testList.reloadData()
                     
-                    //keep calling api while there is still more plans to get
+                    //Keep calling api while there is still more plans to get
                     if self.totalPlansReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
@@ -162,11 +161,11 @@ extension TestListViewController: EndpointDelegate {
                     self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
                     self.testList.reloadData()
                    
-                    //keep calling api while there are still more cycles
+                    //Keep calling api while there are still more cycles
                     if self.totalCyclesReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
                     }
-                    //if there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
+                    //If there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
                     if tmpList.testCycleList.isEmpty && self.testCycleList.testCycleList.isEmpty {
                         let emptyCycle = TestCycleModel();
                         self.testCycleList.testCycleList.insert(emptyCycle, at: 0)
@@ -192,12 +191,12 @@ extension TestListViewController: EndpointDelegate {
                     }
                     self.testList.reloadData()
                     
-                    //keep calling api while there are still more runs
+                    //Keep calling api while there are still more runs
                     if self.totalRunsReturnedFromServer < totalItems {
                         RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password)
                         return
                     }
-                    //if there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
+                    //If there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
                     if self.testRunList.testRunList.isEmpty {
                         let emptyRun = TestRunModel()
                         self.testRunList.testRunList.insert(emptyRun, at: 0)
@@ -240,8 +239,8 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+   
         //If we unselect a test plan or cycle return
-        
         if unselectTestPlan(indexPath: indexPath) || unselectTestCycle(indexPath: indexPath) {
             return
         }

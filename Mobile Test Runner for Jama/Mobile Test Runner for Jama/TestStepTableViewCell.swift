@@ -24,14 +24,13 @@ class TestStepTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        //Configure the view for the selected state
     }
 
     func customInit(tableWidth: CGFloat, stepNumber: Int, stepName: String, stepStatus: String) {
         self.bounds = CGRect(x: self.bounds.minX, y: self.bounds.minY, width: UIScreen.main.bounds.width, height: self.bounds.height)
         
-        //create the status image view from the images and set its position and inital display attribute
+        //Create the status image view from the images and set its position and inital display attribute
         var statusIcon: UIImage
         if stepStatus == "PASSED" {
             iconFileName = "check_icon_green.png"
@@ -51,7 +50,7 @@ class TestStepTableViewCell: UITableViewCell {
         numberLabel = UILabel(frame: CGRect(x: self.contentView.bounds.minX, y: self.contentView.bounds.minY, width: 40, height: self.contentView.bounds.height))
         nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - statusIconImageView.bounds.width - numberLabel.bounds.width - nameLabelOffset , height: self.contentView.bounds.height))
         
-        //set the position of the labels
+        //Set the position of the labels
         numberLabel.center = CGPoint(x: statusIconImageView.center.x + iconOffset + numberLabel.bounds.width/2 , y: self.contentView.center.y)
         nameLabel.center = CGPoint(x: numberLabel.center.x + iconOffset + nameLabel.bounds.width/2, y: self.contentView.center.y)
         
