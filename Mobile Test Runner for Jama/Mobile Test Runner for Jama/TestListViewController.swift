@@ -274,7 +274,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         getCyclesForPlanOnClick()
     }
     
-    func buildCell(indexPath: IndexPath) -> UITableViewCell {
+    func buildCell(indexPath: IndexPath) -> TestListTableViewCell {
         //If the cell needs to be a testRun cell
         if indexPath.row > selectedCycleTableViewIndex && indexPath.row <= selectedCycleTableViewIndex + testRunList.testRunList.count {
             return buildTestRunCell(indexPath: indexPath)
@@ -297,6 +297,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             selectedCycleTableViewIndex = largeNumber
             testCycleList.testCycleList = []
             testRunList.testRunList = []
+            (testList.cellForRow(at: indexPath) as! TestListTableViewCell).unselectCell()
             testList.reloadData()
             return true
         }
@@ -309,6 +310,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             selectedCycleTableViewIndex = largeNumber
             selectedCycleIndex = largeNumber
             testRunList.testRunList = []
+            (testList.cellForRow(at: indexPath) as! TestListTableViewCell).unselectCell()
             testList.reloadData()
             return true
         }
@@ -343,27 +345,22 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         selectedPlanId = testPlanList.testPlanList[selectedPlanIndex].id
     }
     
-    func buildTestRunCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestRunCell")
+    func buildTestRunCell(indexPath: IndexPath) -> TestListTableViewCell {
+        let cell = TestListTableViewCell(style: .default, reuseIdentifier: "TestRunCell")
         let currentRunIndex = indexPath.row - selectedCycleTableViewIndex - 1
-        
-        cell.textLabel?.textAlignment = .left
-        cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
-        cell.backgroundColor = UIColor.white
-        cell.indentationLevel = 1
+       
+        cell.customInit(tableWidth: testList.frame.width, cellType: .testRun)
         if self.testRunList.testRunList[0].name == "No Runs Found" {
             cell.isUserInteractionEnabled = false
-            cell.textLabel?.text = self.testRunList.testRunList[currentRunIndex].name
+            cell.nameLabel.text = self.testRunList.testRunList[currentRunIndex].name
         } else {
-            cell.textLabel?.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
-            
+            cell.nameLabel.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
             cell.accessoryType = .disclosureIndicator
-        
         }
         return cell
     }
     
-    func buildTestCycleCell(indexPath: IndexPath) -> UITableViewCell {
+    func buildTestCycleCell(indexPath: IndexPath) -> TestListTableViewCell {
         //Find the index into the testCycleList to get the cycle name for the current cell
         var currentCycleIndex = largeNumber
         if indexPath.row <= selectedCycleTableViewIndex {
@@ -372,52 +369,41 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             currentCycleIndex = indexPath.row - selectedPlanIndex - testRunList.testRunList.count - 1
         }
         
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestCycleCell")
-        
-        cell.textLabel?.text = self.testCycleList.testCycleList[currentCycleIndex].name
-        cell.textLabel?.textAlignment = .left
-        cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
+        let cell = TestListTableViewCell(style: .default, reuseIdentifier: "TestCycleCell")
+        cell.customInit(tableWidth: testList.frame.width, cellType: .testCycle)
+        cell.nameLabel.text = self.testCycleList.testCycleList[currentCycleIndex].name
         
         //If cycle's cell is selected change the background color
-        if selectedCycleTableViewIndex != indexPath.row {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0xE5/0xFF, green: 0xE5/0xFF, blue: 0xE5/0xFF, alpha: 1)
-        } else {
-            cell.backgroundColor = UIColor(colorLiteralRed: 0xFF/0xFF, green: 0xFD/0xFF, blue: 0xCF/0xFF, alpha: 1)
-            
+        if selectedCycleTableViewIndex == indexPath.row {
+            cell.selectCell()
         }
-        cell.indentationLevel = 1
-        cell.indentationWidth = 15.0
-        if(self.testCycleList.testCycleList[0].name == "No Cycles Found")
-        {
+
+        if self.testCycleList.testCycleList[0].name == "No Cycles Found" {
             cell.isUserInteractionEnabled = false
+            cell.icon.isHidden = true
         }
         return cell
     }
     
-    func buildTestPlanCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "TestPlanCell")
-        
-        //Find the index into the testPlanList to get the plan name
+    func buildTestPlanCell(indexPath: IndexPath) -> TestListTableViewCell {
+        let cell = TestListTableViewCell(style: .default, reuseIdentifier: "TestPlanCell")
         var currentPlanIndex = largeNumber
+        
+        cell.customInit(tableWidth: testList.frame.width, cellType: .testPlan)
+       
+        //Find the index into the testPlanList to get the plan name
         if indexPath.row <= selectedPlanIndex {
             currentPlanIndex = indexPath.row
         } else {
             currentPlanIndex = indexPath.row - testCycleList.testCycleList.count - testRunList.testRunList.count
         }
-        cell.textLabel?.text = testPlanList.testPlanList[currentPlanIndex].name
-        cell.textLabel?.textAlignment = .left
-        //If the plan's cell is selected change the background color
-    
-        cell.backgroundColor = UIColor(colorLiteralRed: 0x76/0xFF, green: 0xD3/0xFF, blue: 0xF5/0xFF, alpha: 1)
+        cell.nameLabel.text = testPlanList.testPlanList[currentPlanIndex].name
         
-        if selectedPlanIndex != indexPath.row {
-                cell.backgroundColor = UIColor.lightGray
+        if selectedPlanIndex == indexPath.row {
+            cell.selectCell()
         }
-        
-        cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 20.0)
         return cell
     }
-
 }
 
 extension TestListViewController: TestRunDelegate {

@@ -46,6 +46,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var initialRunResultField = ""
     var currentUser: UserModel!
     var testRunDelegate: TestRunDelegate!
+    var popupOriginY: CGFloat = 0
     let placeholderText = "Enter actual results here"
     let testRunStatusNotRunStr = "Test Run Status: Not Run"
     let testRunStatusInProgressStr = "Test Run Status: In Progress"
@@ -185,6 +186,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     
     //Used to set up text window popup, called in viewDidLoad
     func setupPopup() {
+        popupOriginY = self.inputResultsBox.frame.origin.y
         NotificationCenter.default.addObserver(self, selector: #selector(TestRunIndexViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TestRunIndexViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         inputResultsBox.isHidden = true
@@ -224,13 +226,15 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     //Move popup when keyboard appears/hides
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
+            if popupOriginY == self.inputResultsBox.frame.origin.y {
+                self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
+            }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.inputResultsBox.frame.origin.y += keyboardSize.height/3
+        if popupOriginY != self.inputResultsBox.frame.origin.y {
+            self.inputResultsBox.frame.origin.y = popupOriginY
         }
     }
     
