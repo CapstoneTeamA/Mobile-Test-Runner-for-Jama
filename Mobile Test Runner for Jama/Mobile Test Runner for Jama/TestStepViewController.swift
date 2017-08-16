@@ -38,7 +38,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     var currentIndex = 0
     var indexLength = 0
     var indexDelegate: StepIndexDelegate!
-    let placeholderText = "Enter actual results here"
+    var popupOriginY: CGFloat = 0
+    let placeholderText = "Enter results here"
     let rightArrowStr = "small_right_chevron.png"
     let downArrowStr = "small_down_chevron.png"
     var titleAndDividerHeight: CGFloat = 0
@@ -156,6 +157,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     
     // Used to set up text window popup, called in viewDidLoad
     func setupPopup() {
+        popupOriginY = self.inputResultsBox.frame.origin.y
         NotificationCenter.default.addObserver(self, selector: #selector(TestStepViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TestStepViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         inputResultsBox.isHidden = true
@@ -188,13 +190,15 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     // Move popup when keyboard appears/hides
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
+            if popupOriginY == self.inputResultsBox.frame.origin.y {
+                self.inputResultsBox.frame.origin.y -= keyboardSize.height/3
+            }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.inputResultsBox.frame.origin.y += keyboardSize.height/3
+        if popupOriginY != self.inputResultsBox.frame.origin.y {
+            self.inputResultsBox.frame.origin.y = popupOriginY
         }
     }
     
