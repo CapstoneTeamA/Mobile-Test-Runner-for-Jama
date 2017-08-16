@@ -23,6 +23,7 @@ class TestListTableViewCell: UITableViewCell {
     let planIndentLevel: CGFloat = 12
     let cycleIndentLevel: CGFloat = 28
     let runIndentLevel: CGFloat = 28
+    let nameLabelLeftPadding: CGFloat = 6
     let planBackgroundColor = UIColor.init(red: 0xE6/0xFF, green: 0xE6/0xFF, blue: 0xE6/0xFF, alpha: 1)
     let cycleBackgroundColor = UIColor.init(red: 0xF5/0xFF, green: 0xF5/0xFF, blue: 0xF5/0xFF, alpha: 1)
     let runBackgroundColor = UIColor.white
@@ -33,7 +34,6 @@ class TestListTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
@@ -62,10 +62,10 @@ class TestListTableViewCell: UITableViewCell {
         
         icon.center = CGPoint(x: icon.bounds.width/2 + indentWidth, y: self.contentView.bounds.height/2)
         nameLabel = UILabel(frame: CGRect(x: self.bounds.minX, y: self.bounds.minY, width: tableWidth - icon.bounds.width - acccessoryViewOffset - indentWidth, height: self.contentView.bounds.height))
-        nameLabel.center = CGPoint(x: 6 + indentWidth + icon.bounds.width  + nameLabel.bounds.width/2, y: self.contentView.center.y)
-        
+        nameLabel.center = CGPoint(x: indentWidth + icon.bounds.width + nameLabelLeftPadding + nameLabel.bounds.width/2, y: self.contentView.center.y)
         nameLabel.font = UIFont(name: "Helvetica Neue", size: fontSize)
         nameLabel.textAlignment = .left
+        
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(icon)
     }

@@ -353,7 +353,6 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.nameLabel.text = self.testRunList.testRunList[currentRunIndex].name
         } else {
             cell.nameLabel.text = "\(currentRunIndex + 1). " + self.testRunList.testRunList[currentRunIndex].name
-            
             cell.accessoryType = .disclosureIndicator
         }
         return cell
@@ -377,8 +376,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectCell()
         }
 
-        if(self.testCycleList.testCycleList[0].name == "No Cycles Found")
-        {
+        if self.testCycleList.testCycleList[0].name == "No Cycles Found" {
             cell.isUserInteractionEnabled = false
             cell.icon.isHidden = true
         }
