@@ -12,6 +12,7 @@
 		133971C31F2C326700AB9D30 /* TestStepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */; };
 		1379B5141F3D8502004E7231 /* small_down_chevron.png in Resources */ = {isa = PBXBuildFile; fileRef = 1379B5121F3D8502004E7231 /* small_down_chevron.png */; };
 		1379B5151F3D8502004E7231 /* small_right_chevron.png in Resources */ = {isa = PBXBuildFile; fileRef = 1379B5131F3D8502004E7231 /* small_right_chevron.png */; };
+		1379B5171F414E74004E7231 /* TestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1379B5161F414E74004E7231 /* TestListTableViewCell.swift */; };
 		13A342EF1F0367E9002EBC92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A342EE1F0367E9002EBC92 /* AppDelegate.swift */; };
 		13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F21F0367E9002EBC92 /* Main.storyboard */; };
 		13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13A342F51F0367E9002EBC92 /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepTableViewCell.swift; sourceTree = "<group>"; };
 		1379B5121F3D8502004E7231 /* small_down_chevron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_down_chevron.png; sourceTree = "<group>"; };
 		1379B5131F3D8502004E7231 /* small_right_chevron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_right_chevron.png; sourceTree = "<group>"; };
+		1379B5161F414E74004E7231 /* TestListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListTableViewCell.swift; sourceTree = "<group>"; };
 		13A342EB1F0367E9002EBC92 /* Mobile Test Runner for Jama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Test Runner for Jama.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A342EE1F0367E9002EBC92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13A342F31F0367E9002EBC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				13A343271F04C2B4002EBC92 /* TestStepViewController.swift */,
 				4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */,
 				133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */,
+				1379B5161F414E74004E7231 /* TestListTableViewCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				133971C31F2C326700AB9D30 /* TestStepTableViewCell.swift in Sources */,
 				13A3433E1F04C49F002EBC92 /* TestCycleModel.swift in Sources */,
 				13A342EF1F0367E9002EBC92 /* AppDelegate.swift in Sources */,
+				1379B5171F414E74004E7231 /* TestListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
