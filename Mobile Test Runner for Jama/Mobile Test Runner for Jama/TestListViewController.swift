@@ -187,7 +187,7 @@ extension TestListViewController: EndpointDelegate {
                     
                     //Filter the runs returned from the API to select the assignedTo value is the current user's id
                     for run in tmpList.testRunList {
-                        if run.assignedTo == self.currentUser.id && run.testStatus == "NOT_RUN"  {
+                        if run.assignedTo == self.currentUser.id && (run.testStatus == "NOT_RUN" || run.testStatus == "INPROGRESS") {
                             self.testRunList.testRunList.append(run)
                         }
                     }
