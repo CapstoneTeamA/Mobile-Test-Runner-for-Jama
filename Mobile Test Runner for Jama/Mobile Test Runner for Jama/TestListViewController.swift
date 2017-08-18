@@ -60,14 +60,13 @@ class TestListViewController: UIViewController {
         //If a test run has just updated before this view appeared
         if displayTestRunAlert {
             //Alert the user that the update was successful
-            let updateSucceededAlert = UIAlertController(title: updatedRunName + " updated", message: updatedRunName + " was successfully committed.", preferredStyle: UIAlertControllerStyle.alert)
-            //Present alert and hide it after 3 seconds
-            let hideAlert = DispatchTime.now() + 3
+            let updateSucceededAlert = UIAlertController(title: "Test Run Updated", message: updatedRunName + " was successfully committed.", preferredStyle: UIAlertControllerStyle.alert)
+            
+            updateSucceededAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
+                (action: UIAlertAction!) in
+                _ = ""
+            }))
             self.present(updateSucceededAlert, animated: true, completion: nil)
-        
-            DispatchQueue.main.asyncAfter(deadline: hideAlert){
-                updateSucceededAlert.dismiss(animated: true, completion: nil)
-            }
         }
         //Unset the flag for test run updates.
         displayTestRunAlert = false
