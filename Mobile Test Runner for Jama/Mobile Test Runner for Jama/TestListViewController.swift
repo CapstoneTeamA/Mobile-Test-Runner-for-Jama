@@ -199,7 +199,7 @@ extension TestListViewController: EndpointDelegate {
                         return
                     }
                     //If there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
-                    if self.testRunList.testRunList.isEmpty {
+                    if self.testRunList.testRunList.isEmpty && self.selectedTestCycleId != -1 {
                         let emptyRun = TestRunModel()
                         self.testRunList.testRunList.insert(emptyRun, at: 0)
                         self.testList.reloadData()
@@ -309,6 +309,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         if selectedCycleTableViewIndex == indexPath.row {
             selectedCycleTableViewIndex = largeNumber
             selectedCycleIndex = largeNumber
+            selectedTestCycleId = -1
             testRunList.testRunList = []
             (testList.cellForRow(at: indexPath) as! TestListTableViewCell).unselectCell()
             testList.reloadData()
