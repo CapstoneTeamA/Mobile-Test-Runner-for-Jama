@@ -10,7 +10,7 @@ import UIKit
 
 protocol TestRunDelegate {
     func didUpdateTestRun()
-    func removeUpdatedItemFromTable()
+    func removeUpdatedItemFromTable(status:String)
 }
 
 class TestListViewController: UIViewController {
@@ -412,9 +412,14 @@ extension TestListViewController: TestRunDelegate {
         displayTestRunAlert = true
     }
     
-    //TODO this method will be updated to take a status and unless the status is "in progress" the run will be removed.
-    func removeUpdatedItemFromTable() {
-        testRunList.testRunList.remove(at: selectedRunIndex)
-        self.testList.reloadData()
+    // Remove the run from the list unless the status is 'in progress'
+    func removeUpdatedItemFromTable(status:String) {
+        if status != "INPROGRESS"{
+            testRunList.testRunList.remove(at: selectedRunIndex)
+            self.testList.reloadData()
+        }
+        else {
+            self.testList.reloadData()
+        }
     }
 }
