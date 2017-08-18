@@ -51,8 +51,10 @@ class TestListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let endpoint = buildTestPlanEndpointString()
-        RestHelper.hitEndpoint(atEndpointString: endpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+        if testPlanList.testPlanList.isEmpty {
+            let endpoint = buildTestPlanEndpointString()
+            RestHelper.hitEndpoint(atEndpointString: endpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
