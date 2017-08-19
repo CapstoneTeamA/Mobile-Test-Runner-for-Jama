@@ -159,27 +159,7 @@ class RestHelper {
         dataTask.resume()
     }
     
-    static func associateAttachmentToRun(atEndpointString: String, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, attachmentId: Int) {
-        var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: "POST")
-        request?.httpBody = buildAssociateAttachmentToRunRequestBody(attachmentId: attachmentId) as Data
-        
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request!, completionHandler: {
-            (data, response, error) -> Void in
-            let message = parseMessageFromAssociateRunAndAttachment(data: data!)
-            //Another error string to take into account with the widget warning
-            //
-            var attachmentWarning: AttachmentWarning = .none
-            if message == "item must have attachment widget on the item type" {
-                attachmentWarning = .widgetWarning
-            } else if message == "attachment must have a file" {
-                attachmentWarning = .imageUploadWarning
-            }
-            withDelegate.didConnectRunAndAttachment(attachmentWarning: attachmentWarning)
-        })
-        dataTask.resume()
-    }
-    
+    //Create an "empty" attachment, used to upload our image to, and connect to the test run.
     static func createNewAttachmentItem(atEndpointString: String, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, runName: String) {
         var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: "POST")
         request?.httpBody = buildNewAttachmentItemRequestBody(runName: runName) as Data
@@ -200,6 +180,7 @@ class RestHelper {
         dataTask.resume()
     }
     
+    //Upload the image from the app to the "empty" attachment item that was created.
     static func putImageToAttachmentFile(atEndpointString: String, image: UIImage, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, runName: String) {
         let boundary = "Boundary-\(UUID().uuidString)"
         let filename = runName + " Attachment.jpg"
@@ -218,6 +199,27 @@ class RestHelper {
         task.resume()
     }
     
+    //Connect the new attachment that was created to the test run.
+    static func associateAttachmentToRun(atEndpointString: String, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, attachmentId: Int) {
+        var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: "POST")
+        request?.httpBody = buildAssociateAttachmentToRunRequestBody(attachmentId: attachmentId) as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request!, completionHandler: {
+            (data, response, error) -> Void in
+            //Get the message to check if there were issues with the attachment creation
+            let message = parseMessageFromAssociateRunAndAttachment(data: data!)
+            var attachmentWarning: AttachmentWarning = .none
+            if message == "item must have attachment widget on the item type" {
+                attachmentWarning = .widgetWarning
+            } else if message == "attachment must have a file" {
+                attachmentWarning = .imageUploadWarning
+            }
+            withDelegate.didConnectRunAndAttachment(attachmentWarning: attachmentWarning)
+        })
+        dataTask.resume()
+    }
+    
     //Build the body for the new attachment request. Body in form of ["fields":["name" : filename]]
     static func buildNewAttachmentItemRequestBody(runName: String) -> NSMutableData {
         let body = NSMutableData()
@@ -225,19 +227,6 @@ class RestHelper {
         fields.updateValue(runName + " attachment" as AnyObject, forKey: "name")
         var bodyDict: [String: AnyObject] = [:]
         bodyDict.updateValue(fields as AnyObject, forKey: "fields")
-        if JSONSerialization.isValidJSONObject(bodyDict) {
-            let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
-            body.append(bodyData)
-        }
-        return body
-    }
-    
-    //Build the body for the associate run to attachment request. Body form of ["attachment" : attachmentId]
-    static func buildAssociateAttachmentToRunRequestBody(attachmentId: Int) -> NSMutableData {
-        let body = NSMutableData()
-        var bodyDict: [String: AnyObject] = [:]
-        bodyDict.updateValue(attachmentId as AnyObject, forKey: "attachment")
-        
         if JSONSerialization.isValidJSONObject(bodyDict) {
             let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
             body.append(bodyData)
@@ -262,6 +251,20 @@ class RestHelper {
         return body
     }
     
+    //Build the body for the associate run to attachment request. Body form of ["attachment" : attachmentId]
+    static func buildAssociateAttachmentToRunRequestBody(attachmentId: Int) -> NSMutableData {
+        let body = NSMutableData()
+        var bodyDict: [String: AnyObject] = [:]
+        bodyDict.updateValue(attachmentId as AnyObject, forKey: "attachment")
+        
+        if JSONSerialization.isValidJSONObject(bodyDict) {
+            let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
+            body.append(bodyData)
+        }
+        return body
+    }
+    
+    //When creating a new "empty" attachment, we need to parse its id from the "location" in the API response
     static func parseLocationFromNewAttachmentData(data: Data) -> Int {
         var id = -1
         do {
@@ -282,6 +285,7 @@ class RestHelper {
         return id
     }
     
+    //Parse the message from the API response to check for certain errors that can occur
     static func parseMessageFromAssociateRunAndAttachment(data: Data) -> String {
         var message = ""
         do {
