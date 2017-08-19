@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol EndpointDelegate {
     func didLoadEndpoint(data: [[String: AnyObject]]?, totalItems: Int)
@@ -156,5 +157,124 @@ class RestHelper {
             }
         })
         dataTask.resume()
+    }
+    
+    static func associateAttachmentToRun(atEndpointString: String, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, attachmentId: Int) {
+        var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: "POST")
+        
+        let body = NSMutableData()
+        var bodyDict: [String: AnyObject] = [:]
+        bodyDict.updateValue(attachmentId as AnyObject, forKey: "attachment")
+        
+        if JSONSerialization.isValidJSONObject(bodyDict) {
+            let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
+            body.append(bodyData)
+        }
+        request?.httpBody = body as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request!, completionHandler: {
+            (data, response, error) -> Void in
+            //TODO I am not sure if this completion handler is needed, 
+            //  I am not sure how we will be dealing with errors if one happens here
+            withDelegate.didConnectRunAndAttachment()
+        })
+        dataTask.resume()
+    }
+    
+    static func createNewAttachmentItem(atEndpointString: String, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, runName: String) {
+        var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: "POST")
+        
+        let body = NSMutableData()
+        var fields: [String: AnyObject] = [:]
+        fields.updateValue(runName + " attachment" as AnyObject, forKey: "name")
+        var bodyDict: [String: AnyObject] = [:]
+        bodyDict.updateValue(fields as AnyObject, forKey: "fields")
+        if JSONSerialization.isValidJSONObject(bodyDict) {
+            let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
+            body.append(bodyData)
+        }
+        request?.httpBody = body as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request!, completionHandler: {
+            (data, response, error) -> Void in
+            guard error == nil else {
+                print("error calling endpoint")
+                return
+            }
+            guard data != nil else {
+                return
+            }
+            do {
+                guard let jsonData = try JSONSerialization.jsonObject(with: data!, options: [])
+                    as? [String: Any] else {
+                        print("error trying to convert to JSON")
+                        return
+                }
+                //Retrieve the location string from the returned meta data and parse the new attachment id
+                let meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
+                let location = meta["location"] as! String
+                let idStr = location.components(separatedBy: "attachments/").last
+                let id = Int.init(idStr!)
+                withDelegate.didCreateEmptyAttachment(withId: id!)
+            } catch {
+                print("error trying to convert to json")
+                return
+            }
+        })
+        
+        dataTask.resume()
+    }
+    
+    static func putImageToAttachmentFile(atEndpointString: String, image: UIImage, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, runName: String) {
+        let boundary = "Boundary-\(UUID().uuidString)"
+        let filename = runName + " Attachment.jpg"
+        var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password)
+        request?.httpMethod = "PUT"
+        request?.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        let body = buildMultipartRequestBody(fileName: filename, image: image, boundary: boundary)
+//        //Build the body of the multipart content-type http request
+//        body.appendString(boundaryPrefix)
+//        body.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
+//        body.appendString("Content-Type: \(mimetype)\r\n\r\n")
+//        body.append(jpegData!)
+//        body.appendString("\r\n")
+//        body.appendString("--".appending(boundary.appending("--")))
+        
+        request?.httpBody = body as Data
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request!, completionHandler: {
+            (data, response, error) -> Void in
+            withDelegate.didAddPhotoToAttachment()
+        })
+        task.resume()
+    }
+    
+    //Build the body for the http request with the image as the data
+    static func buildMultipartRequestBody(fileName: String, image: UIImage, boundary: String) -> NSMutableData {
+        let jpegData = UIImageJPEGRepresentation(image, 0.7)
+        let body = NSMutableData()
+        let mimetype = "image/jpg"
+        let boundaryPrefix = "--\(boundary)\r\n"
+        
+        body.appendString(boundaryPrefix)
+        body.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n")
+        body.appendString("Content-Type: \(mimetype)\r\n\r\n")
+        body.append(jpegData!)
+        body.appendString("\r\n")
+        body.appendString("--".appending(boundary.appending("--")))
+        
+        return body
+    }
+}
+
+//Extend NSMutableData with method to append a string
+extension NSMutableData {
+    func appendString(_ string: String) {
+        let strData = string.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        append(strData!)
     }
 }

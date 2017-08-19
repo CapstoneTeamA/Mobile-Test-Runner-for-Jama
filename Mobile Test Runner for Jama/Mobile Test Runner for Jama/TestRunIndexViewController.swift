@@ -17,6 +17,12 @@ protocol RestPutDelegate {
     func didPutTestRun(responseCode: Int)
 }
 
+protocol AttachmentApiEndpointDelegate {
+    func didCreateEmptyAttachment(withId: Int)
+    func didAddPhotoToAttachment()
+    func didConnectRunAndAttachment()
+}
+
 enum Status {
     case pass, fail, not_run
 }
@@ -39,7 +45,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     var username = ""
     var password = ""
     var runName = ""
+    var projectId = -1
     var currentlySelectedStepIndex = -1
+    var attachmentId = -1
     var testRun: TestRunModel = TestRunModel()
     var initialStepsStatusList: [String] = []
     var initialStepsResultsList: [String] = []
@@ -56,6 +64,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     let notSelectedPassButtonImage = UIImage.init(named: "PASS_UNSELECTED.png")
     let selectedFailButtonImage = UIImage.init(named: "FAIL.png")
     let notSelectedFailButtonImage = UIImage.init(named: "FAIL_UNSELECTED.png")
+    var photoToAttach: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +76,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         noStepRunStatusLabel.text = testRunStatusInProgressStr
         noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
         noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
+        photoToAttach = nil
+        //TODO remove this when we have setup for camera to create the image
+//        photoToAttach = UIImage.init(named: "PASS.png")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,7 +129,11 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         submitAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .cancel, handler: {
             (action: UIAlertAction!) in
-            RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            if self.photoToAttach != nil {
+                RestHelper.createNewAttachmentItem(atEndpointString: self.buildEmptyAttachmentEndpointString(), withDelegate: self, username: self.username, password: self.password, runName: self.testRun.name)
+            } else {
+                RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            }
         }))
         
         submitAlert.addAction(UIAlertAction(title: "Never mind", style: .default, handler: {
@@ -147,7 +163,11 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .cancel, handler: {
             (action: UIAlertAction!) in
             self.setupBlockedStatus()
-            RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(),withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            if self.photoToAttach != nil {
+                RestHelper.createNewAttachmentItem(atEndpointString: self.buildEmptyAttachmentEndpointString(), withDelegate: self, username: self.username, password: self.password, runName: self.testRun.name)
+            } else {
+                RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            }
         }))
         
         blockedAlert.addAction(UIAlertAction(title: "Never mind", style: .default, handler: {
@@ -392,6 +412,7 @@ extension TestRunIndexViewController: StepIndexDelegate {
 }
 
 extension TestRunIndexViewController: RestPutDelegate {
+    
     func didPutTestRun(responseCode: Int) {
         //If the update is successful, inform delegate and pop to the test list view
         if responseCode == 200 {
@@ -412,5 +433,42 @@ extension TestRunIndexViewController: RestPutDelegate {
                 self.present(updateFailedAlert, animated: true, completion: nil)
             }
         }
+    }
+}
+
+extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
+    
+    func buildEmptyAttachmentEndpointString() -> String {
+        var endpoint = RestHelper.getEndpointString(method: "Post", endpoint: "EmptyAttachment")
+        endpoint = "https://" + instance + "." + endpoint
+        endpoint = endpoint.replacingOccurrences(of: "{projectId}", with: "\(projectId)")
+        return endpoint
+    }
+    
+    func buildAttachmentFileEndpointString(attachmentId: Int) -> String {
+        var endpoint = RestHelper.getEndpointString(method: "Put", endpoint: "AttachmentFile")
+        endpoint = "https://" + instance + "." + endpoint
+        endpoint = endpoint.replacingOccurrences(of: "{attachmentId}", with: "\(attachmentId)")
+        return endpoint
+    }
+    
+    func buildConnectRunAndAttachmentEndpointString() -> String {
+        var endpoint = RestHelper.getEndpointString(method: "Post", endpoint: "TestRunAttachment")
+        endpoint = "https://" + instance + "." + endpoint
+        endpoint = endpoint.replacingOccurrences(of: "{testRunId}", with: "\(testRun.id)")
+        return endpoint
+    }
+    
+    func didCreateEmptyAttachment(withId: Int) {
+        attachmentId = withId
+        let endpoint = buildAttachmentFileEndpointString(attachmentId: withId)
+        RestHelper.putImageToAttachmentFile(atEndpointString: endpoint, image: photoToAttach!, withDelegate: self, username: username, password: password, runName: testRun.name)
+    }
+    func didAddPhotoToAttachment() {
+        let endpoint = buildConnectRunAndAttachmentEndpointString()
+        RestHelper.associateAttachmentToRun(atEndpointString: endpoint, withDelegate: self, username: username, password: password, attachmentId: attachmentId)
+    }
+    func didConnectRunAndAttachment() {
+        RestHelper.hitPutEndpoint(atEndpointString: buildTestRunPutEndpointString(), withDelegate: self, username: username, password: password, httpBodyData: buildPutRunBody())
     }
 }
