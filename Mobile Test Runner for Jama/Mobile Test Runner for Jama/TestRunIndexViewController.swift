@@ -416,7 +416,6 @@ extension TestRunIndexViewController: StepIndexDelegate {
 }
 
 extension TestRunIndexViewController: RestPutDelegate {
-    
     func didPutTestRun(responseCode: Int) {
         //If the update is successful, inform delegate and pop to the test list view
         if responseCode == 200 {
@@ -441,7 +440,7 @@ extension TestRunIndexViewController: RestPutDelegate {
 }
 
 extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
-    
+    //Building endpoint to create the new "empty" attachment
     func buildEmptyAttachmentEndpointString() -> String {
         var endpoint = RestHelper.getEndpointString(method: "Post", endpoint: "EmptyAttachment")
         endpoint = "https://" + instance + "." + endpoint
@@ -449,6 +448,7 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
         return endpoint
     }
     
+    //Building endpoint to upload the image to the newly created attachment
     func buildAttachmentFileEndpointString(attachmentId: Int) -> String {
         var endpoint = RestHelper.getEndpointString(method: "Put", endpoint: "AttachmentFile")
         endpoint = "https://" + instance + "." + endpoint
@@ -456,6 +456,7 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
         return endpoint
     }
     
+    //Building endpoint to connect the submitted test run to the newly created attachment with the image.
     func buildConnectRunAndAttachmentEndpointString() -> String {
         var endpoint = RestHelper.getEndpointString(method: "Post", endpoint: "TestRunAttachment")
         endpoint = "https://" + instance + "." + endpoint
@@ -463,17 +464,21 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
         return endpoint
     }
     
+    //Once the API returns with the newly created "empty" attachment, call the upload image endpoint with the attachment id.
     func didCreateEmptyAttachment(withId: Int) {
         attachmentId = withId
         let endpoint = buildAttachmentFileEndpointString(attachmentId: withId)
         RestHelper.putImageToAttachmentFile(atEndpointString: endpoint, image: photoToAttach!, withDelegate: self, username: username, password: password, runName: testRun.name)
     }
+    
+    //Once the API returns from the image upload, call to connect the attachment to the test run
     func didAddPhotoToAttachment() {
         let endpoint = buildConnectRunAndAttachmentEndpointString()
         RestHelper.associateAttachmentToRun(atEndpointString: endpoint, withDelegate: self, username: username, password: password, attachmentId: attachmentId)
     }
+    
     func didConnectRunAndAttachment(attachmentWarning: AttachmentWarning) {
-        //If the API returns the error message that the attachment widget is turned off, inform the user.
+        //If the API returns the error message, determine the warning to use to inform the user.
         if attachmentWarning != .none {
             var message = ""
             if attachmentWarning == .widgetWarning {
@@ -483,6 +488,7 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
                 //Not sure why this happens but it consistently happens for certain test runs.
                 message = "Attachment image could not be uploaded. Test run will still be submitted."
             }
+            //Inform the user of the error via popup, then submit the test run.
             let attachmentFailedAlert = UIAlertController(title: "Attachment failed", message: message, preferredStyle: UIAlertControllerStyle.alert)
             attachmentFailedAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
                 (action: UIAlertAction!) in
@@ -492,6 +498,7 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
                 self.present(attachmentFailedAlert, animated: true, completion: nil)
             }
         } else {
+            //No error, call to submit the test run.
             RestHelper.hitPutEndpoint(atEndpointString: buildTestRunPutEndpointString(), withDelegate: self, username: username, password: password, httpBodyData: buildPutRunBody())
         }
     }
