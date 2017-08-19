@@ -161,41 +161,23 @@ class RestHelper {
     
     static func associateAttachmentToRun(atEndpointString: String, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, attachmentId: Int) {
         var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: "POST")
-        
-        let body = NSMutableData()
-        var bodyDict: [String: AnyObject] = [:]
-        bodyDict.updateValue(attachmentId as AnyObject, forKey: "attachment")
-        
-        if JSONSerialization.isValidJSONObject(bodyDict) {
-            let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
-            body.append(bodyData)
-        }
-        request?.httpBody = body as Data
+        request?.httpBody = buildAssociateAttachmentToRunRequestBody(attachmentId: attachmentId) as Data
         
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request!, completionHandler: {
             (data, response, error) -> Void in
-            //TODO I am not sure if this completion handler is needed, 
-            //  I am not sure how we will be dealing with errors if one happens here
-            //  When the data status code is 400 the attachment widget might be turned off for test runs
-            withDelegate.didConnectRunAndAttachment()
+            let message = parseMessageFromAssociateRunAndAttachment(data: data!)
+            //Another error string to take into account with the widget warning
+            //  attachment must have a file
+            let widgetWarning = message == "item must have attachment widget on the item type"
+            withDelegate.didConnectRunAndAttachment(widgetWarning: widgetWarning)
         })
         dataTask.resume()
     }
     
     static func createNewAttachmentItem(atEndpointString: String, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, runName: String) {
         var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: "POST")
-        
-        let body = NSMutableData()
-        var fields: [String: AnyObject] = [:]
-        fields.updateValue(runName + " attachment" as AnyObject, forKey: "name")
-        var bodyDict: [String: AnyObject] = [:]
-        bodyDict.updateValue(fields as AnyObject, forKey: "fields")
-        if JSONSerialization.isValidJSONObject(bodyDict) {
-            let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
-            body.append(bodyData)
-        }
-        request?.httpBody = body as Data
+        request?.httpBody = buildNewAttachmentItemRequestBody(runName: runName) as Data
         
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request!, completionHandler: {
@@ -207,24 +189,9 @@ class RestHelper {
             guard data != nil else {
                 return
             }
-            do {
-                guard let jsonData = try JSONSerialization.jsonObject(with: data!, options: [])
-                    as? [String: Any] else {
-                        print("error trying to convert to JSON")
-                        return
-                }
-                //Retrieve the location string from the returned meta data and parse the new attachment id
-                let meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
-                let location = meta["location"] as! String
-                let idStr = location.components(separatedBy: "attachments/").last
-                let id = Int.init(idStr!)
-                withDelegate.didCreateEmptyAttachment(withId: id!)
-            } catch {
-                print("error trying to convert to json")
-                return
-            }
+            let id = parseLocationFromNewAttachmentData(data: data!)
+            withDelegate.didCreateEmptyAttachment(withId: id)
         })
-        
         dataTask.resume()
     }
     
@@ -236,14 +203,6 @@ class RestHelper {
         request?.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
         let body = buildMultipartRequestBody(fileName: filename, image: image, boundary: boundary)
-//        //Build the body of the multipart content-type http request
-//        body.appendString(boundaryPrefix)
-//        body.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
-//        body.appendString("Content-Type: \(mimetype)\r\n\r\n")
-//        body.append(jpegData!)
-//        body.appendString("\r\n")
-//        body.appendString("--".appending(boundary.appending("--")))
-        
         request?.httpBody = body as Data
         
         let session = URLSession.shared
@@ -252,6 +211,33 @@ class RestHelper {
             withDelegate.didAddPhotoToAttachment()
         })
         task.resume()
+    }
+    
+    //Build the body for the new attachment request. Body in form of ["fields":["name" : filename]]
+    static func buildNewAttachmentItemRequestBody(runName: String) -> NSMutableData {
+        let body = NSMutableData()
+        var fields: [String: AnyObject] = [:]
+        fields.updateValue(runName + " attachment" as AnyObject, forKey: "name")
+        var bodyDict: [String: AnyObject] = [:]
+        bodyDict.updateValue(fields as AnyObject, forKey: "fields")
+        if JSONSerialization.isValidJSONObject(bodyDict) {
+            let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
+            body.append(bodyData)
+        }
+        return body
+    }
+    
+    //Build the body for the associate run to attachment request. Body form of ["attachment" : attachmentId]
+    static func buildAssociateAttachmentToRunRequestBody(attachmentId: Int) -> NSMutableData {
+        let body = NSMutableData()
+        var bodyDict: [String: AnyObject] = [:]
+        bodyDict.updateValue(attachmentId as AnyObject, forKey: "attachment")
+        
+        if JSONSerialization.isValidJSONObject(bodyDict) {
+            let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
+            body.append(bodyData)
+        }
+        return body
     }
     
     //Build the body for the http request with the image as the data
@@ -269,6 +255,46 @@ class RestHelper {
         body.appendString("--".appending(boundary.appending("--")))
         
         return body
+    }
+    
+    static func parseLocationFromNewAttachmentData(data: Data) -> Int {
+        var id = -1
+        do {
+        guard let jsonData = try JSONSerialization.jsonObject(with: data, options: [])
+            as? [String: Any] else {
+                print("error trying to convert to JSON")
+                return 0
+        }
+        //Retrieve the location string from the returned meta data and parse the new attachment id
+        let meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
+        let location = meta["location"] as! String
+        let idStr = location.components(separatedBy: "attachments/").last
+        id = Int.init(idStr!)!
+        } catch {
+            print("error trying to convert to json")
+            return 0
+        }
+        return id
+    }
+    
+    static func parseMessageFromAssociateRunAndAttachment(data: Data) -> String {
+        var message = ""
+        do {
+        guard let jsonData = try JSONSerialization.jsonObject(with: data, options: [])
+        as? [String: Any] else {
+            print("error trying to convert to JSON")
+            return ""
+        }
+        //Retrieve the location string from the returned meta data and parse the new attachment id
+            let meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
+            if meta["message"] != nil {
+                message = meta["message"] as! String
+            }
+        } catch {
+            print("error trying to convert to json")
+            return ""
+        }
+        return message
     }
 }
 

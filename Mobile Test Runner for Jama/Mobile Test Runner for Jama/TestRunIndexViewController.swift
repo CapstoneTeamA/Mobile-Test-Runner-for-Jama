@@ -20,7 +20,7 @@ protocol RestPutDelegate {
 protocol AttachmentApiEndpointDelegate {
     func didCreateEmptyAttachment(withId: Int)
     func didAddPhotoToAttachment()
-    func didConnectRunAndAttachment()
+    func didConnectRunAndAttachment(widgetWarning: Bool)
 }
 
 enum Status {
@@ -76,9 +76,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         noStepRunStatusLabel.text = testRunStatusInProgressStr
         noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
         noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
-        photoToAttach = nil
+//        photoToAttach = nil
         //TODO remove this when we have setup for camera to create the image
-//        photoToAttach = UIImage.init(named: "PASS.png")
+        photoToAttach = UIImage.init(named: "PASS.png")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -468,7 +468,19 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
         let endpoint = buildConnectRunAndAttachmentEndpointString()
         RestHelper.associateAttachmentToRun(atEndpointString: endpoint, withDelegate: self, username: username, password: password, attachmentId: attachmentId)
     }
-    func didConnectRunAndAttachment() {
-        RestHelper.hitPutEndpoint(atEndpointString: buildTestRunPutEndpointString(), withDelegate: self, username: username, password: password, httpBodyData: buildPutRunBody())
+    func didConnectRunAndAttachment(widgetWarning: Bool) {
+        //If the API returns the error message that the attachment widget is turned off, inform the user.
+        if widgetWarning {
+            let attachmentFailedAlert = UIAlertController(title: "Attachment failed", message: "Attachment widget not enabled for test runs. Test run will still be submitted. Please contact your administrator.", preferredStyle: UIAlertControllerStyle.alert)
+            attachmentFailedAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
+                (action: UIAlertAction!) in
+                RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            }))
+            DispatchQueue.main.async {
+                self.present(attachmentFailedAlert, animated: true, completion: nil)
+            }
+        } else {
+            RestHelper.hitPutEndpoint(atEndpointString: buildTestRunPutEndpointString(), withDelegate: self, username: username, password: password, httpBodyData: buildPutRunBody())
+        }
     }
 }
