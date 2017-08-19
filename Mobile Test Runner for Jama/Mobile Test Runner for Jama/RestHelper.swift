@@ -168,9 +168,14 @@ class RestHelper {
             (data, response, error) -> Void in
             let message = parseMessageFromAssociateRunAndAttachment(data: data!)
             //Another error string to take into account with the widget warning
-            //  attachment must have a file
-            let widgetWarning = message == "item must have attachment widget on the item type"
-            withDelegate.didConnectRunAndAttachment(widgetWarning: widgetWarning)
+            //
+            var attachmentWarning: AttachmentWarning = .none
+            if message == "item must have attachment widget on the item type" {
+                attachmentWarning = .widgetWarning
+            } else if message == "attachment must have a file" {
+                attachmentWarning = .imageUploadWarning
+            }
+            withDelegate.didConnectRunAndAttachment(attachmentWarning: attachmentWarning)
         })
         dataTask.resume()
     }
