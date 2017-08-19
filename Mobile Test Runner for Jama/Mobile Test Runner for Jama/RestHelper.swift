@@ -177,6 +177,7 @@ class RestHelper {
             (data, response, error) -> Void in
             //TODO I am not sure if this completion handler is needed, 
             //  I am not sure how we will be dealing with errors if one happens here
+            //  When the data status code is 400 the attachment widget might be turned off for test runs
             withDelegate.didConnectRunAndAttachment()
         })
         dataTask.resume()
