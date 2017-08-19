@@ -419,8 +419,7 @@ extension TestListViewController: TestRunDelegate {
         if status != "INPROGRESS"{
             testRunList.testRunList.remove(at: selectedRunIndex)
             self.testList.reloadData()
-        }
-        else {
+        } else {
             self.testList.reloadData()
         }
     }
