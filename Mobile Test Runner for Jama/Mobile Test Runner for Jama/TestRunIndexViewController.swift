@@ -404,13 +404,12 @@ extension TestRunIndexViewController: RestPutDelegate {
         } else {
             //Create an alert to inform the user that the update failed
             let updateFailedAlert = UIAlertController(title: "Run not updated", message: "Attempt to update this run has failed. Try again.", preferredStyle: UIAlertControllerStyle.alert)
+            updateFailedAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
+                (action: UIAlertAction!) in
+                _ = ""
+            }))
             DispatchQueue.main.async {
                 self.present(updateFailedAlert, animated: true, completion: nil)
-            }
-            //Set the alert to show for 3 seconds.
-            let hideAlert = DispatchTime.now() + 3
-            DispatchQueue.main.asyncAfter(deadline: hideAlert){
-                updateFailedAlert.dismiss(animated: true, completion: nil)
             }
         }
     }
