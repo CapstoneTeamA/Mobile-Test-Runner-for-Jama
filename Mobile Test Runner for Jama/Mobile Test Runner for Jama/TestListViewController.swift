@@ -416,7 +416,9 @@ extension TestListViewController: TestRunDelegate {
     
     // Remove the run from the list unless the status is 'in progress'
     func removeUpdatedItemFromTable(status:String) {
-        if status != "INPROGRESS"{
+        updatedRunName = testRunList.testRunList[selectedRunIndex].name
+        
+        if status == "PASSED" || status == "FAILED" || status == "BLOCKED" {
             testRunList.testRunList.remove(at: selectedRunIndex)
             self.testList.reloadData()
         } else {
