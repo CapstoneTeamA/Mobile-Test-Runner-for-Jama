@@ -154,14 +154,15 @@ extension TestListViewController: EndpointDelegate {
                         if self.totalPlansReturnedFromServer < totalItems {
                             RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password, timestamp: timestamp)
                         }
-                    }
-                    //If there are no plans show the No Plans image and label
-                    if self.testPlanList.testPlanList.isEmpty {
-                        self.testList.isUserInteractionEnabled = false
-                        self.testList.separatorColor = UIColor.white
-                        self.noPlansImage.isHidden = false
-                        self.noPlansLabel.isHidden = false
-                        return
+                    
+                        //If there are no plans show the No Plans image and label
+                        if self.testPlanList.testPlanList.isEmpty {
+                            self.testList.isUserInteractionEnabled = false
+                            self.testList.separatorColor = UIColor.white
+                            self.noPlansImage.isHidden = false
+                            self.noPlansLabel.isHidden = false
+                            return
+                        }
                     }
                 case .cycle:
                     let tmpList = TestCycleListModel()
@@ -176,17 +177,18 @@ extension TestListViewController: EndpointDelegate {
                         if self.totalCyclesReturnedFromServer < totalItems {
                             RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password, timestamp: timestamp)
                         }
-                    }
-                    //If there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
-                    if tmpList.testCycleList.isEmpty && self.testCycleList.testCycleList.isEmpty {
-                        let emptyCycle = TestCycleModel();
-                        self.testCycleList.testCycleList.insert(emptyCycle, at: 0)
-                        self.testList.reloadData()
-                    }
                     
-                    //At the last test plan, auto scroll down to make the cycle cell visible
-                    if self.selectedPlanIndex == self.totalPlansReturnedFromServer - 1 {
-                        self.scrollToLastRow()
+                        //If there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
+                        if tmpList.testCycleList.isEmpty && self.testCycleList.testCycleList.isEmpty {
+                            let emptyCycle = TestCycleModel();
+                            self.testCycleList.testCycleList.insert(emptyCycle, at: 0)
+                            self.testList.reloadData()
+                        }
+                    
+                        //At the last test plan, auto scroll down to make the cycle cell visible
+                        if self.selectedPlanIndex == self.totalPlansReturnedFromServer - 1 {
+                            self.scrollToLastRow()
+                        }
                     }
                 
                 case .run:
@@ -208,12 +210,13 @@ extension TestListViewController: EndpointDelegate {
                             RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password, timestamp: timestamp)
                         return
                         }
-                    }
-                    //If there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
-                    if self.testRunList.testRunList.isEmpty && self.selectedTestCycleId != -1 {
-                        let emptyRun = TestRunModel()
-                        self.testRunList.testRunList.insert(emptyRun, at: 0)
-                        self.testList.reloadData()
+                    
+                        //If there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
+                        if self.testRunList.testRunList.isEmpty && self.selectedTestCycleId != -1 {
+                            let emptyRun = TestRunModel()
+                            self.testRunList.testRunList.insert(emptyRun, at: 0)
+                            self.testList.reloadData()
+                        }
                     }
             }
         }
@@ -338,7 +341,12 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             selectedCycleIndex = indexPath.row - selectedPlanIndex - testRunList.testRunList.count - 1
             selectedCycleTableViewIndex = indexPath.row - testRunList.testRunList.count
         }
-                
+        
+        //Slows down the user interaction slightly so that the table can keep up and not produce OOB
+        testList.cellForRow(at: indexPath)?.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.testList.cellForRow(at: indexPath)?.isUserInteractionEnabled = true
+        })
         //Empty out the previously selected test cycle's run list
         testRunList.testRunList = []
         totalRunsReturnedFromServer = 0
@@ -351,6 +359,11 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         selectedCycleIndex = largeNumber
         selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - testCycleList.testCycleList.count - testRunList.testRunList.count
         
+        //Slows down the user interaction slightly so that the table can keep up and not produce OOB
+        testList.cellForRow(at: indexPath)?.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.testList.cellForRow(at: indexPath)?.isUserInteractionEnabled = true
+        })
         //Empty out the previous test plan's cycle list and run list
         testCycleList.testCycleList = []
         testRunList.testRunList = []

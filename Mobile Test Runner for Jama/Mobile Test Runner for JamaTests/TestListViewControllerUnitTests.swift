@@ -19,7 +19,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     let runFont = UIFont(name: "Helvetica Neue", size: 17.0)
     let currentUser = UserModel()
     let indexPath = IndexPath(row: 0, section: 0)
-    let timestampString = "2017-8-18 05:59:00"
+    let timestampString = "2017-8-18 05:59:00.0023"
     
     override func setUp() {
         super.setUp()

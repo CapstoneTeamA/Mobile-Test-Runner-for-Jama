@@ -17,7 +17,7 @@ class RestHelper {
     static func getCurrentTimestampString() -> String {
         let now = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss.SSSS"
         let timestamp = formatter.string(from: now)
         return timestamp
     }
