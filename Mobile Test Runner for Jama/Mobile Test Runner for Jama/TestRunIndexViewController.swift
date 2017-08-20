@@ -186,7 +186,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     
     //Used to set up text window popup, called in viewDidLoad
     func setupPopup() {
-        popupOriginY = self.inputResultsBox.frame.origin.y
         NotificationCenter.default.addObserver(self, selector: #selector(TestRunIndexViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TestRunIndexViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         inputResultsBox.isHidden = true
@@ -208,6 +207,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBAction func enterText(_ sender: UIButton) {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
+        popupOriginY = self.inputResultsBox.frame.origin.y
         self.navigationController?.view.addSubview(inputResultsBackground)
         self.navigationController?.view.addSubview(inputResultsBox)
     }
