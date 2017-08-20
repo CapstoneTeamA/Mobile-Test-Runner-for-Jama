@@ -247,10 +247,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         inputResultsTextBox.resignFirstResponder()
     }
     
-    //TODO implement what happens when the photo button is pressed.
-    @IBAction func photoButton(_ sender: Any) {
-    }
-    
     //Move popup when keyboard appears/hides
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -505,5 +501,25 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
             //No error, call to submit the test run.
             RestHelper.hitPutEndpoint(atEndpointString: buildTestRunPutEndpointString(), withDelegate: self, username: username, password: password, httpBodyData: buildPutRunBody())
         }
+    }
+}
+
+extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    //Call camera when photo button is pressed
+    @IBAction func photoButton(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            photoToAttach = pickedImage
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
