@@ -21,8 +21,6 @@ class ProjectListViewController: UIViewController {
     var password = ""
     var instance = ""
     var endpointString = ""
-    
-    
 
     let noProjectsMessage = "No projects found. Please contact your administrator."
     let serverErrorMessage = "Server Error"
@@ -34,7 +32,8 @@ class ProjectListViewController: UIViewController {
         serverErrorLabel.text = serverErrorMessage
         endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "Projects")
         endpointString = "https://" + instance + "." + endpointString
-        RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, username: username, password: password)
+        
+        RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, username: username, password: password, timestamp: RestHelper.getCurrentTimestampString())
         
         let layout = buildCollectionLayout()
         collectionView.setCollectionViewLayout(layout, animated: false)
@@ -93,7 +92,7 @@ class ProjectListViewController: UIViewController {
 }
 
 extension ProjectListViewController: EndpointDelegate {
-    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
+    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int, timestamp: String) {
         
         guard let unwrappedData = data else {
             endpointErrorOccured()
@@ -114,7 +113,7 @@ extension ProjectListViewController: EndpointDelegate {
             
             //As long as there are more Projects that we need to get from the API keep calling for them.
             if self.collectionView.numberOfItems(inSection: 0) < totalItems {
-                RestHelper.hitEndpoint(atEndpointString: self.endpointString + "?startAt=\(self.projectList.projectList.count)", withDelegate: self, username: self.username, password: self.password)
+                RestHelper.hitEndpoint(atEndpointString: self.endpointString + "?startAt=\(self.projectList.projectList.count)", withDelegate: self, username: self.username, password: self.password, timestamp: timestamp)
             }
             //if no projects were returned, display image and text
             self.checkProjectListEmpty()

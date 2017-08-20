@@ -40,6 +40,7 @@ class TestListViewController: UIViewController {
     var displayTestRunAlert = false
     var updatedRunName = ""
     var selectedRunIndex = -1
+    var apiTimestamp = ""
     enum TestLevel {
         case plan, cycle, run
     }
@@ -54,7 +55,8 @@ class TestListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if testPlanList.testPlanList.isEmpty {
             let endpoint = buildTestPlanEndpointString()
-            RestHelper.hitEndpoint(atEndpointString: endpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+            apiTimestamp = RestHelper.getCurrentTimestampString()
+            RestHelper.hitEndpoint(atEndpointString: endpoint, withDelegate: self, httpMethod: "Get", username: username, password: password, timestamp: apiTimestamp)
         }
     }
     
@@ -89,7 +91,8 @@ class TestListViewController: UIViewController {
     func getCyclesForPlanOnClick() {
         self.currentTestLevel = .cycle
         let cycleEndpoint = buildTestCycleEndpointString()
-        RestHelper.hitEndpoint(atEndpointString: cycleEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+        apiTimestamp = RestHelper.getCurrentTimestampString()
+        RestHelper.hitEndpoint(atEndpointString: cycleEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password, timestamp: apiTimestamp)
     }
     
     func buildTestCycleEndpointString() -> String {
@@ -102,7 +105,8 @@ class TestListViewController: UIViewController {
     func getRunsForCycleOnClick(){
         self.currentTestLevel = .run
         let runEndpoint = buildTestRunEndpointString()
-        RestHelper.hitEndpoint(atEndpointString: runEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password)
+        apiTimestamp = RestHelper.getCurrentTimestampString()
+        RestHelper.hitEndpoint(atEndpointString: runEndpoint, withDelegate: self, httpMethod: "Get", username: username, password: password, timestamp: apiTimestamp)
     }
     
     func buildTestRunEndpointString() -> String {
@@ -125,29 +129,31 @@ class TestListViewController: UIViewController {
 }
 
 extension TestListViewController: EndpointDelegate {
-    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
+    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int, timestamp: String) {
         guard let unwrappedData = data else {
             return
         }
         DispatchQueue.main.async {
             switch self.currentTestLevel {
                 case .plan:
-                    let tmpList = TestPlanListModel()
-                    tmpList.extractPlanList(fromData: unwrappedData)
+                    if timestamp == self.apiTimestamp {
+                        let tmpList = TestPlanListModel()
+                        tmpList.extractPlanList(fromData: unwrappedData)
                     
-                    self.totalPlansReturnedFromServer += tmpList.testPlanList.count
+                        self.totalPlansReturnedFromServer += tmpList.testPlanList.count
                     
-                    for plan in tmpList.testPlanList {
-                        if plan.archived == false{
-                            self.testPlanList.testPlanList.append(plan)
+                        for plan in tmpList.testPlanList {
+                            if plan.archived == false {
+                                self.testPlanList.testPlanList.append(plan)
+                            }
                         }
-                    }
-                    //Reload Data in view
-                    self.testList.reloadData()
+                        //Reload Data in view
+                        self.testList.reloadData()
                     
-                    //Keep calling api while there is still more plans to get
-                    if self.totalPlansReturnedFromServer < totalItems {
-                        RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password)
+                        //Keep calling api while there is still more plans to get
+                        if self.totalPlansReturnedFromServer < totalItems {
+                            RestHelper.hitEndpoint(atEndpointString: self.buildTestPlanEndpointString() + "&startAt=\(self.testPlanList.testPlanList.count)", withDelegate: self, username: self.username, password: self.password, timestamp: timestamp)
+                        }
                     }
                     //If there are no plans show the No Plans image and label
                     if self.testPlanList.testPlanList.isEmpty {
@@ -159,15 +165,17 @@ extension TestListViewController: EndpointDelegate {
                     }
                 case .cycle:
                     let tmpList = TestCycleListModel()
+                    if timestamp == self.apiTimestamp {
+                        tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
+                        self.totalCyclesReturnedFromServer += tmpList.testCycleList.count
                     
-                    tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
-                    self.totalCyclesReturnedFromServer += tmpList.testCycleList.count
-                    self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
-                    self.testList.reloadData()
-                   
-                    //Keep calling api while there are still more cycles
-                    if self.totalCyclesReturnedFromServer < totalItems {
-                        RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password)
+                        self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
+                        self.testList.reloadData()
+                    
+                        //Keep calling api while there are still more cycles
+                        if self.totalCyclesReturnedFromServer < totalItems {
+                            RestHelper.hitEndpoint(atEndpointString: self.buildTestCycleEndpointString() + "&startAt=\(self.testCycleList.testCycleList.count)", withDelegate: self, username: self.username, password: self.password, timestamp: timestamp)
+                        }
                     }
                     //If there are no cycles, display an empty cycle with the default value set to No Cycles Found, made unclickable in the buildCycleCell function below
                     if tmpList.testCycleList.isEmpty && self.testCycleList.testCycleList.isEmpty {
@@ -182,23 +190,24 @@ extension TestListViewController: EndpointDelegate {
                     }
                 
                 case .run:
-                    let tmpList = TestRunListModel()
+                    if timestamp == self.apiTimestamp {
+                        let tmpList = TestRunListModel()
+                        tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
+                        self.totalRunsReturnedFromServer += tmpList.testRunList.count
                     
-                    tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
-                    self.totalRunsReturnedFromServer += tmpList.testRunList.count
-                    
-                    //Filter the runs returned from the API to select the assignedTo value is the current user's id
-                    for run in tmpList.testRunList {
-                        if run.assignedTo == self.currentUser.id && run.testStatus == "NOT_RUN"  {
-                            self.testRunList.testRunList.append(run)
+                        //Filter the runs returned from the API to select the assignedTo value is the current user's id
+                        for run in tmpList.testRunList {
+                            if run.assignedTo == self.currentUser.id && run.testStatus == "NOT_RUN"  {
+                                self.testRunList.testRunList.append(run)
+                            }
                         }
-                    }
-                    self.testList.reloadData()
+                        self.testList.reloadData()
                     
-                    //Keep calling api while there are still more runs
-                    if self.totalRunsReturnedFromServer < totalItems {
-                        RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password)
+                        //Keep calling api while there are still more runs
+                        if self.totalRunsReturnedFromServer < totalItems {
+                            RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password, timestamp: timestamp)
                         return
+                        }
                     }
                     //If there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
                     if self.testRunList.testRunList.isEmpty && self.selectedTestCycleId != -1 {
