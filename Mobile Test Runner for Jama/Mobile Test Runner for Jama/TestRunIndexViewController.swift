@@ -397,7 +397,7 @@ extension TestRunIndexViewController: RestPutDelegate {
         if responseCode == 200 {
             self.testRunDelegate.didUpdateTestRun()
             DispatchQueue.main.async {
-                self.testRunDelegate.removeUpdatedItemFromTable(status: self.testRun.testStatus)
+                self.testRunDelegate.removeUpdatedItemFromTable()
                 self.navigationController?.popViewController(animated: true)
             }
            
