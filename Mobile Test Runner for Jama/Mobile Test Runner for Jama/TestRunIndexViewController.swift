@@ -223,6 +223,10 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         inputResultsTextBox.resignFirstResponder()
     }
     
+    //TODO implement what happens when the photo button is pressed.
+    @IBAction func photoButton(_ sender: Any) {
+    }
+    
     //Move popup when keyboard appears/hides
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
