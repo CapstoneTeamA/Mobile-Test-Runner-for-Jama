@@ -507,6 +507,31 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
 extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //Call camera when photo button is pressed
     @IBAction func photoButton(_ sender: Any) {
+        let photoOptions = UIAlertController(title: nil, message: "Add, retake, or remove a photo", preferredStyle: .actionSheet)
+            
+        let useCamera = UIAlertAction(title: "Take Photo", style: .default, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+            self.takePhoto()
+        })
+            
+        let removePhoto = UIAlertAction(title: "Remove Photo", style: .default, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+            self.photoToAttach = nil
+        })
+            
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+        })
+        photoOptions.addAction(useCamera)
+        photoOptions.addAction(removePhoto)
+        photoOptions.addAction(cancelAction)
+        self.present(photoOptions, animated: true, completion: nil)
+    }
+        
+    func takePhoto() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -515,7 +540,7 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
-    
+        
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             photoToAttach = pickedImage
