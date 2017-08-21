@@ -514,6 +514,12 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
             (alert: UIAlertAction!) -> Void in
             self.takePhoto()
         })
+        
+        let viewPhoto = UIAlertAction(title: "View Photo", style: .default, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+            // Set UIImageView.hidden = false
+        })
             
         let removePhoto = UIAlertAction(title: "Remove Photo", style: .default, handler:
         {
@@ -526,6 +532,7 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
             (alert: UIAlertAction!) -> Void in
         })
         photoOptions.addAction(useCamera)
+        photoOptions.addAction(viewPhoto)
         photoOptions.addAction(removePhoto)
         photoOptions.addAction(cancelAction)
         self.present(photoOptions, animated: true, completion: nil)
