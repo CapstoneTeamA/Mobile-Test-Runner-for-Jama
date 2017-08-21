@@ -507,6 +507,17 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
 extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //Call camera when photo button is pressed
     @IBAction func photoButton(_ sender: Any) {
+        if currentUser.licenseType != "NAMED" {
+            let licenseErrorAlert = UIAlertController(title: "License error", message: "In order to upload attachments the user must have a license of type \"Named\"", preferredStyle: UIAlertControllerStyle.alert)
+            licenseErrorAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
+                (action: UIAlertAction!) in
+                _ = ""
+            }))
+            DispatchQueue.main.async {
+                self.present(licenseErrorAlert, animated: true, completion: nil)
+            }
+            return
+        }
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
