@@ -515,13 +515,13 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
             self.takePhoto()
         })
         
-        let viewPhoto = UIAlertAction(title: "View Photo", style: .default, handler:
+        let viewPhoto = UIAlertAction(title: "View Image", style: .default, handler:
         {
             (alert: UIAlertAction!) -> Void in
             // Set UIImageView.hidden = false
         })
             
-        let removePhoto = UIAlertAction(title: "Remove Photo", style: .default, handler:
+        let removePhoto = UIAlertAction(title: "Remove This Image", style: .default, handler:
         {
             (alert: UIAlertAction!) -> Void in
             self.photoToAttach = nil
