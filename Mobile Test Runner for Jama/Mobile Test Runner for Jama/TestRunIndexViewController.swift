@@ -46,6 +46,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var noStepRunStatusLabel: UILabel!
     @IBOutlet weak var currentAttachedImageView: UIView!
     @IBOutlet weak var currentAttachedImage: UIImageView!
+    @IBOutlet weak var closeImageViewButton: UIButton!
     
     var instance = ""
     var username = ""
@@ -72,6 +73,10 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     let notSelectedFailButtonImage = UIImage.init(named: "FAIL_UNSELECTED.png")
     var photoToAttach: UIImage?
     let noAttachmentImage = UIImage.init(named: "noimage.jpg")
+    let closeCurrentImageViewButtonBorderWidth: CGFloat = 1
+    let closeCurrentImageViewButtonCornerRadius: CGFloat = 5
+    let orangeColor = UIColor(red: 0xF1/0xFF, green: 0x61/0xFF, blue: 0x2A/0xFF, alpha: 1)
+    let translucentWhiteColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.7)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +89,12 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
         noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
         photoToAttach = nil
+        //Setup the close current image view button
+        closeImageViewButton.setTitleColor(orangeColor, for: .normal)
+        closeImageViewButton.layer.borderColor = orangeColor.cgColor
+        closeImageViewButton.layer.borderWidth = closeCurrentImageViewButtonBorderWidth
+        closeImageViewButton.layer.cornerRadius = closeCurrentImageViewButtonCornerRadius
+        closeImageViewButton.layer.backgroundColor = translucentWhiteColor.cgColor
         currentAttachedImageView.isHidden = true
         //TODO remove this when we have setup for camera to create the image
         photoToAttach = UIImage.init(named: "PASS.png")
@@ -512,7 +523,7 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
 }
 
 extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    //Call camera when photo button is pressed
+    //Call action sheet where user can take new photo, view current photo or delete photo
     @IBAction func photoButton(_ sender: Any) {
         let photoOptions = UIAlertController(title: nil, message: "Add, retake, or remove a photo", preferredStyle: .actionSheet)
             
@@ -525,20 +536,13 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
         let viewPhoto = UIAlertAction(title: "View Image", style: .default, handler:
         {
             (alert: UIAlertAction!) -> Void in
-            if self.photoToAttach != nil{
-                self.currentAttachedImage.image = self.photoToAttach
-            } else {
-                self.currentAttachedImage.image = self.noAttachmentImage
-            }
-            
-            self.currentAttachedImageView.isHidden = false
+            self.showCurrentImageView()
         })
             
         let removePhoto = UIAlertAction(title: "Remove This Image", style: .default, handler:
         {
             (alert: UIAlertAction!) -> Void in
-            self.photoToAttach = nil
-            self.currentAttachedImage.image = self.noAttachmentImage
+            self.removeCurrentAttachmentImage()
         })
             
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler:
@@ -552,6 +556,7 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
         self.present(photoOptions, animated: true, completion: nil)
     }
     
+    //User selected take new photo, show camera
     func takePhoto() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()
@@ -560,6 +565,23 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
+    }
+    
+    //User selected show current photo, set the image for currentAttachedImageView and unhide it
+    func showCurrentImageView() {
+        if self.photoToAttach != nil{
+            self.currentAttachedImage.image = self.photoToAttach
+        } else {
+            self.currentAttachedImage.image = self.noAttachmentImage
+        }
+        
+        self.currentAttachedImageView.isHidden = false
+    }
+    
+    //User selected remove current image, set the currentAttachedImage to the no attachment image and set the photoToAttach to nil
+    func removeCurrentAttachmentImage() {
+        self.photoToAttach = nil
+        self.currentAttachedImage.image = self.noAttachmentImage
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
