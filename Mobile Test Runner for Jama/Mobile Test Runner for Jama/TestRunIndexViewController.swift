@@ -76,6 +76,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     let closeCurrentImageViewButtonBorderWidth: CGFloat = 1
     let closeCurrentImageViewButtonCornerRadius: CGFloat = 5
     let orangeColor = UIColor(red: 0xF1/0xFF, green: 0x61/0xFF, blue: 0x2A/0xFF, alpha: 1)
+    let lightGrayColor = UIColor(red: 0xE6/0xFF, green: 0xE6/0xFF, blue: 0xE6/0xFF, alpha: 1)
     let translucentWhiteColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.7)
     
     override func viewDidLoad() {
@@ -91,7 +92,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         photoToAttach = nil
         //Setup the close current image view button
         closeImageViewButton.setTitleColor(orangeColor, for: .normal)
-        closeImageViewButton.layer.borderColor = orangeColor.cgColor
+        closeImageViewButton.layer.borderColor = lightGrayColor.cgColor
         closeImageViewButton.layer.borderWidth = closeCurrentImageViewButtonBorderWidth
         closeImageViewButton.layer.cornerRadius = closeCurrentImageViewButtonCornerRadius
         closeImageViewButton.layer.backgroundColor = translucentWhiteColor.cgColor

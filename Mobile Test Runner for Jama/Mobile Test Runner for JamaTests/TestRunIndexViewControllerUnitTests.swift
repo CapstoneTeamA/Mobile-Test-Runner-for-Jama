@@ -339,7 +339,7 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         let noAttachmentImage = UIImage(named: "noimage.jpg")
         XCTAssertEqual(viewController.translucentWhiteColor.cgColor, viewController.closeImageViewButton.layer.backgroundColor)
         XCTAssertEqual(viewController.orangeColor, viewController.closeImageViewButton.currentTitleColor)
-        XCTAssertEqual(viewController.orangeColor.cgColor, viewController.closeImageViewButton.layer.borderColor)
+        XCTAssertEqual(viewController.lightGrayColor.cgColor, viewController.closeImageViewButton.layer.borderColor)
         XCTAssertEqual(viewController.closeCurrentImageViewButtonBorderWidth, viewController.closeImageViewButton.layer.borderWidth)
         XCTAssertEqual(viewController.closeCurrentImageViewButtonCornerRadius, viewController.closeImageViewButton.layer.cornerRadius)
         XCTAssertTrue(viewController.currentAttachedImageView.isHidden)
