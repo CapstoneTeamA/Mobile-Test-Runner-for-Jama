@@ -44,6 +44,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var noStepPassButton: UIButton!
     @IBOutlet weak var noStepFailButton: UIButton!
     @IBOutlet weak var noStepRunStatusLabel: UILabel!
+    @IBOutlet weak var currentAttachedImageView: UIView!
+    @IBOutlet weak var currentAttachedImage: UIImageView!
     
     var instance = ""
     var username = ""
@@ -69,6 +71,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     let selectedFailButtonImage = UIImage.init(named: "FAIL.png")
     let notSelectedFailButtonImage = UIImage.init(named: "FAIL_UNSELECTED.png")
     var photoToAttach: UIImage?
+    let noAttachmentImage = UIImage.init(named: "noimage.jpg")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,8 +84,9 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
         noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
         photoToAttach = nil
+        currentAttachedImageView.isHidden = true
         //TODO remove this when we have setup for camera to create the image
-//        photoToAttach = UIImage.init(named: "PASS.png")
+        photoToAttach = UIImage.init(named: "PASS.png")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,7 +129,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         present(cancelAlert, animated: true, completion: nil)
     }
-    
 
     //If the submit run button is hit, pop up an alert that either does nothing or submits all of the run data to the API
     @IBAction func submitButton(_ sender: Any) {
@@ -365,6 +368,10 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }
         return Data()
     }
+    
+    @IBAction func closeAttachedImageView(_ sender: Any) {
+        self.currentAttachedImageView.isHidden = true
+    }
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
@@ -518,13 +525,20 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
         let viewPhoto = UIAlertAction(title: "View Image", style: .default, handler:
         {
             (alert: UIAlertAction!) -> Void in
-            // Set UIImageView.hidden = false
+            if self.photoToAttach != nil{
+                self.currentAttachedImage.image = self.photoToAttach
+            } else {
+                self.currentAttachedImage.image = self.noAttachmentImage
+            }
+            
+            self.currentAttachedImageView.isHidden = false
         })
             
         let removePhoto = UIAlertAction(title: "Remove This Image", style: .default, handler:
         {
             (alert: UIAlertAction!) -> Void in
             self.photoToAttach = nil
+            self.currentAttachedImage.image = self.noAttachmentImage
         })
             
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler:
@@ -537,7 +551,7 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
         photoOptions.addAction(cancelAction)
         self.present(photoOptions, animated: true, completion: nil)
     }
-        
+    
     func takePhoto() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()
@@ -547,10 +561,11 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
-        
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             photoToAttach = pickedImage
+            self.currentAttachedImage.image = photoToAttach
         }
         picker.dismiss(animated: true, completion: nil)
     }
