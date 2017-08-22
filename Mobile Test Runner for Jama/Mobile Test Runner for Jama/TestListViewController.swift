@@ -197,18 +197,20 @@ extension TestListViewController: EndpointDelegate {
                         tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
                         self.totalRunsReturnedFromServer += tmpList.testRunList.count
                     
-                        //Filter the runs returned from the API to select the assignedTo value is the current user's id
-                        for run in tmpList.testRunList {
-                            if run.assignedTo == self.currentUser.id && run.testStatus == "NOT_RUN"  {
-                                self.testRunList.testRunList.append(run)
-                            }
-                        }
-                        self.testList.reloadData()
+
                     
+                    //Filter the runs returned from the API to select the assignedTo value is the current user's id
+                    for run in tmpList.testRunList {
+                        if run.assignedTo == self.currentUser.id && (run.testStatus == "NOT_RUN" || run.testStatus == "INPROGRESS") {
+                            self.testRunList.testRunList.append(run)
+                        }
+                    }
+                        self.testList.reloadData()
+                        
                         //Keep calling api while there are still more runs
                         if self.totalRunsReturnedFromServer < totalItems {
                             RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password, timestamp: timestamp)
-                        return
+                            return
                         }
                     
                         //If there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
@@ -217,7 +219,7 @@ extension TestListViewController: EndpointDelegate {
                             self.testRunList.testRunList.insert(emptyRun, at: 0)
                             self.testList.reloadData()
                         }
-                    }
+                }
             }
         }
     }
@@ -436,10 +438,11 @@ extension TestListViewController: TestRunDelegate {
         displayTestRunAlert = true
     }
     
-    //TODO this method will be updated to take a status and unless the status is "in progress" the run will be removed.
+    // Remove the run from the list unless the status is 'in progress'
     func removeUpdatedItemFromTable() {
         updatedRunName = testRunList.testRunList[selectedRunIndex].name
-        testRunList.testRunList.remove(at: selectedRunIndex)
-        self.testList.reloadData()
+        self.didTapTestCycleCell(indexPath: IndexPath(row: selectedCycleTableViewIndex, section: 0))
+        self.getRunsForCycleOnClick()
+        
     }
 }
