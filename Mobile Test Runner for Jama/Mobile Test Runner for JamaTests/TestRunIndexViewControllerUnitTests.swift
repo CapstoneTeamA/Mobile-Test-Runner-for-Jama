@@ -336,7 +336,7 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
     }
     
     func testCurrentImageViewInitializedCorrectly() {
-        let noAttachmentImage = UIImage(named: "noimage.jpg")
+        let noAttachmentImage = UIImage(named: "nophotos-v1.png")
         XCTAssertEqual(viewController.translucentWhiteColor.cgColor, viewController.closeImageViewButton.layer.backgroundColor)
         XCTAssertEqual(viewController.orangeColor, viewController.closeImageViewButton.currentTitleColor)
         XCTAssertEqual(viewController.lightGrayColor.cgColor, viewController.closeImageViewButton.layer.borderColor)
