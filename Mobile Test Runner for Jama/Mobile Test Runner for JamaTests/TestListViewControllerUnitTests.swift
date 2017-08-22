@@ -19,6 +19,7 @@ class TestListViewControllerUnitTests: XCTestCase {
     let runFont = UIFont(name: "Helvetica Neue", size: 17.0)
     let currentUser = UserModel()
     let indexPath = IndexPath(row: 0, section: 0)
+    let timestampString = "2017-8-18 05:59:00.0023"
     
     override func setUp() {
         super.setUp()
@@ -76,6 +77,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         viewController.testRunList.testRunList.append(testRun1)
         viewController.testRunList.testRunList.append(testRun2)
         viewController.testRunList.testRunList.append(testRun3)
+        viewController.apiTimestamp = timestampString
         
     }
     
@@ -278,38 +280,38 @@ class TestListViewControllerUnitTests: XCTestCase {
     func testDidLoadEndpointEmptyPlanList() {
         viewController.currentTestLevel = .plan
         viewController.testPlanList.testPlanList = []
-        viewController.didLoadEndpoint(data: [], totalItems: 0)
+        viewController.didLoadEndpoint(data: [], totalItems: 0, timestamp: timestampString)
         XCTAssertTrue(viewController.testPlanList.testPlanList.isEmpty)
     }
     
     func testDidLoadEndpointEmptyCycleList() {
         viewController.currentTestLevel = .cycle
         viewController.testCycleList.testCycleList = []
-        viewController.didLoadEndpoint(data: [], totalItems: 0)
+        viewController.didLoadEndpoint(data: [], totalItems: 0, timestamp: timestampString)
         XCTAssertTrue(viewController.testCycleList.testCycleList.isEmpty)
     }
     
     func testDidLoadEndpointEmptyRunList() {
         viewController.currentTestLevel = .run
         viewController.testRunList.testRunList = []
-        viewController.didLoadEndpoint(data: [], totalItems: 0)
+        viewController.didLoadEndpoint(data: [], totalItems: 0, timestamp: timestampString)
         XCTAssertTrue(viewController.testRunList.testRunList.isEmpty)
     }
     
     func testDidLoadEndpointNilList() {
         viewController.currentTestLevel = .plan
         viewController.testPlanList.testPlanList = []
-        viewController.didLoadEndpoint(data: nil, totalItems: 0)
+        viewController.didLoadEndpoint(data: nil, totalItems: 0, timestamp: timestampString)
         XCTAssertTrue(viewController.testPlanList.testPlanList.isEmpty)
         
         viewController.currentTestLevel = .cycle
         viewController.testCycleList.testCycleList = []
-        viewController.didLoadEndpoint(data: nil, totalItems: 0)
+        viewController.didLoadEndpoint(data: nil, totalItems: 0, timestamp: timestampString)
         XCTAssertTrue(viewController.testCycleList.testCycleList.isEmpty)
         
         viewController.currentTestLevel = .run
         viewController.testRunList.testRunList = []
-        viewController.didLoadEndpoint(data: nil, totalItems: 0)
+        viewController.didLoadEndpoint(data: nil, totalItems: 0, timestamp: timestampString)
         XCTAssertTrue(viewController.testRunList.testRunList.isEmpty)
     }
     
@@ -329,7 +331,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         
         dataList.append(planData)
         
-        viewController.didLoadEndpoint(data: dataList, totalItems: 1)
+        viewController.didLoadEndpoint(data: dataList, totalItems: 1, timestamp: timestampString)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             XCTAssertEqual("testPlan", self.viewController.testPlanList.testPlanList[0].name)
             XCTAssertEqual(23, self.viewController.testPlanList.testPlanList[0].id)
@@ -357,7 +359,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         
         dataList.append(cycleData)
         
-        viewController.didLoadEndpoint(data: dataList, totalItems: 1)
+        viewController.didLoadEndpoint(data: dataList, totalItems: 1, timestamp: timestampString)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: {
             XCTAssertEqual("testCycle1", self.viewController.testCycleList.testCycleList[0].name)
             XCTAssertEqual(cycleId, self.viewController.testCycleList.testCycleList[0].id)
@@ -387,7 +389,7 @@ class TestListViewControllerUnitTests: XCTestCase {
         
         dataList.append(runData)
         
-        viewController.didLoadEndpoint(data: dataList, totalItems: 1)
+        viewController.didLoadEndpoint(data: dataList, totalItems: 1, timestamp: timestampString)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: {
             XCTAssertEqual("testRun1", self.viewController.testRunList.testRunList[0].name)
             XCTAssertEqual(runId, self.viewController.testRunList.testRunList[0].id)

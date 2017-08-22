@@ -1021,6 +1021,48 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="If4-uU-tGx" userLabel="CurrentPhotoView">
+                                <rect key="frame" x="0.0" y="114" width="414" height="465"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kcs-gY-fjG">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="465"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grL-y8-Kem" userLabel="Close">
+                                        <rect key="frame" x="361" y="1" width="52" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="grL-y8-Kem" secondAttribute="height" multiplier="1:1" id="kLD-NO-G3o"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                        <state key="normal" title="X">
+                                            <color key="titleColor" red="0.94509803920000002" green="0.3803921569" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeAttachedImageView:" destination="NKr-0k-Apa" eventType="touchUpInside" id="dPd-kk-jbY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Kcs-gY-fjG" firstAttribute="width" secondItem="If4-uU-tGx" secondAttribute="width" id="2iZ-ac-jdc"/>
+                                    <constraint firstItem="Kcs-gY-fjG" firstAttribute="height" secondItem="If4-uU-tGx" secondAttribute="height" id="368-r0-vV9"/>
+                                    <constraint firstItem="grL-y8-Kem" firstAttribute="top" secondItem="If4-uU-tGx" secondAttribute="top" constant="1" id="3NA-i8-is7"/>
+                                    <constraint firstAttribute="trailing" secondItem="grL-y8-Kem" secondAttribute="trailing" constant="1" id="6dp-U2-gm8"/>
+                                    <constraint firstItem="Kcs-gY-fjG" firstAttribute="centerY" secondItem="If4-uU-tGx" secondAttribute="centerY" id="7Ca-ns-BPv"/>
+                                    <constraint firstItem="Kcs-gY-fjG" firstAttribute="centerX" secondItem="If4-uU-tGx" secondAttribute="centerX" id="b5b-9p-o1o"/>
+                                    <constraint firstItem="grL-y8-Kem" firstAttribute="width" secondItem="If4-uU-tGx" secondAttribute="width" multiplier="1:8" id="o5x-6m-WCd"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1033,7 +1075,10 @@
                             <constraint firstItem="w7O-Ml-k6v" firstAttribute="height" secondItem="29g-Lj-zF6" secondAttribute="height" id="B8G-ZK-GBR"/>
                             <constraint firstItem="eQ6-Hy-uXH" firstAttribute="centerX" secondItem="29g-Lj-zF6" secondAttribute="centerX" id="BIs-d8-xBa"/>
                             <constraint firstItem="7gT-7g-SHk" firstAttribute="bottom" secondItem="xDR-j2-5vA" secondAttribute="bottom" id="ESi-XT-exJ"/>
+                            <constraint firstItem="If4-uU-tGx" firstAttribute="bottom" secondItem="1ZF-DZ-CxQ" secondAttribute="top" id="EVy-Ud-Lin"/>
                             <constraint firstItem="7gT-7g-SHk" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="Eac-aO-Y1s"/>
+                            <constraint firstItem="If4-uU-tGx" firstAttribute="centerX" secondItem="29g-Lj-zF6" secondAttribute="centerX" id="FFn-f9-fBx"/>
+                            <constraint firstItem="If4-uU-tGx" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="Fg1-9j-fXq"/>
                             <constraint firstItem="w7O-Ml-k6v" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="GLQ-sj-7BF"/>
                             <constraint firstItem="eJc-4V-jEK" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" multiplier="9:10" id="Gyh-bU-gZB"/>
                             <constraint firstItem="7gT-7g-SHk" firstAttribute="centerX" secondItem="29g-Lj-zF6" secondAttribute="centerX" id="IFg-Ys-KUv"/>
@@ -1049,6 +1094,7 @@
                             <constraint firstItem="xDR-j2-5vA" firstAttribute="top" secondItem="TzA-TL-KAC" secondAttribute="bottom" id="gUe-t6-XHC"/>
                             <constraint firstItem="ukt-q7-rqc" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" constant="-24" id="gY6-yz-Q8B"/>
                             <constraint firstItem="xDR-j2-5vA" firstAttribute="centerX" secondItem="7gT-7g-SHk" secondAttribute="centerX" id="h0s-9Y-KGu"/>
+                            <constraint firstItem="If4-uU-tGx" firstAttribute="top" secondItem="TzA-TL-KAC" secondAttribute="bottom" id="heL-5w-WfK"/>
                             <constraint firstItem="eQ6-Hy-uXH" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="puI-b5-3xR"/>
                             <constraint firstItem="7gT-7g-SHk" firstAttribute="top" secondItem="TzA-TL-KAC" secondAttribute="bottom" id="q8q-3q-CwP"/>
                             <constraint firstItem="1ZF-DZ-CxQ" firstAttribute="width" secondItem="29g-Lj-zF6" secondAttribute="width" id="si2-gz-ebd"/>
@@ -1069,6 +1115,9 @@
                     <connections>
                         <outlet property="blockButton" destination="B8F-ke-ULJ" id="viU-1L-PgP"/>
                         <outlet property="cancelRun" destination="lHq-Lx-YPg" id="rMz-b9-Nhz"/>
+                        <outlet property="closeImageViewButton" destination="grL-y8-Kem" id="pDt-gK-NI4"/>
+                        <outlet property="currentAttachedImage" destination="Kcs-gY-fjG" id="haL-BU-4lW"/>
+                        <outlet property="currentAttachedImageView" destination="If4-uU-tGx" id="8P8-TH-SSl"/>
                         <outlet property="inputResultsBackground" destination="w7O-Ml-k6v" id="KiZ-wS-xRa"/>
                         <outlet property="inputResultsBox" destination="eJc-4V-jEK" id="vrq-In-l6J"/>
                         <outlet property="inputResultsButton" destination="rM3-gm-dNb" id="R52-Wl-RVn"/>
