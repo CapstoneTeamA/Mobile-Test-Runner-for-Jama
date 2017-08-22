@@ -55,7 +55,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
         }
         let endpointString = buildCurrentUserEndpointString()
-        RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, httpMethod: "Get", username: userNameTextBox.text!, password: passwordTextBox.text!)
+        RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, httpMethod: "Get", username: userNameTextBox.text!, password: passwordTextBox.text!, timestamp: RestHelper.getCurrentTimestampString())
         
         loginButton.isEnabled = false
         
@@ -108,7 +108,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 }
 
 extension LoginViewController: EndpointDelegate{
-    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int) {
+    func didLoadEndpoint(data: [[String : AnyObject]]?, totalItems: Int, timestamp: String) {
         //Enable login button once async function returns.
         DispatchQueue.main.async {
             self.loginButton.isEnabled = true
