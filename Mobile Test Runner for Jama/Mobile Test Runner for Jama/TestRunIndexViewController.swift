@@ -97,8 +97,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         closeImageViewButton.layer.cornerRadius = closeCurrentImageViewButtonCornerRadius
         closeImageViewButton.layer.backgroundColor = translucentWhiteColor.cgColor
         currentAttachedImageView.isHidden = true
-        //TODO remove this when we have setup for camera to create the image
-        photoToAttach = UIImage.init(named: "PASS.png")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -575,7 +573,6 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
         } else {
             self.currentAttachedImage.image = self.noAttachmentImage
         }
-        
         self.currentAttachedImageView.isHidden = false
     }
     
@@ -587,8 +584,8 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            photoToAttach = pickedImage
-            self.currentAttachedImage.image = photoToAttach
+            self.photoToAttach = pickedImage
+            self.currentAttachedImage.image = self.photoToAttach
         }
         picker.dismiss(animated: true, completion: nil)
     }
