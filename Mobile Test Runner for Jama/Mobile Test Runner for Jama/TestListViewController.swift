@@ -198,13 +198,14 @@ extension TestListViewController: EndpointDelegate {
                         self.totalRunsReturnedFromServer += tmpList.testRunList.count
                     
 
-                        self.testList.reloadData()
                     
                     //Filter the runs returned from the API to select the assignedTo value is the current user's id
                     for run in tmpList.testRunList {
                         if run.assignedTo == self.currentUser.id && (run.testStatus == "NOT_RUN" || run.testStatus == "INPROGRESS") {
                             self.testRunList.testRunList.append(run)}
                         }
+                        self.testList.reloadData()
+                        
                         //Keep calling api while there are still more runs
                         if self.totalRunsReturnedFromServer < totalItems {
                             RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password, timestamp: timestamp)
