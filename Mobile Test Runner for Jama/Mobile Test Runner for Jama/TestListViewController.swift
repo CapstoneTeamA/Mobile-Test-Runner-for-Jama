@@ -202,14 +202,15 @@ extension TestListViewController: EndpointDelegate {
                     //Filter the runs returned from the API to select the assignedTo value is the current user's id
                     for run in tmpList.testRunList {
                         if run.assignedTo == self.currentUser.id && (run.testStatus == "NOT_RUN" || run.testStatus == "INPROGRESS") {
-                            self.testRunList.testRunList.append(run)}
+                            self.testRunList.testRunList.append(run)
                         }
+                    }
                         self.testList.reloadData()
                         
                         //Keep calling api while there are still more runs
                         if self.totalRunsReturnedFromServer < totalItems {
                             RestHelper.hitEndpoint(atEndpointString: self.buildTestRunEndpointString() + "&startAt=\(self.totalRunsReturnedFromServer)", withDelegate: self, username: self.username, password: self.password, timestamp: timestamp)
-                        return
+                            return
                         }
                     
                         //If there are no runs, display an empty run with the default value set to No Runs Found, made unclickable and with no number in the buildRunCell function below
@@ -218,7 +219,7 @@ extension TestListViewController: EndpointDelegate {
                             self.testRunList.testRunList.insert(emptyRun, at: 0)
                             self.testList.reloadData()
                         }
-                    }
+                }
             }
         }
     }
