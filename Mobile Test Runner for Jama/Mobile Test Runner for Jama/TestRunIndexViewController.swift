@@ -72,7 +72,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     let selectedFailButtonImage = UIImage.init(named: "FAIL.png")
     let notSelectedFailButtonImage = UIImage.init(named: "FAIL_UNSELECTED.png")
     var photoToAttach: UIImage?
-    let noAttachmentImage = UIImage.init(named: "noimage.jpg")
+    let noAttachmentImage = UIImage.init(named: "nophotos-v1.png")
     let closeCurrentImageViewButtonBorderWidth: CGFloat = 1
     let closeCurrentImageViewButtonCornerRadius: CGFloat = 5
     let orangeColor = UIColor(red: 0xF1/0xFF, green: 0x61/0xFF, blue: 0x2A/0xFF, alpha: 1)

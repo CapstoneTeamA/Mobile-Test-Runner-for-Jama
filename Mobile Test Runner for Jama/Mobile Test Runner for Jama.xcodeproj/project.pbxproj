@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0ACE37081F4A77D40059165A /* noimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ACE37071F4A77D40059165A /* noimage.jpg */; };
+		0ACE370C1F4BDDF30059165A /* nophotos-v1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACE370B1F4BDDF30059165A /* nophotos-v1.png */; };
 		130BFF8E1F36C3B2005F1660 /* TestRunIndexViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130BFF8D1F36C3B2005F1660 /* TestRunIndexViewControllerUnitTests.swift */; };
 		133971BB1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */; };
 		133971C31F2C326700AB9D30 /* TestStepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */; };
@@ -85,7 +85,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0ACE37071F4A77D40059165A /* noimage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = noimage.jpg; sourceTree = "<group>"; };
+		0ACE370B1F4BDDF30059165A /* nophotos-v1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nophotos-v1.png"; sourceTree = "<group>"; };
 		130BFF8D1F36C3B2005F1660 /* TestRunIndexViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunIndexViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		133971BA1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepTableViewCell.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 		133971B71F1B437600AB9D30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0ACE37071F4A77D40059165A /* noimage.jpg */,
+				0ACE370B1F4BDDF30059165A /* nophotos-v1.png */,
 				1379B5121F3D8502004E7231 /* small_down_chevron.png */,
 				1379B5131F3D8502004E7231 /* small_right_chevron.png */,
 				908CE8611F3274EE00042C1E /* empty_icon_grey.png */,
@@ -452,13 +452,13 @@
 				1379B5141F3D8502004E7231 /* small_down_chevron.png in Resources */,
 				13A342F61F0367E9002EBC92 /* Assets.xcassets in Resources */,
 				E2840AFC1F3ED3E900559EF1 /* BLOCK.png in Resources */,
-				0ACE37081F4A77D40059165A /* noimage.jpg in Resources */,
 				E2840AED1F3E9C1B00559EF1 /* NOTES.png in Resources */,
 				E2840AFE1F3ED3ED00559EF1 /* FAIL.png in Resources */,
 				13A342F41F0367E9002EBC92 /* Main.storyboard in Resources */,
 				E2840AFA1F3ECC8200559EF1 /* UPLOAD.png in Resources */,
 				908CE85E1F32744800042C1E /* check_icon_green.png in Resources */,
 				908CE8601F32744800042C1E /* X_icon_red.png in Resources */,
+				0ACE370C1F4BDDF30059165A /* nophotos-v1.png in Resources */,
 				908CE8621F3274EE00042C1E /* empty_icon_grey.png in Resources */,
 				E2840B081F3F98F100559EF1 /* PASS_UNSELECTED.png in Resources */,
 				E247FFBE1F206FB500E2A65C /* folder-lightbl-redx.png in Resources */,
