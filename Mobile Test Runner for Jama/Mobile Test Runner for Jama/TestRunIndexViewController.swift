@@ -524,6 +524,17 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
 extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //Call action sheet where user can take new photo, view current photo or delete photo
     @IBAction func photoButton(_ sender: Any) {
+        //If the user does not have a Named type license then they cannot create attachments. Inform the user.
+        if currentUser.licenseType != "NAMED" {
+            let licenseErrorAlert = UIAlertController(title: "License error", message: "In order to upload attachments, the user must have a license of type \"Named\". Please contact your administrator.", preferredStyle: UIAlertControllerStyle.alert)
+            licenseErrorAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
+                (action: UIAlertAction!) in
+            }))
+            DispatchQueue.main.async {
+                self.present(licenseErrorAlert, animated: true, completion: nil)
+            }
+            return
+        }
         let photoOptions = UIAlertController(title: nil, message: "Add, retake, or remove a photo", preferredStyle: .actionSheet)
             
         let useCamera = UIAlertAction(title: "Take Photo", style: .default, handler:
