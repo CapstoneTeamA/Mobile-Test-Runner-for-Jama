@@ -9,10 +9,18 @@
 import Foundation
 
 protocol EndpointDelegate {
-    func didLoadEndpoint(data: [[String: AnyObject]]?, totalItems: Int)
+    func didLoadEndpoint(data: [[String: AnyObject]]?, totalItems: Int, timestamp: String)
 }
 
 class RestHelper {
+    
+    static func getCurrentTimestampString() -> String {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss.SSSS"
+        let timestamp = formatter.string(from: now)
+        return timestamp
+    }
     
     static func getEndpointString(method: String, endpoint: String) -> String{
         //Get the Endpoints plist, using the http method string select the correct dictionary of endpoints, then grab and return the endpoint.
@@ -95,7 +103,7 @@ class RestHelper {
         return (endpointData, totalItems)
     }
     
-    static func hitEndpoint(atEndpointString: String, withDelegate: EndpointDelegate, httpMethod : String = "Get", username: String, password: String) {
+    static func hitEndpoint(atEndpointString: String, withDelegate: EndpointDelegate, httpMethod : String = "Get", username: String, password: String, timestamp: String) {
         guard let request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: httpMethod) else {
             return
         }
@@ -108,11 +116,11 @@ class RestHelper {
             guard error == nil else {
                 print("error calling endpoint")
                 endpointData.append(["Unauthorized": "Unauthorized" as AnyObject])
-                withDelegate.didLoadEndpoint(data: endpointData, totalItems: 0)
+                withDelegate.didLoadEndpoint(data: endpointData, totalItems: 0, timestamp: timestamp)
                 return
             }
             guard let responseData = data else {
-                withDelegate.didLoadEndpoint(data: nil, totalItems: 0)
+                withDelegate.didLoadEndpoint(data: nil, totalItems: 0, timestamp: timestamp)
                 return
             }
             
@@ -129,7 +137,7 @@ class RestHelper {
                 (endpointData, totalItems) = self.processRestJson(jsonData: jsonData)
                 
                 //Call on the provided delegate.
-                withDelegate.didLoadEndpoint(data: endpointData, totalItems: totalItems)
+                withDelegate.didLoadEndpoint(data: endpointData, totalItems: totalItems, timestamp: timestamp)
                 
             } catch {
                 print("error trying to convert to json")
