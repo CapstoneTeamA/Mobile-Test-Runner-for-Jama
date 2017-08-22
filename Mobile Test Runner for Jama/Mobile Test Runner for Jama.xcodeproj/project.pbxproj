@@ -49,6 +49,8 @@
 		13A3435F1F04CA38002EBC92 /* TestListViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A3435E1F04CA38002EBC92 /* TestListViewControllerUnitTests.swift */; };
 		13A343611F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */; };
 		13A343B11F0F5C6E002EBC92 /* Endpoints.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A343B01F0F5C6E002EBC92 /* Endpoints.plist */; };
+		2EC3C56A1F4A31F5006CB2CD /* PhotoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC3C5691F4A31F5006CB2CD /* PhotoEditViewController.swift */; };
+		2EC3C56C1F4A3691006CB2CD /* PhotoEditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC3C56B1F4A3691006CB2CD /* PhotoEditModel.swift */; };
 		303AD4651F2994F5000E3988 /* LoginViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */; };
 		309325751F32E1C700561EC4 /* mtrlogo_v8-1.png in Resources */ = {isa = PBXBuildFile; fileRef = E2B974361F312092007BE00E /* mtrlogo_v8-1.png */; };
 		4D15D7D81F2A802F009A26B8 /* TestRunIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */; };
@@ -133,6 +135,8 @@
 		13A3435E1F04CA38002EBC92 /* TestListViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343601F04CA59002EBC92 /* TestStepViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStepViewControllerUnitTests.swift; sourceTree = "<group>"; };
 		13A343B01F0F5C6E002EBC92 /* Endpoints.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Endpoints.plist; sourceTree = "<group>"; };
+		2EC3C5691F4A31F5006CB2CD /* PhotoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditViewController.swift; sourceTree = "<group>"; };
+		2EC3C56B1F4A3691006CB2CD /* PhotoEditModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditModel.swift; sourceTree = "<group>"; };
 		303AD4641F2994F5000E3988 /* LoginViewControllerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerUITests.swift; sourceTree = "<group>"; };
 		4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunIndexViewController.swift; sourceTree = "<group>"; };
 		908CE85B1F32744800042C1E /* check_icon_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check_icon_green.png; path = "Mobile Test Runner for Jama/check_icon_green.png"; sourceTree = SOURCE_ROOT; };
@@ -267,6 +271,7 @@
 				4D15D7D71F2A802F009A26B8 /* TestRunIndexViewController.swift */,
 				133971C21F2C326700AB9D30 /* TestStepTableViewCell.swift */,
 				1379B5161F414E74004E7231 /* TestListTableViewCell.swift */,
+				2EC3C5691F4A31F5006CB2CD /* PhotoEditViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 				13A343391F04C454002EBC92 /* TestPlanModel.swift */,
 				13A3433B1F04C48E002EBC92 /* TestCycleListModel.swift */,
 				13A3433D1F04C49F002EBC92 /* TestCycleModel.swift */,
+				2EC3C56B1F4A3691006CB2CD /* PhotoEditModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -486,7 +492,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EC3C56C1F4A3691006CB2CD /* PhotoEditModel.swift in Sources */,
 				133971BB1F1B460F00AB9D30 /* ProjectCollectionViewCell.swift in Sources */,
+				2EC3C56A1F4A31F5006CB2CD /* PhotoEditViewController.swift in Sources */,
 				13A3433C1F04C48E002EBC92 /* TestCycleListModel.swift in Sources */,
 				4D15D7D81F2A802F009A26B8 /* TestRunIndexViewController.swift in Sources */,
 				13A343281F04C2B4002EBC92 /* TestStepViewController.swift in Sources */,
