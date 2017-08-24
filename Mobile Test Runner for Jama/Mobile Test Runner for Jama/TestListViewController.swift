@@ -345,9 +345,9 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         //Slows down the user interaction slightly so that the table can keep up and not produce OOB
-        testList.cellForRow(at: indexPath)?.isUserInteractionEnabled = false
+        testList.isUserInteractionEnabled = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            self.testList.cellForRow(at: indexPath)?.isUserInteractionEnabled = true
+            self.testList.isUserInteractionEnabled = true
         })
         //Empty out the previously selected test cycle's run list
         testRunList.testRunList = []
@@ -362,9 +362,9 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
         selectedPlanIndex = indexPath.row <= selectedPlanIndex ? indexPath.row : indexPath.row - testCycleList.testCycleList.count - testRunList.testRunList.count
         
         //Slows down the user interaction slightly so that the table can keep up and not produce OOB
-        testList.cellForRow(at: indexPath)?.isUserInteractionEnabled = false
+        testList.isUserInteractionEnabled = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            self.testList.cellForRow(at: indexPath)?.isUserInteractionEnabled = true
+            self.testList.isUserInteractionEnabled = true
         })
         //Empty out the previous test plan's cycle list and run list
         testCycleList.testCycleList = []
