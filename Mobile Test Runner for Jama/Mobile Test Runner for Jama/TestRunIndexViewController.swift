@@ -245,8 +245,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
         popupOriginY = self.inputResultsBox.frame.origin.y
-        self.navigationController?.view.addSubview(inputResultsBackground)
-        self.navigationController?.view.addSubview(inputResultsBox)
     }
     
     //Called when 'Done' button in popup is clicked
@@ -275,9 +273,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func textViewShouldReturn(_ textView: UITextView) -> Bool {
+    func textViewDidEndEditing(_ textView: UITextView) {
         inputResultsTextBox.resignFirstResponder()
-        return (true)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

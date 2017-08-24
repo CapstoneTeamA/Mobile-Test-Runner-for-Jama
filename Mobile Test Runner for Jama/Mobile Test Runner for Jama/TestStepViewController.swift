@@ -202,9 +202,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func textViewShouldReturn(_ textView: UITextView) -> Bool {
+    func textViewDidEndEditing(_ textView: UITextView) {
         inputResultsTextBox.resignFirstResponder()
-        return (true)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
