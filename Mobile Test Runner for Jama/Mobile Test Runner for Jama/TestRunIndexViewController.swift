@@ -245,6 +245,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
         popupOriginY = self.inputResultsBox.frame.origin.y
+        self.cancelRun.isEnabled = false
     }
     
     //Called when 'Done' button in popup is clicked
@@ -255,6 +256,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             testRun.result = inputResultsTextBox.text
         }
         setPlaceholderText()
+        self.cancelRun.isEnabled = true
         inputResultsTextBox.resignFirstResponder()
     }
     

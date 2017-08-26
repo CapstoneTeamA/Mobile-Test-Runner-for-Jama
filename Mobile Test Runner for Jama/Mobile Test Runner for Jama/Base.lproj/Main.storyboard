@@ -708,6 +708,7 @@
                         <outlet property="actionTextView" destination="j7z-pb-nHp" id="fSy-Oz-74S"/>
                         <outlet property="actionTextViewHeightContraint" destination="eQP-yN-0y4" id="jc3-lq-h2Y"/>
                         <outlet property="addResultsButton" destination="tnj-KD-mnB" id="dnf-qi-f3W"/>
+                        <outlet property="clearStepButton" destination="HoQ-oq-Dy8" id="f8L-DG-rZb"/>
                         <outlet property="expectedResultButton" destination="dcP-7h-pXF" id="xID-Na-T2U"/>
                         <outlet property="expectedResultsTextView" destination="8ZR-DR-O4d" id="9vY-gp-9EH"/>
                         <outlet property="expectedResultsTextViewHeightConstraint" destination="bYk-v3-2xJ" id="VJQ-iT-kkC"/>
