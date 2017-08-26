@@ -487,7 +487,7 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
         attachmentId = withId
         //If the user was unauthorized to edit items, withId will be -1
         if withId == -1 {
-            let licenseErrorAlert = UIAlertController(title: "License error", message: "Your license does not permit you to add attachments in Jama.  Please contact your Jama administrator about your license needs.", preferredStyle: UIAlertControllerStyle.alert)
+            let licenseErrorAlert = UIAlertController(title: "License error", message: "You do not currently have the ability to add attachments to this project. Please contact your administrator.", preferredStyle: UIAlertControllerStyle.alert)
             licenseErrorAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
                 (action: UIAlertAction!) in
                 RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
