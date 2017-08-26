@@ -29,6 +29,7 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var notesButton: UIButton!
     @IBOutlet weak var titleDivider: UIView!
     @IBOutlet weak var runNameLabel: UILabel!
+    @IBOutlet weak var clearStepButton: UIBarButtonItem!
  
     var action = ""
     var expResult = ""
@@ -73,8 +74,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
         popupOriginY = self.inputResultsBox.frame.origin.y
-        self.navigationController?.view.addSubview(inputResultsBackground)
-        self.navigationController?.view.addSubview(inputResultsBox)
+        self.navigationItem.hidesBackButton = true
+        self.clearStepButton.isEnabled = false
     }
     
     @IBAction func didTapFail(_ sender: Any) {
@@ -185,6 +186,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         }
         setPlaceholderText()
         inputResultsTextBox.resignFirstResponder()
+        self.navigationItem.hidesBackButton = false
+        self.clearStepButton.isEnabled = true
     }
     
     // Move popup when keyboard appears/hides
@@ -202,9 +205,8 @@ class TestStepViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func textViewShouldReturn(_ textView: UITextView) -> Bool {
+    func textViewDidEndEditing(_ textView: UITextView) {
         inputResultsTextBox.resignFirstResponder()
-        return (true)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
