@@ -14,9 +14,10 @@ class UserModel {
     var email: String = ""
     var id: Int = -1
     var username: String = ""
+    var licenseType = ""
 
     func extractUser(fromData: [String : AnyObject]) {
-        if fromData["firstName"] == nil || fromData["lastName"] == nil || fromData["email"] == nil || fromData["username"] == nil || fromData["id"] == nil {
+        if fromData["firstName"] == nil || fromData["lastName"] == nil || fromData["email"] == nil || fromData["username"] == nil || fromData["id"] == nil || fromData["licenseType"] == nil{
             return
         }
         firstName = fromData["firstName"] as! String
@@ -24,6 +25,7 @@ class UserModel {
         email = fromData["email"] as! String
         id = fromData["id"] as! Int
         username = fromData["username"] as! String
+        licenseType = fromData["licenseType"] as! String
     }
 }
 

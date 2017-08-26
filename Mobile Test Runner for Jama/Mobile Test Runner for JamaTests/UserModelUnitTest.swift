@@ -16,6 +16,7 @@ class UserModelUnitTest: XCTestCase {
     var lastName = "McTester"
     var email = "tester@jaca.com"
     var username = "McT"
+    var licenseType = "NAMED"
     var id = 23
     
     override func setUp() {
@@ -26,6 +27,7 @@ class UserModelUnitTest: XCTestCase {
         userData.updateValue(email as AnyObject, forKey: "email")
         userData.updateValue(id as AnyObject, forKey: "id")
         userData.updateValue(username as AnyObject, forKey: "username")
+        userData.updateValue(licenseType as AnyObject, forKey: "licenseType")
         
     }
     
@@ -41,6 +43,7 @@ class UserModelUnitTest: XCTestCase {
         XCTAssertEqual(email, user.email)
         XCTAssertEqual(username, user.username)
         XCTAssertEqual(id, user.id)
+        XCTAssertEqual(licenseType, user.licenseType)
     }
     
     func testExtractUserFromEmptyData() {
@@ -50,6 +53,7 @@ class UserModelUnitTest: XCTestCase {
         XCTAssertTrue(user.lastName.isEmpty)
         XCTAssertTrue(user.email.isEmpty)
         XCTAssertTrue(user.username.isEmpty)
+        XCTAssertTrue(user.licenseType.isEmpty)
         XCTAssertEqual(-1, user.id)
     }
     

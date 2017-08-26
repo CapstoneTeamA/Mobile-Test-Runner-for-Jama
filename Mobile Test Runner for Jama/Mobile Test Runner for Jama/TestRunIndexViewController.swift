@@ -17,8 +17,18 @@ protocol RestPutDelegate {
     func didPutTestRun(responseCode: Int)
 }
 
+protocol AttachmentApiEndpointDelegate {
+    func didCreateEmptyAttachment(withId: Int)
+    func didAddPhotoToAttachment()
+    func didConnectRunAndAttachment(attachmentWarning: AttachmentWarning)
+}
+
 enum Status {
     case pass, fail, not_run
+}
+
+enum AttachmentWarning {
+    case widgetWarning, imageUploadWarning, none
 }
 
 class TestRunIndexViewController: UIViewController, UITextViewDelegate {
@@ -34,12 +44,17 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var noStepPassButton: UIButton!
     @IBOutlet weak var noStepFailButton: UIButton!
     @IBOutlet weak var noStepRunStatusLabel: UILabel!
+    @IBOutlet weak var currentAttachedImageView: UIView!
+    @IBOutlet weak var currentAttachedImage: UIImageView!
+    @IBOutlet weak var closeImageViewButton: UIButton!
     
     var instance = ""
     var username = ""
     var password = ""
     var runName = ""
+    var projectId = -1
     var currentlySelectedStepIndex = -1
+    var attachmentId = -1
     var testRun: TestRunModel = TestRunModel()
     var initialStepsStatusList: [String] = []
     var initialStepsResultsList: [String] = []
@@ -56,6 +71,13 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
     let notSelectedPassButtonImage = UIImage.init(named: "PASS_UNSELECTED.png")
     let selectedFailButtonImage = UIImage.init(named: "FAIL.png")
     let notSelectedFailButtonImage = UIImage.init(named: "FAIL_UNSELECTED.png")
+    var photoToAttach: UIImage?
+    let noAttachmentImage = UIImage.init(named: "nophotos-v1.png")
+    let closeCurrentImageViewButtonBorderWidth: CGFloat = 1
+    let closeCurrentImageViewButtonCornerRadius: CGFloat = 5
+    let orangeColor = UIColor(red: 0xF1/0xFF, green: 0x61/0xFF, blue: 0x2A/0xFF, alpha: 1)
+    let lightGrayColor = UIColor(red: 0xE6/0xFF, green: 0xE6/0xFF, blue: 0xE6/0xFF, alpha: 1)
+    let translucentWhiteColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.7)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +89,14 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         noStepRunStatusLabel.text = testRunStatusInProgressStr
         noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
         noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
+        photoToAttach = nil
+        //Setup the close current image view button
+        closeImageViewButton.setTitleColor(orangeColor, for: .normal)
+        closeImageViewButton.layer.borderColor = lightGrayColor.cgColor
+        closeImageViewButton.layer.borderWidth = closeCurrentImageViewButtonBorderWidth
+        closeImageViewButton.layer.cornerRadius = closeCurrentImageViewButtonCornerRadius
+        closeImageViewButton.layer.backgroundColor = translucentWhiteColor.cgColor
+        currentAttachedImageView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,7 +139,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         present(cancelAlert, animated: true, completion: nil)
     }
-    
 
     //If the submit run button is hit, pop up an alert that either does nothing or submits all of the run data to the API
     @IBAction func submitButton(_ sender: Any) {
@@ -117,7 +146,11 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         
         submitAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .cancel, handler: {
             (action: UIAlertAction!) in
-            RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            if self.photoToAttach != nil {
+                RestHelper.createNewAttachmentItem(atEndpointString: self.buildEmptyAttachmentEndpointString(), withDelegate: self, username: self.username, password: self.password, runName: self.testRun.name)
+            } else {
+                RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            }
         }))
         
         submitAlert.addAction(UIAlertAction(title: "Never mind", style: .default, handler: {
@@ -147,7 +180,11 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         blockedAlert.addAction(UIAlertAction(title: "Yes, I'm sure", style: .cancel, handler: {
             (action: UIAlertAction!) in
             self.setupBlockedStatus()
-            RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(),withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            if self.photoToAttach != nil {
+                RestHelper.createNewAttachmentItem(atEndpointString: self.buildEmptyAttachmentEndpointString(), withDelegate: self, username: self.username, password: self.password, runName: self.testRun.name)
+            } else {
+                RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            }
         }))
         
         blockedAlert.addAction(UIAlertAction(title: "Never mind", style: .default, handler: {
@@ -341,6 +378,10 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }
         return Data()
     }
+    
+    @IBAction func closeAttachedImageView(_ sender: Any) {
+        self.currentAttachedImageView.isHidden = true
+    }
 }
 
 extension TestRunIndexViewController: UITableViewDelegate, UITableViewDataSource {
@@ -412,5 +453,151 @@ extension TestRunIndexViewController: RestPutDelegate {
                 self.present(updateFailedAlert, animated: true, completion: nil)
             }
         }
+    }
+}
+
+extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
+    //Building endpoint to create the new "empty" attachment
+    func buildEmptyAttachmentEndpointString() -> String {
+        var endpoint = RestHelper.getEndpointString(method: "Post", endpoint: "EmptyAttachment")
+        endpoint = "https://" + instance + "." + endpoint
+        endpoint = endpoint.replacingOccurrences(of: "{projectId}", with: "\(projectId)")
+        return endpoint
+    }
+    
+    //Building endpoint to upload the image to the newly created attachment
+    func buildAttachmentFileEndpointString(attachmentId: Int) -> String {
+        var endpoint = RestHelper.getEndpointString(method: "Put", endpoint: "AttachmentFile")
+        endpoint = "https://" + instance + "." + endpoint
+        endpoint = endpoint.replacingOccurrences(of: "{attachmentId}", with: "\(attachmentId)")
+        return endpoint
+    }
+    
+    //Building endpoint to connect the submitted test run to the newly created attachment with the image.
+    func buildConnectRunAndAttachmentEndpointString() -> String {
+        var endpoint = RestHelper.getEndpointString(method: "Post", endpoint: "TestRunAttachment")
+        endpoint = "https://" + instance + "." + endpoint
+        endpoint = endpoint.replacingOccurrences(of: "{testRunId}", with: "\(testRun.id)")
+        return endpoint
+    }
+    
+    //Once the API returns with the newly created "empty" attachment, call the upload image endpoint with the attachment id.
+    func didCreateEmptyAttachment(withId: Int) {
+        attachmentId = withId
+        let endpoint = buildAttachmentFileEndpointString(attachmentId: withId)
+        RestHelper.putImageToAttachmentFile(atEndpointString: endpoint, image: photoToAttach!, withDelegate: self, username: username, password: password, runName: testRun.name)
+    }
+    
+    //Once the API returns from the image upload, call to connect the attachment to the test run
+    func didAddPhotoToAttachment() {
+        let endpoint = buildConnectRunAndAttachmentEndpointString()
+        RestHelper.associateAttachmentToRun(atEndpointString: endpoint, withDelegate: self, username: username, password: password, attachmentId: attachmentId)
+    }
+    
+    func didConnectRunAndAttachment(attachmentWarning: AttachmentWarning) {
+        //If the API returns the error message, determine the warning to use to inform the user.
+        if attachmentWarning != .none {
+            var message = ""
+            if attachmentWarning == .widgetWarning {
+                //In order to upload attachments the attachment widget must be enabled on test runs.
+                message = "Attachment widget not enabled for test runs. Test run will still be submitted. Please contact your administrator."
+            } else if attachmentWarning == .imageUploadWarning {
+                //Not sure why this happens but it consistently happens for certain test runs.
+                message = "Attachment image could not be uploaded. Test run will still be submitted."
+            }
+            //Inform the user of the error via popup, then submit the test run.
+            let attachmentFailedAlert = UIAlertController(title: "Attachment failed", message: message, preferredStyle: UIAlertControllerStyle.alert)
+            attachmentFailedAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
+                (action: UIAlertAction!) in
+                RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            }))
+            DispatchQueue.main.async {
+                self.present(attachmentFailedAlert, animated: true, completion: nil)
+            }
+        } else {
+            //No error, call to submit the test run.
+            RestHelper.hitPutEndpoint(atEndpointString: buildTestRunPutEndpointString(), withDelegate: self, username: username, password: password, httpBodyData: buildPutRunBody())
+        }
+    }
+}
+
+extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    //Call action sheet where user can take new photo, view current photo or delete photo
+    @IBAction func photoButton(_ sender: Any) {
+        //If the user does not have a Named type license then they cannot create attachments. Inform the user.
+        if currentUser.licenseType != "NAMED" {
+            let licenseErrorAlert = UIAlertController(title: "License error", message: "You do not currently have the ability to add attachments to this project. Please contact your administrator.", preferredStyle: UIAlertControllerStyle.alert)
+            licenseErrorAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
+                (action: UIAlertAction!) in
+            }))
+            DispatchQueue.main.async {
+                self.present(licenseErrorAlert, animated: true, completion: nil)
+            }
+            return
+        }
+        let photoOptions = UIAlertController(title: nil, message: "Add, retake, or remove a photo", preferredStyle: .actionSheet)
+            
+        let useCamera = UIAlertAction(title: "Take Photo", style: .default, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+            self.takePhoto()
+        })
+        
+        let viewPhoto = UIAlertAction(title: "View Image", style: .default, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+            self.showCurrentImageView()
+        })
+            
+        let removePhoto = UIAlertAction(title: "Remove This Image", style: .default, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+            self.removeCurrentAttachmentImage()
+        })
+            
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+        })
+        photoOptions.addAction(useCamera)
+        photoOptions.addAction(viewPhoto)
+        photoOptions.addAction(removePhoto)
+        photoOptions.addAction(cancelAction)
+        self.present(photoOptions, animated: true, completion: nil)
+    }
+    
+    //User selected take new photo, show camera
+    func takePhoto() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    //User selected show current photo, set the image for currentAttachedImageView and unhide it
+    func showCurrentImageView() {
+        if self.photoToAttach != nil{
+            self.currentAttachedImage.image = self.photoToAttach
+        } else {
+            self.currentAttachedImage.image = self.noAttachmentImage
+        }
+        self.currentAttachedImageView.isHidden = false
+    }
+    
+    //User selected remove current image, set the currentAttachedImage to the no attachment image and set the photoToAttach to nil
+    func removeCurrentAttachmentImage() {
+        self.photoToAttach = nil
+        self.currentAttachedImage.image = self.noAttachmentImage
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.photoToAttach = pickedImage
+            self.currentAttachedImage.image = self.photoToAttach
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
