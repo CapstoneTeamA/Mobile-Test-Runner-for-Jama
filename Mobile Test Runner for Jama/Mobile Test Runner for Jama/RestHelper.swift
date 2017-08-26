@@ -276,19 +276,23 @@ class RestHelper {
     static func parseLocationFromNewAttachmentData(data: Data) -> Int {
         var id = -1
         do {
-        guard let jsonData = try JSONSerialization.jsonObject(with: data, options: [])
-            as? [String: Any] else {
+            guard let jsonData = try JSONSerialization.jsonObject(with: data, options: [])
+                as? [String: Any] else {
                 print("error trying to convert to JSON")
                 return 0
-        }
+            }
         //Retrieve the location string from the returned meta data and parse the new attachment id
-        let meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
-        let location = meta["location"] as! String
-        let idStr = location.components(separatedBy: "attachments/").last
-        id = Int.init(idStr!)!
-        } catch {
-            print("error trying to convert to json")
-            return 0
+            let meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
+        
+            if meta["status"] as! String == "Unauthorized" {
+                return -1
+            }
+            let location = meta["location"] as! String
+            let idStr = location.components(separatedBy: "attachments/").last
+            id = Int.init(idStr!)!
+            } catch {
+                print("error trying to convert to json")
+                return 0
         }
         return id
     }
