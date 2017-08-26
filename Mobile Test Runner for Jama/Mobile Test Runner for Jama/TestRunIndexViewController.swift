@@ -525,7 +525,7 @@ extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigat
     @IBAction func photoButton(_ sender: Any) {
         //If the user does not have a Named type license then they cannot create attachments. Inform the user.
         if currentUser.licenseType != "NAMED" {
-            let licenseErrorAlert = UIAlertController(title: "License error", message: "In order to upload attachments, the user must have a license of type \"Named\". Please contact your administrator.", preferredStyle: UIAlertControllerStyle.alert)
+            let licenseErrorAlert = UIAlertController(title: "License error", message: "Editing items in Jama requires a creator license. Please contact your Jama administrator about your license needs.", preferredStyle: UIAlertControllerStyle.alert)
             licenseErrorAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
                 (action: UIAlertAction!) in
             }))
