@@ -485,8 +485,9 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
     //Once the API returns with the newly created "empty" attachment, call the upload image endpoint with the attachment id.
     func didCreateEmptyAttachment(withId: Int) {
         attachmentId = withId
+        //If the user was unauthorized to edit items, withId will be -1
         if withId == -1 {
-            let licenseErrorAlert = UIAlertController(title: "License error", message: "Editing items in Jama requires a creator license. Please contact your Jama administrator about your license needs. This test run will be submitted without an attachment.", preferredStyle: UIAlertControllerStyle.alert)
+            let licenseErrorAlert = UIAlertController(title: "License error", message: "Your license does not permit you to add attachments in Jama.  Please contact your Jama administrator about your license needs.", preferredStyle: UIAlertControllerStyle.alert)
             licenseErrorAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
                 (action: UIAlertAction!) in
                 RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
