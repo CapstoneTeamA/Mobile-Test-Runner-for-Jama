@@ -90,7 +90,6 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         noStepPassButton.setImage(notSelectedPassButtonImage, for: .normal)
         noStepFailButton.setImage(notSelectedFailButtonImage, for: .normal)
         photoToAttach = nil
-        photoToAttach = UIImage(named: "PASS.png")
         //Setup the close current image view button
         closeImageViewButton.setTitleColor(orangeColor, for: .normal)
         closeImageViewButton.layer.borderColor = lightGrayColor.cgColor
@@ -246,8 +245,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         inputResultsBackground.isHidden = false
         inputResultsBox.isHidden = false
         popupOriginY = self.inputResultsBox.frame.origin.y
-        self.navigationController?.view.addSubview(inputResultsBackground)
-        self.navigationController?.view.addSubview(inputResultsBox)
+        self.cancelRun.isEnabled = false
     }
     
     //Called when 'Done' button in popup is clicked
@@ -258,6 +256,7 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
             testRun.result = inputResultsTextBox.text
         }
         setPlaceholderText()
+        self.cancelRun.isEnabled = true
         inputResultsTextBox.resignFirstResponder()
     }
     
@@ -276,9 +275,8 @@ class TestRunIndexViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func textViewShouldReturn(_ textView: UITextView) -> Bool {
+    func textViewDidEndEditing(_ textView: UITextView) {
         inputResultsTextBox.resignFirstResponder()
-        return (true)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
