@@ -483,6 +483,18 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
     //Once the API returns with the newly created "empty" attachment, call the upload image endpoint with the attachment id.
     func didCreateEmptyAttachment(withId: Int) {
         attachmentId = withId
+        //If the user was unauthorized to edit items, withId will be -1
+        if withId == -1 {
+            let licenseErrorAlert = UIAlertController(title: "License error", message: "You do not currently have the ability to add attachments to this project. Please contact your administrator.", preferredStyle: UIAlertControllerStyle.alert)
+            licenseErrorAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
+                (action: UIAlertAction!) in
+                RestHelper.hitPutEndpoint(atEndpointString: self.buildTestRunPutEndpointString(), withDelegate: self, username: self.username, password: self.password, httpBodyData: self.buildPutRunBody())
+            }))
+            DispatchQueue.main.async {
+                self.present(licenseErrorAlert, animated: true, completion: nil)
+            }
+        return
+        }
         let endpoint = buildAttachmentFileEndpointString(attachmentId: withId)
         RestHelper.putImageToAttachmentFile(atEndpointString: endpoint, image: photoToAttach!, withDelegate: self, username: username, password: password, runName: testRun.name)
     }
@@ -523,17 +535,6 @@ extension TestRunIndexViewController: AttachmentApiEndpointDelegate {
 extension TestRunIndexViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //Call action sheet where user can take new photo, view current photo or delete photo
     @IBAction func photoButton(_ sender: Any) {
-        //If the user does not have a Named type license then they cannot create attachments. Inform the user.
-        if currentUser.licenseType != "NAMED" {
-            let licenseErrorAlert = UIAlertController(title: "License error", message: "You do not currently have the ability to add attachments to this project. Please contact your administrator.", preferredStyle: UIAlertControllerStyle.alert)
-            licenseErrorAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: {
-                (action: UIAlertAction!) in
-            }))
-            DispatchQueue.main.async {
-                self.present(licenseErrorAlert, animated: true, completion: nil)
-            }
-            return
-        }
         let photoOptions = UIAlertController(title: nil, message: "Add, retake, or remove a photo", preferredStyle: .actionSheet)
             
         let useCamera = UIAlertAction(title: "Take Photo", style: .default, handler:
