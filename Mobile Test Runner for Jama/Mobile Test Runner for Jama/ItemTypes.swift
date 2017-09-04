@@ -10,7 +10,11 @@ import Foundation
 
 class ItemTypes {
     
-    var endpointString = ""
+    var endpointString: String = ""
+    var totalItemTypesReturned: Int = 0
+    var username: String = ""
+    var password: String = ""
+    
     let planKey: String = "TSTPL"
     let cycleKey: String = "TSTCY"
     let runKey: String = "TSTRN"
@@ -20,10 +24,17 @@ class ItemTypes {
 
     // Build endpoint string and call API to get instance-specific item type ids
     func getItemIds(instance: String, username: String, password: String) {
+        self.username = username
+        self.password = password
+        
         endpointString = RestHelper.getEndpointString(method: "Get", endpoint: "ItemTypes")
         endpointString = "https://" + instance + "." + endpointString
-        
         RestHelper.hitEndpoint(atEndpointString: endpointString, withDelegate: self, username: username, password: password, timestamp: RestHelper.getCurrentTimestampString())
+    }
+    
+    // Check that all desired item types were found and saved
+    func didNotFindAllTypes() -> Bool {
+        return planId < 0 || cycleId < 0 || runId < 0
     }
     
     // Only save item type ids for plan, cycle, and run
@@ -36,9 +47,15 @@ class ItemTypes {
             } else if item["typeKey"] as! String == runKey {
                 runId = item["id"] as! Int
             }
+            self.totalItemTypesReturned += 1
+            
+            // Stop checking item types once plan, cycle, and run are found
+            if !didNotFindAllTypes() {
+                return
+            }
         }
-        
     }
+    
 }
 
 extension ItemTypes: EndpointDelegate {
@@ -49,6 +66,11 @@ extension ItemTypes: EndpointDelegate {
         }
         DispatchQueue.main.async {
             self.extractItemTypes(fromData: unwrappedData)
+            
+            //Keep calling API if desired types weren't found in first batch and there are more types to check
+            if self.totalItemTypesReturned < totalItems && self.didNotFindAllTypes() {
+                RestHelper.hitEndpoint(atEndpointString: self.endpointString + "&startAt=\(self.totalItemTypesReturned)", withDelegate: self, username: self.username, password: self.password, timestamp: RestHelper.getCurrentTimestampString())
+            }
         }
     }
 }
