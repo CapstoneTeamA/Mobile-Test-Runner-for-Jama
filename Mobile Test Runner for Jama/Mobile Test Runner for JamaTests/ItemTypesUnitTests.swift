@@ -48,6 +48,7 @@ class ItemTypesUnitTests: XCTestCase {
     }
     
     func testExtractItemsFromData() {
+        itemTypeData.append(wrongitem)
         itemTypeData.append(planitem)
         itemTypeData.append(cycleitem)
         itemTypeData.append(runitem)
@@ -60,23 +61,39 @@ class ItemTypesUnitTests: XCTestCase {
         XCTAssertEqual(cyclekey, itemTypes.cycleKey)
         XCTAssertEqual(runid, itemTypes.runId)
         XCTAssertEqual(runkey, itemTypes.runKey)
+        XCTAssertEqual(itemTypeData.count, itemTypes.totalItemTypesReturned)
     }
     
     func testFoundAllTypes() {
         itemTypeData.append(planitem)
         itemTypeData.append(cycleitem)
         itemTypeData.append(runitem)
+        itemTypeData.append(wrongitem)
+        
         itemTypes.extractItemTypes(fromData: itemTypeData)
         
         XCTAssertFalse(itemTypes.didNotFindAllTypes())
+        XCTAssertNotEqual(itemTypeData.count, itemTypes.totalItemTypesReturned)
     }
     
     func testDidNotFindAllTypes() {
+        itemTypeData.append(wrongitem)
         itemTypeData.append(planitem)
+        itemTypeData.append(wrongitem)
         itemTypeData.append(cycleitem)
         itemTypeData.append(wrongitem)
+        
         itemTypes.extractItemTypes(fromData: itemTypeData)
         
         XCTAssertTrue(itemTypes.didNotFindAllTypes())
+        XCTAssertEqual(itemTypeData.count, itemTypes.totalItemTypesReturned)
+    }
+    
+    func testGetItemIds() {
+        itemTypes.getItemIds(instance: instance, username: username, password: password)
+        
+        XCTAssertEqual(self.username, itemTypes.username)
+        XCTAssertEqual(self.password, itemTypes.password)
+        XCTAssertEqual(itemTypes.endpointString, "https://capstone-sandbox.jamacloud.com/rest/latest/itemtypes")
     }
 }
