@@ -17,6 +17,7 @@ class ProjectListViewController: UIViewController {
     @IBOutlet weak var noProjectsMargin: UIView!
     var currentUser: UserModel = UserModel()
     var projectList: ProjectListModel = ProjectListModel()
+    var itemTypes: ItemTypes = ItemTypes()
     var username = ""
     var password = ""
     var instance = ""
@@ -27,6 +28,7 @@ class ProjectListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        itemTypes.getItemIds(instance: instance, username: username, password: password)
         
         serverErrorLabel.isHidden = true
         serverErrorLabel.text = serverErrorMessage
@@ -140,6 +142,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         testViewController.password = password
         testViewController.instance = instance
         testViewController.currentUser = currentUser
+        testViewController.itemTypes = itemTypes
         self.navigationController?.pushViewController(testViewController, animated: true)
     }
     
