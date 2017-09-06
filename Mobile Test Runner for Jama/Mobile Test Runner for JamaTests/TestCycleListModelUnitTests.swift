@@ -55,19 +55,19 @@ class TestCycleListModelUnitTests: XCTestCase {
     }
     
     func testExtractTestCycleFromEmptyData() {
-        cycleList.extractCycleList(fromData: [], parentId: testPlanId)
+        cycleList.extractCycleList(fromData: [], parentId: testPlanId, itemTypeId: testCycleItemType)
         
         XCTAssertTrue(cycleList.testCycleList.isEmpty)
     }
     
     func testExtractCycleListFromWrongParentData() {
-        cycleList.extractCycleList(fromData: data, parentId: testPlanId + 1)
+        cycleList.extractCycleList(fromData: data, parentId: testPlanId + 1, itemTypeId: testCycleItemType)
         
         XCTAssertTrue(cycleList.testCycleList.isEmpty)
     }
     
     func testExtractCycleList() {
-        cycleList.extractCycleList(fromData: data, parentId: testPlanId)
+        cycleList.extractCycleList(fromData: data, parentId: testPlanId, itemTypeId: testCycleItemType)
         
         XCTAssertEqual(cycle1.id, cycleList.testCycleList[0].id)
         XCTAssertEqual(cycle1.name, cycleList.testCycleList[0].name)
@@ -83,7 +83,7 @@ class TestCycleListModelUnitTests: XCTestCase {
         data.append(cycle1Data)
         data.append(cycle2Data)
         
-        cycleList.extractCycleList(fromData: data, parentId: testPlanId)
+        cycleList.extractCycleList(fromData: data, parentId: testPlanId, itemTypeId: testCycleItemType)
         
         XCTAssertTrue(cycleList.testCycleList.isEmpty)
     }

@@ -23,6 +23,7 @@ class TestListViewController: UIViewController {
     let testRunList:  TestRunListModel = TestRunListModel()
     var testRun: TestRunModel = TestRunModel()
     var currentUser: UserModel!
+    var itemTypes: ItemTypes!
     var projectId = -1
     var selectedPlanId = -1
     var selectedTestCycleId = -1
@@ -138,7 +139,7 @@ extension TestListViewController: EndpointDelegate {
                 case .plan:
                     if timestamp == self.apiTimestamp {
                         let tmpList = TestPlanListModel()
-                        tmpList.extractPlanList(fromData: unwrappedData)
+                        tmpList.extractPlanList(fromData: unwrappedData, itemTypeId: self.itemTypes.planId)
                     
                         self.totalPlansReturnedFromServer += tmpList.testPlanList.count
                     
@@ -167,7 +168,7 @@ extension TestListViewController: EndpointDelegate {
                 case .cycle:
                     let tmpList = TestCycleListModel()
                     if timestamp == self.apiTimestamp {
-                        tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId)
+                        tmpList.extractCycleList(fromData: unwrappedData, parentId: self.selectedPlanId, itemTypeId: self.itemTypes.cycleId)
                         self.totalCyclesReturnedFromServer += tmpList.testCycleList.count
                     
                         self.testCycleList.testCycleList.append(contentsOf: tmpList.testCycleList)
@@ -194,7 +195,7 @@ extension TestListViewController: EndpointDelegate {
                 case .run:
                     if timestamp == self.apiTimestamp {
                         let tmpList = TestRunListModel()
-                        tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId)
+                        tmpList.extractRunList(fromData: unwrappedData, parentId: self.selectedTestCycleId, itemTypeId: self.itemTypes.runId)
                         self.totalRunsReturnedFromServer += tmpList.testRunList.count
                     
 

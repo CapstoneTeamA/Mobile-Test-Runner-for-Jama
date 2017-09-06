@@ -10,12 +10,11 @@ import Foundation
 
 class TestRunListModel {
     var testRunList: [TestRunModel] = []
-    let testRunItemTypeId = 37 //Id in the jama system for items of type TestRun
     
-    func extractRunList(fromData: [[String : AnyObject]], parentId: Int) {
+    func extractRunList(fromData: [[String : AnyObject]], parentId: Int, itemTypeId: Int) {
         for run in fromData {
             let fields: [String : AnyObject] = run["fields"] as! Dictionary
-            if run["itemType"] as! Int != testRunItemTypeId || fields["testCycle"] as! Int != parentId{
+            if run["itemType"] as! Int != itemTypeId || fields["testCycle"] as! Int != parentId{
                 break
             }
         
