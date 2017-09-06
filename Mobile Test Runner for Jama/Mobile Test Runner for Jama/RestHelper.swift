@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol EndpointDelegate {
     func didLoadEndpoint(data: [[String: AnyObject]]?, totalItems: Int, timestamp: String)
@@ -164,5 +165,164 @@ class RestHelper {
             }
         })
         dataTask.resume()
+    }
+    
+    //Create an "empty" attachment, used to upload our image to, and connect to the test run.
+    static func createNewAttachmentItem(atEndpointString: String, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, runName: String) {
+        var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: "POST")
+        request?.httpBody = buildNewAttachmentItemRequestBody(runName: runName) as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request!, completionHandler: {
+            (data, response, error) -> Void in
+            guard error == nil else {
+                print("error calling endpoint")
+                return
+            }
+            guard data != nil else {
+                return
+            }
+            let id = parseLocationFromNewAttachmentData(data: data!)
+            withDelegate.didCreateEmptyAttachment(withId: id)
+        })
+        dataTask.resume()
+    }
+    
+    //Upload the image from the app to the "empty" attachment item that was created.
+    static func putImageToAttachmentFile(atEndpointString: String, image: UIImage, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, runName: String) {
+        let boundary = "Boundary-\(UUID().uuidString)"
+        let filename = runName + " Attachment.jpg"
+        var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password)
+        request?.httpMethod = "PUT"
+        request?.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        let body = buildMultipartRequestBody(fileName: filename, image: image, boundary: boundary)
+        request?.httpBody = body as Data
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request!, completionHandler: {
+            (data, response, error) -> Void in
+            withDelegate.didAddPhotoToAttachment()
+        })
+        task.resume()
+    }
+    
+    //Connect the new attachment that was created to the test run.
+    static func associateAttachmentToRun(atEndpointString: String, withDelegate: AttachmentApiEndpointDelegate, username: String, password: String, attachmentId: Int) {
+        var request = prepareHttpRequest(atEndpointString: atEndpointString, username: username, password: password, httpMethod: "POST")
+        request?.httpBody = buildAssociateAttachmentToRunRequestBody(attachmentId: attachmentId) as Data
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request!, completionHandler: {
+            (data, response, error) -> Void in
+            //Get the message to check if there were issues with the attachment creation
+            let message = parseMessageFromAssociateRunAndAttachment(data: data!)
+            var attachmentWarning: AttachmentWarning = .none
+            if message == "item must have attachment widget on the item type" {
+                attachmentWarning = .widgetWarning
+            } else if message == "attachment must have a file" {
+                attachmentWarning = .imageUploadWarning
+            }
+            withDelegate.didConnectRunAndAttachment(attachmentWarning: attachmentWarning)
+        })
+        dataTask.resume()
+    }
+    
+    //Build the body for the new attachment request. Body in form of ["fields":["name" : filename]]
+    static func buildNewAttachmentItemRequestBody(runName: String) -> NSMutableData {
+        let body = NSMutableData()
+        var fields: [String: AnyObject] = [:]
+        fields.updateValue(runName + " attachment" as AnyObject, forKey: "name")
+        var bodyDict: [String: AnyObject] = [:]
+        bodyDict.updateValue(fields as AnyObject, forKey: "fields")
+        if JSONSerialization.isValidJSONObject(bodyDict) {
+            let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
+            body.append(bodyData)
+        }
+        return body
+    }
+    
+    //Build the body for the http request with the image as the data
+    static func buildMultipartRequestBody(fileName: String, image: UIImage, boundary: String) -> NSMutableData {
+        let jpegData = UIImageJPEGRepresentation(image, 0.7)
+        let body = NSMutableData()
+        let mimetype = "image/jpg"
+        let boundaryPrefix = "--\(boundary)\r\n"
+        
+        body.appendString(boundaryPrefix)
+        body.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n")
+        body.appendString("Content-Type: \(mimetype)\r\n\r\n")
+        body.append(jpegData!)
+        body.appendString("\r\n")
+        body.appendString("--".appending(boundary.appending("--")))
+        
+        return body
+    }
+    
+    //Build the body for the associate run to attachment request. Body form of ["attachment" : attachmentId]
+    static func buildAssociateAttachmentToRunRequestBody(attachmentId: Int) -> NSMutableData {
+        let body = NSMutableData()
+        var bodyDict: [String: AnyObject] = [:]
+        bodyDict.updateValue(attachmentId as AnyObject, forKey: "attachment")
+        
+        if JSONSerialization.isValidJSONObject(bodyDict) {
+            let bodyData = try! JSONSerialization.data(withJSONObject: bodyDict)
+            body.append(bodyData)
+        }
+        return body
+    }
+    
+    //When creating a new "empty" attachment, we need to parse its id from the "location" in the API response
+    static func parseLocationFromNewAttachmentData(data: Data) -> Int {
+        var id = -1
+        do {
+            guard let jsonData = try JSONSerialization.jsonObject(with: data, options: [])
+                as? [String: Any] else {
+                print("error trying to convert to JSON")
+                return 0
+            }
+        //Retrieve the location string from the returned meta data and parse the new attachment id
+            let meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
+        
+            if meta["status"] as! String == "Unauthorized" {
+                return -1
+            }
+            let location = meta["location"] as! String
+            let idStr = location.components(separatedBy: "attachments/").last
+            id = Int.init(idStr!)!
+            } catch {
+                print("error trying to convert to json")
+                return 0
+        }
+        return id
+    }
+    
+    //Parse the message from the API response to check for certain errors that can occur
+    static func parseMessageFromAssociateRunAndAttachment(data: Data) -> String {
+        var message = ""
+        do {
+        guard let jsonData = try JSONSerialization.jsonObject(with: data, options: [])
+        as? [String: Any] else {
+            print("error trying to convert to JSON")
+            return ""
+        }
+        //Retrieve the location string from the returned meta data and parse the new attachment id
+            let meta: [String:AnyObject] = jsonData["meta"] as! Dictionary
+            if meta["message"] != nil {
+                message = meta["message"] as! String
+            }
+        } catch {
+            print("error trying to convert to json")
+            return ""
+        }
+        return message
+    }
+}
+
+//Extend NSMutableData with method to append a string
+extension NSMutableData {
+    func appendString(_ string: String) {
+        let strData = string.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        append(strData!)
     }
 }

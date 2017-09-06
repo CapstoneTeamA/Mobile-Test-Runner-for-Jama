@@ -2,12 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Post</key>
+	<dict>
+		<key>EmptyAttachment</key>
+		<string>jamacloud.com/rest/latest/projects/{projectId}/attachments</string>
+		<key>TestRunAttachment</key>
+		<string>jamacloud.com/rest/latest/testruns/{testRunId}/attachments</string>
+	</dict>
 	<key>Delete</key>
 	<string></string>
 	<key>Patch</key>
 	<dict/>
 	<key>Put</key>
 	<dict>
+		<key>AttachmentFile</key>
+		<string>jamacloud.com/rest/latest/attachments/{attachmentId}/file</string>
 		<key>TestRuns</key>
 		<string>jamacloud.com/rest/latest/testruns/{id}</string>
 	</dict>

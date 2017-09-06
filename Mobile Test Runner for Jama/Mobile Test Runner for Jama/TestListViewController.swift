@@ -278,6 +278,7 @@ extension TestListViewController: UITableViewDelegate, UITableViewDataSource {
             runViewController.currentUser = currentUser
             runViewController.preserveCurrentRunStatus()
             runViewController.testRunDelegate = self
+            runViewController.projectId = projectId
             self.navigationController?.pushViewController(runViewController, animated: true)
             return
         }

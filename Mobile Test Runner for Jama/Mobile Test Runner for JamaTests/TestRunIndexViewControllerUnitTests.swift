@@ -334,4 +334,47 @@ class TestRunIndexViewControllerUnitTests: XCTestCase {
         XCTAssertEqual("FAILED", viewController.testRun.testStatus)
         XCTAssertEqual(viewController.notSelectedPassButtonImage, viewController.noStepPassButton.currentImage)
     }
+    
+    func testCurrentImageViewInitializedCorrectly() {
+        let noAttachmentImage = UIImage(named: "nophotos-v1.png")
+        XCTAssertEqual(viewController.translucentWhiteColor.cgColor, viewController.closeImageViewButton.layer.backgroundColor)
+        XCTAssertEqual(viewController.orangeColor, viewController.closeImageViewButton.currentTitleColor)
+        XCTAssertEqual(viewController.lightGrayColor.cgColor, viewController.closeImageViewButton.layer.borderColor)
+        XCTAssertEqual(viewController.closeCurrentImageViewButtonBorderWidth, viewController.closeImageViewButton.layer.borderWidth)
+        XCTAssertEqual(viewController.closeCurrentImageViewButtonCornerRadius, viewController.closeImageViewButton.layer.cornerRadius)
+        XCTAssertTrue(viewController.currentAttachedImageView.isHidden)
+        XCTAssertEqual(noAttachmentImage, viewController.noAttachmentImage)
+    }
+    
+    func testCanRemoveAttachmentImage() {
+        //Set an image to attach and call to remove current attachment image
+        viewController.photoToAttach = UIImage(named: "PASS.png")
+        viewController.removeCurrentAttachmentImage()
+        
+        XCTAssertEqual(viewController.noAttachmentImage, viewController.currentAttachedImage.image)
+        XCTAssertNil(viewController.photoToAttach)
+    }
+    
+    func testCanShowAttachmentImage() {
+        let imageToAttach = UIImage(named: "PASS.png")
+        viewController.photoToAttach = imageToAttach
+        viewController.showCurrentImageView()
+        
+        XCTAssertFalse(viewController.currentAttachedImageView.isHidden)
+        XCTAssertEqual(imageToAttach, viewController.currentAttachedImage.image)
+        
+        //set the attachment image to nil and show the current image view
+        viewController.photoToAttach = nil
+        viewController.showCurrentImageView()
+        
+        XCTAssertEqual(viewController.noAttachmentImage, viewController.currentAttachedImage.image)
+    }
+    
+    func testHideAttachedImage() {
+        //unhide the current attachment view and call to close the view
+        viewController.currentAttachedImageView.isHidden = false
+        viewController.closeAttachedImageView(self)
+        
+        XCTAssertTrue(viewController.currentAttachedImageView.isHidden)
+    }
 }
