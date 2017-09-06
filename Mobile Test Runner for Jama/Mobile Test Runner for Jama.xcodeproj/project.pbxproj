@@ -293,6 +293,7 @@
 			children = (
 				90D1E2381F0D787F00D66830 /* MaxTextLength.swift */,
 				13A3433F1F04C564002EBC92 /* RestHelper.swift */,
+				0AD7DEAA1F5DE174009421A2 /* ItemTypes.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -318,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				13A343551F04C881002EBC92 /* RestHelperUnitTests.swift */,
+				0AD7DEAE1F5E0644009421A2 /* ItemTypesUnitTests.swift */,
 			);
 			name = utilsUnitTests;
 			sourceTree = "<group>";
@@ -498,6 +500,7 @@
 				13A343321F04C396002EBC92 /* TestRunListModel.swift in Sources */,
 				90D1E2391F0D787F00D66830 /* MaxTextLength.swift in Sources */,
 				13A343221F04C247002EBC92 /* LoginViewController.swift in Sources */,
+				0AD7DEAB1F5DE174009421A2 /* ItemTypes.swift in Sources */,
 				13A343261F04C28F002EBC92 /* TestListViewController.swift in Sources */,
 				13A343301F04C379002EBC92 /* ProjectModel.swift in Sources */,
 				13A343401F04C564002EBC92 /* RestHelper.swift in Sources */,
@@ -517,6 +520,7 @@
 				13A343441F04C77A002EBC92 /* ProjectListModelUnitTests.swift in Sources */,
 				13A3434C1F04C7DE002EBC92 /* TestStepModelUnitTests.swift in Sources */,
 				13A3434A1F04C7BE002EBC92 /* TestRunModelUnitTests.swift in Sources */,
+				0AD7DEAF1F5E0644009421A2 /* ItemTypesUnitTests.swift in Sources */,
 				130BFF8E1F36C3B2005F1660 /* TestRunIndexViewControllerUnitTests.swift in Sources */,
 				13A343461F04C78F002EBC92 /* ProjectModelUnitTests.swift in Sources */,
 				13A3434E1F04C814002EBC92 /* TestPlanListModelUnitTests.swift in Sources */,

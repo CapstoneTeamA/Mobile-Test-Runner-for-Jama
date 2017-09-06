@@ -10,12 +10,11 @@ import Foundation
 
 class TestCycleListModel {
     var testCycleList: [TestCycleModel] = []
-    let testCycleItemTypeId = 36 //ID in the jama system for items of the type TestCycle
     
-    func extractCycleList(fromData: [[String : AnyObject]], parentId: Int) {
+    func extractCycleList(fromData: [[String : AnyObject]], parentId: Int, itemTypeId: Int) {
         for cycle in fromData {
             let fields: [String : AnyObject] = cycle["fields"] as! Dictionary
-            if cycle["itemType"] as! Int != testCycleItemTypeId || fields["testPlan"] as! Int != parentId{
+            if cycle["itemType"] as! Int != itemTypeId || fields["testPlan"] as! Int != parentId{
                 break
             }
             let tmpCycle = TestCycleModel()

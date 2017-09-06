@@ -59,13 +59,13 @@ class TestRunListModelUnitTests: XCTestCase {
     }
     
     func testExtractEmptyDataList() {
-        testRunList.extractRunList(fromData: [], parentId: parentTestCycleId)
+        testRunList.extractRunList(fromData: [], parentId: parentTestCycleId, itemTypeId: testRunItemType)
         
         XCTAssertTrue(testRunList.testRunList.isEmpty)
     }
     
     func testExtractDataListFromWrongParentCycle() {
-        testRunList.extractRunList(fromData: dataList, parentId: parentTestCycleId + 1)
+        testRunList.extractRunList(fromData: dataList, parentId: parentTestCycleId + 1, itemTypeId: testRunItemType)
         
         XCTAssertTrue(testRunList.testRunList.isEmpty)
     }
@@ -77,12 +77,12 @@ class TestRunListModelUnitTests: XCTestCase {
         dataList.append(run1Data)
         dataList.append(run2Data)
         
-        testRunList.extractRunList(fromData: dataList, parentId: parentTestCycleId)
+        testRunList.extractRunList(fromData: dataList, parentId: parentTestCycleId, itemTypeId: testRunItemType)
         XCTAssertTrue(testRunList.testRunList.isEmpty)
     }
     
     func testExtractDataFromDataList() {
-        testRunList.extractRunList(fromData: dataList, parentId: parentTestCycleId)
+        testRunList.extractRunList(fromData: dataList, parentId: parentTestCycleId, itemTypeId: testRunItemType)
         
         XCTAssertEqual(dataList.count, testRunList.testRunList.count)
         XCTAssertEqual(run1Name, testRunList.testRunList[0].name)

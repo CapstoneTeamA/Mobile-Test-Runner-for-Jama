@@ -58,13 +58,13 @@ class TestPlanListModelUnitTests: XCTestCase {
     }
     
     func testExtractTestPlanFromEmptyData() {
-        planList.extractPlanList(fromData: [])
+        planList.extractPlanList(fromData: [], itemTypeId: testPlanType)
         
         XCTAssertTrue(planList.testPlanList.isEmpty)
     }
     
     func testExtractPlanList() {
-        planList.extractPlanList(fromData: data)
+        planList.extractPlanList(fromData: data, itemTypeId: testPlanType)
         
         XCTAssertEqual(plan1.id, planList.testPlanList[0].id)
         XCTAssertEqual(plan1.projectId, planList.testPlanList[0].projectId)

@@ -22,6 +22,8 @@
 	</dict>
 	<key>Get</key>
 	<dict>
+		<key>ItemTypes</key>
+		<string>jamacloud.com/rest/latest/itemtypes</string>
 		<key>TestRuns</key>
 		<string>jamacloud.com/rest/latest/testruns?testCycle={testCycleId}</string>
 		<key>TestCycles</key>
