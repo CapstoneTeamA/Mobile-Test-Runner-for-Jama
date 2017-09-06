@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A3368091F60732800FF79C5 /* ItemTypesUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3368081F60732800FF79C5 /* ItemTypesUnitTests.swift */; };
 		0A3FDF971F606ECE0097267F /* ItemTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FDF961F606ECE0097267F /* ItemTypes.swift */; };
 		0ACE370C1F4BDDF30059165A /* nophotos-v1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ACE370B1F4BDDF30059165A /* nophotos-v1.png */; };
 		130BFF8E1F36C3B2005F1660 /* TestRunIndexViewControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130BFF8D1F36C3B2005F1660 /* TestRunIndexViewControllerUnitTests.swift */; };
@@ -86,6 +87,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A3368081F60732800FF79C5 /* ItemTypesUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypesUnitTests.swift; sourceTree = "<group>"; };
 		0A3FDF961F606ECE0097267F /* ItemTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypes.swift; sourceTree = "<group>"; };
 		0ACE370B1F4BDDF30059165A /* nophotos-v1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nophotos-v1.png"; sourceTree = "<group>"; };
 		130BFF8D1F36C3B2005F1660 /* TestRunIndexViewControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRunIndexViewControllerUnitTests.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				13A343551F04C881002EBC92 /* RestHelperUnitTests.swift */,
+				0A3368081F60732800FF79C5 /* ItemTypesUnitTests.swift */,
 			);
 			name = utilsUnitTests;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A3368091F60732800FF79C5 /* ItemTypesUnitTests.swift in Sources */,
 				13A343441F04C77A002EBC92 /* ProjectListModelUnitTests.swift in Sources */,
 				13A3434C1F04C7DE002EBC92 /* TestStepModelUnitTests.swift in Sources */,
 				13A3434A1F04C7BE002EBC92 /* TestRunModelUnitTests.swift in Sources */,
